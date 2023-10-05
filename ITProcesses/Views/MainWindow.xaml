@@ -6,15 +6,23 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"
         xmlns:local="clr-namespace:ITProcesses"
         xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
+        xmlns:views="clr-namespace:ITProcesses.Views"
         mc:Ignorable="d"
         Title="IT-Processes" Height="720" Width="1280"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource primaryBackColor}">
     
     <Window.DataContext>
         <viewModels:MainViewModel/>
     </Window.DataContext>
     
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
+            <views:LoginView/>
+        </DataTemplate>
+    </Window.Resources>
+    
     <Grid>
-
+        <ContentControl Content="{Binding CurrentChildView}"/>
     </Grid>
 </Window>

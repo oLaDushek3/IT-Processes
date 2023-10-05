@@ -23,4 +23,11 @@
       <PackageReference Include="ModernWpfUI" Version="0.9.7-preview.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Resources\BigLogo.png" />
+      <Resource Include="Resources\BigLogo.png" />
+      <None Remove="Resources\SmallLogo.png" />
+      <Resource Include="Resources\SmallLogo.png" />
+    </ItemGroup>
+
 </Project>

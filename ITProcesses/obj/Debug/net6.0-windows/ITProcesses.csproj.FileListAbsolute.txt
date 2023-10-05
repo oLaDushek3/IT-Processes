@@ -149,4 +149,7 @@ C:\Users\oLaDushek\RiderProjects\ITProcesses\ITProcesses\bin\Debug\net6.0-window
 C:\Users\oLaDushek\RiderProjects\ITProcesses\ITProcesses\bin\Debug\net6.0-windows\vi-VN\ModernWpf.resources.dll
 C:\Users\oLaDushek\RiderProjects\ITProcesses\ITProcesses\obj\Debug\net6.0-windows\App.baml
 C:\Users\oLaDushek\RiderProjects\ITProcesses\ITProcesses\obj\Debug\net6.0-windows\ITProcesses.csproj.CopyComplete
-C:\Users\oLaDushek\RiderProjects\ITProcesses\ITProcesses\obj\Debug\net6.0-windows\Styles\UIColors.baml
+C:\Users\oLaDushek\RiderProjects\ITProcesses\ITProcesses\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\oLaDushek\RiderProjects\ITProcesses\ITProcesses\obj\Debug\net6.0-windows\Views\LoginView.g.cs
+C:\Users\oLaDushek\RiderProjects\ITProcesses\ITProcesses\obj\Debug\net6.0-windows\Views\LoginView.baml
+C:\Users\oLaDushek\RiderProjects\ITProcesses\ITProcesses\obj\Debug\net6.0-windows\Resources\UIColors.baml
