@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "GOhzL6LcwSsunnXqrwW2LotHfXFX5aGXG2D8JwGMPKPD7QKms9hel8JMvXx2vzmUPOFh5CPNGyA8gWR8i7u8FQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\oLaDushek\\RiderProjects\\ITProcesses\\ITProcesses\\ITProcesses.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\oLaDushek\\.nuget\\packages\\modernwpfui\\0.9.7-preview.2\\modernwpfui.0.9.7-preview.2.nupkg.sha512"
+  ],
+  "logs": []
+}
