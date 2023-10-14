@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "fBgczIVwUhLChhkAnsPzUdG1cYTF0Uf4vuNKeTtvaTWNmM+AFMtjtDKpR2XzH611UKs5At3bpLdL2R54F0u+jQ==",
+  "dgSpecHash": "KwEU8rwW5EphOQW9yGU+BezhOkymNZyttnvzChuI9OYZ7HP3DdDAAwF1mhrkInL2gBtL8LBB5bYCpMwMm7YIeg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\arshi\\RiderProjects\\IT-Processes\\ITProcesses\\ITProcesses.csproj",
+  "projectFilePath": "C:\\Users\\arshi\\OneDrive\\Документы\\GitHub\\IT-Processes\\ITProcesses\\ITProcesses.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\arshi\\.nuget\\packages\\modernwpfui\\0.9.7-preview.2\\modernwpfui.0.9.7-preview.2.nupkg.sha512",
-    "C:\\Users\\arshi\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.22\\microsoft.netcore.app.ref.6.0.22.nupkg.sha512",
-    "C:\\Users\\arshi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.22\\microsoft.windowsdesktop.app.ref.6.0.22.nupkg.sha512",
-    "C:\\Users\\arshi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.22\\microsoft.aspnetcore.app.ref.6.0.22.nupkg.sha512",
-    "C:\\Users\\arshi\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.22\\microsoft.netcore.app.host.win-x64.6.0.22.nupkg.sha512"
+    "C:\\Users\\arshi\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.20\\microsoft.netcore.app.ref.6.0.20.nupkg.sha512",
+    "C:\\Users\\arshi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.20\\microsoft.windowsdesktop.app.ref.6.0.20.nupkg.sha512",
+    "C:\\Users\\arshi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.20\\microsoft.aspnetcore.app.ref.6.0.20.nupkg.sha512",
+    "C:\\Users\\arshi\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.20\\microsoft.netcore.app.host.win-x64.6.0.20.nupkg.sha512"
   ],
   "logs": []
 }
