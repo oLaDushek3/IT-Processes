@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Title="IT-Processes" Height="720" Width="1280"
         WindowStartupLocation="CenterScreen"
-        Background="{StaticResource primaryBackColor}">
+        ui:WindowHelper.UseModernWindowStyle="True">
     
     <Window.DataContext>
         <viewModels:MainViewModel/>

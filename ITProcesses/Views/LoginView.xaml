@@ -7,32 +7,42 @@
              xmlns:local="clr-namespace:ITProcesses.Views"
              mc:Ignorable="d"
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
-             d:DesignHeight="720" d:DesignWidth="1280" Background="Transparent">
-    
+             d:DesignHeight="720" d:DesignWidth="1280">
+
     <UserControl.DataContext>
-        <viewModels:LoginViewModel/>
+        <viewModels:LoginViewModel />
     </UserControl.DataContext>
-    
+
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <Image Source="/Resources/SmallLogo.png"
                Width="150" Height="150"
-               Margin="0 0 0 50"/>
-        
+               Margin="0 0 0 50" />
+
         <TextBox Name="LoginBox"
                  Height="60" Width="230"
                  Margin="0 0 0 30"
-                 ui:ControlHelper.Header="Логин"/>
-        
-        <TextBox Name="PasswordBox" 
+                 ui:ControlHelper.Header="Логин" />
+
+        <TextBox Name="PasswordBox"
                  Height="60" Width="230"
-                 Margin="0 0 0 30"
-                 ui:ControlHelper.Header="Пароль"/>
+                 Margin="0 0 0 10"
+                 ui:ControlHelper.Header="Пароль" />
         
+        <CheckBox
+            Content="Запомнить меня" IsChecked="True">
+            <CheckBox.Resources>
+                <!--Unchecked state-->
+                <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUnchecked" Color="Black"/>
+                <!--Checked state-->
+                <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeChecked" Color="Green"/>
+            </CheckBox.Resources>
+        </CheckBox>
+
         <Button Name="LoginButton"
-                HorizontalAlignment="Center" VerticalAlignment="Center"
-                Height="60" Width="160"
-                Background="{StaticResource accentColor}"
-                Content="Войти" FontSize="24">
+                Content="Войти"
+                IsDefault="True">
+
         </Button>
+
     </StackPanel>
 </UserControl>

@@ -5,4 +5,5 @@
     <SolidColorBrush x:Key="primaryStrokeColor" Color="#262727"/> 
     <SolidColorBrush x:Key="secondaryBackColor" Color="#242729"/>
     <SolidColorBrush x:Key="accentColor" Color="#5437DC"/>
+    <SolidColorBrush x:Key="activeAccentColor" Color="#442db3"/>
 </ResourceDictionary>
