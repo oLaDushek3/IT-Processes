@@ -5,6 +5,8 @@ namespace ITProcesses.Services;
 
 public interface IUserService
 {
-    public Task<User> Login(string login, string password);
-    
+     Task<User> Login(string login, string password);
+
+     Task<User> Registration(User user);
+
 }
