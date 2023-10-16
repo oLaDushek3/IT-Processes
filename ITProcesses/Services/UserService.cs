@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using ITProcesses.JsonSaveInfo;
 using ITProcesses.Models;
 using ITProcesses.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ namespace ITProcesses.Services;
 
 public class UserService : BaseViewModel, IUserService
 {
+    private SaveInfo _saveInfo = new SaveInfo();
+
     public async Task<User> Login(string userName, string password)
     {
         var user = await Context.Users.FirstOrDefaultAsync(u => u.Username == userName);
@@ -19,6 +22,14 @@ public class UserService : BaseViewModel, IUserService
 
         if (user.Password != password)
             throw new Exception("Нверный пароль");
+
+        // var settings = Settings;
+
+       // settings!.UserName = userName;
+
+       // settings.Password = password;
+
+       // SaveInfo.SaveSettings(settings);
 
         return user;
     }
@@ -32,23 +43,23 @@ public class UserService : BaseViewModel, IUserService
 
         if (!ValidatePassword(user.Password))
             throw new Exception("Неверный формат пароля");
-        
+
         //Если будешь писать лоигку добавления, то не забывай, что guid не identity и тебе надо вручную писать!!!
         user.Id = Guid.NewGuid();
 
         await Context.Users.AddAsync(user);
-        
+
         await Context.SaveChangesAsync();
-        
+
         return user;
     }
 
     public async Task<User> Update(User user)
     {
         Context.Users.Update(user);
-        
+
         await Context.SaveChangesAsync();
-        
+
         return user;
     }
 

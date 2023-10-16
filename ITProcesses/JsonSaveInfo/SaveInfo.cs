@@ -7,12 +7,28 @@ namespace ITProcesses.JsonSaveInfo;
 
 public class SaveInfo
 {
-    private static string _AppSettings =>
+    private static string _appSettings =>
         "appsettings.json";
+
+    public static AppSettings? AppSettings => ReadAppSettings();
+    
+    public static void SaveSettings(AppSettings appSettings)
+    {
+        WriteAppSettings(appSettings);
+    }
+
+    private static AppSettings? ReadAppSettings()
+    {
+        using var sr = new StreamReader(_appSettings);
+
+        var json = sr.ReadToEnd();
+
+        return JsonSerializer.Deserialize<AppSettings>(json);
+    }
 
     private static void WriteAppSettings(AppSettings appSettings)
     {
-        using var sw = new StreamWriter(_AppSettings);
+        using var sw = new StreamWriter(_appSettings);
 
         var options = new JsonSerializerOptions
         {

@@ -1,13 +1,14 @@
 using System;
 using System.Windows;
 using ITProcesses.Command;
+using ITProcesses.JsonSaveInfo;
 using ITProcesses.Services;
 
 namespace ITProcesses.ViewModels;
 
 public class LoginViewModel : BaseViewModel
 {
-    private string _login = string.Empty;
+    private string _login = String.Empty;
     private string _password = String.Empty;
     private readonly UserService _userService = new UserService();
     public LoginViewModel()
@@ -49,7 +50,7 @@ public class LoginViewModel : BaseViewModel
         }
         catch(Exception e)
         {
-            MessageBox.Show(e.ToString());
+            MessageBox.Show(e.Message);
         }
     }
 

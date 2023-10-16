@@ -21,6 +21,7 @@
         <TextBox Name="LoginBox"
                  Height="60" Width="230"
                  Margin="0 0 0 30"
+                 Text = "{Binding Login}"
                  ui:ControlHelper.Header="Логин" />
 
         <PasswordBox Name="PasswordBox"

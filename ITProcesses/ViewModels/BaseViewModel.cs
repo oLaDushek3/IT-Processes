@@ -1,13 +1,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using ITProcesses.JsonSaveInfo;
 using ITProcesses.Models;
 
 namespace ITProcesses.ViewModels;
 
 public abstract class BaseViewModel : INotifyPropertyChanged
 {
-    protected ItprocessesContext Context = new ItprocessesContext();
+    protected readonly ItprocessesContext Context = new ();
+    
+    public static AppSettings? Settings =>
+            SaveInfo.AppSettings;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
