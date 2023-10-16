@@ -23,13 +23,15 @@
                  Margin="0 0 0 30"
                  ui:ControlHelper.Header="Логин" />
 
-        <TextBox Name="PasswordBox"
+        <PasswordBox Name="PasswordBox"
                  Height="60" Width="230"
                  Margin="0 0 0 10"
+                 PasswordChanged="PasswordBox_OnPasswordChanged"
                  ui:ControlHelper.Header="Пароль" />
         
         <CheckBox
-            Content="Запомнить меня" IsChecked="True">
+            Content="Запомнить меня" 
+            IsChecked="{Binding IsActive, Mode=TwoWay}">
             <CheckBox.Resources>
                 <!--Unchecked state-->
                 <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUnchecked" Color="Black"/>
@@ -40,9 +42,10 @@
 
         <Button Name="LoginButton"
                 Content="Войти"
-                IsDefault="True">
-
-        </Button>
-
+                IsDefault="True"
+                Command="{Binding LoginCommand}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+        
     </StackPanel>
 </UserControl>

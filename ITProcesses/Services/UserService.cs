@@ -42,7 +42,16 @@ public class UserService : BaseViewModel, IUserService
         
         return user;
     }
-    
+
+    public async Task<User> Update(User user)
+    {
+        Context.Users.Update(user);
+        
+        await Context.SaveChangesAsync();
+        
+        return user;
+    }
+
     private bool ValidatePassword(string password)
     {
         return password.Any(char.IsLetter) &&

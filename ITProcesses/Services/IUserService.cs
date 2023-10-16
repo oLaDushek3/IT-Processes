@@ -9,4 +9,6 @@ public interface IUserService
 
      Task<User> Registration(User user);
 
+     Task<User> Update(User user);
+
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jeX2Js1bgF1bvCeEMrJVmdpDJsajM6UaJvO9T/KLe3QF9hdUpZpkClmgpMIGl+JMnl4ppORhQr0tXGrE3Iuhkw==",
+  "dgSpecHash": "tE3oisyXTUdDv5/uTeKbuCgbAvDRVAFfVD267SfoHPIASpE4cNTArEEmz02OGYm4vtZ/K5pTKCKDgugZVl1xLQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\arshi\\RiderProjects\\IT-Processes\\ItProcesses\\ITProcesses.csproj",
+  "projectFilePath": "C:\\Users\\arshi\\RiderProjects\\IT-Processes\\ITProcesses\\ITProcesses.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\arshi\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\arshi\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.12\\microsoft.entityframeworkcore.7.0.12.nupkg.sha512",

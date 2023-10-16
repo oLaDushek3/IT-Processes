@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\arshi\\RiderProjects\\IT-Processes\\ItProcesses\\ITProcesses.csproj": {}
+    "C:\\Users\\arshi\\RiderProjects\\IT-Processes\\ITProcesses\\ITProcesses.csproj": {}
   },
   "projects": {
-    "C:\\Users\\arshi\\RiderProjects\\IT-Processes\\ItProcesses\\ITProcesses.csproj": {
+    "C:\\Users\\arshi\\RiderProjects\\IT-Processes\\ITProcesses\\ITProcesses.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\arshi\\RiderProjects\\IT-Processes\\ItProcesses\\ITProcesses.csproj",
+        "projectUniqueName": "C:\\Users\\arshi\\RiderProjects\\IT-Processes\\ITProcesses\\ITProcesses.csproj",
         "projectName": "ITProcesses",
-        "projectPath": "C:\\Users\\arshi\\RiderProjects\\IT-Processes\\ItProcesses\\ITProcesses.csproj",
+        "projectPath": "C:\\Users\\arshi\\RiderProjects\\IT-Processes\\ITProcesses\\ITProcesses.csproj",
         "packagesPath": "C:\\Users\\arshi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\arshi\\RiderProjects\\IT-Processes\\ItProcesses\\obj\\",
+        "outputPath": "C:\\Users\\arshi\\RiderProjects\\IT-Processes\\ITProcesses\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\arshi\\AppData\\Roaming\\NuGet\\NuGet.Config"

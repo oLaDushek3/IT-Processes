@@ -39,6 +39,8 @@ public class LoginViewModel : BaseViewModel
 
     public CommandHandler LoginCommand => new(LoginAsync);
 
+    //public CommandHandler IsActive => new(SaveLoginIfoInJson);
+
     private async void LoginAsync()
     {
         try
@@ -50,5 +52,9 @@ public class LoginViewModel : BaseViewModel
             MessageBox.Show(e.ToString());
         }
     }
-    
+
+    private async void SaveLoginIfoInJson()
+    {
+        
+    }
 }
