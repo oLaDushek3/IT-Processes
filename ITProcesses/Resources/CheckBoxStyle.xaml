@@ -1,7 +1,6 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="CheckBox1" TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
-        <Setter Property="Content" Value="хуй"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">

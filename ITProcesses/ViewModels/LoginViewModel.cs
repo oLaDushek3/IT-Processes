@@ -44,7 +44,7 @@ public class LoginViewModel : BaseViewModel
         get => _checkBoxBool;
         set
         {
-            if(value==_checkBoxBool) return;
+            if (value==_checkBoxBool) return;
             _checkBoxBool = value;
             OnPropertyChanged();
         }
@@ -59,7 +59,9 @@ public class LoginViewModel : BaseViewModel
         try
         {
             await _userService.Login(Login, Password);
-            if(CheckBoxBool==true){}
+            
+            if(CheckBoxBool==true)
+                SaveLoginIfoInJson();
             
         }
         catch(Exception e)
@@ -70,6 +72,10 @@ public class LoginViewModel : BaseViewModel
 
     private async void SaveLoginIfoInJson()
     {
-        
+        var settings = Settings;
+        settings!.UserName = Login;
+        settings.Password = Password;
+        SaveInfo.SaveSettings(settings);
+
     }
 }

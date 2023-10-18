@@ -32,8 +32,8 @@
                      Foreground="{DynamicResource primaryFontColorBrush}"/>
         
         <CheckBox Content="Запомнить меня" 
-                  IsChecked="{Binding CheckBoxBool}"
-                  Style="{StaticResource CheckBox1}"/>
+                  IsChecked="{Binding CheckBoxBool, Mode=TwoWay}"
+                  />
 
         <Button Style="{DynamicResource RoundedButton}"
                 Content="Войти"

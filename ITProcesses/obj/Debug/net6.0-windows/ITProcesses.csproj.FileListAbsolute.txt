@@ -353,3 +353,4 @@ C:\Users\oLaDushek\RiderProjects\ITProcesses\ITProcesses\bin\Debug\net6.0-window
 C:\Users\oLaDushek\RiderProjects\ITProcesses\ITProcesses\bin\Debug\net6.0-windows\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 C:\Users\oLaDushek\RiderProjects\ITProcesses\ITProcesses\obj\Debug\net6.0-windows\Resources\ButtonStyles.baml
 C:\Users\oLaDushek\RiderProjects\ITProcesses\ITProcesses\obj\Debug\net6.0-windows\Resources\CheckBoxStyle.baml
+C:\Users\arshi\RiderProjects\IT-Processes\ITProcesses\obj\Debug\net6.0-windows\Resources\CheckBoxStyle.baml
