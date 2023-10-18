@@ -10,6 +10,7 @@ public class LoginViewModel : BaseViewModel
 {
     private string _login = String.Empty;
     private string _password = String.Empty;
+    private bool _checkBoxBool = false;
     private readonly UserService _userService = new UserService();
     public LoginViewModel()
     {
@@ -38,6 +39,17 @@ public class LoginViewModel : BaseViewModel
         }
     }
 
+    public bool CheckBoxBool
+    {
+        get => _checkBoxBool;
+        set
+        {
+            if(value==_checkBoxBool) return;
+            _checkBoxBool = value;
+            OnPropertyChanged();
+        }
+    }
+
     public CommandHandler LoginCommand => new(LoginAsync);
 
     //public CommandHandler IsActive => new(SaveLoginIfoInJson);
@@ -47,6 +59,8 @@ public class LoginViewModel : BaseViewModel
         try
         {
             await _userService.Login(Login, Password);
+            if(CheckBoxBool==true){}
+            
         }
         catch(Exception e)
         {
