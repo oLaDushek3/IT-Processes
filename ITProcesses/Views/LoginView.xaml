@@ -16,37 +16,30 @@
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <Image Source="/Resources/SmallLogo.png"
                Width="150" Height="150"
-               Margin="0 0 0 50" />
+               Margin="0 0 0 35"/>
 
-        <TextBox Name="LoginBox"
-                 Height="60" Width="230"
-                 Margin="0 0 0 30"
+        <TextBox Height="60" Width="230"
+                 Margin="0 15 0 15"
                  Text = "{Binding Login}"
-                 ui:ControlHelper.Header="Логин" />
-
-        <PasswordBox Name="PasswordBox"
-                 Height="60" Width="230"
-                 Margin="0 0 0 10"
-                 PasswordChanged="PasswordBox_OnPasswordChanged"
-                 ui:ControlHelper.Header="Пароль" />
+                 ui:ControlHelper.Header="Логин"
+                 Foreground="{DynamicResource primaryFontColorBrush}"/>
         
-        <CheckBox
-            Content="Запомнить меня" 
-            IsChecked="{Binding IsActive, Mode=TwoWay}">
-            <CheckBox.Resources>
-                <!--Unchecked state-->
-                <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUnchecked" Color="Black"/>
-                <!--Checked state-->
-                <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeChecked" Color="Green"/>
-            </CheckBox.Resources>
-        </CheckBox>
 
-        <Button Name="LoginButton"
+        <PasswordBox Height="60" Width="230"
+                     Margin="0 15 0 5"
+                     PasswordChanged="PasswordBox_OnPasswordChanged"
+                     ui:ControlHelper.Header="Пароль"
+                     Foreground="{DynamicResource primaryFontColorBrush}"/>
+        
+        <CheckBox Content="Запомнить меня" 
+                  IsChecked="{Binding IsActive, Mode=TwoWay}"
+                  Style="{StaticResource CheckBox1}"/>
+
+        <Button Style="{DynamicResource RoundedButton}"
                 Content="Войти"
                 IsDefault="True"
                 Command="{Binding LoginCommand}"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"/>
-        
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                Margin="15"/>
     </StackPanel>
 </UserControl>

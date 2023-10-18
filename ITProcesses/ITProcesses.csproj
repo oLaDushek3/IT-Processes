@@ -34,6 +34,8 @@
       <Resource Include="Resources\BigLogo.png" />
       <None Remove="Resources\SmallLogo.png" />
       <Resource Include="Resources\SmallLogo.png" />
+      <None Remove="Resources\3270-Regular.otf" />
+      <Resource Include="Resources\3270-Regular.otf" />
     </ItemGroup>
 
 

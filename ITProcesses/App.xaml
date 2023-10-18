@@ -11,6 +11,7 @@
                 <ui:XamlControlsResources />
                 <ResourceDictionary Source="/Resources/UIColors.xaml"/>
                 <ResourceDictionary Source="/Resources/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/Resources/CheckBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

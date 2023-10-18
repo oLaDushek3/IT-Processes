@@ -3,7 +3,8 @@
     <!--Rounded button-->
     <Style x:Key="RoundedButton" TargetType="Button">
         <!--Button at rest-->
-        <Setter Property="Background" Value="{StaticResource accentColor}"/>
+        <Setter Property="Background" Value="{DynamicResource accentColorBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}"/>
         <Setter Property="Width" Value="160"/>
         <Setter Property="Height" Value="55"/>
         <Setter Property="Template">
@@ -22,9 +23,8 @@
         <!--Mouse over change back color-->
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource activeAccentColor}"/>
+                <Setter Property="Background" Value="{DynamicResource activeAccentColorBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
-    
 </ResourceDictionary>
