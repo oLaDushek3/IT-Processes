@@ -19,11 +19,16 @@ public class SaveInfo
 
     private static AppSettings? ReadAppSettings()
     {
-        using var sr = new StreamReader(_appSettings);
+        if (File.Exists(_appSettings))
+        {
+            using var sr = new StreamReader(_appSettings);
 
-        var json = sr.ReadToEnd();
+            var json = sr.ReadToEnd();
 
-        return JsonSerializer.Deserialize<AppSettings>(json);
+            return JsonSerializer.Deserialize<AppSettings>(json);
+        }
+        else
+            return new AppSettings();
     }
 
     private static void WriteAppSettings(AppSettings appSettings)
@@ -32,9 +37,7 @@ public class SaveInfo
 
         var options = new JsonSerializerOptions
         {
-            Encoder =
-                JavaScriptEncoder.Create(
-                    UnicodeRanges.All),
+            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
             WriteIndented = true
         };
 

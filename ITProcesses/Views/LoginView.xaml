@@ -7,14 +7,12 @@
              xmlns:local="clr-namespace:ITProcesses.Views"
              mc:Ignorable="d"
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
-             d:DesignHeight="720" d:DesignWidth="1280">
-
-    <UserControl.DataContext>
-        <viewModels:LoginViewModel />
-    </UserControl.DataContext>
+             d:DesignHeight="720" d:DesignWidth="1280"
+             d:DataContext="{d:DesignInstance Type=viewModels:LoginViewModel, IsDesignTimeCreatable=False}">
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <Image Source="/Resources/SmallLogo.png"
+               RenderOptions.BitmapScalingMode="HighQuality"
                Width="150" Height="150"
                Margin="0 0 0 35"/>
 
@@ -31,9 +29,9 @@
                      ui:ControlHelper.Header="Пароль"
                      Foreground="{DynamicResource primaryFontColorBrush}"/>
         
-        <CheckBox Content="Запомнить меня" 
-                  IsChecked="{Binding CheckBoxBool, Mode=TwoWay}"
-                  />
+        <CheckBox Content="Запомнить меня"
+                  Style="{DynamicResource CustomColorCheckBox}"
+                  IsChecked="{Binding CheckBoxBool, Mode=TwoWay}"/>
 
         <Button Style="{DynamicResource RoundedButton}"
                 Content="Войти"

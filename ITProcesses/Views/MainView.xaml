@@ -1,0 +1,58 @@
+<UserControl x:Class="ITProcesses.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:local="clr-namespace:ITProcesses.Views"
+             mc:Ignorable="d"
+             xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
+             d:DesignHeight="720" d:DesignWidth="1280">
+    
+    <UserControl.DataContext>
+        <viewModels:MainViewModel />
+    </UserControl.DataContext>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!--Header title-->
+        <Border Grid.Row="0" Grid.Column="0"
+                BorderThickness="0 0 0 3"
+                BorderBrush="{DynamicResource primaryStrokeColorBrush}">
+            
+            <Image Source="/Resources/BigLogo.png" Margin="10"
+                   RenderOptions.BitmapScalingMode="HighQuality"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        
+        <!--Navigation menu-->
+        <Border Grid.Row="1" Grid.Column="0"
+                BorderThickness="0 0 2 0"
+                BorderBrush="{DynamicResource primaryStrokeColorBrush}">
+            <StackPanel >
+                <RadioButton HorizontalAlignment="Center" VerticalAlignment="Center"
+                             Style="{DynamicResource MenuButton}"
+                             Tag="{DynamicResource TaskList}"
+                             Content="Мои задачи"/>
+                
+                <RadioButton HorizontalAlignment="Center" VerticalAlignment="Center"
+                             Style="{DynamicResource MenuButton}"
+                             Tag="{DynamicResource TaskList}"
+                             Content="Мои задачи"/>
+                
+                <ComboBox>1</ComboBox>
+                
+            </StackPanel>
+        </Border>
+        
+    </Grid>
+</UserControl>

@@ -31,7 +31,14 @@ namespace ITProcesses
 
         private async void WriteUserFromJson()
         {
-           await _userService.Login(Settings.UserName, Settings.Password);
+            try
+            {
+                await _userService.Login(Settings.UserName, Settings.Password);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
     }
 }

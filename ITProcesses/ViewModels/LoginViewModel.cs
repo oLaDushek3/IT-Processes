@@ -8,14 +8,17 @@ namespace ITProcesses.ViewModels;
 
 public class LoginViewModel : BaseViewModel
 {
+    #region Fields
+
     private string _login = String.Empty;
     private string _password = String.Empty;
     private bool _checkBoxBool = false;
     private readonly UserService _userService = new UserService();
-    public LoginViewModel()
-    {
-        
-    }
+    private MainWindowViewModel _currentMainViewModel;
+
+    #endregion
+
+    #region Properties
 
     public string Login
     {
@@ -27,7 +30,6 @@ public class LoginViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-
     public string Password
     {
         get => _password;
@@ -38,7 +40,6 @@ public class LoginViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-
     public bool CheckBoxBool
     {
         get => _checkBoxBool;
@@ -49,11 +50,33 @@ public class LoginViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
+    public MainWindowViewModel CurrentMainViewModel
+    {
+        get => _currentMainViewModel;
+        set
+        {
+            _currentMainViewModel = value;
+            OnPropertyChanged();
+        }
+    }
+
+    #endregion
+
+    #region Commands
 
     public CommandHandler LoginCommand => new(LoginAsync);
-
+    
     //public CommandHandler IsActive => new(SaveLoginIfoInJson);
 
+    #endregion
+
+    //Constructor
+    public LoginViewModel(MainWindowViewModel currentMainViewModel)
+    {
+        CurrentMainViewModel = currentMainViewModel;
+    }
+    
+    //Methods
     private async void LoginAsync()
     {
         try
@@ -62,7 +85,8 @@ public class LoginViewModel : BaseViewModel
             
             if(CheckBoxBool==true)
                 SaveLoginIfoInJson();
-            
+
+            CurrentMainViewModel.ChangeView(new MainViewModel());
         }
         catch(Exception e)
         {
