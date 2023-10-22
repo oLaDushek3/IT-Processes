@@ -535,3 +535,6 @@ C:\Users\oLaDushek\RiderProjects\IT-Processes\ITProcesses\obj\Debug\net6.0-windo
 C:\Users\oLaDushek\RiderProjects\IT-Processes\ITProcesses\obj\Debug\net6.0-windows\Views\MainView.g.cs
 C:\Users\oLaDushek\RiderProjects\IT-Processes\ITProcesses\obj\Debug\net6.0-windows\Views\MainView.baml
 C:\Users\oLaDushek\RiderProjects\IT-Processes\ITProcesses\obj\Debug\net6.0-windows\Resources\Icons.baml
+C:\Users\oLaDushek\RiderProjects\IT-Processes\ITProcesses\obj\Debug\net6.0-windows\Resources\TreeViewStyle.baml
+C:\Users\oLaDushek\RiderProjects\IT-Processes\ITProcesses\obj\Debug\net6.0-windows\Views\TreeViewItem.g.cs
+C:\Users\oLaDushek\RiderProjects\IT-Processes\ITProcesses\obj\Debug\net6.0-windows\Views\TreeViewItem.baml
