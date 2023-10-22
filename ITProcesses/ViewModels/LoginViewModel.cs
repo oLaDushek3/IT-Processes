@@ -94,7 +94,7 @@ public class LoginViewModel : BaseViewModel
         }
     }
 
-    private async void SaveLoginIfoInJson()
+    private void SaveLoginIfoInJson()
     {
         var settings = Settings;
         settings!.UserName = Login;

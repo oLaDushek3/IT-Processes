@@ -17,6 +17,18 @@ public class SaveInfo
         WriteAppSettings(appSettings);
     }
 
+    private static AppSettings DefaultSettings => new()
+    {
+        UserName = null,
+        Password = null
+    };
+
+    public static void CreateAppSettingsDefault()
+    {
+        if(!File.Exists(_appSettings))
+            SaveSettings(DefaultSettings);
+    }
+
     private static AppSettings? ReadAppSettings()
     {
         if (File.Exists(_appSettings))

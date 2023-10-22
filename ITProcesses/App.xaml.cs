@@ -15,12 +15,13 @@ namespace ITProcesses
     /// </summary>
     public partial class App : Application
     {
-        private UserService _userService = new UserService();
-        public static AppSettings? Settings => SaveInfo.AppSettings;
+        private readonly UserService _userService = new();
+        private static AppSettings? Settings => SaveInfo.AppSettings;
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
             try
             {
+                SaveInfo.CreateAppSettingsDefault();
                 WriteUserFromJson();
             }
             catch (Exception exception)
