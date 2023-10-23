@@ -24,7 +24,7 @@ public class MainWindowViewModel : BaseViewModel
     
     public MainWindowViewModel()
     {
-        ChangeView(new MainViewModel());
+        ChangeView(new LoginViewModel(this));
     }
 
     public void ChangeView(BaseViewModel selectedChildView)

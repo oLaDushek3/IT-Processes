@@ -224,16 +224,9 @@
                             MinHeight="{TemplateBinding MinHeight}"
                             SnapsToDevicePixels="true"
                             ui:PressHelper.IsEnabled="True">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                
                                 <ToggleButton
                                     x:Name="ExpandCollapseChevron"
                                     Margin="10,0,10,0"
-                                    Width="Auto"
                                     Opacity="{TemplateBinding ui:TreeViewItemHelper.GlyphOpacity}"
                                     Background="Transparent"
                                     IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
@@ -260,8 +253,6 @@
                                         
                                     </Grid>
                                 </ToggleButton>
-                                
-                            </Grid>
                         </Border>
 
                         <ItemsPresenter
@@ -277,50 +268,10 @@
                             <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource secondaryBackColorBrush}" />
                             <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}" />
                         </Trigger>
-                        <Trigger Property="HasItems" Value="False">
-                            <Setter TargetName="ExpandCollapseChevron" Property="Visibility" Value="Hidden" />
-                            <Setter Property="ui:TreeViewItemHelper.GlyphOpacity" Value="0" />
-                        </Trigger>
                         <Trigger SourceName="ContentPresenterGrid" Property="IsMouseOver" Value="True">
                             <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource secondaryBackColorBrush}" />
                             <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}" />
                         </Trigger>
-                        <Trigger SourceName="ContentPresenterGrid" Property="ui:PressHelper.IsPressed" Value="True">
-                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource activeAccentColorBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}" />
-                        </Trigger>
-                        <!-- Selected -->
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource accentColorBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource TreeViewItemBackgroundDisabled}" />
-                        </Trigger>
-                        <!-- PointerOverSelected -->
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition SourceName="ContentPresenterGrid" Property="IsMouseOver" Value="True" />
-                                <Condition Property="IsSelected" Value="True" />
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource activeAccentColorBrush}" />
-                        </MultiTrigger>
-                        <!-- PressedSelected -->
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition SourceName="ContentPresenterGrid" Property="ui:PressHelper.IsPressed" Value="True" />
-                                <Condition Property="IsSelected" Value="True" />
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource activeAccentColorBrush}" />
-                        </MultiTrigger>
-                        <!-- SelectedDisabled -->
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsSelected" Value="True" />
-                                <Condition Property="IsEnabled" Value="False" />
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource TreeViewItemBackgroundSelectedDisabled}" />
-                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
