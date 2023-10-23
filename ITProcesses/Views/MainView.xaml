@@ -6,6 +6,7 @@
              xmlns:ui="http://schemas.modernwpf.com/2019"
              xmlns:local="clr-namespace:ITProcesses.Views"
              xmlns:hellpers="clr-namespace:ITProcesses.Resources"
+             hellpers:ScrollViewerHelper.ShiftWheelScrollsHorizontally="True"
              mc:Ignorable="d"
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
              d:DesignHeight="720" d:DesignWidth="1280">
@@ -20,7 +21,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <!--Header title-->
+        <!--Header-->
         <Border Grid.Row="0"
                 BorderThickness="0 0 0 3"
                 BorderBrush="{DynamicResource primaryStrokeColorBrush}">
@@ -37,85 +38,108 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
-                    <!--Navigation menu-->
-        <Border Grid.Column="0">
-            <StackPanel Height="500">
-
-                <RadioButton HorizontalAlignment="Center" VerticalAlignment="Center"
-                             Style="{DynamicResource MenuButton}"
+            <!--Navigation menu-->
+            <ScrollViewer Grid.Column="0"
+                          HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"
+                          Padding="10">
+            <StackPanel>
+                <RadioButton Style="{DynamicResource NavigationButton}"
                              Tag="{DynamicResource TaskList}"
-                             Content="Мои задачи"/>
+                             GroupName="NavigationButtons"
+                             Content="Мои задачи"
+                             Margin="0 2.5" 
+                             Padding="10 0"/>
                 
-                <RadioButton HorizontalAlignment="Center" VerticalAlignment="Center"
-                             Style="{DynamicResource MenuButton}"
+                <RadioButton Style="{DynamicResource NavigationButton}"
                              Tag="{DynamicResource TaskList}"
-                             Content="Мои задачи"/>
-
-                <ScrollViewer hellpers:ScrollViewerHelper.ShiftWheelScrollsHorizontally="True">
-                    <TreeView Height="300" Padding="10">
-                    <TreeViewItem Header="Taskgfdddddddddd" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                    <TreeViewItem Header="Task" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                    <TreeViewItem Header="Tasks" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}">
-                        <TreeViewItem Header="Task" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                        <TreeViewItem Header="Task2" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                        <TreeViewItem Header="Task3" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}">
-                            <TreeViewItem Header="Task3.1" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                            <TreeViewItem Header="Task3.2" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                            <TreeViewItem Header="Task3.3" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                            <TreeViewItem Header="Task3" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}">
-                                <TreeViewItem Header="Task3.1" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                                <TreeViewItem Header="Task3.2" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                                <TreeViewItem Header="Task3" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}">
-                                    <TreeViewItem Header="Task3.1" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                                    <TreeViewItem Header="Task3.2" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                                    <TreeViewItem Header="Task3.3" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                                </TreeViewItem>
-                                <TreeViewItem Header="Task3" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}">
-                                    <TreeViewItem Header="Task3.1" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                                    <TreeViewItem Header="Task3.2" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                                    <TreeViewItem Header="Task3.3" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                                </TreeViewItem>
-                                <TreeViewItem Header="Task3" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}">
-                                    <TreeViewItem Header="Task3.1" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                                    <TreeViewItem Header="Task3.2" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                                    <TreeViewItem Header="Task3.3" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                                </TreeViewItem>
-                                <TreeViewItem Header="Task3.3" Tag="{DynamicResource TaskList}" Style="{StaticResource TreeViewItemStyle}"/>
-                            </TreeViewItem>
-                        </TreeViewItem>
+                             GroupName="NavigationButtons"
+                             Content="Мои задачи"
+                             Margin="0 2.5" 
+                             Padding="10 0"/>
+                
+                <TreeView>
+                    <TreeViewItem Style="{DynamicResource HeaderTreeViewItemStyle}"
+                                  Header="Мои задачи2" 
+                                  Tag="{DynamicResource TaskList}"
+                                  ItemsSource="{Binding Nodes}">
+                        <TreeViewItem.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Nodes}">
+                                <RadioButton HorizontalAlignment="Center" VerticalAlignment="Center"
+                                             Style="{DynamicResource NavigationButton}"
+                                             Tag="{DynamicResource TaskList}"
+                                             Content="{Binding Name}"
+                                             GroupName="NavigationButtons"
+                                             Foreground="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=Foreground}"
+                                             Background="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=Background}"
+                                             IsChecked="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=IsSelected, Mode=TwoWay}"/>
+                            </HierarchicalDataTemplate>
+                        </TreeViewItem.ItemTemplate>
                     </TreeViewItem>
+                    
                 </TreeView>
-                </ScrollViewer>
+
+                <RadioButton Style="{DynamicResource NavigationButton}"
+                             Tag="{DynamicResource TaskList}"
+                             GroupName="NavigationButtons"
+                             Content="Мои задачи"
+                             Margin="10 2.5" 
+                             Padding="10 0"/>
                 
+                <RadioButton Style="{DynamicResource NavigationButton}"
+                             Tag="{DynamicResource TaskList}"
+                             GroupName="NavigationButtons"
+                             Content="Мои задачи"
+                             Margin="10 2.5" 
+                             Padding="10 0"/>
+                <RadioButton Style="{DynamicResource NavigationButton}"
+                             Tag="{DynamicResource TaskList}"
+                             GroupName="NavigationButtons"
+                             Content="Мои задачи"
+                             Margin="10 2.5" 
+                             Padding="10 0"/>
+                <RadioButton Style="{DynamicResource NavigationButton}"
+                             Tag="{DynamicResource TaskList}"
+                             GroupName="NavigationButtons"
+                             Content="Мои задачи"
+                             Margin="10 2.5" 
+                             Padding="10 0"/>
+                <RadioButton Style="{DynamicResource NavigationButton}"
+                             Tag="{DynamicResource TaskList}"
+                             GroupName="NavigationButtons"
+                             Content="Мои задачи"
+                             Margin="10 2.5" 
+                             Padding="10 0"/>
+                <RadioButton Style="{DynamicResource NavigationButton}"
+                             Tag="{DynamicResource TaskList}"
+                             GroupName="NavigationButtons"
+                             Content="Мои задачи"
+                             Margin="10 2.5" 
+                             Padding="10 0"/>
+                <RadioButton Style="{DynamicResource NavigationButton}"
+                             Tag="{DynamicResource TaskList}"
+                             GroupName="NavigationButtons"
+                             Content="Мои задачи"
+                             Margin="10 2.5" 
+                             Padding="10 0"/>
+                <RadioButton Style="{DynamicResource NavigationButton}"
+                             Tag="{DynamicResource TaskList}"
+                             GroupName="NavigationButtons"
+                             Content="Мои задачи"
+                             Margin="10 2.5" 
+                             Padding="10 0"/>
+                <RadioButton Style="{DynamicResource NavigationButton}"
+                             Tag="{DynamicResource TaskList}"
+                             GroupName="NavigationButtons"
+                             Content="Мои задачи"
+                             Margin="10 2.5" 
+                             Padding="10 0"/>
             </StackPanel>
-        </Border>
-        <GridSplitter Grid.Column="1"
-                      Width="2"
-                      Background="{DynamicResource primaryStrokeColorBrush}"
-                      HorizontalAlignment="Center"/>
-            
+            </ScrollViewer>
+            <GridSplitter Grid.Column="1"
+                          Width="2"
+                          Background="{DynamicResource primaryStrokeColorBrush}"
+                          HorizontalAlignment="Center"/>
         </Grid>
         
     </Grid>
-    <!--<Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MinWidth="100" MaxWidth="150" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />     
-        </Grid.ColumnDefinitions>
-        <TextBox Grid.Row="0" Grid.Column="0" 
-                 HorizontalAlignment="Stretch" 
-                 VerticalAlignment="Stretch" 
-                 Text="TexBox" />      
-        <GridSplitter Grid.Row="0" Grid.Column="1" Margin="2,0,2,0"
-                      Width="3" Background="Purple" 
-                      VerticalAlignment="Stretch" 
-                      HorizontalAlignment="Center" />
-        <ListView Grid.Row="0" Grid.Column="2" Background="Aqua" 
-                  HorizontalAlignment="Stretch" 
-                  VerticalAlignment="Stretch"/>
-    </Grid>-->
 </UserControl>
