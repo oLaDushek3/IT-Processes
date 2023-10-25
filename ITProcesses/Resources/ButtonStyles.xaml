@@ -1,17 +1,17 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!--Rounded button-->
+    <!--RoundedButton-->
     <Style x:Key="RoundedButton" TargetType="Button">
-        <!--Button at rest-->
+        <!--ButtonAtRest-->
         <Setter Property="Background" Value="{DynamicResource accentColorBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}"/>
         <Setter Property="Width" Value="160"/>
-        <Setter Property="Height" Value="55"/>
+        <Setter Property="Height" Value="40"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
-                            CornerRadius="25"
+                            CornerRadius="20"
                             Background="{TemplateBinding Background}">
                         <ContentPresenter VerticalAlignment="Center"
                                           HorizontalAlignment="Center"/>
@@ -20,7 +20,7 @@
             </Setter.Value>
         </Setter>
         
-        <!--Mouse over change back color-->
+        <!--MouseOver-->
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource activeAccentColorBrush}"/>
@@ -28,23 +28,20 @@
         </Style.Triggers>
     </Style>
     
-    <!--Menu button-->
-    <Style x:Key="MenuButton" TargetType="RadioButton">
-        <!--Button at rest-->
+    <!--NavigationButton-->
+    <Style x:Key="NavigationButton" TargetType="RadioButton">
+        <!--ButtonAtRest-->
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{DynamicResource secondaryFontColorBrush}"/>
-        <Setter Property="Width" Value="200"/>
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="Margin" Value="0 5"/>
+        <Setter Property="MinHeight" Value="35"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
-                            CornerRadius="10"
+                    <Border CornerRadius="10"
                             Background="{TemplateBinding Background}">
                         
-                        <ContentControl Margin="10 0 0 0"
-                                        VerticalAlignment="Center">
+                        <ContentControl VerticalAlignment="Center"
+                                        Margin="{Binding RelativeSource={RelativeSource AncestorType=RadioButton}, Path=Padding}">
                             <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Left">
                                 
@@ -64,17 +61,27 @@
             </Setter.Value>
         </Setter>
         
-        <!--Mouse over change back color-->
         <Style.Triggers>
+            <!--MouseOver-->
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource activeAccentColorBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource secondaryBackColorBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}"/>
             </Trigger>
             
+            <!--Selected-->
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="{DynamicResource activeAccentColorBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource accentColorBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}"/>
             </Trigger>
+            
+            <!--PointerOverSelected-->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsChecked" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource activeAccentColorBrush}"/>
+            </MultiTrigger>
         </Style.Triggers>
     </Style>
 </ResourceDictionary>

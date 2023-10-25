@@ -1,36 +1,26 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style x:Key="CustomColorCheckBox" TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="CheckBox">
-                    <CheckBox IsChecked="{Binding RelativeSource={RelativeSource AncestorType=CheckBox}, Path=IsChecked, Mode=TwoWay}">
-                        <ContentPresenter VerticalAlignment="Center"
-                                          HorizontalAlignment="Center"/>
-                        <CheckBox.Resources>
-                            <!--Stroke-->
-                            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUnchecked" Color="{DynamicResource primaryStrokeColor}"/>
-                            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeChecked" Color="{DynamicResource primaryStrokeColor}"/>
-                            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedPointerOver" Color="Black"/>
-                            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedPressed" Color="Black"/>
-                            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedPressed" Color="Transparent"/>
-                            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedPointerOver" Color="Transparent"/>
+    
+    <!--Stroke-->
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUnchecked" Color="{DynamicResource primaryStrokeColor}"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeChecked" Color="{DynamicResource primaryStrokeColor}"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedPointerOver" Color="Black"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedPressed" Color="Black"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedPressed" Color="Transparent"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedPointerOver" Color="Transparent"/>
                             
-                            <!--Fill-->
-                            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillChecked" Color="{DynamicResource accentColor}"/>
-                            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPointerOver" Color="{DynamicResource accentColor}"/>
-                            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPressed" Color="{DynamicResource activeAccentColor}"/>
+    <!--Fill-->
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillChecked" Color="{DynamicResource accentColor}"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPointerOver" Color="{DynamicResource accentColor}"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPressed" Color="{DynamicResource activeAccentColor}"/>
                             
-                            <!--Foreground-->
-                            <SolidColorBrush x:Key="CheckBoxForegroundUnchecked" Color="{DynamicResource primaryFontColor}"/>
-                            <SolidColorBrush x:Key="CheckBoxForegroundChecked" Color="{DynamicResource primaryFontColor}"/>
-                            <SolidColorBrush x:Key="CheckBoxForegroundUncheckedPointerOver" Color="{DynamicResource primaryFontColor}"/>
-                            <SolidColorBrush x:Key="CheckBoxForegroundCheckedPointerOver" Color="{DynamicResource primaryFontColor}"/>
-                            <SolidColorBrush x:Key="CheckBoxForegroundUncheckedPressed" Color="{DynamicResource primaryFontColor}"/>
-                        </CheckBox.Resources>
-                    </CheckBox>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <!--Foreground-->
+    <SolidColorBrush x:Key="CheckBoxForegroundUnchecked" Color="{DynamicResource primaryFontColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundChecked" Color="{DynamicResource primaryFontColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundUncheckedPointerOver" Color="{DynamicResource primaryFontColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundCheckedPointerOver" Color="{DynamicResource primaryFontColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundUncheckedPressed" Color="{DynamicResource primaryFontColor}"/>
+    
+    <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}"/>
+    
 </ResourceDictionary>
