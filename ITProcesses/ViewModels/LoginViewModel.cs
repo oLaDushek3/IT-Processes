@@ -75,6 +75,11 @@ public class LoginViewModel : BaseViewModel
     {
         CurrentMainViewModel = currentMainViewModel;
     }
+
+    public LoginViewModel()
+    {
+        
+    }
     
     //Methods
     private async void LoginAsync()

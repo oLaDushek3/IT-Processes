@@ -25,7 +25,13 @@ public partial class Task
 
     public bool Archived { get; set; }
 
+    public Guid? BeforeTask { get; set; }
+
     public virtual ICollection<Archive> Archives { get; set; } = new List<Archive>();
+
+    public virtual Task? BeforeTaskNavigation { get; set; }
+
+    public virtual ICollection<Task> InverseBeforeTaskNavigation { get; set; } = new List<Task>();
 
     public virtual Project Project { get; set; } = null!;
 

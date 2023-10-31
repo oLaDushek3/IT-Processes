@@ -1,16 +1,30 @@
 using System.Collections.ObjectModel;
+using ITProcesses.Command;
+using ITProcesses.JsonSaveInfo;
+using ITProcesses.Models;
 
 namespace ITProcesses.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
+    private MainWindowViewModel _currentMainViewModel;
     public class Node
     {
         public string Name { get; set; }
         public ObservableCollection<Node> Nodes { get; set; }
     }
+    public MainWindowViewModel CurrentMainViewModel
+    {
+        get => _currentMainViewModel;
+        set
+        {
+            _currentMainViewModel = value;
+            OnPropertyChanged();
+        }
+    }
 
     private ObservableCollection<Node> _nodes;
+    public CommandHandler LogOutCommand => new(LogOutAsync);
 
     public ObservableCollection<Node> Nodes
     {
@@ -60,5 +74,18 @@ public class MainViewModel : BaseViewModel
             new Node { Name="Америка" },
             new Node { Name="Австралия" }
         };
+    }
+
+    private async void LogOutAsync()
+    {
+        try
+        {
+            CurrentMainViewModel.ChangeView(new LoginViewModel());
+            SaveInfo.CreateAppSettingsDefault();
+        }
+        catch
+        {
+            
+        }
     }
 }

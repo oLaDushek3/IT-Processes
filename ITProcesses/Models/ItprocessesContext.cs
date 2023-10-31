@@ -41,7 +41,7 @@ public partial class ItprocessesContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=ITProcesses;Username=postgres;Password=qazqaz");
+        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=ITProcesses;Username=admin;Password=admin");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -129,6 +129,7 @@ public partial class ItprocessesContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.Archived).HasColumnName("archived");
+            entity.Property(e => e.BeforeTask).HasColumnName("before_task");
             entity.Property(e => e.DateCreateTimestamp)
                 .HasDefaultValueSql("now()")
                 .HasColumnName("date_create_timestamp");
@@ -141,6 +142,10 @@ public partial class ItprocessesContext : DbContext
             entity.Property(e => e.ProjectId).HasColumnName("project_id");
             entity.Property(e => e.StatusId).HasColumnName("status_id");
             entity.Property(e => e.TypeId).HasColumnName("type_id");
+
+            entity.HasOne(d => d.BeforeTaskNavigation).WithMany(p => p.InverseBeforeTaskNavigation)
+                .HasForeignKey(d => d.BeforeTask)
+                .HasConstraintName("task_before_task_fkey");
 
             entity.HasOne(d => d.Project).WithMany(p => p.Tasks)
                 .HasForeignKey(d => d.ProjectId)
