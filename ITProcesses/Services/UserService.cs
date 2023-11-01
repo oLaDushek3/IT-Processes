@@ -11,8 +11,7 @@ namespace ITProcesses.Services;
 
 public class UserService : BaseViewModel, IUserService
 {
-    private SaveInfo _saveInfo = new SaveInfo();
-
+   
     public async Task<User> Login(string userName, string password)
     {
         var user = await Context.Users.FirstOrDefaultAsync(u => u.Username == userName);
@@ -22,15 +21,7 @@ public class UserService : BaseViewModel, IUserService
 
         if (user.Password != password)
             throw new Exception("Нверный пароль");
-
-        // var settings = Settings;
-
-       // settings!.UserName = userName;
-
-       // settings.Password = password;
-
-       // SaveInfo.SaveSettings(settings);
-
+        
         return user;
     }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ITProcesses.Models;
 
-public partial class Task
+public partial class Tasks
 {
     public Guid Id { get; set; }
 
@@ -29,9 +29,9 @@ public partial class Task
 
     public virtual ICollection<Archive> Archives { get; set; } = new List<Archive>();
 
-    public virtual Task? BeforeTaskNavigation { get; set; }
+    public virtual Tasks? BeforeTaskNavigation { get; set; }
 
-    public virtual ICollection<Task> InverseBeforeTaskNavigation { get; set; } = new List<Task>();
+    public virtual ICollection<Tasks> InverseBeforeTaskNavigation { get; set; } = new List<Tasks>();
 
     public virtual Project Project { get; set; } = null!;
 

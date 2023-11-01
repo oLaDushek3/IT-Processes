@@ -13,5 +13,5 @@ public partial class TaskDocument
 
     public virtual Document? DocumentsNavigation { get; set; }
 
-    public virtual Task? Task { get; set; }
+    public virtual Tasks? Task { get; set; }
 }

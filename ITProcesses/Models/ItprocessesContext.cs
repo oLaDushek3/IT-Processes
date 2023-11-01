@@ -25,7 +25,7 @@ public partial class ItprocessesContext : DbContext
 
     public virtual DbSet<Tag> Tags { get; set; }
 
-    public virtual DbSet<Task> Tasks { get; set; }
+    public virtual DbSet<Tasks> Tasks { get; set; }
 
     public virtual DbSet<TaskDocument> TaskDocuments { get; set; }
 
@@ -117,7 +117,7 @@ public partial class ItprocessesContext : DbContext
                 .HasColumnName("name");
         });
 
-        modelBuilder.Entity<Task>(entity =>
+        modelBuilder.Entity<Tasks>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("task_pkey");
 

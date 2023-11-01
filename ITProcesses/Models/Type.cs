@@ -9,5 +9,5 @@ public partial class Type
 
     public string Name { get; set; } = null!;
 
-    public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
+    public virtual ICollection<Tasks> Tasks { get; set; } = new List<Tasks>();
 }

@@ -13,5 +13,5 @@ public partial class TaskTag
 
     public virtual Tag? TagNavigation { get; set; }
 
-    public virtual Task? TaskNavigation { get; set; }
+    public virtual Tasks? TaskNavigation { get; set; }
 }

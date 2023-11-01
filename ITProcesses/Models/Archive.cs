@@ -11,5 +11,5 @@ public partial class Archive
 
     public Guid? TaskId { get; set; }
 
-    public virtual Task? Task { get; set; }
+    public virtual Tasks? Task { get; set; }
 }
