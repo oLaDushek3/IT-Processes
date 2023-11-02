@@ -6,6 +6,7 @@ using System.Windows.Automation.Provider;
 using ITProcesses.Models;
 using ITProcesses.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using TaskStatus = ITProcesses.Models.TaskStatus;
 
 namespace ITProcesses.Services;
 
@@ -46,5 +47,10 @@ public class TaskService : BaseViewModel, ITaskService
         await Context.SaveChangesAsync();
 
         return project;
+    }
+
+    public async Task<List<TaskStatus>> GetAllStatuses()
+    {
+      return  await Context.TaskStatuses.ToListAsync();
     }
 }

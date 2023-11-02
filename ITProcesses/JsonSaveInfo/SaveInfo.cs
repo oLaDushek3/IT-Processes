@@ -19,13 +19,12 @@ public class SaveInfo
 
     private static AppSettings DefaultSettings => new()
     {
-        UserName = null,
-        Password = null
+        UserName = "1",
+        Password = "1"
     };
 
     public static void CreateAppSettingsDefault()
     {
-        if(!File.Exists(_appSettings))
             SaveSettings(DefaultSettings);
     }
 
