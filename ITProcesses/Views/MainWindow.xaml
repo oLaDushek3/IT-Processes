@@ -13,11 +13,12 @@
         MinHeight="720" MinWidth="1280"
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource primaryBackColorBrush}"
-        ui:WindowHelper.UseModernWindowStyle="True">
+        ui:WindowHelper.UseModernWindowStyle="True"
+        d:DataContext="{d:DesignInstance Type=viewModels:MainWindowViewModel, IsDesignTimeCreatable=False}">
     
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <viewModels:MainWindowViewModel/>
-    </Window.DataContext>
+    </Window.DataContext>-->
     
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">

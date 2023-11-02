@@ -22,9 +22,12 @@ public class MainWindowViewModel : BaseViewModel
 
     #endregion
     
-    public MainWindowViewModel()
+    public MainWindowViewModel(bool skipAuth)
     {
-        ChangeView(new LoginViewModel(this));
+        if(!skipAuth)
+            ChangeView(new LoginViewModel(this));
+        else
+            ChangeView(new MainViewModel(this));
     }
 
     public void ChangeView(BaseViewModel selectedChildView)

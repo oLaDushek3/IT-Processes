@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using ITProcesses.JsonSaveInfo;
+using ITProcesses.Models;
 using ITProcesses.Services;
+using ITProcesses.ViewModels;
 
 namespace ITProcesses
 {
@@ -17,28 +15,35 @@ namespace ITProcesses
     {
         private readonly UserService _userService = new();
         private static AppSettings? Settings => SaveInfo.AppSettings;
-        private void App_OnStartup(object sender, StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
+            base.OnStartup(e);
+            var mainWindow = new MainWindow();
+            
             try
             {
                 SaveInfo.CreateAppSettingsDefault();
-                WriteUserFromJson();
+                mainWindow.DataContext = new MainWindowViewModel(WriteUserFromJson());
             }
             catch (Exception exception)
             {
                 MessageBox.Show("Ошибка");
             }
+            
+            mainWindow.Show();
         }
 
-        private async void WriteUserFromJson()
+        private bool WriteUserFromJson()
         {
             try
             {
-                await _userService.Login(Settings.UserName, Settings.Password);
+                _userService.Login(Settings.UserName, Settings.Password);
+                return true;
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
+                return false;
             }
         }
     }
