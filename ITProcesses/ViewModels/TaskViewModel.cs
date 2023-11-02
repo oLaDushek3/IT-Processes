@@ -10,7 +10,6 @@ public class TaskViewModel : BaseViewModel
     #region Fields
 
     private  Tasks _selectedTask;
-    private  DateTime _testDateTime;
 
     #endregion
 
@@ -26,23 +25,13 @@ public class TaskViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public DateTime TestDateTime
-    {
-        get => _testDateTime;
-
-        set
-        {
-            _testDateTime = value;
-            OnPropertyChanged();
-        }
-    }
 
     #endregion
     
     
     //Constructor
-    public TaskViewModel(Tasks selectedTask)
+    public TaskViewModel()
     {
-        SelectedTask = selectedTask;
+        //SelectedTask = selectedTask;
     }
 }
