@@ -9,7 +9,7 @@ public interface ITaskService
 {
     Task<List<UsersTask>> GetTasksThisUser(Guid guid);
 
-    Task<Archive> ArchivedTask(Tasks tasks);
+   
 
     Task<Tasks> CreateTask(Tasks tasks);
 

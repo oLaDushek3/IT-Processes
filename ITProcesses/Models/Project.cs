@@ -11,5 +11,7 @@ public partial class Project
 
     public string Description { get; set; } = null!;
 
+    public bool? Archived { get; set; }
+
     public virtual ICollection<Tasks> Tasks { get; set; } = new List<Tasks>();
 }

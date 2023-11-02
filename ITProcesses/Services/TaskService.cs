@@ -22,31 +22,6 @@ public class TaskService : BaseViewModel, ITaskService
         return tasks;
     }
 
-    public async Task<Archive> ArchivedTask(Tasks tasks)
-    {
-        Archive archive = new Archive();
-
-        if (tasks.Archived == true)
-        {
-            archive.Task = tasks;
-
-            await Context.Archives.AddAsync(archive);
-            await Context.SaveChangesAsync();
-        }
-        else
-        {
-            tasks.Archived = true;
-            Context.Tasks.Update(tasks);
-
-            archive.Task = tasks;
-
-            await Context.Archives.AddAsync(archive);
-            await Context.SaveChangesAsync();
-        }
-
-        return archive;
-    }
-
     public async Task<Tasks> CreateTask(Tasks tasks)
     {
         var task = await Context.Tasks.FirstOrDefaultAsync(t => t.Id == tasks.Id);

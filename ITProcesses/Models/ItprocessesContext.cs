@@ -15,8 +15,6 @@ public partial class ItprocessesContext : DbContext
     {
     }
 
-    public virtual DbSet<Archive> Archives { get; set; }
-
     public virtual DbSet<Document> Documents { get; set; }
 
     public virtual DbSet<Project> Projects { get; set; }
@@ -45,23 +43,6 @@ public partial class ItprocessesContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Archive>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("archive_pkey");
-
-            entity.ToTable("archive");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.DateArchivedTimestamp)
-                .HasDefaultValueSql("now()")
-                .HasColumnName("date_archived_timestamp");
-            entity.Property(e => e.TaskId).HasColumnName("task_id");
-
-            entity.HasOne(d => d.Task).WithMany(p => p.Archives)
-                .HasForeignKey(d => d.TaskId)
-                .HasConstraintName("archive_task_id_fkey");
-        });
-
         modelBuilder.Entity<Document>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("documents_pkey");
@@ -83,6 +64,7 @@ public partial class ItprocessesContext : DbContext
             entity.HasIndex(e => e.Name, "project_name_key").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Archived).HasColumnName("archived");
             entity.Property(e => e.Description).HasColumnName("description");
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
@@ -121,7 +103,7 @@ public partial class ItprocessesContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("task_pkey");
 
-            entity.ToTable("task");
+            entity.ToTable("tasks");
 
             entity.HasIndex(e => e.Name, "task_name_key").IsUnique();
 
