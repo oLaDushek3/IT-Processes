@@ -12,4 +12,6 @@ public interface ITaskService
     Task<Archive> ArchivedTask(Tasks tasks);
 
     Task<Tasks> CreateTask(Tasks tasks);
+
+    Task<Project> CreateProject(Project project);
 }
