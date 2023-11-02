@@ -11,7 +11,6 @@ namespace ITProcesses.Services;
 
 public class UserService : BaseViewModel, IUserService
 {
-   
     public async Task<User> Login(string userName, string password)
     {
         var user = await Context.Users.FirstOrDefaultAsync(u => u.Username == userName);

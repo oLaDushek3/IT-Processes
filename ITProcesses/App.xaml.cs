@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using System.Windows;
 using ITProcesses.JsonSaveInfo;
-using ITProcesses.Models;
 using ITProcesses.Services;
 using ITProcesses.ViewModels;
 
@@ -15,15 +14,14 @@ namespace ITProcesses
     {
         private readonly UserService _userService = new();
         private static AppSettings? Settings => SaveInfo.AppSettings;
-        protected override void OnStartup(StartupEventArgs e)
+        protected async override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             var mainWindow = new MainWindow();
             
             try
             {
-                SaveInfo.CreateAppSettingsDefault();
-                mainWindow.DataContext = new MainWindowViewModel(WriteUserFromJson());
+                mainWindow.DataContext = new MainWindowViewModel(await WriteUserFromJson());
             }
             catch (Exception exception)
             {
@@ -33,11 +31,11 @@ namespace ITProcesses
             mainWindow.Show();
         }
 
-        private bool WriteUserFromJson()
+        private async Task<bool> WriteUserFromJson()
         {
             try
             {
-                _userService.Login(Settings.UserName, Settings.Password);
+                await _userService.Login(Settings.UserName, Settings.Password);
                 return true;
             }
             catch (Exception exception)
