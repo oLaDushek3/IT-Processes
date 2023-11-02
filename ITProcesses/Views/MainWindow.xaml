@@ -8,7 +8,9 @@
         xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
         xmlns:views="clr-namespace:ITProcesses.Views"
         mc:Ignorable="d"
-        Title="IT-Processes" Height="720" Width="1280"
+        Title="IT-Processes" 
+        Height="720" Width="1280"
+        MinHeight="720" MinWidth="1280"
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource primaryBackColorBrush}"
         ui:WindowHelper.UseModernWindowStyle="True">

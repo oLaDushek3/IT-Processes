@@ -1,7 +1,6 @@
 using System.Collections.ObjectModel;
 using ITProcesses.Command;
 using ITProcesses.JsonSaveInfo;
-using ITProcesses.Models;
 
 namespace ITProcesses.ViewModels;
 
@@ -76,11 +75,16 @@ public class MainViewModel : BaseViewModel
         };
     }
 
+    public MainViewModel(MainWindowViewModel currentMainViewModel)
+    {
+        CurrentMainViewModel = currentMainViewModel;
+    }
+
     private async void LogOutAsync()
     {
         try
         {
-            CurrentMainViewModel.ChangeView(new LoginViewModel());
+            CurrentMainViewModel.ChangeView(new LoginViewModel(CurrentMainViewModel));
             SaveInfo.CreateAppSettingsDefault();
         }
         catch

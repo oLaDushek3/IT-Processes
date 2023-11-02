@@ -9,11 +9,12 @@
              hellpers:ScrollViewerHelper.ShiftWheelScrollsHorizontally="True"
              mc:Ignorable="d"
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
-             d:DesignHeight="720" d:DesignWidth="1280">
+             d:DesignHeight="720" d:DesignWidth="1280"
+             d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel, IsDesignTimeCreatable=False}">
 
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <viewModels:MainViewModel />
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
 
     <Grid>
         <Grid.RowDefinitions>
@@ -26,9 +27,18 @@
                 BorderThickness="0 0 0 3"
                 BorderBrush="{DynamicResource primaryStrokeColorBrush}">
 
-            <Image Source="/Resources/BigLogo.png" Margin="10"
-                   RenderOptions.BitmapScalingMode="HighQuality"
-                   HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <Grid>
+                <Image Source="/Resources/BigLogo.png" Margin="10"
+                       RenderOptions.BitmapScalingMode="HighQuality"
+                       HorizontalAlignment="Left" VerticalAlignment="Center" />
+            
+                <Button Style="{DynamicResource RoundedButton}" Margin="10"
+                        HorizontalAlignment="Right" VerticalAlignment="Center"
+                        Width="100"
+                        Content="Выйти"
+                        Command="{Binding LogOutCommand}">
+                </Button>
+            </Grid>
         </Border>
 
         <Grid Grid.Row="1">

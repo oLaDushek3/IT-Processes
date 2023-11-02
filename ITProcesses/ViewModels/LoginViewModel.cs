@@ -75,11 +75,6 @@ public class LoginViewModel : BaseViewModel
     {
         CurrentMainViewModel = currentMainViewModel;
     }
-
-    public LoginViewModel()
-    {
-        
-    }
     
     //Methods
     private async void LoginAsync()
@@ -91,7 +86,7 @@ public class LoginViewModel : BaseViewModel
             if(CheckBoxBool==true)
                 SaveLoginIfoInJson();
 
-            CurrentMainViewModel.ChangeView(new MainViewModel());
+            CurrentMainViewModel.ChangeView(new MainViewModel(CurrentMainViewModel));
         }
         catch(Exception e)
         {
