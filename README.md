@@ -34,10 +34,10 @@
     <img src="image/SmallLogo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">It_Processes</h3>
 
   <p align="center">
-    project_description
+    Данный проект является курсовой работой студентов группы 1201: Аршинова Данилы и Ильи Кузина
     <br />
     <a href="https://github.com/oLaDushek3/IT-Processes"><strong>Explore the docs »</strong></a>
     <br />
