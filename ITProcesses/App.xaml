@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="/Resources/CheckBoxStyle.xaml"/>
                 <ResourceDictionary Source="/Resources/TreeViewStyle.xaml"/>
                 <ResourceDictionary Source="/Resources/ScrollViewerStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/ComboBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

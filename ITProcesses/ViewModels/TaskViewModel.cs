@@ -1,16 +1,21 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using ITProcesses.Models;
-using Microsoft.EntityFrameworkCore.Storage;
+using ITProcesses.Services;
 
 namespace ITProcesses.ViewModels;
 
 public class TaskViewModel : BaseViewModel
 {
-
     #region Fields
 
-    private  Tasks _selectedTask;
-    private  DateTime _testDateTime;
+    private readonly ITaskService _taskService;
+    
+    private Tasks _selectedTask;
+    private ObservableCollection<TaskStatus> _statusList;
+
 
     #endregion
 
@@ -26,23 +31,32 @@ public class TaskViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public DateTime TestDateTime
+
+    public ObservableCollection<TaskStatus> StatusList
     {
-        get => _testDateTime;
+        get => _statusList;
 
         set
         {
-            _testDateTime = value;
+            _statusList = value;
             OnPropertyChanged();
         }
     }
-
+    
     #endregion
     
     
     //Constructor
-    public TaskViewModel(Tasks selectedTask)
+    public TaskViewModel(Guid selectedTaskGuid)
     {
-        SelectedTask = selectedTask;
+        _taskService = new TaskService();
+        
+        GetData(selectedTaskGuid);
+    }
+
+    private async void GetData(Guid selectedTaskGuid)
+    {
+        StatusList = new ObservableCollection<TaskStatus>(await _taskService.GetAllStatuses());
+        SelectedTask = (await _taskService.GetTaskById(selectedTaskGuid));
     }
 }

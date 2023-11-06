@@ -16,10 +16,39 @@ public class TaskService : BaseViewModel, ITaskService
     {
         var tasks = await Context.UsersTasks.Include(c => c.Task)
             .Where(c => c.UserId == guid).ToListAsync();
-
+        
         if (tasks == null)
             throw new Exception("Не найден пользователь");
 
+        return tasks;
+    }
+    
+    public async Task<List<Tasks>> GetTasksByProject(int id)
+    {
+        var tasks = await Context.Tasks.
+            Where(t => t.ProjectId == id).ToListAsync();
+
+        if (tasks == null)
+            throw new Exception("Проект не найден");
+        
+        return tasks;
+    }
+    
+    public async Task<Tasks> GetTaskById(Guid guid)
+    {
+        var tasks = await Context.Tasks.Where(t => t.Id == guid).
+            Include(t => t.UsersTasks).
+                ThenInclude(ut => ut.User).
+                    ThenInclude(u => u.Role).
+            Include(t => t.TaskDocuments).
+                ThenInclude(td => td.DocumentsNavigation).
+            Include(t => t.TaskTags).
+                ThenInclude(tt => tt.TagNavigation).
+            Include(t => t.Status).FirstAsync();
+
+        if (tasks == null)
+            throw new Exception("Задача не найдена");
+        
         return tasks;
     }
 

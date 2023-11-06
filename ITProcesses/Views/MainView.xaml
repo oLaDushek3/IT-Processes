@@ -9,12 +9,22 @@
              hellpers:ScrollViewerHelper.ShiftWheelScrollsHorizontally="True"
              mc:Ignorable="d"
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
+             xmlns:views="clr-namespace:ITProcesses.Views"
              d:DesignHeight="720" d:DesignWidth="1280"
              d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel, IsDesignTimeCreatable=False}">
 
     <!--<UserControl.DataContext>
         <viewModels:MainViewModel />
     </UserControl.DataContext>-->
+    
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewModels:TaskViewModel}">
+            <views:TaskView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:TasksListViewModel}">
+            <views:TasksListView/>
+        </DataTemplate>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -36,8 +46,7 @@
                         HorizontalAlignment="Right" VerticalAlignment="Center"
                         Width="100"
                         Content="Выйти"
-                        Command="{Binding LogOutCommand}">
-                </Button>
+                        Command="{Binding LogOutCommand}"/>
             </Grid>
         </Border>
 
@@ -60,7 +69,9 @@
                                  GroupName="NavigationButtons"
                                  Content="Мои задачи"
                                  Margin="0 2.5"
-                                 Padding="10 0" />
+                                 Padding="10 0"
+                                 IsChecked="True"
+                                 Command="{Binding ShowStatisticsViewCommand}"/>
 
                     <RadioButton Style="{DynamicResource NavigationButton}"
                                  Tag="{DynamicResource TaskList}"
@@ -90,62 +101,6 @@
 
                     </TreeView>
 
-                    <RadioButton Style="{DynamicResource NavigationButton}"
-                                 Tag="{DynamicResource TaskList}"
-                                 GroupName="NavigationButtons"
-                                 Content="Мои задачи"
-                                 Margin="0 2.5"
-                                 Padding="10 0" />
-
-                    <RadioButton Style="{DynamicResource NavigationButton}"
-                                 Tag="{DynamicResource TaskList}"
-                                 GroupName="NavigationButtons"
-                                 Content="Мои задачи"
-                                 Margin="0 2.5"
-                                 Padding="10 0" />
-
-                    <RadioButton Style="{DynamicResource NavigationButton}"
-                                 Tag="{DynamicResource TaskList}"
-                                 GroupName="NavigationButtons"
-                                 Content="Мои задачи"
-                                 Margin="0 2.5"
-                                 Padding="10 0" />
-
-                    <RadioButton Style="{DynamicResource NavigationButton}"
-                                 Tag="{DynamicResource TaskList}"
-                                 GroupName="NavigationButtons"
-                                 Content="Мои задачи"
-                                 Margin="0 2.5"
-                                 Padding="10 0" />
-
-                    <RadioButton Style="{DynamicResource NavigationButton}"
-                                 Tag="{DynamicResource TaskList}"
-                                 GroupName="NavigationButtons"
-                                 Content="Мои задачи"
-                                 Margin="0 2.5"
-                                 Padding="10 0" />
-
-                    <RadioButton Style="{DynamicResource NavigationButton}"
-                                 Tag="{DynamicResource TaskList}"
-                                 GroupName="NavigationButtons"
-                                 Content="Мои задачи"
-                                 Margin="0 2.5"
-                                 Padding="10 0" />
-
-                    <RadioButton Style="{DynamicResource NavigationButton}"
-                                 Tag="{DynamicResource TaskList}"
-                                 GroupName="NavigationButtons"
-                                 Content="Мои задачи"
-                                 Margin="0 2.5"
-                                 Padding="10 0" />
-
-                    <RadioButton Style="{DynamicResource NavigationButton}"
-                                 Tag="{DynamicResource TaskList}"
-                                 GroupName="NavigationButtons"
-                                 Content="Мои задачи"
-                                 Margin="0 2.5"
-                                 Padding="10 0" />
-
                 </StackPanel>
 
             </ScrollViewer>
@@ -154,6 +109,8 @@
                           Width="2"
                           Background="{DynamicResource primaryStrokeColorBrush}"
                           HorizontalAlignment="Center" />
+            
+            <ContentControl Grid.Column="2" Content="{Binding CurrentChildView}"/>
         </Grid>
 
     </Grid>

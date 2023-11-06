@@ -10,6 +10,10 @@ namespace ITProcesses.Services;
 public interface ITaskService
 {
     Task<List<UsersTask>> GetTasksThisUser(Guid guid);
+
+    Task<List<Tasks>> GetTasksByProject(int id);
+    
+    Task<Tasks> GetTaskById(Guid guid);
     
     Task<Tasks> CreateTask(Tasks tasks);
 
