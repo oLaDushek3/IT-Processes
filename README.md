@@ -77,21 +77,10 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
-### Built With
 
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -120,11 +109,6 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 - [ ] Создать приложение
 - [ ] Написать отчет
     - [ ] Сдать курсовую
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- CONTRIBUTING -->
