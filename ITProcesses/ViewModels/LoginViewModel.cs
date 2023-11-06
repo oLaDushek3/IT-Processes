@@ -1,5 +1,6 @@
 using System;
 using System.Windows;
+using System.Windows.Input;
 using ITProcesses.Command;
 using ITProcesses.JsonSaveInfo;
 using ITProcesses.Services;
@@ -14,7 +15,7 @@ public class LoginViewModel : BaseViewModel
     private string _password = String.Empty;
     private bool _checkBoxBool = false;
     private readonly UserService _userService = new UserService();
-    private MainWindowViewModel _currentMainViewModel;
+    private MainWindowViewModel _currentMainWindowViewModel;
 
     #endregion
 
@@ -50,12 +51,12 @@ public class LoginViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public MainWindowViewModel CurrentMainViewModel
+    public MainWindowViewModel CurrentMainWindowViewModel
     {
-        get => _currentMainViewModel;
+        get => _currentMainWindowViewModel;
         set
         {
-            _currentMainViewModel = value;
+            _currentMainWindowViewModel = value;
             OnPropertyChanged();
         }
     }
@@ -73,7 +74,7 @@ public class LoginViewModel : BaseViewModel
     //Constructor
     public LoginViewModel(MainWindowViewModel currentMainViewModel)
     {
-        CurrentMainViewModel = currentMainViewModel;
+        CurrentMainWindowViewModel = currentMainViewModel;
     }
     
     //Methods
@@ -86,7 +87,7 @@ public class LoginViewModel : BaseViewModel
             if(CheckBoxBool==true)
                 SaveLoginIfoInJson();
 
-            CurrentMainViewModel.ChangeView(new MainViewModel(CurrentMainViewModel));
+            CurrentMainWindowViewModel.ChangeView(new MainViewModel(CurrentMainWindowViewModel));
         }
         catch(Exception e)
         {

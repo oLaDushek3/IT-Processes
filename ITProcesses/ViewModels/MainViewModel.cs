@@ -9,19 +9,19 @@ public class MainViewModel : BaseViewModel
 {
     #region Fields
     
-    private MainWindowViewModel _currentMainViewModel;
+    private MainWindowViewModel _currentMainWindowViewModel;
     private BaseViewModel _currentChildView;
 
     #endregion
     
     #region Properties
 
-    public MainWindowViewModel CurrentMainViewModel
+    public MainWindowViewModel CurrentMainWindowViewModel
     {
-        get => _currentMainViewModel;
+        get => _currentMainWindowViewModel;
         set
         {
-            _currentMainViewModel = value;
+            _currentMainWindowViewModel = value;
             OnPropertyChanged();
         }
     }
@@ -40,19 +40,19 @@ public class MainViewModel : BaseViewModel
     //Commands
     public CommandHandler LogOutCommand => new(LogOutAsync);
 
-    public CommandHandler ShowStatisticsViewCommand => new(ChangeView);
+    public CommandHandler ShowStatisticsViewCommand => new(OpenTasksListView);
     
 
     public MainViewModel(MainWindowViewModel currentMainViewModel)
     {
-        _currentMainViewModel = currentMainViewModel;
+        _currentMainWindowViewModel = currentMainViewModel;
     }
 
     private async void LogOutAsync()
     {
         try
         {
-            CurrentMainViewModel.ChangeView(new LoginViewModel(CurrentMainViewModel));
+            CurrentMainWindowViewModel.ChangeView(new LoginViewModel(CurrentMainWindowViewModel));
             SaveInfo.CreateAppSettingsDefault();
         }
         catch
@@ -60,8 +60,14 @@ public class MainViewModel : BaseViewModel
             
         }
     }
-    public async void ChangeView()
+    
+    public async void OpenTasksListView()
     {
-        CurrentChildView = new TasksListViewModel();
+        ChangeView(new TasksListViewModel(this));
+    }
+    
+    public void ChangeView(BaseViewModel selectedView)
+    {
+        CurrentChildView = selectedView;
     }
 }
