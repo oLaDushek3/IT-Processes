@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using ITProcesses.Command;
 using ITProcesses.JsonSaveInfo;
@@ -6,12 +7,15 @@ namespace ITProcesses.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
+    #region Fields
+    
     private MainWindowViewModel _currentMainViewModel;
-    public class Node
-    {
-        public string Name { get; set; }
-        public ObservableCollection<Node> Nodes { get; set; }
-    }
+    private BaseViewModel _currentChildView;
+
+    #endregion
+    
+    #region Properties
+
     public MainWindowViewModel CurrentMainViewModel
     {
         get => _currentMainViewModel;
@@ -21,63 +25,27 @@ public class MainViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-
-    private ObservableCollection<Node> _nodes;
-    public CommandHandler LogOutCommand => new(LogOutAsync);
-
-    public ObservableCollection<Node> Nodes
+    public BaseViewModel CurrentChildView
     {
-        get => _nodes;
+        get => _currentChildView;
         set
         {
-            _nodes = value;
+            _currentChildView = value;
             OnPropertyChanged();
         }
     }
+    
+    #endregion
+    
+    //Commands
+    public CommandHandler LogOutCommand => new(LogOutAsync);
 
-    public MainViewModel()
-    {
-        Nodes = new ObservableCollection<Node>
-        {
-            new Node
-            {
-                Name ="Европа",
-                Nodes = new ObservableCollection<Node>
-                {
-                    new Node {Name="Германия" },
-                    new Node {Name="Франция" },
-                    new Node
-                    {
-                        Name ="Великобритания",
-                        Nodes = new ObservableCollection<Node>
-                        {
-                            new Node {Name="Англия" },
-                            new Node {Name="Шотландия" },
-                            new Node {Name="Уэльс" },
-                            new Node {Name="Сев. Ирландия" },
-                        }
-                    }
-                }
-            },
-            new Node
-            {
-                Name ="Азия",
-                Nodes = new ObservableCollection<Node>
-                {
-                    new Node {Name="Китай" },
-                    new Node {Name="Япония" },
-                    new Node { Name ="Индия" }
-                }
-            },
-            new Node { Name="Африка" },
-            new Node { Name="Америка" },
-            new Node { Name="Австралия" }
-        };
-    }
+    public CommandHandler ShowStatisticsViewCommand => new(ChangeView);
+    
 
     public MainViewModel(MainWindowViewModel currentMainViewModel)
     {
-        CurrentMainViewModel = currentMainViewModel;
+        _currentMainViewModel = currentMainViewModel;
     }
 
     private async void LogOutAsync()
@@ -91,5 +59,9 @@ public class MainViewModel : BaseViewModel
         {
             
         }
+    }
+    public async void ChangeView()
+    {
+        CurrentChildView = new TasksListViewModel();
     }
 }
