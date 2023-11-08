@@ -13,8 +13,7 @@
     
     <Grid>
         <ListView Margin="20"
-                  ItemsSource="{Binding TasksList}"
-                  FontSize="35">
+                  ItemsSource="{Binding TasksList}">
             
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem" BasedOn="{StaticResource {x:Static GridView.GridViewItemContainerStyleKey}}">
@@ -24,12 +23,14 @@
                     
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
                     <Setter Property="Padding" Value="0"/>
+                    <Setter Property="FontSize" Value="15"/>
                 </Style>
             </ListView.ItemContainerStyle>
             
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="FontSize" Value="15"/>
                 </Style>
             </ListView.Resources>
             
