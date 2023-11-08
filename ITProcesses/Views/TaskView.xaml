@@ -10,10 +10,6 @@
              Background="{DynamicResource primaryBackColorBrush}"
              d:DataContext="{d:DesignInstance Type=viewModels:TaskViewModel, IsDesignTimeCreatable=False}">
     
-    <!--<UserControl.DataContext>
-        <viewModels:TaskViewModel/>
-    </UserControl.DataContext>-->
-    
     <Grid>
         <Grid.ColumnDefinitions>
             <!--Main space-->
@@ -70,11 +66,11 @@
                                Foreground="{DynamicResource primaryFontColorBrush}"
                                FontSize="20"/>
                     
-                    <ComboBox Grid.Column="1" HorizontalContentAlignment="Stretch"
+                    <ComboBox Grid.Column="1"
                               ItemsSource="{Binding StatusList}"
                               SelectedItem="{Binding SelectedTask.Status}"
                               HorizontalAlignment="Stretch">
-                    
+                        
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name}"/>

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Automation.Provider;
 using ITProcesses.Models;
 using ITProcesses.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -96,7 +95,12 @@ public class TaskService : BaseViewModel, ITaskService
 
     public async Task<List<Tasks>> GetAllTask()
     {
-        return await Context.Tasks.ToListAsync();
+        return await Context.Tasks.
+            Include(t => t.Status).
+            Include(t => t.Type).
+            Include(t => t.TaskTags).
+                ThenInclude(tt => tt.TagNavigation).
+            ToListAsync();
     }
 
     public async void DeleteTask(Tasks tasks)

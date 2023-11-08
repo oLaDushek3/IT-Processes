@@ -3,19 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:ui="http://schemas.modernwpf.com/2019"
              xmlns:local="clr-namespace:ITProcesses.Views"
-             xmlns:hellpers="clr-namespace:ITProcesses.Resources"
-             hellpers:ScrollViewerHelper.ShiftWheelScrollsHorizontally="True"
+             hellpersAndConverters:ScrollViewerHelper.ShiftWheelScrollsHorizontally="True"
              mc:Ignorable="d"
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
              xmlns:views="clr-namespace:ITProcesses.Views"
+             xmlns:hellpersAndConverters="clr-namespace:ITProcesses.HellpersAndConverters"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
              d:DesignHeight="720" d:DesignWidth="1280"
              d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel, IsDesignTimeCreatable=False}">
-
-    <!--<UserControl.DataContext>
-        <viewModels:MainViewModel />
-    </UserControl.DataContext>-->
     
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type viewModels:TaskViewModel}">
@@ -47,6 +43,7 @@
                         Width="100"
                         Content="Выйти"
                         Command="{Binding LogOutCommand}"/>
+                
             </Grid>
         </Border>
 
@@ -60,31 +57,25 @@
             <!--Navigation menu-->
             <ScrollViewer Grid.Column="0"
                           HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"
-                          Padding="20 0 0 0">
+                          Padding="15 0">
 
                 <StackPanel>
 
                     <RadioButton Style="{DynamicResource NavigationButton}"
                                  Tag="{DynamicResource TaskList}"
                                  GroupName="NavigationButtons"
-                                 Content="Мои задачи"
+                                 Content="Список задач"
                                  Margin="0 2.5"
                                  Padding="10 0"
                                  IsChecked="True"
                                  Command="{Binding ShowStatisticsViewCommand}"/>
 
-                    <RadioButton Style="{DynamicResource NavigationButton}"
-                                 Tag="{DynamicResource TaskList}"
-                                 GroupName="NavigationButtons"
-                                 Content="Мои задачи"
-                                 Margin="0 2.5"
-                                 Padding="10 0" />
-
                     <TreeView>
                         <TreeViewItem Style="{DynamicResource HeaderTreeViewItemStyle}"
-                                      Header="Мои задачи2"
+                                      Header="Мои задачи"
                                       Tag="{DynamicResource TaskList}"
                                       ItemsSource="{Binding Nodes}">
+                            
                             <TreeViewItem.ItemTemplate>
                                 <HierarchicalDataTemplate ItemsSource="{Binding Nodes}">
                                     <RadioButton HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -97,8 +88,8 @@
                                                  IsChecked="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=IsSelected, Mode=TwoWay}" />
                                 </HierarchicalDataTemplate>
                             </TreeViewItem.ItemTemplate>
+                            
                         </TreeViewItem>
-
                     </TreeView>
 
                 </StackPanel>
