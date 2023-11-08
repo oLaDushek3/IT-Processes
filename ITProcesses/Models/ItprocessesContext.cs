@@ -52,6 +52,9 @@ public partial class ItprocessesContext : DbContext
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
                 .HasColumnName("id");
+            entity.Property(e => e.Name)
+                .HasMaxLength(50)
+                .HasColumnName("name");
             entity.Property(e => e.Path).HasColumnName("path");
         });
 
@@ -223,6 +226,7 @@ public partial class ItprocessesContext : DbContext
             entity.Property(e => e.FirstName)
                 .HasMaxLength(100)
                 .HasColumnName("first_name");
+            entity.Property(e => e.Image).HasColumnName("image");
             entity.Property(e => e.LastName)
                 .HasMaxLength(100)
                 .HasColumnName("last_name");

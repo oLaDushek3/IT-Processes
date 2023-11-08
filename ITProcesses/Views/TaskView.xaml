@@ -26,16 +26,14 @@
         <StackPanel Grid.Column="0"
                     Margin="20">
 
-            <StackPanel Orientation="Horizontal"
-                        Margin="5">
-
-                <ui:AppBarButton Icon="Back"
-                                 Width="100"
-                                 HorizontalAlignment="Right"
-                                 Margin="10"
-                                 Command="{Binding BackCommand}" />
-
-            </StackPanel>
+            <ui:AppBarButton Icon="Back"
+                             Command="{Binding BackCommand}"
+                             Height="32"
+                             Width="32" 
+                             HorizontalContentAlignment="Center"
+                             VerticalContentAlignment="Center"
+                             Padding="0"
+                             Margin="0"/>
 
             <TextBlock Text="{Binding SelectedTask.Name}"
                        FontSize="30"

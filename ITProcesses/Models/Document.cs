@@ -9,5 +9,7 @@ public partial class Document
 
     public string Path { get; set; } = null!;
 
+    public string? Name { get; set; }
+
     public virtual ICollection<TaskDocument> TaskDocuments { get; set; } = new List<TaskDocument>();
 }
