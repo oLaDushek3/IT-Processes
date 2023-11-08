@@ -13,7 +13,7 @@ public class TasksListViewModel : BaseViewModel
 
     private ITaskService _taskService;
     private MainViewModel _currentMainViewModel;
-    
+
     private ObservableCollection<Tasks> _tasksList;
     private Tasks _selectedTask;
 
@@ -39,31 +39,31 @@ public class TasksListViewModel : BaseViewModel
         {
             _selectedTask = value;
             OnPropertyChanged();
-            
-            if(value != null)
+
+            if (value != null)
                 OpenTask();
         }
     }
 
     #endregion
-    
+
     //Constructor
     public TasksListViewModel(MainViewModel currentMainViewModel)
     {
         _taskService = new TaskService();
         _currentMainViewModel = currentMainViewModel;
-        
+
         GetData();
     }
-    
+
     //Methods
     private async void GetData()
     {
         TasksList = new ObservableCollection<Tasks>(await _taskService.GetAllTask());
     }
-    
+
     private void OpenTask()
     {
-        _currentMainViewModel.ChangeView(new TaskViewModel(SelectedTask.Id));
+        _currentMainViewModel.ChangeView(new TaskViewModel(SelectedTask.Id, _currentMainViewModel));
     }
 }

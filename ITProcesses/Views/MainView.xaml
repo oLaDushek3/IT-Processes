@@ -67,7 +67,7 @@
                     <RadioButton Style="{DynamicResource NavigationButton}"
                                  Tag="{DynamicResource TaskList}"
                                  GroupName="NavigationButtons"
-                                 Content="Мои задачи"
+                                 Content="Все задачи"
                                  Margin="0 2.5"
                                  Padding="10 0"
                                  IsChecked="True"

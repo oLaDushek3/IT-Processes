@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using ITProcesses.Command;
 using ITProcesses.Models;
 using ITProcesses.Services;
 
@@ -15,6 +16,8 @@ public class TaskViewModel : BaseViewModel
     
     private Tasks _selectedTask;
     private ObservableCollection<TaskStatus> _statusList;
+    private MainViewModel _currentMainViewModel;
+
 
 
     #endregion
@@ -47,16 +50,24 @@ public class TaskViewModel : BaseViewModel
     
     
     //Constructor
-    public TaskViewModel(Guid selectedTaskGuid)
+    public TaskViewModel(Guid selectedTaskGuid, MainViewModel currentMainViewModel)
     {
         _taskService = new TaskService();
-        
+        _currentMainViewModel = currentMainViewModel;
         GetData(selectedTaskGuid);
     }
+
+    public CommandHandler BackCommand => new(BackTaskListView);
 
     private async void GetData(Guid selectedTaskGuid)
     {
         StatusList = new ObservableCollection<TaskStatus>(await _taskService.GetAllStatuses());
         SelectedTask = (await _taskService.GetTaskById(selectedTaskGuid));
     }
+
+    private void BackTaskListView()
+    { 
+        _currentMainViewModel.ChangeView(new TasksListViewModel(_currentMainViewModel));
+    }
+    
 }
