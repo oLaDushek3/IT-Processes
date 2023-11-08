@@ -5,25 +5,72 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ITProcesses.Views"
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
+             xmlns:behavior="clr-namespace:AttachedCommandBehavior;assembly=AttachedCommandBehavior"
              mc:Ignorable="d" x:Name="MyUserControl"
              d:DesignHeight="650" d:DesignWidth="1060"
              Background="{DynamicResource primaryBackColorBrush}"
              d:DataContext="{d:DesignInstance Type=viewModels:TasksListViewModel, IsDesignTimeCreatable=False}">
     
-    <!--<UserControl.DataContext>
-        <viewModels:TasksListViewModel/>
-    </UserControl.DataContext>-->
-    
     <Grid>
-        <ListView Margin="20" Height="150" VerticalAlignment="Top"
-                  ItemsSource="{Binding TasksList}"
-                  SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
+        <ListView Margin="20"
+                  ItemsSource="{Binding TasksList}">
+            
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem" BasedOn="{StaticResource {x:Static GridView.GridViewItemContainerStyleKey}}">
+                    <Setter Property="behavior:CommandBehavior.Event" Value="MouseDoubleClick" />
+                    <Setter Property="behavior:CommandBehavior.Command" Value="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.OpenTaskCommand}" />
+                    <Setter Property="behavior:CommandBehavior.CommandParameter" Value="{Binding}" />
+                    
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="FontSize" Value="15"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            
+            <ListView.Resources>
+                <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="FontSize" Value="15"/>
+                </Style>
+            </ListView.Resources>
             
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" 
-                                    Header="Название"
-                                    Width="180"/>
+                    
+                    <GridViewColumn Header="Название"
+                                    DisplayMemberBinding="{Binding Name}"/>
+                    
+                    <GridViewColumn Header="Описание"
+                                    Width="200">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Description}"
+                                           TextTrimming="CharacterEllipsis"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    
+                    <GridViewColumn Header="Тип"
+                                    DisplayMemberBinding="{Binding Type.Name}"/>
+                    
+                    <GridViewColumn Header="Статус"
+                                    DisplayMemberBinding="{Binding Status.Name}"/>
+                    
+                    <GridViewColumn Header="Дата создания"
+                                    DisplayMemberBinding="{Binding DateCreateTimestamp, 
+                                    StringFormat={}{0:d MMMM yyyy}, 
+                                    ConverterCulture=ru-RU}"/>
+                    
+                    <GridViewColumn Header="Дата начала"
+                                    DisplayMemberBinding="{Binding DateStartTimestamp, 
+                                    StringFormat={}{0:d MMMM yyyy}, 
+                                    ConverterCulture=ru-RU}"/>
+                    
+                    <GridViewColumn Header="Дата окончания"
+                                    DisplayMemberBinding="{Binding DateEndTimestamp, 
+                                    StringFormat={}{0:d MMMM yyyy}, 
+                                    ConverterCulture=ru-RU}"/>
+                    
                 </GridView>
             </ListView.View>
             
