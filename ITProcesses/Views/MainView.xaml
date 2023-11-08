@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ui="http://schemas.modernwpf.com/2019"
              xmlns:local="clr-namespace:ITProcesses.Views"
-             xmlns:hellpers="clr-namespace:ITProcesses.Resources"
+             xmlns:hellpers="clr-namespace:ITProcesses.HellpersAndConverters"
              hellpers:ScrollViewerHelper.ShiftWheelScrollsHorizontally="True"
              mc:Ignorable="d"
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"

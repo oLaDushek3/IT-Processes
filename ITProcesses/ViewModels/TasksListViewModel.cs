@@ -55,6 +55,6 @@ public class TasksListViewModel : BaseViewModel
     
     private void OpenTask(Tasks selectedTask)
     {
-        _currentMainViewModel.ChangeView(new TaskViewModel(selectedTask.Id));
+        _currentMainViewModel.ChangeView(new TaskViewModel(selectedTask.Id, _currentMainViewModel));
     }
 }
