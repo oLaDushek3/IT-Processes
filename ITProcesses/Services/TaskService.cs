@@ -15,39 +15,32 @@ public class TaskService : BaseViewModel, ITaskService
     {
         var tasks = await Context.UsersTasks.Include(c => c.Task)
             .Where(c => c.UserId == guid).ToListAsync();
-        
+
         if (tasks == null)
             throw new Exception("Не найден пользователь");
 
         return tasks;
     }
-    
+
     public async Task<List<Tasks>> GetTasksByProject(int id)
     {
-        var tasks = await Context.Tasks.
-            Where(t => t.ProjectId == id).ToListAsync();
+        var tasks = await Context.Tasks.Where(t => t.ProjectId == id).ToListAsync();
 
         if (tasks == null)
             throw new Exception("Проект не найден");
-        
+
         return tasks;
     }
-    
+
     public async Task<Tasks> GetTaskById(Guid guid)
     {
-        var tasks = await Context.Tasks.Where(t => t.Id == guid).
-            Include(t => t.UsersTasks).
-                ThenInclude(ut => ut.User).
-                    ThenInclude(u => u.Role).
-            Include(t => t.TaskDocuments).
-                ThenInclude(td => td.DocumentsNavigation).
-            Include(t => t.TaskTags).
-                ThenInclude(tt => tt.TagNavigation).
-            Include(t => t.Status).FirstAsync();
+        var tasks = await Context.Tasks.Where(t => t.Id == guid).Include(t => t.UsersTasks).ThenInclude(ut => ut.User)
+            .ThenInclude(u => u.Role).Include(t => t.TaskDocuments).ThenInclude(td => td.DocumentsNavigation)
+            .Include(t => t.TaskTags).ThenInclude(tt => tt.TagNavigation).Include(t => t.Status).FirstAsync();
 
         if (tasks == null)
             throw new Exception("Задача не найдена");
-        
+
         return tasks;
     }
 
@@ -84,7 +77,8 @@ public class TaskService : BaseViewModel, ITaskService
 
     public async Task<List<UsersTask>> GetAllUsersFromTask(Guid guid)
     {
-        var users = await Context.UsersTasks.Include(u => u.User)
+        var users = await Context.UsersTasks
+            .Include(u => u.User)
             .Where(u => u.TaskId == guid).ToListAsync();
 
         if (users == null)
@@ -95,12 +89,10 @@ public class TaskService : BaseViewModel, ITaskService
 
     public async Task<List<Tasks>> GetAllTask()
     {
-        return await Context.Tasks.
-            Include(t => t.Status).
-            Include(t => t.Type).
-            Include(t => t.TaskTags).
-                ThenInclude(tt => tt.TagNavigation).
-            ToListAsync();
+        return await Context.Tasks.Include(t => t.Status)
+            .Include(t => t.Type)
+            .Include(t => t.TaskTags)
+            .ThenInclude(tt => tt.TagNavigation).ToListAsync();
     }
 
     public async void DeleteTask(Tasks tasks)
@@ -113,5 +105,12 @@ public class TaskService : BaseViewModel, ITaskService
         await Context.SaveChangesAsync();
         Context.Tasks.Remove(tasks);
         await Context.SaveChangesAsync();
+    }
+
+    public async Task<Tasks> UpdateTask(Tasks tasks)
+    {
+        Context.Tasks.Update(tasks);
+        await Context.SaveChangesAsync();
+        return tasks;
     }
 }

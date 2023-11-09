@@ -69,5 +69,10 @@ public class TaskViewModel : BaseViewModel
     { 
         _currentMainViewModel.ChangeView(new TasksListViewModel(_currentMainViewModel));
     }
+
+    private void EditTask()
+    {
+       // _taskService.
+    }
     
 }

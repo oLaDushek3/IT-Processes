@@ -23,9 +23,10 @@
                     Margin="20">
             
             <ui:AppBarButton Icon="Back"
-                             Height="32"
+                             Height="33"
                              Width="32"
-                             Command="{Binding BackCommand}"/>
+                             Command="{Binding BackCommand}"
+                             Margin="4"/>
             
             <TextBlock Text="{Binding SelectedTask.Name}"
                        FontSize="30"
