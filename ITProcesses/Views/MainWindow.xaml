@@ -16,19 +16,6 @@
         ui:WindowHelper.UseModernWindowStyle="True"
         d:DataContext="{d:DesignInstance Type=viewModels:MainWindowViewModel, IsDesignTimeCreatable=False}">
     
-    <!--<Window.DataContext>
-        <viewModels:MainWindowViewModel/>
-    </Window.DataContext>-->
-    
-    <Window.Resources>
-        <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
-            <views:LoginView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModels:MainViewModel}">
-            <views:MainView/>
-        </DataTemplate>
-    </Window.Resources>
-    
     <Grid>
         <ContentControl Content="{Binding CurrentChildView}"/>
     </Grid>

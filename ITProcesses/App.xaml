@@ -7,13 +7,14 @@
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemeResources />
                 <ui:XamlControlsResources />
+                <ResourceDictionary Source="/Resources/ViewResources.xaml"/>
                 <ResourceDictionary Source="/Resources/UIColors.xaml"/>
                 <ResourceDictionary Source="/Resources/Icons.xaml"/>
                 <ResourceDictionary Source="/Resources/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="/Resources/CheckBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/ComboBoxStyle.xaml"/>
                 <ResourceDictionary Source="/Resources/TreeViewStyle.xaml"/>
                 <ResourceDictionary Source="/Resources/ScrollViewerStyle.xaml"/>
-                <ResourceDictionary Source="/Resources/ComboBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
