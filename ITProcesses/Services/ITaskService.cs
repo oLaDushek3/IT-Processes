@@ -26,4 +26,6 @@ public interface ITaskService
     Task<List<Tasks>> GetAllTask();
 
     void DeleteTask(Tasks tasks);
+
+    Task<Tasks> UpdateTask(Tasks tasks);
 }
