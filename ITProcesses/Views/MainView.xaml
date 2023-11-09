@@ -12,15 +12,6 @@
              xmlns:views="clr-namespace:ITProcesses.Views"
              d:DesignHeight="720" d:DesignWidth="1280"
              d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel, IsDesignTimeCreatable=False}">
-    
-    <UserControl.Resources>
-        <DataTemplate DataType="{x:Type viewModels:TaskViewModel}">
-            <views:TaskView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModels:TasksListViewModel}">
-            <views:TasksListView/>
-        </DataTemplate>
-    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
