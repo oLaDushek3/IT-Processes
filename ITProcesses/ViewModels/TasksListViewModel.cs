@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -22,6 +23,7 @@ public class TasksListViewModel : BaseViewModel
     private Tasks _selectedTask;
     private string _searchBox = string.Empty;
     private List<Tasks> _allTasks;
+    private DateTime _selectedDate = DateTime.Now;
 
     #endregion
 
@@ -45,7 +47,18 @@ public class TasksListViewModel : BaseViewModel
         {
             _searchBox = value;
             OnPropertyChanged();
-            SearchInfo();
+            SearchInfoFromSearchBox();
+        }
+    }
+
+    public DateTime SelectedDate
+    {
+        get => _selectedDate;
+        set
+        {
+            _selectedDate = value;
+            OnPropertyChanged();
+            SearchDateFromDatePicker();
         }
     }
 
@@ -68,7 +81,6 @@ public class TasksListViewModel : BaseViewModel
     {
         _allTasks = await _taskService.GetAllTask();
         TasksList = new ObservableCollection<Tasks>(_allTasks);
-        
     }
 
     private void OpenTask(Tasks selectedTask)
@@ -76,7 +88,7 @@ public class TasksListViewModel : BaseViewModel
         _currentMainViewModel.ChangeView(new TaskViewModel(selectedTask.Id, _currentMainViewModel));
     }
 
-    private void SearchInfo()
+    private void SearchInfoFromSearchBox()
     {
         if (_searchBox != string.Empty)
         {
@@ -89,5 +101,18 @@ public class TasksListViewModel : BaseViewModel
         {
             GetData();
         }
+    }
+
+    private void SearchDateFromDatePicker()
+    {
+        if (_selectedDate != new DateTime())
+        {
+           
+        }
+        else
+        {
+            GetData();
+        }
+        
     }
 }
