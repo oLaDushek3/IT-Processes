@@ -12,6 +12,9 @@ public class MainViewModel : BaseViewModel
     private MainWindowViewModel _currentMainWindowViewModel;
     private BaseViewModel _currentChildView;
 
+    private ITaskService _taskService = new TaskService();
+    private Project _currentProject;
+
     #endregion
     
     #region Properties
@@ -34,7 +37,17 @@ public class MainViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    
+
+    public Project CurrentProject
+    {
+        get => _currentProject;
+        set
+        {
+            _currentProject = value;
+            OnPropertyChanged();
+        }
+    }
+
     #endregion
     
     //Commands
@@ -46,6 +59,13 @@ public class MainViewModel : BaseViewModel
     public MainViewModel(MainWindowViewModel currentMainViewModel)
     {
         _currentMainWindowViewModel = currentMainViewModel;
+        GetData();
+    }
+
+    //Methods
+    private async void GetData()
+    {
+        CurrentProject = await _taskService.GetProjectById(Settings.CurrentProject);
     }
 
     private async void LogOutAsync()

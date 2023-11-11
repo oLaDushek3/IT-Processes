@@ -20,7 +20,8 @@ public class SaveInfo
     private static AppSettings DefaultSettings => new()
     {
         UserName = null,
-        Password = null
+        Password = null,
+        CurrentProject = 1
     };
 
     public static void CreateAppSettingsDefault()

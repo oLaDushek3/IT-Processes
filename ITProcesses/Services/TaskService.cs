@@ -11,17 +11,17 @@ namespace ITProcesses.Services;
 
 public class TaskService : BaseViewModel, ITaskService
 {
-    public async Task<List<UsersTask>> GetTasksThisUser(Guid guid)
-    {
-        var tasks = await Context.UsersTasks.Include(c => c.Task)
-            .Where(c => c.UserId == guid).ToListAsync();
-        
-        if (tasks == null)
-            throw new Exception("Не найден пользователь");
+    #region TasksServices
 
-        return tasks;
+    public async Task<List<Tasks>> GetAllTask()
+    {
+        return await Context.Tasks.
+            Include(t => t.Status).
+            Include(t => t.Type).
+            Include(t => t.TaskTags).
+            ThenInclude(tt => tt.TagNavigation).
+            ToListAsync();
     }
-    
     public async Task<List<Tasks>> GetTasksByProject(int id)
     {
         var tasks = await Context.Tasks.
@@ -32,17 +32,26 @@ public class TaskService : BaseViewModel, ITaskService
         
         return tasks;
     }
-    
+    public async Task<List<UsersTask>> GetTasksThisUser(Guid guid)
+    {
+        var tasks = await Context.UsersTasks.Include(c => c.Task)
+            .Where(c => c.UserId == guid).ToListAsync();
+        
+        if (tasks == null)
+            throw new Exception("Не найден пользователь");
+
+        return tasks;
+    }
     public async Task<Tasks> GetTaskById(Guid guid)
     {
         var tasks = await Context.Tasks.Where(t => t.Id == guid).
             Include(t => t.UsersTasks).
-                ThenInclude(ut => ut.User).
-                    ThenInclude(u => u.Role).
+            ThenInclude(ut => ut.User).
+            ThenInclude(u => u.Role).
             Include(t => t.TaskDocuments).
-                ThenInclude(td => td.DocumentsNavigation).
+            ThenInclude(td => td.DocumentsNavigation).
             Include(t => t.TaskTags).
-                ThenInclude(tt => tt.TagNavigation).
+            ThenInclude(tt => tt.TagNavigation).
             Include(t => t.Status).FirstAsync();
 
         if (tasks == null)
@@ -50,7 +59,6 @@ public class TaskService : BaseViewModel, ITaskService
         
         return tasks;
     }
-
     public async Task<Tasks> CreateTask(Tasks tasks)
     {
         var task = await Context.Tasks.FirstOrDefaultAsync(t => t.Id == tasks.Id);
@@ -63,7 +71,31 @@ public class TaskService : BaseViewModel, ITaskService
 
         return tasks;
     }
+    public async void DeleteTask(Tasks tasks)
+    {
+        tasks.TaskDocuments = null;
+        tasks.InverseBeforeTaskNavigation = null;
+        tasks.UsersTasks = null;
+        tasks.TaskTags = null;
+        Context.Tasks.Update(tasks);
+        await Context.SaveChangesAsync();
+        Context.Tasks.Remove(tasks);
+        await Context.SaveChangesAsync();
+    }
 
+    #endregion
+
+    #region ProjectServices
+    
+    public async Task<Project> GetProjectById(int id)
+    {
+        var project = await Context.Projects.FirstOrDefaultAsync(p => p.Id == id);
+
+        if (project == null)
+            throw new Exception("Проект не найдена");
+        
+        return project;
+    }
     public async Task<Project> CreateProject(Project project)
     {
         var proj = await Context.Projects.FirstOrDefaultAsync(p => p.Id == project.Id);
@@ -76,6 +108,8 @@ public class TaskService : BaseViewModel, ITaskService
 
         return project;
     }
+
+    #endregion
 
     public async Task<List<TaskStatus>> GetAllStatuses()
     {
@@ -91,27 +125,5 @@ public class TaskService : BaseViewModel, ITaskService
             throw new Exception("Пользователи не найдены");
 
         return users;
-    }
-
-    public async Task<List<Tasks>> GetAllTask()
-    {
-        return await Context.Tasks.
-            Include(t => t.Status).
-            Include(t => t.Type).
-            Include(t => t.TaskTags).
-                ThenInclude(tt => tt.TagNavigation).
-            ToListAsync();
-    }
-
-    public async void DeleteTask(Tasks tasks)
-    {
-        tasks.TaskDocuments = null;
-        tasks.InverseBeforeTaskNavigation = null;
-        tasks.UsersTasks = null;
-        tasks.TaskTags = null;
-        Context.Tasks.Update(tasks);
-        await Context.SaveChangesAsync();
-        Context.Tasks.Remove(tasks);
-        await Context.SaveChangesAsync();
     }
 }

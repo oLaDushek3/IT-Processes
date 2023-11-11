@@ -17,6 +17,8 @@ public interface ITaskService
     
     Task<Tasks> CreateTask(Tasks tasks);
 
+    Task<Project> GetProjectById(int id);
+    
     Task<Project> CreateProject(Project project);
 
     Task<List<TaskStatus>> GetAllStatuses();
