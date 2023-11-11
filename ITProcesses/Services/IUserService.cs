@@ -11,4 +11,6 @@ public interface IUserService
 
      Task<User> Update(User user);
 
+     Task<User> GetUserByLoginAndPassword(string login, string password);
+
 }

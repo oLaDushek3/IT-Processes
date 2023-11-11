@@ -1,3 +1,5 @@
+using ITProcesses.Models;
+
 namespace ITProcesses.ViewModels;
 
 public class MainWindowViewModel : BaseViewModel
@@ -22,12 +24,12 @@ public class MainWindowViewModel : BaseViewModel
 
     #endregion
     
-    public MainWindowViewModel(bool skipAuth)
+    public MainWindowViewModel(User user)
     {
-        if(!skipAuth)
+        if(user == null)
             ChangeView(new LoginViewModel(this));
         else
-            ChangeView(new MainViewModel(this));
+            ChangeView(new MainViewModel(this, user));
     }
 
     public void ChangeView(BaseViewModel selectedChildView)

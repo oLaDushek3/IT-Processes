@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using ITProcesses.Command;
 using ITProcesses.JsonSaveInfo;
+using ITProcesses.Models;
 
 namespace ITProcesses.ViewModels;
 
@@ -11,6 +12,7 @@ public class MainViewModel : BaseViewModel
     
     private MainWindowViewModel _currentMainWindowViewModel;
     private BaseViewModel _currentChildView;
+    private User _user;
 
     #endregion
     
@@ -43,9 +45,10 @@ public class MainViewModel : BaseViewModel
     public CommandHandler ShowStatisticsViewCommand => new(OpenTasksListView);
     
 
-    public MainViewModel(MainWindowViewModel currentMainViewModel)
+    public MainViewModel(MainWindowViewModel currentMainViewModel, User user)
     {
         _currentMainWindowViewModel = currentMainViewModel;
+        _user = user;
     }
 
     private async void LogOutAsync()

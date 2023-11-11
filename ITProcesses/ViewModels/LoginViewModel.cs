@@ -82,12 +82,12 @@ public class LoginViewModel : BaseViewModel
     {
         try
         {
-            await _userService.Login(Login, Password);
+          var user =  await _userService.Login(Login, Password);
             
             if(CheckBoxBool==true)
                 SaveLoginIfoInJson();
 
-            CurrentMainWindowViewModel.ChangeView(new MainViewModel(CurrentMainWindowViewModel));
+            CurrentMainWindowViewModel.ChangeView(new MainViewModel(CurrentMainWindowViewModel,user));
         }
         catch(Exception e)
         {

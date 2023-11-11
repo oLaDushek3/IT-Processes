@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using ITProcesses.JsonSaveInfo;
+using ITProcesses.Models;
 using ITProcesses.Services;
 using ITProcesses.ViewModels;
 
@@ -31,17 +32,17 @@ namespace ITProcesses
             mainWindow.Show();
         }
 
-        private async Task<bool> WriteUserFromJson()
+        private async Task<User> WriteUserFromJson()
         {
             try
             {
-                await _userService.Login(Settings.UserName, Settings.Password);
-                return true;
+              var user =  await _userService.Login(Settings.UserName, Settings.Password);
+                return user;
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
-                return false;
+                return null;
             }
         }
     }

@@ -50,6 +50,11 @@ public class UserService : BaseViewModel, IUserService
         return user;
     }
 
+    public Task<User> GetUserByLoginAndPassword(string login, string password)
+    {
+        throw new NotImplementedException();
+    }
+
     private bool ValidatePassword(string password)
     {
         return password.Any(char.IsLetter) &&
