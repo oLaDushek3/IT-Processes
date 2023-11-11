@@ -14,15 +14,6 @@ public class ConfirmDialogViewModel : BaseViewModel
 
     #region Properties
 
-    public DialogProvider DialogProvider
-    {
-        get => _dialogProvider;
-        set
-        {
-            _dialogProvider = value;
-            OnPropertyChanged();
-        }
-    }
     public string Message
     {
         get => _message;
@@ -36,23 +27,18 @@ public class ConfirmDialogViewModel : BaseViewModel
     #endregion
 
     //Commands
-    public CommandHandler ClickYesCommand => new(ClickYes);
-    public CommandHandler ClickNoCommand => new(ClickNo);
+    public CommandHandler<bool> ConfirmCommand => new(Confirm);
     
     //Constructor
     public ConfirmDialogViewModel(DialogProvider dialogProvider, string message)
     {
-        DialogProvider = dialogProvider;
+        _dialogProvider = dialogProvider;
         Message = message;
     }
     
     //Methods
-    private void ClickYes()
+    private void Confirm(bool decision)
     {
-        DialogProvider.CloseDialog(true);
-    }
-    private void ClickNo()
-    {
-        DialogProvider.CloseDialog(false);
+        _dialogProvider.CloseDialog(decision);
     }
 }
