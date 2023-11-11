@@ -12,6 +12,4 @@
     <SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="{DynamicResource secondaryBackColor}"/>
     <SolidColorBrush x:Key="ComboBoxDropDownBackgroundPointerOver" Color="{DynamicResource secondaryBackColor}"/>
     
-    <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}"/>
-    
 </ResourceDictionary>

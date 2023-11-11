@@ -18,6 +18,7 @@
                 <ResourceDictionary Source="/Resources/ComboBoxStyle.xaml"/>
                 <ResourceDictionary Source="/Resources/TreeViewStyle.xaml"/>
                 <ResourceDictionary Source="/Resources/ScrollViewerStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/ListViewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
         </ResourceDictionary>

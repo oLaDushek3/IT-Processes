@@ -15,24 +15,14 @@
         <ListView Margin="20"
                   ItemsSource="{Binding TasksList}">
             
+            <!--Double click on item-->
             <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem" BasedOn="{StaticResource {x:Static GridView.GridViewItemContainerStyleKey}}">
+                <Style TargetType="ListViewItem" BasedOn="{StaticResource DefaultListViewItem}">
                     <Setter Property="behavior:CommandBehavior.Event" Value="MouseDoubleClick" />
                     <Setter Property="behavior:CommandBehavior.Command" Value="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.OpenTaskCommand}" />
                     <Setter Property="behavior:CommandBehavior.CommandParameter" Value="{Binding}" />
-                    
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                    <Setter Property="Padding" Value="0"/>
-                    <Setter Property="FontSize" Value="15"/>
                 </Style>
             </ListView.ItemContainerStyle>
-            
-            <ListView.Resources>
-                <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                    <Setter Property="FontSize" Value="15"/>
-                </Style>
-            </ListView.Resources>
             
             <ListView.View>
                 <GridView>
