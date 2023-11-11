@@ -19,13 +19,15 @@
         <TextBox Height="60" Width="230"
                  Margin="0 15 0 15"
                  Text = "{Binding Login}"
-                 ui:ControlHelper.Header="Логин"
+                 ui:ControlHelper.PlaceholderText="Логин"
+                 ui:ControlHelper.PlaceholderForeground="{DynamicResource secondaryFontColorBrush}"
                  Foreground="{DynamicResource primaryFontColorBrush}"/>
 
         <PasswordBox Height="60" Width="230"
                      Margin="0 15 0 5"
                      PasswordChanged="PasswordBox_OnPasswordChanged"
-                     ui:ControlHelper.Header="Пароль"
+                     ui:ControlHelper.PlaceholderText="Пароль"
+                     ui:ControlHelper.PlaceholderForeground="{DynamicResource secondaryFontColorBrush}"
                      Foreground="{DynamicResource primaryFontColorBrush}"/>
         
         <CheckBox Content="Запомнить меня"

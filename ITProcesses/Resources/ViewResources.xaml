@@ -19,4 +19,8 @@
         <views:TaskView/>
     </DataTemplate>
     
+    <DataTemplate DataType="{x:Type viewModels:ConfirmDialogViewModel}">
+        <views:ConfirmDialogView/>
+    </DataTemplate>
+    
 </ResourceDictionary>

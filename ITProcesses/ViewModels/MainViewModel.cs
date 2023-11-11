@@ -2,13 +2,15 @@ using System;
 using System.Collections.ObjectModel;
 using ITProcesses.Command;
 using ITProcesses.JsonSaveInfo;
+using ITProcesses.Models;
+using ITProcesses.Services;
 
 namespace ITProcesses.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
     #region Fields
-    
+
     private MainWindowViewModel _currentMainWindowViewModel;
     private BaseViewModel _currentChildView;
 
@@ -16,7 +18,7 @@ public class MainViewModel : BaseViewModel
     private Project _currentProject;
 
     #endregion
-    
+
     #region Properties
 
     public MainWindowViewModel CurrentMainWindowViewModel
@@ -28,6 +30,7 @@ public class MainViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
+
     public BaseViewModel CurrentChildView
     {
         get => _currentChildView;
@@ -49,13 +52,13 @@ public class MainViewModel : BaseViewModel
     }
 
     #endregion
-    
+
     //Commands
     public CommandHandler LogOutCommand => new(LogOutAsync);
 
     public CommandHandler ShowStatisticsViewCommand => new(OpenTasksListView);
-    
 
+    //Constructor
     public MainViewModel(MainWindowViewModel currentMainViewModel)
     {
         _currentMainWindowViewModel = currentMainViewModel;
@@ -72,20 +75,23 @@ public class MainViewModel : BaseViewModel
     {
         try
         {
-            CurrentMainWindowViewModel.ChangeView(new LoginViewModel(CurrentMainWindowViewModel));
-            SaveInfo.CreateAppSettingsDefault();
+            if (await CurrentMainWindowViewModel.DialogProvider.ShowDialog(
+                    new ConfirmDialogViewModel(CurrentMainWindowViewModel.DialogProvider, "Вы уверены?")))
+            {
+                CurrentMainWindowViewModel.ChangeView(new LoginViewModel(CurrentMainWindowViewModel));
+                SaveInfo.CreateAppSettingsDefault();
+            }
         }
         catch
         {
-            
         }
     }
-    
+
     public async void OpenTasksListView()
     {
         ChangeView(new TasksListViewModel(this));
     }
-    
+
     public void ChangeView(BaseViewModel selectedView)
     {
         CurrentChildView = selectedView;

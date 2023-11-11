@@ -4,6 +4,9 @@
              xmlns:ui="http://schemas.modernwpf.com/2019">
     <Application.Resources>
         <ResourceDictionary>
+            
+            <BooleanToVisibilityConverter x:Key="BoolToVisible"/>
+            
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemeResources />
                 <ui:XamlControlsResources />
@@ -16,6 +19,7 @@
                 <ResourceDictionary Source="/Resources/TreeViewStyle.xaml"/>
                 <ResourceDictionary Source="/Resources/ScrollViewerStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

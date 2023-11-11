@@ -1,3 +1,6 @@
+using System.Threading.Tasks;
+using ITProcesses.Dialog;
+
 namespace ITProcesses.ViewModels;
 
 public class MainWindowViewModel : BaseViewModel
@@ -5,6 +8,7 @@ public class MainWindowViewModel : BaseViewModel
     #region Fields
 
     private BaseViewModel _currentChildView;
+    private DialogProvider _dialogProvider = new DialogProvider();
 
     #endregion
 
@@ -16,7 +20,16 @@ public class MainWindowViewModel : BaseViewModel
         set
         {
             _currentChildView = value;
-            OnPropertyChanged(nameof(CurrentChildView));
+            OnPropertyChanged();
+        }
+    }
+    public DialogProvider DialogProvider
+    {
+        get => _dialogProvider;
+        set
+        {
+            _dialogProvider = value;
+            OnPropertyChanged();
         }
     }
 
