@@ -72,6 +72,11 @@ public partial class ItprocessesContext : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .HasColumnName("name");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Projects)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("project_user_id_fkey");
         });
 
         modelBuilder.Entity<Role>(entity =>
@@ -127,6 +132,7 @@ public partial class ItprocessesContext : DbContext
             entity.Property(e => e.ProjectId).HasColumnName("project_id");
             entity.Property(e => e.StatusId).HasColumnName("status_id");
             entity.Property(e => e.TypeId).HasColumnName("type_id");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.HasOne(d => d.BeforeTaskNavigation).WithMany(p => p.InverseBeforeTaskNavigation)
                 .HasForeignKey(d => d.BeforeTask)
@@ -144,6 +150,10 @@ public partial class ItprocessesContext : DbContext
             entity.HasOne(d => d.Type).WithMany(p => p.Tasks)
                 .HasForeignKey(d => d.TypeId)
                 .HasConstraintName("task_type_id_fkey");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Tasks)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("tasks_user_id_fkey");
         });
 
         modelBuilder.Entity<TaskDocument>(entity =>
@@ -153,11 +163,11 @@ public partial class ItprocessesContext : DbContext
             entity.ToTable("task_documents");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Documents).HasColumnName("documents");
+            entity.Property(e => e.DocumentsId).HasColumnName("documents_id");
             entity.Property(e => e.TaskId).HasColumnName("task_id");
 
-            entity.HasOne(d => d.DocumentsNavigation).WithMany(p => p.TaskDocuments)
-                .HasForeignKey(d => d.Documents)
+            entity.HasOne(d => d.Documents).WithMany(p => p.TaskDocuments)
+                .HasForeignKey(d => d.DocumentsId)
                 .HasConstraintName("task_documents_documents_fkey");
 
             entity.HasOne(d => d.Task).WithMany(p => p.TaskDocuments)
@@ -186,15 +196,15 @@ public partial class ItprocessesContext : DbContext
             entity.ToTable("task_tag");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Tag).HasColumnName("tag");
-            entity.Property(e => e.Task).HasColumnName("task");
+            entity.Property(e => e.TagId).HasColumnName("tag_id");
+            entity.Property(e => e.TaskId).HasColumnName("task_id");
 
-            entity.HasOne(d => d.TagNavigation).WithMany(p => p.TaskTags)
-                .HasForeignKey(d => d.Tag)
+            entity.HasOne(d => d.Tag).WithMany(p => p.TaskTags)
+                .HasForeignKey(d => d.TagId)
                 .HasConstraintName("task_tag_tag_fkey");
 
-            entity.HasOne(d => d.TaskNavigation).WithMany(p => p.TaskTags)
-                .HasForeignKey(d => d.Task)
+            entity.HasOne(d => d.Task).WithMany(p => p.TaskTags)
+                .HasForeignKey(d => d.TaskId)
                 .HasConstraintName("task_tag_task_fkey");
         });
 
@@ -254,6 +264,7 @@ public partial class ItprocessesContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.TaskId).HasColumnName("task_id");
+            entity.Property(e => e.TimeCount).HasColumnName("time_count");
             entity.Property(e => e.UserComments).HasColumnName("user_comments");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 

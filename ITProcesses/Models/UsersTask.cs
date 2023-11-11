@@ -13,6 +13,8 @@ public partial class UsersTask
 
     public string? UserComments { get; set; }
 
+    public int? TimeCount { get; set; }
+
     public virtual Tasks? Task { get; set; }
 
     public virtual User? User { get; set; }

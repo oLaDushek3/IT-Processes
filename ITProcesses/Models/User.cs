@@ -21,7 +21,11 @@ public partial class User
 
     public string? Image { get; set; }
 
+    public virtual ICollection<Project> Projects { get; set; } = new List<Project>();
+
     public virtual Role? Role { get; set; }
+
+    public virtual ICollection<Tasks> Tasks { get; set; } = new List<Tasks>();
 
     public virtual ICollection<UsersTask> UsersTasks { get; set; } = new List<UsersTask>();
 }

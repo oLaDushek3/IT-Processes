@@ -35,8 +35,8 @@ public class TaskService : BaseViewModel, ITaskService
     public async Task<Tasks> GetTaskById(Guid guid)
     {
         var tasks = await Context.Tasks.Where(t => t.Id == guid).Include(t => t.UsersTasks).ThenInclude(ut => ut.User)
-            .ThenInclude(u => u.Role).Include(t => t.TaskDocuments).ThenInclude(td => td.DocumentsNavigation)
-            .Include(t => t.TaskTags).ThenInclude(tt => tt.TagNavigation).Include(t => t.Status).FirstAsync();
+            .ThenInclude(u => u.Role).Include(t => t.TaskDocuments).ThenInclude(td => td.Documents)
+            .Include(t => t.TaskTags).ThenInclude(tt => tt.Tag).Include(t => t.Status).FirstAsync();
 
         if (tasks == null)
             throw new Exception("Задача не найдена");
@@ -92,7 +92,7 @@ public class TaskService : BaseViewModel, ITaskService
         return await Context.Tasks.Include(t => t.Status)
             .Include(t => t.Type)
             .Include(t => t.TaskTags)
-            .ThenInclude(tt => tt.TagNavigation).ToListAsync();
+            .ThenInclude(tt => tt.Tag).ToListAsync();
     }
 
     public async void DeleteTask(Tasks tasks)

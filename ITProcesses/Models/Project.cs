@@ -13,5 +13,9 @@ public partial class Project
 
     public bool? Archived { get; set; }
 
+    public Guid? UserId { get; set; }
+
     public virtual ICollection<Tasks> Tasks { get; set; } = new List<Tasks>();
+
+    public virtual User? User { get; set; }
 }
