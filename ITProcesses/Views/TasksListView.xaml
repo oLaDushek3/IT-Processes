@@ -6,74 +6,85 @@
              xmlns:local="clr-namespace:ITProcesses.Views"
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
              xmlns:behavior="clr-namespace:AttachedCommandBehavior;assembly=AttachedCommandBehavior"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
              mc:Ignorable="d" x:Name="MyUserControl"
              d:DesignHeight="650" d:DesignWidth="1060"
              Background="{DynamicResource primaryBackColorBrush}"
              d:DataContext="{d:DesignInstance Type=viewModels:TasksListViewModel, IsDesignTimeCreatable=False}">
-    
-    <Grid>
+
+    <StackPanel>
+        
+        <TextBox Margin="10"
+                 Text="{Binding SearchBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                 Height="35"
+                 Width="125"
+                 HorizontalAlignment="Left"
+                 ui:ControlHelper.PlaceholderText="Поиск"/>
+        
         <ListView Margin="20"
                   ItemsSource="{Binding TasksList}">
-            
+
             <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem" BasedOn="{StaticResource {x:Static GridView.GridViewItemContainerStyleKey}}">
+                <Style TargetType="ListViewItem"
+                       BasedOn="{StaticResource {x:Static GridView.GridViewItemContainerStyleKey}}">
                     <Setter Property="behavior:CommandBehavior.Event" Value="MouseDoubleClick" />
-                    <Setter Property="behavior:CommandBehavior.Command" Value="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.OpenTaskCommand}" />
+                    <Setter Property="behavior:CommandBehavior.Command"
+                            Value="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.OpenTaskCommand}" />
                     <Setter Property="behavior:CommandBehavior.CommandParameter" Value="{Binding}" />
-                    
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                    <Setter Property="Padding" Value="0"/>
-                    <Setter Property="FontSize" Value="15"/>
+
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="FontSize" Value="15" />
                 </Style>
             </ListView.ItemContainerStyle>
-            
+
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                    <Setter Property="FontSize" Value="15"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="FontSize" Value="15" />
                 </Style>
             </ListView.Resources>
-            
+
             <ListView.View>
                 <GridView>
-                    
+
                     <GridViewColumn Header="Название"
-                                    DisplayMemberBinding="{Binding Name}"/>
-                    
+                                    DisplayMemberBinding="{Binding Name}" />
+
                     <GridViewColumn Header="Описание"
                                     Width="200">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Description}"
-                                           TextTrimming="CharacterEllipsis"/>
+                                           TextTrimming="CharacterEllipsis" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    
+
                     <GridViewColumn Header="Тип"
-                                    DisplayMemberBinding="{Binding Type.Name}"/>
-                    
+                                    DisplayMemberBinding="{Binding Type.Name}" />
+
                     <GridViewColumn Header="Статус"
-                                    DisplayMemberBinding="{Binding Status.Name}"/>
-                    
+                                    DisplayMemberBinding="{Binding Status.Name}" />
+
                     <GridViewColumn Header="Дата создания"
                                     DisplayMemberBinding="{Binding DateCreateTimestamp, 
                                     StringFormat={}{0:d MMMM yyyy}, 
-                                    ConverterCulture=ru-RU}"/>
-                    
+                                    ConverterCulture=ru-RU}" />
+
                     <GridViewColumn Header="Дата начала"
                                     DisplayMemberBinding="{Binding DateStartTimestamp, 
                                     StringFormat={}{0:d MMMM yyyy}, 
-                                    ConverterCulture=ru-RU}"/>
-                    
+                                    ConverterCulture=ru-RU}" />
+
                     <GridViewColumn Header="Дата окончания"
                                     DisplayMemberBinding="{Binding DateEndTimestamp, 
                                     StringFormat={}{0:d MMMM yyyy}, 
-                                    ConverterCulture=ru-RU}"/>
-                    
+                                    ConverterCulture=ru-RU}" />
+
                 </GridView>
             </ListView.View>
-            
+
         </ListView>
-    </Grid>
+    </StackPanel>
 </UserControl>

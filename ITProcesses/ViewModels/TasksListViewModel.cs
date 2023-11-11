@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Documents;
 using ITProcesses.Command;
 using ITProcesses.Models;
 using ITProcesses.Services;
@@ -13,12 +15,13 @@ public class TasksListViewModel : BaseViewModel
 {
     #region Fields
 
-    private ITaskService _taskService;
-    private MainViewModel _currentMainViewModel;
+    private readonly ITaskService _taskService = new TaskService();
+    private readonly MainViewModel _currentMainViewModel;
 
     private ObservableCollection<Tasks> _tasksList;
     private Tasks _selectedTask;
     private string _searchBox = string.Empty;
+    private List<Tasks> _allTasks;
 
     #endregion
 
@@ -42,6 +45,7 @@ public class TasksListViewModel : BaseViewModel
         {
             _searchBox = value;
             OnPropertyChanged();
+            SearchInfo();
         }
     }
 
@@ -50,7 +54,7 @@ public class TasksListViewModel : BaseViewModel
     //Constructor
     public TasksListViewModel(MainViewModel currentMainViewModel)
     {
-        _taskService = new TaskService();
+        // _taskService = new TaskService();
         _currentMainViewModel = currentMainViewModel;
         _tasksList = new ObservableCollectionListSource<Tasks>();
 
@@ -62,7 +66,9 @@ public class TasksListViewModel : BaseViewModel
     //Methods
     private async void GetData()
     {
-        TasksList = new ObservableCollection<Tasks>(await _taskService.GetAllTask());
+        _allTasks = await _taskService.GetAllTask();
+        TasksList = new ObservableCollection<Tasks>(_allTasks);
+        
     }
 
     private void OpenTask(Tasks selectedTask)
@@ -70,14 +76,12 @@ public class TasksListViewModel : BaseViewModel
         _currentMainViewModel.ChangeView(new TaskViewModel(selectedTask.Id, _currentMainViewModel));
     }
 
-    private async void SearchInfo()
+    private void SearchInfo()
     {
         if (_searchBox != string.Empty)
         {
-            var allTaskList = await _taskService.GetAllTask();
-
-            ObservableCollection<Tasks> tasksEnumerable = (ObservableCollection<Tasks>)allTaskList
-                .Where(a => a.Name.Contains(_searchBox));
+            ObservableCollection<Tasks> tasksEnumerable = new ObservableCollection<Tasks>(_allTasks
+                .Where(a => a.Name.Contains(_searchBox)));
             TasksList = null;
             TasksList = tasksEnumerable;
         }

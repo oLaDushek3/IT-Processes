@@ -2,6 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 using ITProcesses.Command;
+using ITProcesses.Hash;
 using ITProcesses.JsonSaveInfo;
 using ITProcesses.Services;
 
@@ -82,7 +83,7 @@ public class LoginViewModel : BaseViewModel
     {
         try
         {
-          var user =  await _userService.Login(Login, Password);
+          var user =  await _userService.Login(Login, Md5.HashPassword(Password));
             
             if(CheckBoxBool==true)
                 SaveLoginIfoInJson();
@@ -99,7 +100,7 @@ public class LoginViewModel : BaseViewModel
     {
         var settings = Settings;
         settings!.UserName = Login;
-        settings.Password = Password;
+        settings.Password = Md5.HashPassword(Password);
         SaveInfo.SaveSettings(settings);
 
     }

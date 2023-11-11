@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using ITProcesses.Hash;
 using ITProcesses.JsonSaveInfo;
 using ITProcesses.Models;
 using ITProcesses.ViewModels;
@@ -33,6 +34,8 @@ public class UserService : BaseViewModel, IUserService
 
         //Если будешь писать лоигку добавления, то не забывай, что guid не identity и тебе надо вручную писать!!!
         user.Id = Guid.NewGuid();
+
+        user.Password = Md5.HashPassword(user.Password);
 
         await Context.Users.AddAsync(user);
 
