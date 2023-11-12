@@ -3,19 +3,23 @@ using System.Collections.ObjectModel;
 using ITProcesses.Command;
 using ITProcesses.JsonSaveInfo;
 using ITProcesses.Models;
+using ITProcesses.Services;
 
 namespace ITProcesses.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
     #region Fields
-    
+
     private MainWindowViewModel _currentMainWindowViewModel;
     private BaseViewModel _currentChildView;
     private User _user;
 
+    private ITaskService _taskService = new TaskService();
+    private Project _currentProject;
+
     #endregion
-    
+
     #region Properties
 
     public MainWindowViewModel CurrentMainWindowViewModel
@@ -27,6 +31,7 @@ public class MainViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
+
     public BaseViewModel CurrentChildView
     {
         get => _currentChildView;
@@ -36,39 +41,69 @@ public class MainViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    
+
+    public Project CurrentProject
+    {
+        get => _currentProject;
+        set
+        {
+            _currentProject = value;
+            OnPropertyChanged();
+        }
+    }
+
     #endregion
-    
+
     //Commands
+    public CommandHandler OpenProjectDialogCommand => new(OpenProjectDialog);
+    
     public CommandHandler LogOutCommand => new(LogOutAsync);
 
-    public CommandHandler ShowStatisticsViewCommand => new(OpenTasksListView);
-    
+    public CommandHandler OpenTasksListCommand => new(OpenTasksList);
 
+    //Constructor
     public MainViewModel(MainWindowViewModel currentMainViewModel, User user)
     {
         _currentMainWindowViewModel = currentMainViewModel;
         _user = user;
+        GetData();
+    }
+
+    //Methods
+    private async void OpenProjectDialog()
+    {
+        _currentProject =
+            (Project)await CurrentMainWindowViewModel.DialogProvider.ShowDialog(
+                new ProjectDialogViewModel(CurrentMainWindowViewModel.DialogProvider));
+    }
+    
+    private async void GetData()
+    {
+        CurrentProject = await _taskService.GetProjectById(Settings.CurrentProject);
     }
 
     private async void LogOutAsync()
     {
         try
         {
-            CurrentMainWindowViewModel.ChangeView(new LoginViewModel(CurrentMainWindowViewModel));
-            SaveInfo.CreateAppSettingsDefault();
+            if ((bool)await CurrentMainWindowViewModel.DialogProvider.ShowDialog(
+                    new ConfirmDialogViewModel(CurrentMainWindowViewModel.DialogProvider, "Вы уверены?")))
+            {
+                CurrentMainWindowViewModel.ChangeView(new LoginViewModel(CurrentMainWindowViewModel));
+                SaveInfo.CreateAppSettingsDefault();
+            }
         }
         catch
         {
             
         }
     }
-    
-    public async void OpenTasksListView()
+
+    public async void OpenTasksList()
     {
         ChangeView(new TasksListViewModel(this));
     }
-    
+
     public void ChangeView(BaseViewModel selectedView)
     {
         CurrentChildView = selectedView;

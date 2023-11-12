@@ -1,3 +1,4 @@
+using ITProcesses.Dialog;
 using ITProcesses.Models;
 
 namespace ITProcesses.ViewModels;
@@ -18,7 +19,16 @@ public class MainWindowViewModel : BaseViewModel
         set
         {
             _currentChildView = value;
-            OnPropertyChanged(nameof(CurrentChildView));
+            OnPropertyChanged();
+        }
+    }
+    public DialogProvider DialogProvider
+    {
+        get => _dialogProvider;
+        set
+        {
+            _dialogProvider = value;
+            OnPropertyChanged();
         }
     }
 

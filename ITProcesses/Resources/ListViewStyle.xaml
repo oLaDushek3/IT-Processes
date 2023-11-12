@@ -1,0 +1,19 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Style x:Key="DefaultGridViewColumnHeader" TargetType="GridViewColumnHeader" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="15"/>
+    </Style>
+    
+    <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource DefaultGridViewColumnHeader}"></Style>
+    
+    <Style x:Key="DefaultListViewItem" TargetType="ListViewItem" BasedOn="{StaticResource {x:Static GridView.GridViewItemContainerStyleKey}}">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontSize" Value="15"/>
+    </Style>
+    
+    <Style TargetType="ListViewItem" BasedOn="{StaticResource DefaultListViewItem}"></Style>
+    
+</ResourceDictionary>
