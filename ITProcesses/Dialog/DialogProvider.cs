@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -40,20 +39,21 @@ public class DialogProvider : INotifyPropertyChanged
     
     private delegate void CloseDialogDelegate();
     private event CloseDialogDelegate CloseDialogEvent;
-    private bool DialogResult;
+    private object DialogResult;
     
-    public Task<bool> ShowDialog(BaseViewModel currentDialogView)
+    public Task<object> ShowDialog(BaseViewModel currentDialogView)
     {
         DialogView = currentDialogView;
 
         DialogActive = true;
 
-        var completion = new TaskCompletionSource<bool>();
+        var completion = new TaskCompletionSource<object>();
 
         CloseDialogEvent += () => completion.TrySetResult(DialogResult);
         return completion.Task;
     }
-    public void CloseDialog(bool dialogResult)
+    
+    public void CloseDialog(object dialogResult)
     {
         DialogResult = dialogResult;
         DialogView = null;

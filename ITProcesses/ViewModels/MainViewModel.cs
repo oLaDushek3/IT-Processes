@@ -75,7 +75,7 @@ public class MainViewModel : BaseViewModel
     {
         try
         {
-            if (await CurrentMainWindowViewModel.DialogProvider.ShowDialog(
+            if ((bool)await CurrentMainWindowViewModel.DialogProvider.ShowDialog(
                     new ConfirmDialogViewModel(CurrentMainWindowViewModel.DialogProvider, "Вы уверены?")))
             {
                 CurrentMainWindowViewModel.ChangeView(new LoginViewModel(CurrentMainWindowViewModel));
@@ -86,8 +86,10 @@ public class MainViewModel : BaseViewModel
         {
         }
     }
+    
+    
 
-    public async void OpenTasksListView()
+    public async void OpenTasksList()
     {
         ChangeView(new TasksListViewModel(this));
     }
