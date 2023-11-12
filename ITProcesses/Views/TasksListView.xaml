@@ -13,16 +13,28 @@
              d:DataContext="{d:DesignInstance Type=viewModels:TasksListViewModel, IsDesignTimeCreatable=False}">
 
     <StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBox Margin="10"
-                     Text="{Binding SearchBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                     Height="35"
-                     Width="125"
-                     HorizontalAlignment="Left"
-                     ui:ControlHelper.PlaceholderText="Поиск" />
+        <StackPanel Orientation="Horizontal"
+                    Margin="5">
+            <StackPanel Orientation="Horizontal">
+                <TextBox
+                    Text="{Binding SearchBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    Height="35"
+                    Width="125"
+                    HorizontalAlignment="Left"
+                    ui:ControlHelper.PlaceholderText="Поиск" />
+                
+            </StackPanel>
 
-            <DatePicker SelectedDate="{Binding SelectedDate}"/>
-            
+            <StackPanel Orientation="Horizontal"
+                        Margin="5">
+                <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
+                
+                <!-- <Button Style="{DynamicResource IconButton}" -->
+                <!--         Tag="{DynamicResource TaskList}"  -->
+                <!--         Command="{Binding ClearDatePickerCommand}"/> -->
+            </StackPanel>
+
+
         </StackPanel>
 
 

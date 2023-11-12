@@ -21,9 +21,9 @@ public class TasksListViewModel : BaseViewModel
 
     private ObservableCollection<Tasks> _tasksList;
     private Tasks _selectedTask;
-    private string _searchBox = string.Empty;
+    private string? _searchBox = string.Empty;
     private List<Tasks> _allTasks;
-    private DateTime _selectedDate = DateTime.Now;
+    private DateTime? _selectedDate = DateTime.Now;
     private List<Tasks> tasksEnumerable = new List<Tasks>();
     private List<Tasks> tasksFromDatePickerList = new List<Tasks>();
 
@@ -53,7 +53,7 @@ public class TasksListViewModel : BaseViewModel
         }
     }
 
-    public DateTime SelectedDate
+    public DateTime? SelectedDate
     {
         get => _selectedDate;
         set
@@ -78,6 +78,10 @@ public class TasksListViewModel : BaseViewModel
 
     public CommandHandler<Tasks> OpenTaskCommand => new(OpenTask);
 
+    
+
+    // public CommandHandler ClearDatePickerCommand => new(ClearDatePicker);
+
     //Methods
     private async void GetData()
     {
@@ -92,7 +96,9 @@ public class TasksListViewModel : BaseViewModel
 
     private void SearchInfoFromSearchBox()
     {
-        if (_searchBox != string.Empty)
+       
+            
+        if (!string.IsNullOrEmpty(_searchBox))
         {
             tasksEnumerable = new List<Tasks>(_allTasks
                 .Where(a => a.Name.ToLower().Contains(_searchBox.ToLower())));
@@ -109,7 +115,7 @@ public class TasksListViewModel : BaseViewModel
 
     private void SearchDateFromDatePicker()
     {
-        if (_selectedDate != new DateTime())
+        if (_selectedDate != null)
         {
             tasksFromDatePickerList =
                 new List<Tasks>(_allTasks
@@ -136,4 +142,12 @@ public class TasksListViewModel : BaseViewModel
 
         return new ObservableCollection<T>(resultList);
     }
+
+    
+
+    // private void ClearDatePicker()
+    // {
+    //     _selectedDate = null;
+    //     tasksFromDatePickerList = null;
+    // }
 }
