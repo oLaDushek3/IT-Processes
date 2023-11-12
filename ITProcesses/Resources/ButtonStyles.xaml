@@ -84,4 +84,43 @@
             </MultiTrigger>
         </Style.Triggers>
     </Style>
+    
+    
+     <!--IconButton-->
+    <Style x:Key="IconButton" TargetType="Button">
+        <!--ButtonAtRest-->
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource secondaryFontColorBrush}"/>
+        <Setter Property="MinHeight" Value="35"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="10"
+                            Background="{TemplateBinding Background}">
+                        
+                        <ContentControl VerticalAlignment="Center"
+                                        Margin="{Binding RelativeSource={RelativeSource AncestorType=RadioButton}, Path=Padding}">
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Left">
+                                
+                                <Path Fill="{TemplateBinding Foreground}" Data="{TemplateBinding Tag}"
+                                      Margin="0 0 10 0"/>
+                                
+                            </StackPanel>
+                        </ContentControl>
+                        
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+        <Style.Triggers>
+            <!--MouseOver-->
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource secondaryBackColorBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}"/>
+            </Trigger>
+            
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

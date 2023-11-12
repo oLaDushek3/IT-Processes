@@ -57,18 +57,7 @@ public class TaskService : BaseViewModel, ITaskService
         return tasks;
     }
 
-    public async Task<Project> CreateProject(Project project)
-    {
-        var proj = await Context.Projects.FirstOrDefaultAsync(p => p.Id == project.Id);
-
-        if (proj != null)
-            throw new Exception("Данный проект уже существует!");
-
-        await Context.Projects.AddAsync(project);
-        await Context.SaveChangesAsync();
-
-        return project;
-    }
+    
 
     public async Task<List<TaskStatus>> GetAllStatuses()
     {
