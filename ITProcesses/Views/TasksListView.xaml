@@ -21,7 +21,7 @@
                      HorizontalAlignment="Left"
                      ui:ControlHelper.PlaceholderText="Поиск" />
 
-            <DatePicker SelectedDate="{Binding SelectedDate}" />
+            <DatePicker SelectedDate="{Binding SelectedDate}"/>
             
         </StackPanel>
 

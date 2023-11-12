@@ -107,12 +107,19 @@ public class TasksListViewModel : BaseViewModel
     {
         if (_selectedDate != new DateTime())
         {
-           
+            ObservableCollection<Tasks> tasksFromDatePickerList =
+                new ObservableCollection<Tasks>(_allTasks
+                    .Where(a => a.DateCreateTimestamp.Date == _selectedDate));
+            TasksList = null;
+            TasksList = tasksFromDatePickerList;
         }
         else
         {
             GetData();
         }
-        
+    }
+
+    private void Merger()
+    {
     }
 }
