@@ -24,6 +24,8 @@ public class TasksListViewModel : BaseViewModel
     private string _searchBox = string.Empty;
     private List<Tasks> _allTasks;
     private DateTime _selectedDate = DateTime.Now;
+    private List<Tasks> tasksEnumerable = new List<Tasks>();
+    private List<Tasks> tasksFromDatePickerList = new List<Tasks>();
 
     #endregion
 
@@ -92,10 +94,12 @@ public class TasksListViewModel : BaseViewModel
     {
         if (_searchBox != string.Empty)
         {
-            ObservableCollection<Tasks> tasksEnumerable = new ObservableCollection<Tasks>(_allTasks
-                .Where(a => a.Name.Contains(_searchBox)));
+            tasksEnumerable = new List<Tasks>(_allTasks
+                .Where(a => a.Name.ToLower().Contains(_searchBox.ToLower())));
             TasksList = null;
-            TasksList = tasksEnumerable;
+
+
+            TasksList = Merger(new List<List<Tasks>> { tasksEnumerable, tasksFromDatePickerList });
         }
         else
         {
@@ -107,11 +111,13 @@ public class TasksListViewModel : BaseViewModel
     {
         if (_selectedDate != new DateTime())
         {
-            ObservableCollection<Tasks> tasksFromDatePickerList =
-                new ObservableCollection<Tasks>(_allTasks
+            tasksFromDatePickerList =
+                new List<Tasks>(_allTasks
                     .Where(a => a.DateCreateTimestamp.Date == _selectedDate));
             TasksList = null;
-            TasksList = tasksFromDatePickerList;
+
+
+            TasksList = Merger(new List<List<Tasks>> { tasksFromDatePickerList, tasksEnumerable });
         }
         else
         {
@@ -119,7 +125,15 @@ public class TasksListViewModel : BaseViewModel
         }
     }
 
-    private void Merger()
+    private ObservableCollection<T> Merger<T>(List<List<T>> lists)
     {
+        IEnumerable<T> resultList = lists.First();
+
+        foreach (List<T> list in lists)
+        {
+            resultList.Intersect(list);
+        }
+
+        return new ObservableCollection<T>(resultList);
     }
 }
