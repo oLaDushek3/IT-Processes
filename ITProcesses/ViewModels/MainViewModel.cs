@@ -54,9 +54,11 @@ public class MainViewModel : BaseViewModel
     #endregion
 
     //Commands
+    public CommandHandler OpenProjectDialogCommand => new(OpenProjectDialog);
+    
     public CommandHandler LogOutCommand => new(LogOutAsync);
 
-    public CommandHandler ShowStatisticsViewCommand => new(OpenTasksListView);
+    public CommandHandler OpenTasksListCommand => new(OpenTasksList);
 
     //Constructor
     public MainViewModel(MainWindowViewModel currentMainViewModel)
@@ -66,6 +68,13 @@ public class MainViewModel : BaseViewModel
     }
 
     //Methods
+    private async void OpenProjectDialog()
+    {
+        _currentProject =
+            (Project)await CurrentMainWindowViewModel.DialogProvider.ShowDialog(
+                new ProjectDialogViewModel(CurrentMainWindowViewModel.DialogProvider));
+    }
+    
     private async void GetData()
     {
         CurrentProject = await _taskService.GetProjectById(Settings.CurrentProject);

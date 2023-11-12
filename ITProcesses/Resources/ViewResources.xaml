@@ -23,4 +23,8 @@
         <views:ConfirmDialogView/>
     </DataTemplate>
     
+    <DataTemplate DataType="{x:Type viewModels:ProjectDialogViewModel}">
+        <views:ProjectDialogView/>
+    </DataTemplate>
+    
 </ResourceDictionary>

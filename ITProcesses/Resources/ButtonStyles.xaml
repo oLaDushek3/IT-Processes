@@ -3,84 +3,91 @@
     <!--RoundedButton-->
     <Style x:Key="RoundedButton" TargetType="Button">
         <!--ButtonAtRest-->
-        <Setter Property="Background" Value="{DynamicResource accentColorBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}"/>
-        <Setter Property="Width" Value="160"/>
-        <Setter Property="Height" Value="40"/>
+        <Setter Property="Background" Value="{DynamicResource accentColorBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}" />
+        <Setter Property="Width" Value="160" />
+        <Setter Property="Height" Value="40" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
+                    <Border x:Name="Border"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
                             CornerRadius="20"
                             Background="{TemplateBinding Background}">
                         <ContentPresenter VerticalAlignment="Center"
-                                          HorizontalAlignment="Center"/>
+                                          HorizontalAlignment="Center" />
                     </Border>
+
+                    <ControlTemplate.Triggers>
+                        <!--MouseOver-->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource activeAccentColorBrush}" />
+                        </Trigger>
+                        <!--Disable-->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Opacity" Value="0.5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                    
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        
-        <!--MouseOver-->
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource activeAccentColorBrush}"/>
-            </Trigger>
-        </Style.Triggers>
     </Style>
-    
+
     <!--NavigationButton-->
     <Style x:Key="NavigationButton" TargetType="RadioButton">
         <!--ButtonAtRest-->
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{DynamicResource secondaryFontColorBrush}"/>
-        <Setter Property="MinHeight" Value="35"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource secondaryFontColorBrush}" />
+        <Setter Property="MinHeight" Value="35" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
                     <Border CornerRadius="10"
                             Background="{TemplateBinding Background}">
-                        
+
                         <ContentControl VerticalAlignment="Center"
                                         Margin="{Binding RelativeSource={RelativeSource AncestorType=RadioButton}, Path=Padding}">
                             <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Left">
-                                
+
                                 <Path Fill="{TemplateBinding Foreground}" Data="{TemplateBinding Tag}"
-                                      Margin="0 0 10 0"/>
-                                                                
-                                <TextBlock Text="{TemplateBinding Content}" 
+                                      Margin="0 0 10 0" />
+
+                                <TextBlock Text="{TemplateBinding Content}"
                                            FontSize="18"
                                            Foreground="{TemplateBinding Foreground}"
-                                           VerticalAlignment="Center"/>
-                                
+                                           VerticalAlignment="Center" />
+
                             </StackPanel>
                         </ContentControl>
-                        
+
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        
+
         <Style.Triggers>
             <!--MouseOver-->
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource secondaryBackColorBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource secondaryBackColorBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}" />
             </Trigger>
-            
+
             <!--Selected-->
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="{DynamicResource accentColorBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource accentColorBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}" />
             </Trigger>
-            
+
             <!--PointerOverSelected-->
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsMouseOver" Value="True" />
                     <Condition Property="IsChecked" Value="True" />
                 </MultiTrigger.Conditions>
-                <Setter Property="Background" Value="{DynamicResource activeAccentColorBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource activeAccentColorBrush}" />
             </MultiTrigger>
         </Style.Triggers>
     </Style>

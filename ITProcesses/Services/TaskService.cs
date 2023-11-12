@@ -87,6 +87,12 @@ public class TaskService : BaseViewModel, ITaskService
 
     #region ProjectServices
     
+    public async Task<List<Project>> GetAllProject()
+    {
+        var project = await Context.Projects.ToListAsync();
+        
+        return project;
+    }
     public async Task<Project> GetProjectById(int id)
     {
         var project = await Context.Projects.FirstOrDefaultAsync(p => p.Id == id);

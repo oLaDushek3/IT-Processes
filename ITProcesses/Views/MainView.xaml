@@ -54,8 +54,7 @@
                         Background="{DynamicResource secondaryBackColorBrush}"
                         Foreground="{DynamicResource secondaryFontColorBrush}"
                         Content="{Binding CurrentProject.Name}"
-                        Command="{Binding LogOutCommand}">
-                </Button>
+                        Command="{Binding OpenProjectDialogCommand}"/>
 
                 <Separator Grid.Column="3"
                            Margin="0 15"
@@ -96,7 +95,7 @@
                                  Margin="0 2.5"
                                  Padding="10 0"
                                  IsChecked="True"
-                                 Command="{Binding ShowStatisticsViewCommand}" />
+                                 Command="{Binding OpenTasksListCommand}" />
 
                     <TreeView>
                         <TreeViewItem Style="{DynamicResource HeaderTreeViewItemStyle}"
