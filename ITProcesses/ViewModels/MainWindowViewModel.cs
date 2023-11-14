@@ -8,7 +8,7 @@ public class MainWindowViewModel : BaseViewModel
     #region Fields
 
     private BaseViewModel _currentChildView;
-    private DialogProvider _dialogProvider;
+    private DialogProvider _dialogProvider = new();
 
     #endregion
 

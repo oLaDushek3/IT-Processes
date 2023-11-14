@@ -10,7 +10,7 @@ public class DialogProvider : INotifyPropertyChanged
     #region Fields
 
     private BaseViewModel? _currentDialogView;
-    private bool _dialogActive = false;
+    private bool _dialogActive;
 
     #endregion
 
