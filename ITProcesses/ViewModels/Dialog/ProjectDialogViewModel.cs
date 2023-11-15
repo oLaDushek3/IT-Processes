@@ -58,12 +58,11 @@ public class ProjectDialogViewModel : BaseViewModel
             SearchInfoFromSearchBox();
         }
     }
-
-
+    
     #endregion
     
     //Commands
-    public CommandHandler<Project> AcceptSelectCommand => new (AcceptSelectExecute, AcceptSelectCanExecute);
+    public CommandHandler AcceptSelectCommand => new (_ => AcceptSelectExecute(), _ => _selectedProject != null);
     
     //Constructor
     public ProjectDialogViewModel(DialogProvider dialogProvider)
@@ -79,14 +78,9 @@ public class ProjectDialogViewModel : BaseViewModel
         ProjectsList = new ObservableCollection<Project>(_allProjects);
     }
     
-    private void AcceptSelectExecute(Project selectedProject)
+    private void AcceptSelectExecute()
     {
         _dialogProvider.CloseDialog(SelectedProject);
-    }
-
-    private bool AcceptSelectCanExecute(Project? selectedProject)
-    {
-        return _selectedProject != null;
     }
     
     private void SearchInfoFromSearchBox()
@@ -107,33 +101,4 @@ public class ProjectDialogViewModel : BaseViewModel
         }
     }
 
-    // public RelayCommand Command => new(AcceptSelectCanExecute, AcceptSelectExecute);
-    //
-    // public class RelayCommand : ICommand
-    // {
-    //     private readonly Predicate<object> _canExecute;
-    //     private readonly Action<object> _execute;
-    //
-    //     public RelayCommand(Predicate<object> canExecute, Action<object> execute)
-    //     {
-    //         _canExecute = canExecute;
-    //         _execute = execute;
-    //     }
-    //
-    //     public event EventHandler CanExecuteChanged
-    //     {
-    //         add => CommandManager.RequerySuggested += value;
-    //         remove => CommandManager.RequerySuggested -= value;
-    //     }
-    //
-    //     public bool CanExecute(object parameter)
-    //     {
-    //         return _canExecute(parameter);
-    //     }
-    //
-    //     public void Execute(object parameter)
-    //     {
-    //         _execute(parameter);
-    //     }
-    // }
 }

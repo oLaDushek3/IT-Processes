@@ -55,11 +55,11 @@ public class MainViewModel : BaseViewModel
     #endregion
 
     //Commands
-    public CommandHandler OpenProjectDialogCommand => new(OpenProjectDialog);
+    public CommandHandler OpenProjectDialogCommand => new(_ => OpenProjectDialog());
     
-    public CommandHandler LogOutCommand => new(LogOutAsync);
+    public CommandHandler LogOutCommand => new(_ => LogOutAsync());
 
-    public CommandHandler OpenTasksListCommand => new(OpenTasksList);
+    public CommandHandler OpenTasksListCommand => new(_ => OpenTasksList());
 
     //Constructor
     public MainViewModel(MainWindowViewModel currentMainViewModel, User user)
@@ -72,7 +72,7 @@ public class MainViewModel : BaseViewModel
     //Methods
     private async void OpenProjectDialog()
     {
-        _currentProject =
+        CurrentProject =
             (Project)await CurrentMainWindowViewModel.DialogProvider.ShowDialog(
                 new ProjectDialogViewModel(CurrentMainWindowViewModel.DialogProvider));
     }

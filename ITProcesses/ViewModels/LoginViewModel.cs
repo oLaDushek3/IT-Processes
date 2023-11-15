@@ -79,7 +79,7 @@ public class LoginViewModel : BaseViewModel
     }
     
     //Methods
-    private async void LoginAsync()
+    private async void LoginAsync(object? obj)
     {
         try
         {
@@ -102,6 +102,5 @@ public class LoginViewModel : BaseViewModel
         settings!.UserName = Login;
         settings.Password = Md5.HashPassword(Password);
         SaveInfo.SaveSettings(settings);
-
     }
 }
