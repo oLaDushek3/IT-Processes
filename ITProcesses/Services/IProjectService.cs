@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ITProcesses.Models;
 
 namespace ITProcesses.Services;
@@ -10,4 +11,6 @@ public interface IProjectService
     void DeleteProject(Project project);
 
     Task<Project> EditProject(Project project);
+    public Task<List<Project>> GetAllProject();
+    public Task<Project> GetProjectById(int id);
 }

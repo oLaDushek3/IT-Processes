@@ -16,6 +16,7 @@ public class MainViewModel : BaseViewModel
     private User _user;
 
     private ITaskService _taskService = new TaskService();
+    private IProjectService _projectService = new ProjectService();
     private Project _currentProject;
 
     #endregion
@@ -79,7 +80,7 @@ public class MainViewModel : BaseViewModel
     
     private async void GetData()
     {
-        CurrentProject = await _taskService.GetProjectById(Settings.CurrentProject);
+        CurrentProject = await _projectService.GetProjectById(Settings.CurrentProject);
     }
 
     private async void LogOutAsync()

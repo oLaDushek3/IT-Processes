@@ -18,6 +18,7 @@ public class ProjectDialogViewModel : BaseViewModel
 
     private readonly DialogProvider _dialogProvider;
     private readonly ITaskService _taskService = new TaskService();
+    private readonly IProjectService _projectService = new ProjectService();
 
     private ObservableCollection<Project> _projectsList = null!;
     private Project? _selectedProject;
@@ -75,7 +76,7 @@ public class ProjectDialogViewModel : BaseViewModel
     //Methods
     private async void GetData()
     {
-        _allProjects = await _taskService.GetAllProject();
+        _allProjects = await _projectService.GetAllProject();
         ProjectsList = new ObservableCollection<Project>(_allProjects);
     }
     
