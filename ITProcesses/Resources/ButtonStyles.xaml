@@ -98,7 +98,9 @@
         <!--ButtonAtRest-->
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{DynamicResource secondaryFontColorBrush}"/>
-        <Setter Property="MinHeight" Value="35"/>
+        <Setter Property="Width" Value="35"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Padding" Value="5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -106,14 +108,14 @@
                             Background="{TemplateBinding Background}">
                         
                         <ContentControl VerticalAlignment="Center"
-                                        Margin="{Binding RelativeSource={RelativeSource AncestorType=RadioButton}, Path=Padding}">
-                            <StackPanel Orientation="Horizontal"
-                                        HorizontalAlignment="Left">
-                                
-                                <Path Fill="{TemplateBinding Foreground}" Data="{TemplateBinding Tag}"
-                                      Margin="0 0 10 0"/>
-                                
-                            </StackPanel>
+                                        Margin="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Padding}">
+
+                            <Viewbox>
+                                <Path Data="{TemplateBinding Tag}"
+                                      Fill="{TemplateBinding Foreground}"
+                                      Stretch="Uniform" />
+                            </Viewbox>
+                            
                         </ContentControl>
                         
                     </Border>
