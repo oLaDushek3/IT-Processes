@@ -75,11 +75,24 @@ public class MainViewModel : BaseViewModel
         CurrentProject =
             (Project)await CurrentMainWindowViewModel.DialogProvider.ShowDialog(
                 new ProjectDialogViewModel(CurrentMainWindowViewModel.DialogProvider));
+        
+        var settings = Settings;
+        settings.UserName = Settings.UserName;
+        settings.Password = Settings.Password;
+        settings.CurrentProject = CurrentProject.Id;
+        SaveInfo.SaveSettings(settings);
     }
     
     private async void GetData()
     {
-        CurrentProject = await _taskService.GetProjectById(Settings.CurrentProject);
+        try
+        {
+            CurrentProject = await _taskService.GetProjectById(Settings.CurrentProject);
+        }
+        catch
+        {
+            OpenProjectDialog();
+        }
     }
 
     private async void LogOutAsync()
@@ -99,7 +112,7 @@ public class MainViewModel : BaseViewModel
         }
     }
 
-    public async void OpenTasksList()
+    private void OpenTasksList()
     {
         ChangeView(new TasksListViewModel(this));
     }

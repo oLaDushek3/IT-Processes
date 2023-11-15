@@ -5,8 +5,8 @@
         <!--ButtonAtRest-->
         <Setter Property="Background" Value="{DynamicResource accentColorBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}" />
-        <Setter Property="Width" Value="160" />
-        <Setter Property="Height" Value="40" />
+        <Setter Property="Width" Value="auto" />
+        <Setter Property="Height" Value="auto" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -97,14 +97,15 @@
     <Style x:Key="IconButton" TargetType="Button">
         <!--ButtonAtRest-->
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{DynamicResource secondaryFontColorBrush}"/>
-        <Setter Property="Width" Value="35"/>
-        <Setter Property="Height" Value="35"/>
+        <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}"/>
+        <Setter Property="Width" Value="28"/>
+        <Setter Property="Height" Value="28"/>
         <Setter Property="Padding" Value="5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="10"
+                    <Border x:Name="Border"
+                            CornerRadius="10"
                             Background="{TemplateBinding Background}">
                         
                         <ContentControl VerticalAlignment="Center"
@@ -119,17 +120,22 @@
                         </ContentControl>
                         
                     </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        <!--MouseOver-->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource secondaryBackColorBrush}"/>
+                        </Trigger>
+                        <!--Disable-->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Opacity" Value="0.5" />
+                            <Setter Property="Foreground" Value="{DynamicResource secondaryFontColorBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                    
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         
-        <Style.Triggers>
-            <!--MouseOver-->
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource secondaryBackColorBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}"/>
-            </Trigger>
-            
-        </Style.Triggers>
     </Style>
 </ResourceDictionary>

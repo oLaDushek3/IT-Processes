@@ -1,0 +1,71 @@
+<UserControl x:Class="ITProcesses.Views.CreateProjectView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ITProcesses.Views"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="515" d:DesignWidth="310"
+             d:DataContext="{d:DesignInstance Type=viewModels:CreateProjectViewModel, IsDesignTimeCreatable=False}"
+             Background="{DynamicResource primaryBackColorBrush}">
+    <Grid>
+        <Grid Margin="10"
+              Visibility="{Binding SelectedProject, 
+                               Converter={StaticResource EmptinessToVisibilityConverter}}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="8*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       Text="Создание проекта"
+                       Foreground="{DynamicResource primaryFontColorBrush}"
+                       FontSize="18" />
+
+            <TextBox Grid.Row="1"
+                     ui:ControlHelper.PlaceholderText="Название..."
+                     Text="{Binding SelectedProject.Name}"
+                     Foreground="{DynamicResource primaryFontColorBrush}"
+                     FontSize="18" />
+
+            <ScrollViewer Grid.Row="2"
+                          Margin="0 10">
+                <TextBox ui:ControlHelper.PlaceholderText="Описание..."
+                         Text="{Binding SelectedProject.Description}"
+                         Foreground="{DynamicResource primaryFontColorBrush}"
+                         FontSize="14"
+                         TextWrapping="Wrap" />
+            </ScrollViewer>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                        Style="{DynamicResource RoundedButton}"
+                        Background="Transparent"
+                        Height="35"
+                        HorizontalAlignment="Stretch"
+                        Margin="0 0 5 0"
+                        Content="Отмена"
+                        Command="{Binding CancelCommand}" />
+                
+                <Button Grid.Column="1"
+                        Style="{DynamicResource RoundedButton}"
+                        Height="35"
+                        HorizontalAlignment="Stretch"
+                        Margin="5 0 0 0"
+                        Content="Создать"
+                        Command="{Binding AcceptSelectCommand}" />
+            </Grid>
+
+        </Grid>
+    </Grid>
+</UserControl>

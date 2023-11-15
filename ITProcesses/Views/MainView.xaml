@@ -67,7 +67,8 @@
                         Style="{DynamicResource RoundedButton}"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
-                        Width="100"
+                        Width="160"
+                        Height="40"
                         Content="Выйти"
                         Command="{Binding LogOutCommand}" />
             </Grid>

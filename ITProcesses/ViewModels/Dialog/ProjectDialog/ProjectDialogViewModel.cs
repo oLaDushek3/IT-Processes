@@ -18,9 +18,12 @@ public class ProjectDialogViewModel : BaseViewModel
 
     private readonly DialogProvider _dialogProvider;
     private readonly ITaskService _taskService = new TaskService();
-
+    
+    private BaseViewModel? _currentChildView;
+    
     private ObservableCollection<Project> _projectsList = null!;
     private Project? _selectedProject;
+    
     private string _searchBox;
     private List<Project> _projects;
     private List<Project> _allProjects;
@@ -28,6 +31,16 @@ public class ProjectDialogViewModel : BaseViewModel
     #endregion
 
     #region Properties
+    
+    public BaseViewModel? CurrentChildView
+    {
+        get => _currentChildView;
+        set
+        {
+            _currentChildView = value;
+            OnPropertyChanged();
+        }
+    }
     
     public ObservableCollection<Project> ProjectsList
     {
@@ -38,7 +51,7 @@ public class ProjectDialogViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public Project SelectedProject
+    public Project? SelectedProject
     {
         get => _selectedProject;
         set
@@ -62,7 +75,10 @@ public class ProjectDialogViewModel : BaseViewModel
     #endregion
     
     //Commands
-    public CommandHandler AcceptSelectCommand => new (_ => AcceptSelectExecute(), _ => _selectedProject != null);
+    public CommandHandler CreateProjectCommand => new (_ => ChangeView(new CreateProjectViewModel(this)));
+    public CommandHandler EditProjectCommand => new (_ => ChangeView(null), _ => SelectedProject != null);
+    public CommandHandler DeleteProjectCommand => new (_ => ChangeView(null), _ => SelectedProject != null);
+    public CommandHandler AcceptSelectCommand => new (_ => AcceptSelectExecute(), _ => SelectedProject != null);
     
     //Constructor
     public ProjectDialogViewModel(DialogProvider dialogProvider)
@@ -101,4 +117,9 @@ public class ProjectDialogViewModel : BaseViewModel
         }
     }
 
+    
+    public void ChangeView(BaseViewModel? selectedView)
+    {
+        CurrentChildView = selectedView;
+    }
 }
