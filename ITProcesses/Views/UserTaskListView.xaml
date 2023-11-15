@@ -1,0 +1,96 @@
+<UserControl x:Class="ITProcesses.Views.UserTaskListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:behavior="clr-namespace:AttachedCommandBehavior;assembly=AttachedCommandBehavior"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
+             xmlns:local="clr-namespace:ITProcesses.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="650" d:DesignWidth="1060"
+             d:DataContext="{d:DesignInstance Type=viewModels:UserTaskListViewModel, IsDesignTimeCreatable=False}">
+   <StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    Margin="5">
+            <StackPanel Orientation="Horizontal">
+                <TextBox
+                    Text="{Binding SearchBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    Height="35"
+                    Width="125"
+                    HorizontalAlignment="Left"
+                    ui:ControlHelper.PlaceholderText="Поиск" />
+                
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="5">
+                <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
+                
+                <!-- <Button Style="{DynamicResource IconButton}" -->
+                <!--         Tag="{DynamicResource TaskList}"  -->
+                <!--         Command="{Binding ClearDatePickerCommand}"/> -->
+            </StackPanel>
+
+
+        </StackPanel>
+
+
+        <ListView Margin="20"
+                  ItemsSource="{Binding TasksList}">
+            
+            <!--Double click on item-->
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem" BasedOn="{StaticResource DefaultListViewItem}">
+                    <Setter Property="behavior:CommandBehavior.Event" Value="MouseDoubleClick" />
+                    <Setter Property="behavior:CommandBehavior.Command" Value="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.OpenTaskCommand}" />
+                    <Setter Property="behavior:CommandBehavior.CommandParameter" Value="{Binding}" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            
+            <ListView.View>
+                <GridView>
+
+                    <GridViewColumn Header="Название"
+                                    DisplayMemberBinding="{Binding Name}"/>
+                    
+                    <GridViewColumn Header="Тип"
+                                    DisplayMemberBinding="{Binding Type.Name}" />
+
+                    <GridViewColumn Header="Статус"
+                                    DisplayMemberBinding="{Binding Status.Name}" />
+
+                    <GridViewColumn Header="Дата создания"
+                                    DisplayMemberBinding="{Binding DateCreateTimestamp, 
+                                    StringFormat={}{0:d MMMM yyyy}, 
+                                    ConverterCulture=ru-RU}" />
+
+                    <GridViewColumn Header="Дата начала"
+                                    DisplayMemberBinding="{Binding DateStartTimestamp, 
+                                    StringFormat={}{0:d MMMM yyyy}, 
+                                    ConverterCulture=ru-RU}" />
+
+                    <GridViewColumn Header="Дата окончания"
+                                    DisplayMemberBinding="{Binding DateEndTimestamp, 
+                                    StringFormat={}{0:d MMMM yyyy}, 
+                                    ConverterCulture=ru-RU}"/>
+                    
+                    <GridViewColumn Header="В архиве">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Archived}"
+                                          Style="{ui:StaticResource DataGridCheckBoxStyle}"
+                                          IsEnabled="False"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    
+                    <GridViewColumn Header="Кол-во подзадач"
+                                    DisplayMemberBinding="{Binding InverseBeforeTaskNavigation.Count}"/>
+                    
+                </GridView>
+            </ListView.View>
+
+        </ListView>
+    </StackPanel>
+</UserControl>

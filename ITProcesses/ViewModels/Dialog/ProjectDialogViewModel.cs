@@ -21,6 +21,9 @@ public class ProjectDialogViewModel : BaseViewModel
 
     private ObservableCollection<Project> _projectsList = null!;
     private Project? _selectedProject;
+    private string _searchBox;
+    private List<Project> _projects;
+    private List<Project> _allProjects;
 
     #endregion
 
@@ -44,6 +47,18 @@ public class ProjectDialogViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
+    
+    public string SearchBox
+    {
+        get => _searchBox;
+        set
+        {
+            _searchBox = value;
+            OnPropertyChanged();
+            SearchInfoFromSearchBox();
+        }
+    }
+
 
     #endregion
     
@@ -60,7 +75,8 @@ public class ProjectDialogViewModel : BaseViewModel
     //Methods
     private async void GetData()
     {
-        ProjectsList = new ObservableCollection<Project>(await _taskService.GetAllProject());
+        _allProjects = await _taskService.GetAllProject();
+        ProjectsList = new ObservableCollection<Project>(_allProjects);
     }
     
     private void AcceptSelectExecute(Project selectedProject)
@@ -71,6 +87,24 @@ public class ProjectDialogViewModel : BaseViewModel
     private bool AcceptSelectCanExecute(Project? selectedProject)
     {
         return _selectedProject != null;
+    }
+    
+    private void SearchInfoFromSearchBox()
+    {
+       
+            
+        if (!string.IsNullOrEmpty(_searchBox))
+        {
+            _projects = new List<Project>(_allProjects
+                .Where(a => a.Name.ToLower().Contains(_searchBox.ToLower())));
+
+
+            ProjectsList = new ObservableCollection<Project>(_projects);
+        }
+        else
+        {
+            GetData();
+        }
     }
 
     // public RelayCommand Command => new(AcceptSelectCanExecute, AcceptSelectExecute);
