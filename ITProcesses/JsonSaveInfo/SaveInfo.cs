@@ -57,4 +57,14 @@ public class SaveInfo
 
         sw.WriteAsync(json);
     }
+
+    public static void GetThisSetting(AppSettings settings)
+    {
+        var setting = settings;
+
+        setting.UserName = settings.UserName;
+        setting.Password = settings.Password;
+        setting.CurrentProject = settings.CurrentProject;
+        SaveSettings(setting);
+    }
 }

@@ -4,6 +4,7 @@ using System.Windows.Input;
 using ITProcesses.Command;
 using ITProcesses.Hash;
 using ITProcesses.JsonSaveInfo;
+using ITProcesses.Models;
 using ITProcesses.Services;
 
 namespace ITProcesses.ViewModels;
@@ -17,7 +18,6 @@ public class LoginViewModel : BaseViewModel
     private bool _checkBoxBool = false;
     private readonly UserService _userService = new UserService();
     private MainWindowViewModel _currentMainWindowViewModel;
-
     #endregion
 
     #region Properties
