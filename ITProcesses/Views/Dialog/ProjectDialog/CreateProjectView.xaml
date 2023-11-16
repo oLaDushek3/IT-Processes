@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              d:DesignHeight="515" d:DesignWidth="310"
              d:DataContext="{d:DesignInstance Type=viewModels:CreateProjectViewModel, IsDesignTimeCreatable=False}"
-             Background="{DynamicResource primaryBackColorBrush}">
+             Background="#161819">
     <Grid>
         <Grid Margin="10"
               Visibility="{Binding SelectedProject, 
@@ -22,22 +22,25 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
+            <!--Header-->
             <TextBlock Grid.Row="0"
                        Text="Создание проекта"
-                       Foreground="{DynamicResource primaryFontColorBrush}"
+                       Foreground="{DynamicResource PrimaryFontColorBrush}"
                        FontSize="18" />
 
+            <!--Name-->
             <TextBox Grid.Row="1"
                      ui:ControlHelper.PlaceholderText="Название..."
-                     Text="{Binding SelectedProject.Name}"
-                     Foreground="{DynamicResource primaryFontColorBrush}"
+                     Text="{Binding CreatedProject.Name, UpdateSourceTrigger=PropertyChanged}"
+                     Foreground="{DynamicResource PrimaryFontColorBrush}"
                      FontSize="18" />
 
+            <!--Description-->
             <ScrollViewer Grid.Row="2"
                           Margin="0 10">
                 <TextBox ui:ControlHelper.PlaceholderText="Описание..."
-                         Text="{Binding SelectedProject.Description}"
-                         Foreground="{DynamicResource primaryFontColorBrush}"
+                         Text="{Binding CreatedProject.Description, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="{DynamicResource PrimaryFontColorBrush}"
                          FontSize="14"
                          TextWrapping="Wrap" />
             </ScrollViewer>
@@ -49,8 +52,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Column="0"
-                        Style="{DynamicResource RoundedButton}"
-                        Background="Transparent"
+                        Style="{DynamicResource SubRoundedButton}"
                         Height="35"
                         HorizontalAlignment="Stretch"
                         Margin="0 0 5 0"
@@ -58,12 +60,12 @@
                         Command="{Binding CancelCommand}" />
                 
                 <Button Grid.Column="1"
-                        Style="{DynamicResource RoundedButton}"
+                        Style="{DynamicResource MainRoundedButton}"
                         Height="35"
                         HorizontalAlignment="Stretch"
                         Margin="5 0 0 0"
                         Content="Создать"
-                        Command="{Binding AcceptSelectCommand}" />
+                        Command="{Binding CreateCommand}" />
             </Grid>
 
         </Grid>

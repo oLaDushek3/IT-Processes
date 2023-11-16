@@ -12,8 +12,9 @@ public class MainViewModel : BaseViewModel
     #region Fields
 
     private MainWindowViewModel _currentMainWindowViewModel;
-    private BaseViewModel _currentChildView;
+
     private User _user;
+    private BaseViewModel _currentChildView;
 
     private ITaskService _taskService = new TaskService();
     private Project _currentProject;
@@ -32,12 +33,12 @@ public class MainViewModel : BaseViewModel
         }
     }
 
-    public BaseViewModel CurrentChildView
+    public User User
     {
-        get => _currentChildView;
+        get => _user;
         set
         {
-            _currentChildView = value;
+            _user = value;
             OnPropertyChanged();
         }
     }
@@ -52,11 +53,21 @@ public class MainViewModel : BaseViewModel
         }
     }
 
+    public BaseViewModel CurrentChildView
+    {
+        get => _currentChildView;
+        set
+        {
+            _currentChildView = value;
+            OnPropertyChanged();
+        }
+    }
+
     #endregion
 
     //Commands
     public CommandHandler OpenProjectDialogCommand => new(_ => OpenProjectDialog());
-    
+
     public CommandHandler LogOutCommand => new(_ => LogOutAsync());
 
     public CommandHandler OpenTasksListCommand => new(_ => OpenTasksList());
@@ -72,27 +83,26 @@ public class MainViewModel : BaseViewModel
     //Methods
     private async void OpenProjectDialog()
     {
-        CurrentProject =
-            (Project)await CurrentMainWindowViewModel.DialogProvider.ShowDialog(
-                new ProjectDialogViewModel(CurrentMainWindowViewModel.DialogProvider));
+        var selectedProject = (Project?)await CurrentMainWindowViewModel.DialogProvider.ShowDialog(
+            new ProjectDialogViewModel(CurrentMainWindowViewModel.DialogProvider, this));
+
+        if (selectedProject == null) return;
         
+        CurrentProject = selectedProject;
+            
         var settings = Settings;
         settings.UserName = Settings.UserName;
         settings.Password = Settings.Password;
         settings.CurrentProject = CurrentProject.Id;
         SaveInfo.SaveSettings(settings);
     }
-    
+
     private async void GetData()
     {
-        try
-        {
+        if (Settings.CurrentProject != 0)
             CurrentProject = await _taskService.GetProjectById(Settings.CurrentProject);
-        }
-        catch
-        {
+        else
             OpenProjectDialog();
-        }
     }
 
     private async void LogOutAsync()
@@ -108,7 +118,6 @@ public class MainViewModel : BaseViewModel
         }
         catch
         {
-            
         }
     }
 

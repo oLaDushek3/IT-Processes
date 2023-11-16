@@ -16,6 +16,8 @@ public class ProjectDialogViewModel : BaseViewModel
 {
     #region Field
 
+    public readonly MainViewModel CurrentMainViewModel;
+    
     private readonly DialogProvider _dialogProvider;
     private readonly ITaskService _taskService = new TaskService();
     
@@ -75,34 +77,29 @@ public class ProjectDialogViewModel : BaseViewModel
     #endregion
     
     //Commands
+    public CommandHandler AcceptSelectCommand => new (_ => _dialogProvider.CloseDialog(SelectedProject), _ => SelectedProject != null);
+    public CommandHandler CancelCommand => new (_ => _dialogProvider.CloseDialog(null), _ => Settings.CurrentProject == 0 ? false : true);
     public CommandHandler CreateProjectCommand => new (_ => ChangeView(new CreateProjectViewModel(this)));
     public CommandHandler EditProjectCommand => new (_ => ChangeView(null), _ => SelectedProject != null);
     public CommandHandler DeleteProjectCommand => new (_ => ChangeView(null), _ => SelectedProject != null);
-    public CommandHandler AcceptSelectCommand => new (_ => AcceptSelectExecute(), _ => SelectedProject != null);
     
     //Constructor
-    public ProjectDialogViewModel(DialogProvider dialogProvider)
+    public ProjectDialogViewModel(DialogProvider dialogProvider, MainViewModel currentMainViewModel)
     {
         _dialogProvider = dialogProvider;
+        CurrentMainViewModel = currentMainViewModel;
         GetData();
     }
     
     //Methods
-    private async void GetData()
+    public async void GetData()
     {
         _allProjects = await _taskService.GetAllProject();
         ProjectsList = new ObservableCollection<Project>(_allProjects);
     }
     
-    private void AcceptSelectExecute()
-    {
-        _dialogProvider.CloseDialog(SelectedProject);
-    }
-    
     private void SearchInfoFromSearchBox()
     {
-       
-            
         if (!string.IsNullOrEmpty(_searchBox))
         {
             _projects = new List<Project>(_allProjects
@@ -116,7 +113,6 @@ public class ProjectDialogViewModel : BaseViewModel
             GetData();
         }
     }
-
     
     public void ChangeView(BaseViewModel? selectedView)
     {

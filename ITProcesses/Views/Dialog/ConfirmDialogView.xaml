@@ -11,10 +11,10 @@
              MinHeight="150" MinWidth="300"
              d:DataContext="{d:DesignInstance Type=viewModels:ConfirmDialogViewModel, IsDesignTimeCreatable=False}">
     
-    <Border Background="{DynamicResource primaryBackColorBrush}"
+    <Border Background="{DynamicResource PrimaryBackColorBrush}"
             CornerRadius="10"
             BorderThickness="5"
-            BorderBrush="{DynamicResource primaryStrokeColorBrush}">
+            BorderBrush="{DynamicResource PrimaryStrokeColorBrush}">
         
         <Grid>
             <Grid.RowDefinitions>
@@ -34,9 +34,10 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                 
-                <Button Style="{DynamicResource RoundedButton}"
+                <Button Style="{DynamicResource MainRoundedButton}"
                         IsDefault="True"
                         Width="100"
+                        Height="35"
                         Margin="10"
                         Content="Да"
                         Command="{Binding ConfirmCommand}">
@@ -45,8 +46,9 @@
                     </Button.CommandParameter>
                 </Button>
                 
-                <Button Style="{DynamicResource RoundedButton}"
+                <Button Style="{DynamicResource MainRoundedButton}"
                         Width="100"
+                        Height="35"
                         Margin="10"
                         Content="Нет"
                         Command="{Binding ConfirmCommand}">

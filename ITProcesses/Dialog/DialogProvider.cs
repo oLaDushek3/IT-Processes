@@ -11,6 +11,7 @@ public class DialogProvider : INotifyPropertyChanged
 
     private BaseViewModel? _currentDialogView;
     private bool _dialogActive;
+    private object? _dialogResult;
 
     #endregion
 
@@ -39,7 +40,6 @@ public class DialogProvider : INotifyPropertyChanged
     
     private delegate void CloseDialogDelegate();
     private event CloseDialogDelegate CloseDialogEvent;
-    private object DialogResult;
     
     public Task<object> ShowDialog(BaseViewModel currentDialogView)
     {
@@ -49,13 +49,13 @@ public class DialogProvider : INotifyPropertyChanged
 
         var completion = new TaskCompletionSource<object>();
 
-        CloseDialogEvent += () => completion.TrySetResult(DialogResult);
+        CloseDialogEvent += () => completion.TrySetResult(_dialogResult);
         return completion.Task;
     }
     
-    public void CloseDialog(object dialogResult)
+    public void CloseDialog(object? dialogResult)
     {
-        DialogResult = dialogResult;
+        _dialogResult = dialogResult;
         DialogView = null;
         DialogActive = false;
 

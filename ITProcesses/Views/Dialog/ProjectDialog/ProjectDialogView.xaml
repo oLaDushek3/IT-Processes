@@ -6,13 +6,13 @@
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
              xmlns:ui="http://schemas.modernwpf.com/2019"
              mc:Ignorable="d"
-             Height="525" Width="775"
+             Height="550" Width="825"
              d:DataContext="{d:DesignInstance Type=viewModels:ProjectDialogViewModel, IsDesignTimeCreatable=False}">
 
-    <Border Background="{DynamicResource primaryBackColorBrush}"
+    <Border Background="{DynamicResource PrimaryBackColorBrush}"
             CornerRadius="10"
             BorderThickness="5"
-            BorderBrush="{DynamicResource primaryStrokeColorBrush}">
+            BorderBrush="{DynamicResource PrimaryStrokeColorBrush}">
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -21,51 +21,81 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="9*" />
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="8.5*" />
             </Grid.RowDefinitions>
 
+            <!--Header-->
+            <Border Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="0"
+                    Margin="10"
+                    BorderThickness="0 0 0 1.5"
+                    BorderBrush="{DynamicResource PrimaryStrokeColorBrush}">
+                <Grid>
+                    <TextBlock Grid.Row="0"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Text="Проекты"
+                               Foreground="{DynamicResource PrimaryFontColorBrush}"
+                               FontSize="21" />
 
-            <TextBox Grid.Row="0"
-                     Grid.Column="0"
-                     Text="{Binding SearchBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                     Height="35"
-                     Width="175"
-                     HorizontalAlignment="Left"
-                     ui:ControlHelper.PlaceholderText="Поиск" />
+                    <Button Grid.Column="0"
+                            Style="{DynamicResource SubRoundedButton}"
+                            Height="35"
+                            Width="100"
+                            HorizontalAlignment="Right"
+                            Content="Назад"
+                            Command="{Binding CancelCommand}" />
+                </Grid>
+            </Border>
 
-            <StackPanel Grid.Row="0"
-                        Grid.Column="0"
-                        HorizontalAlignment="Right"
-                        Margin="10"
-                        Orientation="Horizontal">
+            <!--Tools-->
+            <Grid Grid.Row="1"
+                  Grid.Column="0"
+                  Margin="10 0">
 
-                <Button Style="{DynamicResource IconButton}"
-                        Tag="{StaticResource add_regular}"
-                        Margin="5 0"
-                        Command="{Binding CreateProjectCommand}" />
+                <!--Search-->
+                <TextBox Text="{Binding SearchBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                         Height="35"
+                         Width="175"
+                         HorizontalAlignment="Left"
+                         ui:ControlHelper.PlaceholderText="Поиск" />
 
-                <Button Style="{DynamicResource IconButton}"
-                        Tag="{StaticResource edit_regular}"
-                        Margin="5 0"
-                        Command="{Binding EditProjectCommand}" />
+                <!--Create/Edit/Delete buttons-->
+                <StackPanel HorizontalAlignment="Right"
+                            Orientation="Horizontal">
 
-                <Button Style="{DynamicResource IconButton}"
-                        Tag="{StaticResource delete_regular}"
-                        Margin="5 0"
-                        Command="{Binding DeleteProjectCommand}" />
+                    <Button Style="{DynamicResource IconButton}"
+                            Tag="{StaticResource add_regular}"
+                            Margin="5 0"
+                            Command="{Binding CreateProjectCommand}" />
 
-            </StackPanel>
+                    <Button Style="{DynamicResource IconButton}"
+                            Tag="{StaticResource edit_regular}"
+                            Margin="5 0"
+                            Command="{Binding EditProjectCommand}" />
+
+                    <Button Style="{DynamicResource IconButton}"
+                            Tag="{StaticResource delete_regular}"
+                            Margin="5 0"
+                            Command="{Binding DeleteProjectCommand}" />
+
+                </StackPanel>
+
+            </Grid>
 
             <!--List-->
             <Grid Grid.Column="0"
-                  Grid.Row="1">
+                  Grid.Row="2"
+                  Margin="10">
 
                 <!--List emptiness message-->
                 <TextBlock Text="Список пуст"
                            VerticalAlignment="Center" HorizontalAlignment="Center"
                            FontSize="18"
-                           Foreground="{DynamicResource secondaryFontColorBrush}">
+                           Foreground="{DynamicResource SecondaryFontColorBrush}">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
                             <Style.Triggers>
@@ -87,8 +117,14 @@
                     <ListView.View>
                         <GridView>
 
-                            <GridViewColumn Header="Название"
-                                            DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Название" Width="260">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" 
+                                                   TextTrimming="CharacterEllipsis"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
                             <GridViewColumn Header="Кол-во задач"
                                             DisplayMemberBinding="{Binding Tasks.Count}" />
@@ -112,8 +148,9 @@
 
             <!--Side panel-->
             <Border Grid.Column="1"
-                    Grid.Row="0" Grid.RowSpan="2"
-                    BorderBrush="{DynamicResource primaryStrokeColorBrush}"
+                    Grid.Row="1"
+                    Grid.RowSpan="2"
+                    BorderBrush="{DynamicResource PrimaryStrokeColorBrush}"
                     BorderThickness="2 0 0 0">
                 <Grid>
                     <!--Details emptiness message-->
@@ -121,7 +158,7 @@
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
                                FontSize="18"
-                               Foreground="{DynamicResource secondaryFontColorBrush}"
+                               Foreground="{DynamicResource SecondaryFontColorBrush}"
                                Grid.RowSpan="3">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
@@ -148,34 +185,37 @@
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
 
+                        <!--Name-->
                         <TextBlock Grid.Row="0"
                                    Text="{Binding SelectedProject.Name}"
-                                   Foreground="{DynamicResource primaryFontColorBrush}"
+                                   Foreground="{DynamicResource PrimaryFontColorBrush}"
                                    FontSize="18" />
 
+                        <!--Archived-->
                         <CheckBox Grid.Row="1"
                                   Content="В архиве"
                                   IsEnabled="False"
-                                  Foreground="{DynamicResource primaryFontColorBrush}"
+                                  Foreground="{DynamicResource PrimaryFontColorBrush}"
                                   IsChecked="{Binding SelectedProject.Archived}" />
 
+                        <!--Description-->
                         <ScrollViewer Grid.Row="2"
                                       Margin="0 10">
                             <TextBlock TextWrapping="Wrap"
                                        Text="{Binding SelectedProject.Description}"
-                                       Foreground="{DynamicResource primaryFontColorBrush}"
+                                       Foreground="{DynamicResource PrimaryFontColorBrush}"
                                        FontSize="14" />
                         </ScrollViewer>
 
-                        <Button Grid.Row="3" Style="{DynamicResource RoundedButton}"
+                        <!--AcceptButton-->
+                        <Button Grid.Row="3" Style="{DynamicResource MainRoundedButton}"
                                 Content="Выбрать"
                                 Height="35"
-                                Width="auto"
                                 HorizontalAlignment="Stretch"
                                 Command="{Binding AcceptSelectCommand}" />
 
                     </Grid>
-                    
+
                     <!--Create/Update panel-->
                     <ContentControl Content="{Binding CurrentChildView}" />
                 </Grid>
