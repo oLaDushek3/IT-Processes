@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:ui="http://schemas.modernwpf.com/2019"
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="650" d:DesignWidth="1060" 
@@ -22,16 +21,39 @@
         <StackPanel Grid.Column="0"
                     Margin="20">
             
-            <ui:AppBarButton Icon="Back"
-                             Height="33"
-                             Width="32"
-                             Command="{Binding BackCommand}"
-                             Margin="4"/>
-            
-            <TextBlock Text="{Binding SelectedTask.Name}"
-                       FontSize="30"
-                       Margin="0 0 0 20"
-                       Foreground="{DynamicResource PrimaryFontColorBrush}"/>
+            <!--Header-->
+            <Grid Margin="0 0 0 20">
+                <TextBlock HorizontalAlignment="Left" 
+                           Text="{Binding SelectedTask.Name}"
+                           FontSize="30"
+                           Foreground="{DynamicResource PrimaryFontColorBrush}"/>
+                
+                <!--Tools buttons-->
+                <StackPanel HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                
+                    <Button Style="{DynamicResource IconButton}"
+                            Tag="{StaticResource ArrowLeftRegular}"
+                            Margin="5 0"
+                            Command="{Binding CancelCommand}" />
+                    
+                    <Separator Margin="5 5"
+                               Width="2"
+                               Background="{DynamicResource SecondaryBackColorBrush}"
+                               Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+
+                    <Button Style="{DynamicResource IconButton}"
+                            Tag="{StaticResource EditRegular}"
+                            Margin="5 0"
+                            Command="{Binding EditTaskCommand}" />
+
+                    <Button Style="{DynamicResource IconButton}"
+                            Tag="{StaticResource DeleteRegular}"
+                            Margin="5 0"
+                            Command="{Binding DeleteTaskCommand}" />
+
+                </StackPanel>
+            </Grid>
             
             <TextBlock Text="{Binding SelectedTask.DateStartTimestamp, StringFormat=Дата начала: {0:d MMMM yyyy}, ConverterCulture=ru-RU}"
                        FontSize="20"

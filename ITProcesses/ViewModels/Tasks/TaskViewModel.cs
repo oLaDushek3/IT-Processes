@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using ITProcesses.Command;
+using ITProcesses.Dialog;
 using ITProcesses.Models;
 using ITProcesses.Services;
 
@@ -14,13 +15,12 @@ public class TaskViewModel : BaseViewModel
 {
     #region Fields
 
+    private readonly MainViewModel _currentMainViewModel;
     private readonly ITaskService _taskService;
+    private readonly DialogProvider _currentDialogProvider;
     
-    private Tasks _selectedTask;
+    private Tasks _currentTask;
     private ObservableCollection<TaskStatus> _statusList;
-    private MainViewModel _currentMainViewModel;
-
-
 
     #endregion
 
@@ -28,11 +28,11 @@ public class TaskViewModel : BaseViewModel
 
     public Tasks SelectedTask
     {
-        get => _selectedTask;
+        get => _currentTask;
 
         set
         {
-            _selectedTask = value;
+            _currentTask = value;
             OnPropertyChanged();
         }
     }
@@ -50,31 +50,34 @@ public class TaskViewModel : BaseViewModel
     
     #endregion
     
+    //Commands
+    public CommandHandler CancelCommand => new(_ => _currentMainViewModel.ChangeView(new TasksListViewModel(_currentMainViewModel)));
+    public CommandHandler EditTaskCommand => new(_ => _currentMainViewModel.ChangeView(new TasksListViewModel(_currentMainViewModel)));
+    public CommandHandler DeleteTaskCommand => new(_ => DeleteTaskCommandExecute());
     
     //Constructor
     public TaskViewModel(Guid selectedTaskGuid, MainViewModel currentMainViewModel)
     {
         _taskService = new TaskService();
         _currentMainViewModel = currentMainViewModel;
+        _currentDialogProvider = currentMainViewModel.CurrentMainWindowViewModel.MainDialogProvider;
         GetData(selectedTaskGuid);
     }
 
-    public CommandHandler BackCommand => new(_ => BackTaskListView());
-
+    //Methods
     private async void GetData(Guid selectedTaskGuid)
     {
         StatusList = new ObservableCollection<TaskStatus>(await _taskService.GetAllStatuses());
         SelectedTask = (await _taskService.GetTaskById(selectedTaskGuid));
     }
 
-    private void BackTaskListView()
-    { 
-        _currentMainViewModel.ChangeView(new TasksListViewModel(_currentMainViewModel));
-    }
-
-    private void EditTask()
+    private async void DeleteTaskCommandExecute()
     {
-       // _taskService.
+        if ((bool)await _currentDialogProvider.ShowDialog(new ConfirmDialogViewModel(_currentDialogProvider,
+                "Вы уверены?")))
+        {
+            await _taskService.DeleteTask(_currentTask);
+            _currentMainViewModel.ChangeView(new TasksListViewModel(_currentMainViewModel));
+        }
     }
-    
 }

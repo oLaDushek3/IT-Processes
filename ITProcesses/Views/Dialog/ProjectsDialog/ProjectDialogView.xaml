@@ -69,17 +69,17 @@
                             Orientation="Horizontal">
 
                     <Button Style="{DynamicResource IconButton}"
-                            Tag="{StaticResource add_regular}"
+                            Tag="{StaticResource AddRegular}"
                             Margin="5 0"
                             Command="{Binding CreateProjectCommand}" />
 
                     <Button Style="{DynamicResource IconButton}"
-                            Tag="{StaticResource edit_regular}"
+                            Tag="{StaticResource EditRegular}"
                             Margin="5 0"
                             Command="{Binding EditProjectCommand}" />
 
                     <Button Style="{DynamicResource IconButton}"
-                            Tag="{StaticResource delete_regular}"
+                            Tag="{StaticResource DeleteRegular}"
                             Margin="5 0"
                             Command="{Binding DeleteProjectCommand}" />
 
@@ -146,7 +146,16 @@
                 </ListView>
 
             </Grid>
-
+            
+            <!--Create/Edit dialog dimming effect-->
+            <Border Grid.Column="0"
+                    Grid.Row="1" Grid.RowSpan="2"
+                    Background="Black"
+                    Opacity="0.6"
+                    CornerRadius="0 0 0 10"
+                    Visibility="{Binding CreateEditDialogProvider.DialogActive, 
+                    Converter={StaticResource BoolToVisible}}" />
+            
             <!--Details panel-->
             <Border Grid.Column="1"
                     Grid.Row="1"
@@ -223,15 +232,6 @@
                                     Converter={StaticResource BoolToVisible}}" />
                 </Grid>
             </Border>
-            
-            <!--Create/Edit dialog dimming effect-->
-            <Border Grid.Column="0"
-                       Grid.Row="1" Grid.RowSpan="2"
-                       Background="Black"
-                       Opacity="0.6"
-                       CornerRadius="0 0 0 10"
-                       Visibility="{Binding CreateEditDialogProvider.DialogActive, 
-                       Converter={StaticResource BoolToVisible}}" />
 
             <!--Confirm dialog-->
             <Grid Grid.Column="0"

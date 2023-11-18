@@ -20,7 +20,7 @@ public class ProjectDialogViewModel : BaseViewModel
 
     public readonly MainViewModel CurrentMainViewModel;
 
-    private readonly DialogProvider _dialogProvider;
+    private readonly DialogProvider _currentDialogProvider;
     private readonly IProjectService _projectService = new ProjectService();
 
     private ObservableCollection<Project> _projectsList = null!;
@@ -74,10 +74,10 @@ public class ProjectDialogViewModel : BaseViewModel
 
     //Commands
     public CommandHandler AcceptSelectCommand =>
-        new(_ => _dialogProvider.CloseDialog(SelectedProject), _ => SelectedProject != null);
+        new(_ => _currentDialogProvider.CloseDialog(SelectedProject), _ => SelectedProject != null);
 
     public CommandHandler CancelCommand =>
-        new(_ => _dialogProvider.CloseDialog(null), _ => _currentProject != null);
+        new(_ => _currentDialogProvider.CloseDialog(null), _ => _currentProject != null);
 
     public CommandHandler CreateProjectCommand => new(_ => CreateProjectCommandExecute());
 
@@ -87,9 +87,9 @@ public class ProjectDialogViewModel : BaseViewModel
     public CommandHandler DeleteProjectCommand => new(_ => DeleteProjectCommandExecute(), _ => SelectedProject != null);
 
     //Constructor
-    public ProjectDialogViewModel(DialogProvider dialogProvider, MainViewModel currentMainViewModel, Project currentProject)
+    public ProjectDialogViewModel(DialogProvider currentDialogProvider, MainViewModel currentMainViewModel, Project currentProject)
     {
-        _dialogProvider = dialogProvider;
+        _currentDialogProvider = currentDialogProvider;
         CurrentMainViewModel = currentMainViewModel;
         _currentProject = currentProject;
         GetData();

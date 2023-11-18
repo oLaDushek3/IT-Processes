@@ -23,7 +23,7 @@
             <ContentControl.Style>
                 <Style TargetType="ContentControl">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=DialogProvider.DialogActive}" Value="True">
+                        <DataTrigger Binding="{Binding Path=MainDialogProvider.DialogActive}" Value="True">
                             <Setter Property="IsEnabled" Value="False"/>
                         </DataTrigger>
                     </Style.Triggers>
@@ -32,14 +32,14 @@
         </ContentControl>
         
         <!--Dialog-->
-        <Grid Visibility="{Binding DialogProvider.DialogActive, Converter={StaticResource BoolToVisible}}"  
+        <Grid Visibility="{Binding MainDialogProvider.DialogActive, Converter={StaticResource BoolToVisible}}"  
               Grid.RowSpan="2">
             <!--Dimming effect-->
             <Rectangle Fill="Black" Opacity="0.6"/>
             
             <!--Dialog content section-->
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <ContentControl Content="{Binding DialogProvider.DialogView}"/>
+                <ContentControl Content="{Binding MainDialogProvider.DialogView}"/>
             </StackPanel>
         </Grid>
     </Grid>

@@ -84,8 +84,8 @@ public class MainViewModel : BaseViewModel
     //Methods
     private async void OpenProjectDialog()
     {
-        var selectedProject = (Project?)await CurrentMainWindowViewModel.DialogProvider.ShowDialog(
-            new ProjectDialogViewModel(CurrentMainWindowViewModel.DialogProvider, this, CurrentProject));
+        var selectedProject = (Project?)await CurrentMainWindowViewModel.MainDialogProvider.ShowDialog(
+            new ProjectDialogViewModel(CurrentMainWindowViewModel.MainDialogProvider, this, CurrentProject));
 
         if (selectedProject == null) return;
 
@@ -114,8 +114,8 @@ public class MainViewModel : BaseViewModel
     {
         try
         {
-            if ((bool)await CurrentMainWindowViewModel.DialogProvider.ShowDialog(
-                    new ConfirmDialogViewModel(CurrentMainWindowViewModel.DialogProvider, "Вы уверены?")))
+            if ((bool)await CurrentMainWindowViewModel.MainDialogProvider.ShowDialog(
+                    new ConfirmDialogViewModel(CurrentMainWindowViewModel.MainDialogProvider, "Вы уверены?")))
             {
                 CurrentMainWindowViewModel.ChangeView(new LoginViewModel(CurrentMainWindowViewModel));
                 SaveInfo.CreateAppSettingsDefault();
