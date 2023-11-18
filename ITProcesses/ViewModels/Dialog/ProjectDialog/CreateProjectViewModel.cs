@@ -1,4 +1,5 @@
 using ITProcesses.Command;
+using ITProcesses.Dialog;
 using ITProcesses.Models;
 using ITProcesses.Services;
 
@@ -10,6 +11,7 @@ public class CreateProjectViewModel : BaseViewModel
 
     private readonly ProjectDialogViewModel _currentProjectDialogViewModel;
     private readonly IProjectService _projectService = new ProjectService();
+    private readonly DialogProvider _currentDialogProvider;
     
     private Project _createdProject = new();
 
@@ -30,13 +32,14 @@ public class CreateProjectViewModel : BaseViewModel
     #endregion
     
     //Commands
-    public CommandHandler CancelCommand => new (_ => _currentProjectDialogViewModel.ChangeView(null));
-    public CommandHandler CreateCommand => new (_ => CreateCommandExecute(), _ => CreateCommandCanExecute());
+    public CommandHandler CancelCommand => new (_ =>  _currentDialogProvider.CloseDialog(null));
+    public CommandHandler CreateCommand => new (_ => CreateCommandExecute(), _ => !string.IsNullOrEmpty(CreatedProject.Name) && !string.IsNullOrEmpty(CreatedProject.Description));
     
     //Constructor
-    public CreateProjectViewModel(ProjectDialogViewModel currentProjectDialogViewModel)
+    public CreateProjectViewModel(ProjectDialogViewModel currentProjectDialogViewModel, DialogProvider currentDialogProvider)
     {
         _currentProjectDialogViewModel = currentProjectDialogViewModel;
+        _currentDialogProvider = currentDialogProvider;
     }
     
     //Methods
@@ -44,12 +47,7 @@ public class CreateProjectViewModel : BaseViewModel
     {
         CreatedProject.UserId = _currentProjectDialogViewModel.CurrentMainViewModel.User.Id;
         await _projectService.CreateProject(CreatedProject);
-        _currentProjectDialogViewModel.ChangeView(null);
-        _currentProjectDialogViewModel.GetData();
-    }
-    
-    private bool CreateCommandCanExecute()
-    {
-        return !string.IsNullOrEmpty(CreatedProject.Name) && !string.IsNullOrEmpty(CreatedProject.Description);
+        
+        _currentDialogProvider.CloseDialog(CreatedProject);
     }
 }

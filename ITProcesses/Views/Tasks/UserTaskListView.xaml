@@ -9,7 +9,8 @@
              xmlns:local="clr-namespace:ITProcesses.Views"
              mc:Ignorable="d"
              d:DesignHeight="650" d:DesignWidth="1060"
-             d:DataContext="{d:DesignInstance Type=viewModels:UserTaskListViewModel, IsDesignTimeCreatable=False}">
+             d:DataContext="{d:DesignInstance Type=viewModels:UserTaskListViewModel, IsDesignTimeCreatable=False}"
+             Background="{DynamicResource PrimaryBackColorBrush}">
    <StackPanel>
         <StackPanel Orientation="Horizontal"
                     Margin="5">

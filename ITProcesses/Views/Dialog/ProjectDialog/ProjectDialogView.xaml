@@ -9,6 +9,7 @@
              Height="550" Width="825"
              d:DataContext="{d:DesignInstance Type=viewModels:ProjectDialogViewModel, IsDesignTimeCreatable=False}">
 
+
     <Border Background="{DynamicResource PrimaryBackColorBrush}"
             CornerRadius="10"
             BorderThickness="5"
@@ -111,7 +112,7 @@
                 <!--List-->
                 <ListView Name="ElementsList"
                           ItemContainerStyle="{StaticResource DefaultListViewItem}"
-                          ItemsSource="{Binding ProjectsList}"
+                          ItemsSource="{Binding ProjectsList, UpdateSourceTrigger=PropertyChanged}"
                           SelectedItem="{Binding SelectedProject}">
 
                     <ListView.View>
@@ -120,8 +121,8 @@
                             <GridViewColumn Header="Название" Width="260">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Name}" 
-                                                   TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Text="{Binding Name}"
+                                                   TextTrimming="CharacterEllipsis" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -146,7 +147,7 @@
 
             </Grid>
 
-            <!--Side panel-->
+            <!--Details panel-->
             <Border Grid.Column="1"
                     Grid.Row="1"
                     Grid.RowSpan="2"
@@ -215,11 +216,36 @@
                                 Command="{Binding AcceptSelectCommand}" />
 
                     </Grid>
-
-                    <!--Create/Update panel-->
-                    <ContentControl Content="{Binding CurrentChildView}" />
+                    
+                    <!--Create/Edit dialog -->
+                    <ContentControl Content="{Binding CreateEditDialogProvider.DialogView}"
+                                    Visibility="{Binding CreateEditDialogProvider.DialogActive, 
+                                    Converter={StaticResource BoolToVisible}}" />
                 </Grid>
             </Border>
+            
+            <!--Create/Edit dialog dimming effect-->
+            <Border Grid.Column="0"
+                       Grid.Row="1" Grid.RowSpan="2"
+                       Background="Black"
+                       Opacity="0.6"
+                       CornerRadius="0 0 0 10"
+                       Visibility="{Binding CreateEditDialogProvider.DialogActive, 
+                       Converter={StaticResource BoolToVisible}}" />
+
+            <!--Confirm dialog-->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="0"
+                  Grid.RowSpan="3"
+                  Visibility="{Binding ConfirmDialogProvider.DialogActive, Converter={StaticResource BoolToVisible}}">
+                <!--Dimming effect-->
+                <Rectangle Fill="Black" Opacity="0.6"
+                           RadiusX="10" RadiusY="10" />
+
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Content="{Binding ConfirmDialogProvider.DialogView}" />
+            </Grid>
 
         </Grid>
 

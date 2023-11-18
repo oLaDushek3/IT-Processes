@@ -37,7 +37,7 @@
                 <Button Style="{DynamicResource MainRoundedButton}"
                         IsDefault="True"
                         Width="100"
-                        Height="35"
+                        Height="40"
                         Margin="10"
                         Content="Да"
                         Command="{Binding ConfirmCommand}">
@@ -48,7 +48,7 @@
                 
                 <Button Style="{DynamicResource MainRoundedButton}"
                         Width="100"
-                        Height="35"
+                        Height="40"
                         Margin="10"
                         Content="Нет"
                         Command="{Binding ConfirmCommand}">

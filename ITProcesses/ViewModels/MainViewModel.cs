@@ -16,7 +16,8 @@ public class MainViewModel : BaseViewModel
     private User _user;
     private BaseViewModel _currentChildView;
 
-    private ITaskService _taskService = new TaskService();
+    private readonly ITaskService _taskService = new TaskService();
+    private readonly IProjectService _projectService = new ProjectService();
     private Project _currentProject;
 
     #endregion
@@ -84,12 +85,12 @@ public class MainViewModel : BaseViewModel
     private async void OpenProjectDialog()
     {
         var selectedProject = (Project?)await CurrentMainWindowViewModel.DialogProvider.ShowDialog(
-            new ProjectDialogViewModel(CurrentMainWindowViewModel.DialogProvider, this));
+            new ProjectDialogViewModel(CurrentMainWindowViewModel.DialogProvider, this, CurrentProject));
 
         if (selectedProject == null) return;
-        
+
         CurrentProject = selectedProject;
-            
+
         var settings = Settings;
         settings.UserName = Settings.UserName;
         settings.Password = Settings.Password;
@@ -99,10 +100,14 @@ public class MainViewModel : BaseViewModel
 
     private async void GetData()
     {
-        if (Settings.CurrentProject != 0)
-            CurrentProject = await _taskService.GetProjectById(Settings.CurrentProject);
-        else
+        try
+        {
+            CurrentProject = await _projectService.GetProjectById(Settings.CurrentProject);
+        }
+        catch
+        {
             OpenProjectDialog();
+        }
     }
 
     private async void LogOutAsync()

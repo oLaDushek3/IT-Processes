@@ -79,39 +79,6 @@ public class TaskService : BaseViewModel, ITaskService
 
     #endregion
 
-    #region ProjectServices
-
-    public async Task<List<Project>> GetAllProject()
-    {
-        var project = await Context.Projects.Include(p => p.Tasks).ToListAsync();
-
-        return project;
-    }
-
-    public async Task<Project> GetProjectById(int id)
-    {
-        var project = await Context.Projects.FirstOrDefaultAsync(p => p.Id == id);
-
-        if (project == null)
-            throw new Exception("Проект не найдена");
-
-        return project;
-    }
-
-    public async Task<Project> CreateProject(Project project)
-    {
-        var proj = await Context.Projects.FirstOrDefaultAsync(p => p.Id == project.Id);
-
-        if (proj != null)
-            throw new Exception("Данный проект уже существует!");
-
-        await Context.Projects.AddAsync(project);
-        await Context.SaveChangesAsync();
-
-        return project;
-    }
-
-    #endregion
 
     public async Task<List<TaskStatus>> GetAllStatuses()
     {

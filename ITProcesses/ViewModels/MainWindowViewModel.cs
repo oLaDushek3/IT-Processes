@@ -8,7 +8,6 @@ public class MainWindowViewModel : BaseViewModel
     #region Fields
 
     private BaseViewModel _currentChildView;
-    private DialogProvider _dialogProvider = new();
 
     #endregion
 
@@ -23,15 +22,7 @@ public class MainWindowViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public DialogProvider DialogProvider
-    {
-        get => _dialogProvider;
-        set
-        {
-            _dialogProvider = value;
-            OnPropertyChanged();
-        }
-    }
+    public DialogProvider DialogProvider { get; } = new();
 
     #endregion
     
