@@ -1,4 +1,4 @@
-<UserControl x:Class="ITProcesses.Views.EditProjectView"
+<UserControl x:Class="ITProcesses.Views.EditProjectDialogView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -8,8 +8,8 @@
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="515" d:DesignWidth="310"
-             d:DataContext="{d:DesignInstance Type=viewModels:EditProjectViewModel, IsDesignTimeCreatable=False}"
-             Background="#161819">
+             d:DataContext="{d:DesignInstance Type=viewModels:EditTaskDialogViewModel, IsDesignTimeCreatable=False}"
+             Background="{DynamicResource PrimaryBackColorBrush}">
     <Grid>
         <Grid Margin="10"
               Visibility="{Binding SelectedProject, 

@@ -106,7 +106,7 @@ public class ProjectDialogViewModel : BaseViewModel
     {
         var dialogResult =
             (Project?)await CreateEditDialogProvider.ShowDialog(
-                new CreateProjectViewModel(this, CreateEditDialogProvider));
+                new CreateProjectDialogViewModel(this, CreateEditDialogProvider));
 
         if (dialogResult == null) return;
 
@@ -118,7 +118,7 @@ public class ProjectDialogViewModel : BaseViewModel
     private async void EditProjectCommandExecute()
     {
         var dialogResult =
-            (Project?)await CreateEditDialogProvider.ShowDialog(new EditProjectViewModel(this, SelectedProject!,
+            (Project?)await CreateEditDialogProvider.ShowDialog(new EditProjectDialogViewModel(this, SelectedProject!,
                 CreateEditDialogProvider));
 
         if (dialogResult == null) return;

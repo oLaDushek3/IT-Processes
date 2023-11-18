@@ -2,9 +2,9 @@ using System.Windows.Controls;
 
 namespace ITProcesses.Views;
 
-public partial class EditProjectView : UserControl
+public partial class EditProjectDialogView : UserControl
 {
-    public EditProjectView()
+    public EditProjectDialogView()
     {
         InitializeComponent();
     }

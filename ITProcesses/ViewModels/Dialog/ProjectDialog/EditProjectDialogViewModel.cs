@@ -5,7 +5,7 @@ using ITProcesses.Services;
 
 namespace ITProcesses.ViewModels;
 
-public class EditProjectViewModel : BaseViewModel
+public class EditProjectDialogViewModel : BaseViewModel
 {
     #region Field
 
@@ -38,7 +38,7 @@ public class EditProjectViewModel : BaseViewModel
         _ => !string.IsNullOrEmpty(EditableProject.Name) && !string.IsNullOrEmpty(EditableProject.Description));
 
     //Constructor
-    public EditProjectViewModel(ProjectDialogViewModel currentProjectDialogViewModel, Project selectedProject, DialogProvider currentDialogProvider)
+    public EditProjectDialogViewModel(ProjectDialogViewModel currentProjectDialogViewModel, Project selectedProject, DialogProvider currentDialogProvider)
     {
         _currentProjectDialogViewModel = currentProjectDialogViewModel;
         GetData(selectedProject.Id);

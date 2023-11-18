@@ -1,4 +1,4 @@
-<UserControl x:Class="ITProcesses.Views.CreateProjectView"
+<UserControl x:Class="ITProcesses.Views.CreateProjectDialogView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -8,7 +8,7 @@
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="515" d:DesignWidth="310"
-             d:DataContext="{d:DesignInstance Type=viewModels:CreateProjectViewModel, IsDesignTimeCreatable=False}"
+             d:DataContext="{d:DesignInstance Type=viewModels:CreateProjectDialogViewModel, IsDesignTimeCreatable=False}"
              Background="#161819">
     <Grid>
         <Grid Margin="10"
