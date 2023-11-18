@@ -20,20 +20,22 @@
                  Margin="0 15 0 15"
                  Text = "{Binding Login}"
                  ui:ControlHelper.PlaceholderText="Логин"
-                 ui:ControlHelper.PlaceholderForeground="{DynamicResource secondaryFontColorBrush}"
-                 Foreground="{DynamicResource primaryFontColorBrush}"/>
+                 ui:ControlHelper.PlaceholderForeground="{DynamicResource SecondaryFontColorBrush}"
+                 Foreground="{DynamicResource PrimaryFontColorBrush}"/>
 
         <PasswordBox Height="60" Width="230"
                      Margin="0 15 0 5"
                      PasswordChanged="PasswordBox_OnPasswordChanged"
                      ui:ControlHelper.PlaceholderText="Пароль"
-                     ui:ControlHelper.PlaceholderForeground="{DynamicResource secondaryFontColorBrush}"
-                     Foreground="{DynamicResource primaryFontColorBrush}"/>
+                     ui:ControlHelper.PlaceholderForeground="{DynamicResource SecondaryFontColorBrush}"
+                     Foreground="{DynamicResource PrimaryFontColorBrush}"/>
         
         <CheckBox Content="Запомнить меня"
                   IsChecked="{Binding CheckBoxBool, Mode=TwoWay}"/>
 
-        <Button Style="{DynamicResource RoundedButton}"
+        <Button Style="{DynamicResource MainRoundedButton}"
+                Width="160"
+                Height="40"
                 Content="Войти"
                 IsDefault="True"
                 Command="{Binding LoginCommand}"

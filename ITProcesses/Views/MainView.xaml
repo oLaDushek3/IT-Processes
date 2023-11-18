@@ -22,7 +22,7 @@
         <!--Header-->
         <Border Grid.Row="0"
                 BorderThickness="0 0 0 3"
-                BorderBrush="{DynamicResource primaryStrokeColorBrush}">
+                BorderBrush="{DynamicResource PrimaryStrokeColorBrush}">
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -44,7 +44,7 @@
                 <Separator Grid.Column="1"
                            Margin="0 15"
                            Width="2"
-                           Background="{DynamicResource secondaryBackColorBrush}"
+                           Background="{DynamicResource SecondaryBackColorBrush}"
                            Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
 
                 <Button Grid.Column="2"
@@ -52,22 +52,23 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Left"
                         FontSize="24"
-                        Background="{DynamicResource secondaryBackColorBrush}"
-                        Foreground="{DynamicResource secondaryFontColorBrush}"
+                        Background="{DynamicResource SecondaryBackColorBrush}"
+                        Foreground="{DynamicResource SecondaryFontColorBrush}"
                         Content="{Binding CurrentProject.Name}"
                         Command="{Binding OpenProjectDialogCommand}"/>
 
                 <Separator Grid.Column="3"
                            Margin="0 15"
                            Width="2"
-                           Background="{DynamicResource secondaryBackColorBrush}"
+                           Background="{DynamicResource SecondaryBackColorBrush}"
                            Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
 
                 <Button Grid.Column="4"
-                        Style="{DynamicResource RoundedButton}"
+                        Style="{DynamicResource MainRoundedButton}"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
-                        Width="100"
+                        Width="160"
+                        Height="40"
                         Content="Выйти"
                         Command="{Binding LogOutCommand}" />
             </Grid>
@@ -126,7 +127,7 @@
 
             <GridSplitter Grid.Column="1"
                           Width="2"
-                          Background="{DynamicResource primaryStrokeColorBrush}"
+                          Background="{DynamicResource PrimaryStrokeColorBrush}"
                           HorizontalAlignment="Center" />
             
             <!--Content section-->

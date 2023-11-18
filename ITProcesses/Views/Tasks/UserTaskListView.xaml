@@ -1,18 +1,17 @@
-<UserControl x:Class="ITProcesses.Views.TasksListView"
+<UserControl x:Class="ITProcesses.Views.UserTaskListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:ITProcesses.Views"
-             xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
              xmlns:behavior="clr-namespace:AttachedCommandBehavior;assembly=AttachedCommandBehavior"
              xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
+             xmlns:local="clr-namespace:ITProcesses.Views"
              mc:Ignorable="d"
              d:DesignHeight="650" d:DesignWidth="1060"
-             Background="{DynamicResource primaryBackColorBrush}"
-             d:DataContext="{d:DesignInstance Type=viewModels:TasksListViewModel, IsDesignTimeCreatable=False}">
-
-    <StackPanel>
+             d:DataContext="{d:DesignInstance Type=viewModels:UserTaskListViewModel, IsDesignTimeCreatable=False}"
+             Background="{DynamicResource PrimaryBackColorBrush}">
+   <StackPanel>
         <StackPanel Orientation="Horizontal"
                     Margin="5">
             <StackPanel Orientation="Horizontal">

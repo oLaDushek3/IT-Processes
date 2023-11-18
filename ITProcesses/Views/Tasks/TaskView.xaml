@@ -7,7 +7,7 @@
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="650" d:DesignWidth="1060" 
-             Background="{DynamicResource primaryBackColorBrush}"
+             Background="{DynamicResource PrimaryBackColorBrush}"
              d:DataContext="{d:DesignInstance Type=viewModels:TaskViewModel, IsDesignTimeCreatable=False}">
     
     <Grid>
@@ -31,26 +31,26 @@
             <TextBlock Text="{Binding SelectedTask.Name}"
                        FontSize="30"
                        Margin="0 0 0 20"
-                       Foreground="{DynamicResource primaryFontColorBrush}"/>
+                       Foreground="{DynamicResource PrimaryFontColorBrush}"/>
             
             <TextBlock Text="{Binding SelectedTask.DateStartTimestamp, StringFormat=Дата начала: {0:d MMMM yyyy}, ConverterCulture=ru-RU}"
                        FontSize="20"
-                       Foreground="{DynamicResource primaryFontColorBrush}"/>
+                       Foreground="{DynamicResource PrimaryFontColorBrush}"/>
             <TextBlock Text="{Binding SelectedTask.DateEndTimestamp, StringFormat=Дата окончания: {0:d MMMM yyyy}, ConverterCulture=ru-RU}"
                        FontSize="20"
                        Margin="0 0 0 20"
-                       Foreground="{DynamicResource primaryFontColorBrush}"/>
+                       Foreground="{DynamicResource PrimaryFontColorBrush}"/>
             
             <TextBlock Text="{Binding SelectedTask.Description}"
                        TextWrapping="Wrap"
                        FontSize="20"
-                       Foreground="{DynamicResource primaryFontColorBrush}"/>
+                       Foreground="{DynamicResource PrimaryFontColorBrush}"/>
             
         </StackPanel>
         
         <!--Details-->
         <Border Grid.Column="1"
-                BorderBrush="{DynamicResource primaryStrokeColorBrush}"
+                BorderBrush="{DynamicResource PrimaryStrokeColorBrush}"
                 BorderThickness="2 0 0 0">
             
             <Grid Margin="10">
@@ -69,7 +69,7 @@
                     </Grid.ColumnDefinitions>
                     
                     <TextBlock Grid.Column="0" Text="Статус: "
-                               Foreground="{DynamicResource primaryFontColorBrush}"
+                               Foreground="{DynamicResource PrimaryFontColorBrush}"
                                FontSize="20"/>
                     
                     <ComboBox Grid.Column="1"
@@ -96,11 +96,11 @@
                     <TextBlock Grid.Row="0" 
                                Margin="0 0 0 5"
                                Text="Документы: " FontSize="20"
-                               Foreground="{DynamicResource primaryFontColorBrush}"/>
+                               Foreground="{DynamicResource PrimaryFontColorBrush}"/>
                     
                     <ListBox Grid.Row="1"
                              ItemsSource="{Binding SelectedTask.TaskDocuments}"
-                             Background="{DynamicResource secondaryBackColorBrush}">
+                             Background="{DynamicResource SecondaryBackColorBrush}">
                         
                         <ListBox.Resources>
                             <Style TargetType="Border">
@@ -126,11 +126,11 @@
                     <TextBlock Grid.Row="0" 
                                Margin="0 0 0 5"
                                Text="Участники: " FontSize="20"
-                               Foreground="{DynamicResource primaryFontColorBrush}"/>
+                               Foreground="{DynamicResource PrimaryFontColorBrush}"/>
                     
                     <ListBox Grid.Row="1"
                              ItemsSource="{Binding SelectedTask.UsersTasks}"
-                             Background="{DynamicResource secondaryBackColorBrush}"
+                             Background="{DynamicResource SecondaryBackColorBrush}"
                              HorizontalContentAlignment="Stretch">
                         
                         <ListBox.Resources>

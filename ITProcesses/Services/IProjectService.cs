@@ -8,9 +8,11 @@ public interface IProjectService
 {
     Task<Project> CreateProject(Project project);
 
-    void DeleteProject(Project project);
+    Task DeleteProject(Project project);
 
     Task<Project> EditProject(Project project);
+    
     public Task<List<Project>> GetAllProject();
+    
     public Task<Project> GetProjectById(int id);
 }

@@ -8,5 +8,5 @@ public class AppSettings
 
     [JsonPropertyName("password")] public string? Password { get; set; } = string.Empty;
     
-    [JsonPropertyName("currentProject")] public int CurrentProject { get; set; } = 0;
+    [JsonPropertyName("currentProject")] public int CurrentProject { get; set; }
 }

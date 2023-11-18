@@ -26,7 +26,7 @@
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="Background" Value="{DynamicResource TreeViewItemBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource secondaryFontColorBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SecondaryFontColorBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource TreeViewItemBorderBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource TreeViewItemBorderThemeThickness}" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="Local" />
@@ -122,25 +122,25 @@
                         </Trigger>
                         <Trigger Property="IsExpanded" Value="True">
                             <Setter TargetName="ExpandedGlyph" Property="Visibility" Value="Visible"/>
-                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource secondaryBackColorBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}" />
+                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource SecondaryBackColorBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource PrimaryFontColorBrush}" />
                         </Trigger>
                         <Trigger Property="HasItems" Value="False">
                             <Setter TargetName="ExpandCollapseChevron" Property="Visibility" Value="Hidden" />
                             <Setter Property="ui:TreeViewItemHelper.GlyphOpacity" Value="0" />
                         </Trigger>
                         <Trigger SourceName="ContentPresenterGrid" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource secondaryBackColorBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}" />
+                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource SecondaryBackColorBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource PrimaryFontColorBrush}" />
                         </Trigger>
                         <Trigger SourceName="ContentPresenterGrid" Property="ui:PressHelper.IsPressed" Value="True">
-                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource activeAccentColorBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}" />
+                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource ActiveAccentColorBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource PrimaryFontColorBrush}" />
                         </Trigger>
                         <!-- Selected -->
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource accentColorBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}" />
+                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource AccentColorBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource PrimaryFontColorBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource TreeViewItemBackgroundDisabled}" />
@@ -151,7 +151,7 @@
                                 <Condition SourceName="ContentPresenterGrid" Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsSelected" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource activeAccentColorBrush}" />
+                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource ActiveAccentColorBrush}" />
                         </MultiTrigger>
                         <!-- PressedSelected -->
                         <MultiTrigger>
@@ -159,7 +159,7 @@
                                 <Condition SourceName="ContentPresenterGrid" Property="ui:PressHelper.IsPressed" Value="True" />
                                 <Condition Property="IsSelected" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource activeAccentColorBrush}" />
+                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource ActiveAccentColorBrush}" />
                         </MultiTrigger>
                         <!-- SelectedDisabled -->
                         <MultiTrigger>
@@ -191,7 +191,7 @@
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="Background" Value="{DynamicResource TreeViewItemBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource secondaryFontColorBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SecondaryFontColorBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource TreeViewItemBorderBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource TreeViewItemBorderThemeThickness}" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="Local" />
@@ -265,12 +265,12 @@
                             <Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="IsExpanded" Value="True">
-                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource secondaryBackColorBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}" />
+                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource SecondaryBackColorBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource PrimaryFontColorBrush}" />
                         </Trigger>
                         <Trigger SourceName="ContentPresenterGrid" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource secondaryBackColorBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource primaryFontColorBrush}" />
+                            <Setter TargetName="ContentPresenterGrid" Property="Background" Value="{DynamicResource SecondaryBackColorBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource PrimaryFontColorBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

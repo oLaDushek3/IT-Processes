@@ -21,7 +21,7 @@ public class SaveInfo
     {
         UserName = null,
         Password = null,
-        CurrentProject = 1
+        CurrentProject = 0
     };
 
     public static void CreateAppSettingsDefault()

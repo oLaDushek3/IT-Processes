@@ -27,7 +27,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
-                    <Rectangle Fill="{DynamicResource secondaryBackColorBrush}"></Rectangle>
+                    <Rectangle Fill="{DynamicResource SecondaryBackColorBrush}"></Rectangle>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

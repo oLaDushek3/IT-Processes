@@ -76,9 +76,7 @@ public class TasksListViewModel : BaseViewModel
         GetData();
     }
 
-    public CommandHandler<Tasks> OpenTaskCommand => new(OpenTask);
-
-    
+    public CommandHandler OpenTaskCommand => new(obg => OpenTask(obg as Tasks));
 
     // public CommandHandler ClearDatePickerCommand => new(ClearDatePicker);
 

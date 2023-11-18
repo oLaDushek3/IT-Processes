@@ -13,17 +13,17 @@ public class ProjectService : BaseViewModel, IProjectService
     public async Task<Project> CreateProject(Project project)
     {
         var proj = await Context.Projects.FirstOrDefaultAsync(p => p.Id == project.Id);
-
+        
         if (proj != null)
             throw new Exception("Данный проект уже существует!");
-
+        
         await Context.Projects.AddAsync(project);
         await Context.SaveChangesAsync();
-
+        
         return project;
     }
 
-    public async void DeleteProject(Project project)
+    public async Task DeleteProject(Project project)
     {
         var tasksList = Context.Tasks.Where(t => t.ProjectId == project.Id);
         foreach (var tasks in tasksList)
@@ -40,6 +40,9 @@ public class ProjectService : BaseViewModel, IProjectService
 
         Context.Projects.Update(project);
         await Context.SaveChangesAsync();
+        
+        Context.Projects.Remove(project);
+        await Context.SaveChangesAsync();
     }
 
     public async Task<Project> EditProject(Project project)
@@ -48,7 +51,7 @@ public class ProjectService : BaseViewModel, IProjectService
         await Context.SaveChangesAsync();
         return project;
     }
-
+    
     public async Task<List<Project>> GetAllProject()
     {
         var project = await Context.Projects.Include(p => p.Tasks).ToListAsync();

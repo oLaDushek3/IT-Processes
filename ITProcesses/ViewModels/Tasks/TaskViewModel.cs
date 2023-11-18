@@ -59,7 +59,7 @@ public class TaskViewModel : BaseViewModel
         GetData(selectedTaskGuid);
     }
 
-    public CommandHandler BackCommand => new(BackTaskListView);
+    public CommandHandler BackCommand => new(_ => BackTaskListView());
 
     private async void GetData(Guid selectedTaskGuid)
     {

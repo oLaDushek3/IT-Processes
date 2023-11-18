@@ -27,7 +27,7 @@ public class ConfirmDialogViewModel : BaseViewModel
     #endregion
 
     //Commands
-    public CommandHandler<bool> ConfirmCommand => new(Confirm);
+    public CommandHandler ConfirmCommand => new(obj => Confirm(obj as bool? ?? false));
     
     //Constructor
     public ConfirmDialogViewModel(DialogProvider dialogProvider, string message)

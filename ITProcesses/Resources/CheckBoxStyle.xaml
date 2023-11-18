@@ -2,10 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <!--Stroke-->
-    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUnchecked" Color="{DynamicResource primaryStrokeColor}"/>
-    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeChecked" Color="{DynamicResource primaryStrokeColor}"/>
-    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedDisabled" Color="{DynamicResource primaryStrokeColor}"/>
-    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedDisabled" Color="{DynamicResource primaryStrokeColor}"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUnchecked" Color="{DynamicResource PrimaryStrokeColor}"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeChecked" Color="{DynamicResource PrimaryStrokeColor}"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedDisabled" Color="{DynamicResource PrimaryStrokeColor}"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedDisabled" Color="{DynamicResource PrimaryStrokeColor}"/>
     
     <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedPointerOver" Color="Black"/>
     <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedPressed" Color="Black"/>
@@ -18,28 +18,28 @@
     <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedPressedDisabled" Color="Transparent"/>
                             
     <!--Fill-->
-    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillChecked" Color="{DynamicResource accentColor}"/>
-    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPointerOver" Color="{DynamicResource accentColor}"/>
-    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPressed" Color="{DynamicResource activeAccentColor}"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillChecked" Color="{DynamicResource AccentColor}"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPointerOver" Color="{DynamicResource AccentColor}"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPressed" Color="{DynamicResource ActiveAccentColor}"/>
     
-    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedDisabled" Color="{DynamicResource accentColor}"/>
-    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPointerOverDisabled" Color="{DynamicResource accentColor}"/>
-    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPressedDisabled" Color="{DynamicResource activeAccentColor}"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedDisabled" Color="{DynamicResource AccentColor}"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPointerOverDisabled" Color="{DynamicResource AccentColor}"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPressedDisabled" Color="{DynamicResource ActiveAccentColor}"/>
                             
     <!--Foreground-->
-    <SolidColorBrush x:Key="CheckBoxForegroundUnchecked" Color="{DynamicResource primaryFontColor}"/>
-    <SolidColorBrush x:Key="CheckBoxForegroundChecked" Color="{DynamicResource primaryFontColor}"/>
-    <SolidColorBrush x:Key="CheckBoxForegroundUncheckedDisabled" Color="{DynamicResource primaryFontColor}"/>
-    <SolidColorBrush x:Key="CheckBoxForegroundCheckedDisabled" Color="{DynamicResource primaryFontColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundUnchecked" Color="{DynamicResource PrimaryFontColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundChecked" Color="{DynamicResource PrimaryFontColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundUncheckedDisabled" Color="{DynamicResource PrimaryFontColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundCheckedDisabled" Color="{DynamicResource PrimaryFontColor}"/>
     
-    <SolidColorBrush x:Key="CheckBoxForegroundUncheckedPointerOver" Color="{DynamicResource primaryFontColor}"/>
-    <SolidColorBrush x:Key="CheckBoxForegroundCheckedPointerOver" Color="{DynamicResource primaryFontColor}"/>
-    <SolidColorBrush x:Key="CheckBoxForegroundUncheckedPointerOverDisabled" Color="{DynamicResource primaryFontColor}"/>
-    <SolidColorBrush x:Key="CheckBoxForegroundCheckedPointerOverDisabled" Color="{DynamicResource primaryFontColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundUncheckedPointerOver" Color="{DynamicResource PrimaryFontColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundCheckedPointerOver" Color="{DynamicResource PrimaryFontColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundUncheckedPointerOverDisabled" Color="{DynamicResource PrimaryFontColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundCheckedPointerOverDisabled" Color="{DynamicResource PrimaryFontColor}"/>
     
-    <SolidColorBrush x:Key="CheckBoxForegroundUncheckedPressed" Color="{DynamicResource primaryFontColor}"/>
-    <SolidColorBrush x:Key="CheckBoxForegroundCheckedPressed" Color="{DynamicResource primaryFontColor}"/>
-    <SolidColorBrush x:Key="CheckBoxForegroundUncheckedPressedDisabled" Color="{DynamicResource primaryFontColor}"/>
-    <SolidColorBrush x:Key="CheckBoxForegroundCheckedPressedDisabled" Color="{DynamicResource primaryFontColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundUncheckedPressed" Color="{DynamicResource PrimaryFontColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundCheckedPressed" Color="{DynamicResource PrimaryFontColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundUncheckedPressedDisabled" Color="{DynamicResource PrimaryFontColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundCheckedPressedDisabled" Color="{DynamicResource PrimaryFontColor}"/>
     
 </ResourceDictionary>

@@ -1,15 +1,15 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
-    <SolidColorBrush x:Key="ComboBoxDropDownGlyphForeground" Color="{DynamicResource primaryFontColor}"/>
-    <SolidColorBrush x:Key="ComboBoxForeground" Color="{DynamicResource primaryFontColor}"/>
-    <SolidColorBrush x:Key="ComboBoxForegroundPointerOver" Color="{DynamicResource primaryFontColor}"/>
-    <SolidColorBrush x:Key="ComboBoxForegroundFocused" Color="{DynamicResource primaryFontColor}"/>
+    <SolidColorBrush x:Key="ComboBoxDropDownGlyphForeground" Color="{DynamicResource PrimaryFontColor}"/>
+    <SolidColorBrush x:Key="ComboBoxForeground" Color="{DynamicResource PrimaryFontColor}"/>
+    <SolidColorBrush x:Key="ComboBoxForegroundPointerOver" Color="{DynamicResource PrimaryFontColor}"/>
+    <SolidColorBrush x:Key="ComboBoxForegroundFocused" Color="{DynamicResource PrimaryFontColor}"/>
 
-    <SolidColorBrush x:Key="ComboBoxBackground" Color="{DynamicResource secondaryBackColor}"/>
-    <SolidColorBrush x:Key="ComboBoxBackgroundPointerOver" Color="{DynamicResource secondaryBackColor}"/>
+    <SolidColorBrush x:Key="ComboBoxBackground" Color="{DynamicResource SecondaryBackColor}"/>
+    <SolidColorBrush x:Key="ComboBoxBackgroundPointerOver" Color="{DynamicResource SecondaryBackColor}"/>
                     
-    <SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="{DynamicResource secondaryBackColor}"/>
-    <SolidColorBrush x:Key="ComboBoxDropDownBackgroundPointerOver" Color="{DynamicResource secondaryBackColor}"/>
+    <SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="{DynamicResource SecondaryBackColor}"/>
+    <SolidColorBrush x:Key="ComboBoxDropDownBackgroundPointerOver" Color="{DynamicResource SecondaryBackColor}"/>
     
 </ResourceDictionary>

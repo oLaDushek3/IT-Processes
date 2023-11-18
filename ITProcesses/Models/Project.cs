@@ -11,7 +11,7 @@ public partial class Project
 
     public string Description { get; set; } = null!;
 
-    public bool? Archived { get; set; }
+    public bool Archived { get; set; }
 
     public Guid? UserId { get; set; }
 

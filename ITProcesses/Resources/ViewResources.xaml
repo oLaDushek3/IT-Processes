@@ -27,4 +27,12 @@
         <views:ProjectDialogView/>
     </DataTemplate>
     
+    <DataTemplate DataType="{x:Type viewModels:CreateProjectViewModel}">
+        <views:CreateProjectView/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewModels:EditProjectViewModel}">
+        <views:EditProjectView/>
+    </DataTemplate>
+    
 </ResourceDictionary>

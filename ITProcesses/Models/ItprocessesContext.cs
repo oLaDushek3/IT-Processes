@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace ITProcesses.Models;
 
@@ -140,7 +138,6 @@ public partial class ItprocessesContext : DbContext
 
             entity.HasOne(d => d.Project).WithMany(p => p.Tasks)
                 .HasForeignKey(d => d.ProjectId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("task_project_id_fkey");
 
             entity.HasOne(d => d.Status).WithMany(p => p.Tasks)
