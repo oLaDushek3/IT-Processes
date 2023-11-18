@@ -22,7 +22,7 @@ public class MainWindowViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public DialogProvider DialogProvider { get; } = new();
+    public DialogProvider MainDialogProvider { get; } = new();
 
     #endregion
     

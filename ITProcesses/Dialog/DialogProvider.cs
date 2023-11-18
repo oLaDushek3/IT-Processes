@@ -5,7 +5,7 @@ using ITProcesses.ViewModels;
 
 namespace ITProcesses.Dialog;
 
-public class DialogProvider : INotifyPropertyChanged
+public sealed class DialogProvider : INotifyPropertyChanged
 {
     #region Fields
 
@@ -65,7 +65,8 @@ public class DialogProvider : INotifyPropertyChanged
     #region PropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

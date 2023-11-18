@@ -7,7 +7,7 @@ public class ConfirmDialogViewModel : BaseViewModel
 {
     #region Field
 
-    private DialogProvider _dialogProvider;
+    private readonly DialogProvider _currentDialogProvider;
     private string _message;
 
     #endregion
@@ -32,13 +32,13 @@ public class ConfirmDialogViewModel : BaseViewModel
     //Constructor
     public ConfirmDialogViewModel(DialogProvider dialogProvider, string message)
     {
-        _dialogProvider = dialogProvider;
+        _currentDialogProvider = dialogProvider;
         Message = message;
     }
     
     //Methods
     private void Confirm(bool decision)
     {
-        _dialogProvider.CloseDialog(decision);
+        _currentDialogProvider.CloseDialog(decision);
     }
 }

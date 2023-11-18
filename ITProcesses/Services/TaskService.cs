@@ -65,7 +65,7 @@ public class TaskService : BaseViewModel, ITaskService
         return tasks;
     }
 
-    public async void DeleteTask(Tasks tasks)
+    public async Task DeleteTask(Tasks tasks)
     {
         tasks.TaskDocuments = null;
         tasks.InverseBeforeTaskNavigation = null;
