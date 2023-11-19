@@ -28,11 +28,19 @@
     </DataTemplate>
     
     <DataTemplate DataType="{x:Type viewModels:CreateProjectViewModel}">
-        <views:CreateProjectView/>
+        <views:CreateProjectDialogView/>
     </DataTemplate>
     
-    <DataTemplate DataType="{x:Type viewModels:EditProjectViewModel}">
-        <views:EditProjectView/>
+    <DataTemplate DataType="{x:Type viewModels:EditProjectDialogViewModel}">
+        <views:EditProjectDialogView/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewModels:EditTaskDialogViewModel}">
+        <views:EditTaskDialogView/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewModels:UserSelectionDialogViewModel}">
+        <views:UserSelectionDialogView/>
     </DataTemplate>
     
 </ResourceDictionary>

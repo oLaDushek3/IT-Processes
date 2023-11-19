@@ -94,14 +94,11 @@ public class TasksListViewModel : BaseViewModel
 
     private void SearchInfoFromSearchBox()
     {
-       
-            
         if (!string.IsNullOrEmpty(_searchBox))
         {
             tasksEnumerable = new List<Tasks>(_allTasks
                 .Where(a => a.Name.ToLower().Contains(_searchBox.ToLower())));
             TasksList = null;
-
 
             TasksList = Merger(new List<List<Tasks>> { tasksEnumerable, tasksFromDatePickerList });
         }
@@ -119,8 +116,7 @@ public class TasksListViewModel : BaseViewModel
                 new List<Tasks>(_allTasks
                     .Where(a => a.DateCreateTimestamp.Date == _selectedDate));
             TasksList = null;
-
-
+            
             TasksList = Merger(new List<List<Tasks>> { tasksFromDatePickerList, tasksEnumerable });
         }
         else
@@ -140,8 +136,6 @@ public class TasksListViewModel : BaseViewModel
 
         return new ObservableCollection<T>(resultList);
     }
-
-    
 
     // private void ClearDatePicker()
     // {

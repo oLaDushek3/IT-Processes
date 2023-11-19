@@ -20,7 +20,7 @@ public class TaskViewModel : BaseViewModel
     private readonly DialogProvider _currentDialogProvider;
     
     private Tasks _currentTask;
-    private ObservableCollection<TaskStatus> _statusList;
+    private List<TaskStatus> _statusList;
 
     #endregion
 
@@ -37,7 +37,7 @@ public class TaskViewModel : BaseViewModel
         }
     }
 
-    public ObservableCollection<TaskStatus> StatusList
+    public List<TaskStatus> StatusList
     {
         get => _statusList;
 
@@ -52,7 +52,7 @@ public class TaskViewModel : BaseViewModel
     
     //Commands
     public CommandHandler CancelCommand => new(_ => _currentMainViewModel.ChangeView(new TasksListViewModel(_currentMainViewModel)));
-    public CommandHandler EditTaskCommand => new(_ => _currentMainViewModel.ChangeView(new TasksListViewModel(_currentMainViewModel)));
+    public CommandHandler EditTaskCommand => new(_ => _currentDialogProvider.ShowDialog(new EditTaskDialogViewModel(_currentTask, _currentDialogProvider)));
     public CommandHandler DeleteTaskCommand => new(_ => DeleteTaskCommandExecute());
     
     //Constructor
@@ -67,7 +67,7 @@ public class TaskViewModel : BaseViewModel
     //Methods
     private async void GetData(Guid selectedTaskGuid)
     {
-        StatusList = new ObservableCollection<TaskStatus>(await _taskService.GetAllStatuses());
+        StatusList = await _taskService.GetAllStatuses();
         SelectedTask = (await _taskService.GetTaskById(selectedTaskGuid));
     }
 

@@ -5,7 +5,7 @@ using ITProcesses.Services;
 
 namespace ITProcesses.ViewModels;
 
-public class CreateProjectDialogViewModel : BaseViewModel
+public class CreateProjectViewModel : BaseViewModel
 {
     #region Field
 
@@ -36,7 +36,7 @@ public class CreateProjectDialogViewModel : BaseViewModel
     public CommandHandler CreateCommand => new (_ => CreateCommandExecute(), _ => !string.IsNullOrEmpty(CreatedProject.Name) && !string.IsNullOrEmpty(CreatedProject.Description));
     
     //Constructor
-    public CreateProjectDialogViewModel(ProjectDialogViewModel currentProjectDialogViewModel, DialogProvider currentDialogProvider)
+    public CreateProjectViewModel(ProjectDialogViewModel currentProjectDialogViewModel, DialogProvider currentDialogProvider)
     {
         _currentProjectDialogViewModel = currentProjectDialogViewModel;
         _currentDialogProvider = currentDialogProvider;

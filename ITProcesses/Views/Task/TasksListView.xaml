@@ -34,9 +34,7 @@
                 <!--         Command="{Binding ClearDatePickerCommand}"/> -->
             </StackPanel>
 
-
         </StackPanel>
-
 
         <ListView Margin="20"
                   ItemsSource="{Binding TasksList}">

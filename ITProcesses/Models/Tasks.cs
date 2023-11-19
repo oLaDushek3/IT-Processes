@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics.Metrics;
 
 namespace ITProcesses.Models;
 
@@ -45,5 +47,5 @@ public partial class Tasks
 
     public virtual User? User { get; set; }
 
-    public virtual ICollection<UsersTask> UsersTasks { get; set; } = new List<UsersTask>();
+    public virtual ICollection<UsersTask> UsersTasks { get; set; } = new ObservableCollection<UsersTask>();
 }

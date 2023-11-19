@@ -1,0 +1,276 @@
+<UserControl x:Class="ITProcesses.Views.EditTaskDialogView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ITProcesses.Views"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
+             xmlns:behavior="clr-namespace:AttachedCommandBehavior;assembly=AttachedCommandBehavior"
+             mc:Ignorable="d"
+             Width="825" Height="625"
+             d:DataContext="{d:DesignInstance Type=viewModels:EditTaskDialogViewModel, IsDesignTimeCreatable=False}">
+
+    <Border Background="{DynamicResource PrimaryBackColorBrush}"
+            CornerRadius="10"
+            BorderThickness="5"
+            BorderBrush="{DynamicResource PrimaryStrokeColorBrush}">
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="4*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="8.5*" />
+            </Grid.RowDefinitions>
+
+            <!--Header-->
+            <Border Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="0"
+                    Margin="10 10 10 0"
+                    BorderThickness="0 0 0 2"
+                    BorderBrush="{DynamicResource PrimaryStrokeColorBrush}">
+                <Grid>
+                    <TextBlock Grid.Row="0"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Text="Редактирование задачи"
+                               Foreground="{DynamicResource PrimaryFontColorBrush}"
+                               FontSize="21" />
+
+                    <Button Grid.Column="0"
+                            Style="{DynamicResource SubRoundedButton}"
+                            Height="35"
+                            Width="100"
+                            HorizontalAlignment="Right"
+                            Content="Отмена"
+                            Command="{Binding CancelCommand}" />
+                </Grid>
+            </Border>
+
+            <!--Base information-->
+            <Grid Grid.Column="0"
+                  Grid.Row="1"
+                  Margin="10">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="8*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBox Grid.Column="0"
+                         Grid.Row="0"
+                         Grid.ColumnSpan="2"
+                         ui:ControlHelper.PlaceholderText="Название задачи"
+                         Text="{Binding EditableTask.Name}" />
+
+                <DatePicker Grid.Column="0"
+                            Grid.Row="1"
+                            Margin="0 5 5 5"
+                            HorizontalAlignment="Stretch"
+                            ui:ControlHelper.PlaceholderText="Дата начала"
+                            SelectedDate="{Binding EditableTask.DateStartTimestamp}"
+                            SelectedDateFormat="Long"/>
+
+                <DatePicker Grid.Column="1"
+                            Grid.Row="1"
+                            Margin="5 5 0 5"
+                            HorizontalAlignment="Stretch"
+                            ui:ControlHelper.PlaceholderText="Дата окончания" 
+                            SelectedDate="{Binding EditableTask.DateEndTimestamp}"
+                            SelectedDateFormat="Long"/>
+
+                <TextBox Grid.Column="0"
+                         Grid.Row="2"
+                         Grid.ColumnSpan="2"
+                         ui:ControlHelper.PlaceholderText="Описание задачи"
+                         Text="{Binding EditableTask.Description}"
+                         TextWrapping="Wrap" />
+
+            </Grid>
+
+            <!--Separator-->
+            <Separator Grid.Column="1"
+                       Grid.Row="1"
+                       Margin="0 10"
+                       Width="2"
+                       Background="{DynamicResource SecondaryBackColorBrush}"
+                       Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+
+            <Grid Grid.Column="2" 
+                  Grid.Row="1"
+                  Margin="10">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                
+                <!--Status-->
+                <Grid Grid.Row="0"
+                      VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock Grid.Column="0" Text="Статус: "
+                               Foreground="{DynamicResource PrimaryFontColorBrush}"
+                               FontSize="20"/>
+                    
+                    <ComboBox Grid.Column="1"
+                              ItemsSource="{Binding StatusList}"
+                              SelectedItem="{Binding EditableTask.Status}"
+                              HorizontalAlignment="Stretch">
+                        
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+                
+                <!--Documents-->
+                <Grid Grid.Row="1"
+                      Margin="0 0 0 10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" 
+                               Margin="0 0 0 5"
+                               Text="Документы: " FontSize="20"
+                               Foreground="{DynamicResource PrimaryFontColorBrush}"/>
+                    
+                    <ListBox Grid.Row="1"
+                             ItemsSource="{Binding EditableTask.TaskDocuments}"
+                             Background="{DynamicResource SecondaryBackColorBrush}">
+                        
+                        <ListBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </ListBox.Resources>
+                        
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Documents.Name}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ListBox>
+                </Grid>
+                
+                <!--Users-->
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" 
+                               Margin="0 0 0 5"
+                               Text="Участники: " FontSize="20"
+                               Foreground="{DynamicResource PrimaryFontColorBrush}"/>
+                    
+                    <StackPanel Grid.Row="0"
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+                        <Button Style="{DynamicResource IconButton}"
+                                Tag="{StaticResource AddRegular}"
+                                Margin="5 0"
+                                Command="{Binding AddParticipantCommand}" />
+
+                        <Button Style="{DynamicResource IconButton}"
+                                Tag="{StaticResource DeleteRegular}"
+                                Margin="5 0"
+                                Command="{Binding DeleteParticipantCommand}"
+                                CommandParameter="{Binding ElementName=ParticipantList, Path=SelectedItem}" />
+                    </StackPanel>
+                    
+                    <ListBox x:Name="ParticipantList" Grid.Row="1"
+                             ItemsSource="{Binding EditableTask.UsersTasks, UpdateSourceTrigger=PropertyChanged}"
+                             Background="{DynamicResource SecondaryBackColorBrush}"
+                             HorizontalContentAlignment="Stretch" >
+                        
+                        <ListBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                            <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </ListBox.Resources>
+                        
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="7*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Rectangle Grid.Column="0" 
+                                               Width="40" 
+                                               Height="40" 
+                                               RadiusX="5" 
+                                               RadiusY="5" 
+                                               HorizontalAlignment="Left">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{Binding User.Image}" 
+                                                        RenderOptions.BitmapScalingMode="HighQuality"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    
+                                    <TextBlock Grid.Column="1" 
+                                               Margin="10 0 0 0"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Text="{Binding User.Username}"/>
+                                    
+                                    <TextBlock Grid.Column="2" 
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Right"
+                                               Text="{Binding User.Role.Name}"/>
+                                    
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ListBox>
+                </Grid>
+                
+            </Grid>
+            
+            <!--Dialog-->
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="3"
+                  Grid.Row="0"
+                  Grid.RowSpan="2"
+                  Visibility="{Binding ToolsDialogProvider.DialogActive, Converter={StaticResource BoolToVisible}}">
+                <!--Dimming effect-->
+                <Rectangle Fill="Black" Opacity="0.6"
+                           RadiusX="10" RadiusY="10" />
+
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Content="{Binding ToolsDialogProvider.DialogView}" />
+            </Grid>
+            
+        </Grid>
+
+    </Border>
+</UserControl>

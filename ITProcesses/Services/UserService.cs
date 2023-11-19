@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -53,11 +54,17 @@ public class UserService : BaseViewModel, IUserService
         return user;
     }
 
-    public Task<User> GetUserByLoginAndPassword(string login, string password)
+    public async Task<List<User>> GetAllUsers()
     {
-        throw new NotImplementedException();
+        return await Context.Users.
+            Include(u => u.Role).ToListAsync();
     }
 
+    public async Task<List<Role>> GetAllRoles()
+    {
+        return await Context.Roles.ToListAsync();
+    }
+    
     private bool ValidatePassword(string password)
     {
         return password.Any(char.IsLetter) &&

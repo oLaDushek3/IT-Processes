@@ -54,9 +54,7 @@ public class ProjectService : BaseViewModel, IProjectService
     
     public async Task<List<Project>> GetAllProject()
     {
-        var project = await Context.Projects.Include(p => p.Tasks).ToListAsync();
-
-        return project;
+        return await Context.Projects.Include(p => p.Tasks).ToListAsync();
     }
 
     public async Task<Project> GetProjectById(int id)

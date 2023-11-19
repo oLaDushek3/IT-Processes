@@ -9,11 +9,10 @@ public class EditProjectDialogViewModel : BaseViewModel
 {
     #region Field
 
-    private readonly ProjectDialogViewModel _currentProjectDialogViewModel;
     private readonly IProjectService _projectService = new ProjectService();
     private readonly DialogProvider _currentDialogProvider;
 
-    private Project _editableProject = new();
+    private Project _editableProject;
 
     #endregion
 
@@ -35,12 +34,11 @@ public class EditProjectDialogViewModel : BaseViewModel
     public CommandHandler CancelCommand => new(_ =>  _currentDialogProvider.CloseDialog(null));
 
     public CommandHandler SaveCommand => new(_ => SaveCommandExecute(),
-        _ => !string.IsNullOrEmpty(EditableProject.Name) && !string.IsNullOrEmpty(EditableProject.Description));
+        _ => EditableProject != null && !string.IsNullOrEmpty(EditableProject.Name) && !string.IsNullOrEmpty(EditableProject.Description));
 
     //Constructor
-    public EditProjectDialogViewModel(ProjectDialogViewModel currentProjectDialogViewModel, Project selectedProject, DialogProvider currentDialogProvider)
+    public EditProjectDialogViewModel(Project selectedProject, DialogProvider currentDialogProvider)
     {
-        _currentProjectDialogViewModel = currentProjectDialogViewModel;
         GetData(selectedProject.Id);
         _currentDialogProvider = currentDialogProvider;
     }

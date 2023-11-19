@@ -10,71 +10,68 @@
              d:DesignHeight="515" d:DesignWidth="310"
              d:DataContext="{d:DesignInstance Type=viewModels:EditTaskDialogViewModel, IsDesignTimeCreatable=False}"
              Background="{DynamicResource PrimaryBackColorBrush}">
-    <Grid>
-        <Grid Margin="10"
-              Visibility="{Binding SelectedProject, 
-                               Converter={StaticResource EmptinessToVisibilityConverter}}">
+    <Grid Margin="10" >
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="8*" />
-                <RowDefinition Height="auto" />
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
 
-            <!--Header-->
-            <TextBlock Grid.Row="0"
-                       Text="Создание проекта"
-                       Foreground="{DynamicResource PrimaryFontColorBrush}"
-                       FontSize="18" />
+        <!--Header-->
+        <TextBlock Grid.Row="0"
+                   Text="Создание проекта"
+                   Foreground="{DynamicResource PrimaryFontColorBrush}"
+                   FontSize="18" />
 
-            <!--Name-->
-            <TextBox Grid.Row="1"
-                     ui:ControlHelper.PlaceholderText="Название..."
-                     Text="{Binding EditableProject.Name, UpdateSourceTrigger=PropertyChanged}"
+        <!--Name-->
+        <TextBox Grid.Row="1"
+                 ui:ControlHelper.PlaceholderText="Название..."
+                 Text="{Binding EditableProject.Name, UpdateSourceTrigger=PropertyChanged}"
+                 Foreground="{DynamicResource PrimaryFontColorBrush}"
+                 FontSize="18" />
+
+        <!--Archived-->
+        <CheckBox Grid.Row="2"
+                  Content="В архиве"
+                  Foreground="{DynamicResource PrimaryFontColorBrush}"
+                  IsChecked="{Binding EditableProject.Archived}" />
+
+        <!--Description-->
+        <ScrollViewer Grid.Row="3"
+                      Margin="0 10">
+            <TextBox ui:ControlHelper.PlaceholderText="Описание..."
+                     Text="{Binding EditableProject.Description, UpdateSourceTrigger=PropertyChanged}"
                      Foreground="{DynamicResource PrimaryFontColorBrush}"
-                     FontSize="18" />
+                     FontSize="14"
+                     TextWrapping="Wrap" />
+        </ScrollViewer>
 
-            <!--Archived-->
-            <CheckBox Grid.Row="2"
-                      Content="В архиве"
-                      Foreground="{DynamicResource PrimaryFontColorBrush}"
-                      IsChecked="{Binding EditableProject.Archived}" />
-            
-            <!--Description-->
-            <ScrollViewer Grid.Row="3"
-                          Margin="0 10">
-                <TextBox ui:ControlHelper.PlaceholderText="Описание..."
-                         Text="{Binding EditableProject.Description, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="{DynamicResource PrimaryFontColorBrush}"
-                         FontSize="14"
-                         TextWrapping="Wrap" />
-            </ScrollViewer>
+        <!--Buttons-->
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"
+                    Style="{DynamicResource SubRoundedButton}"
+                    Height="35"
+                    HorizontalAlignment="Stretch"
+                    Margin="0 0 5 0"
+                    Content="Отмена"
+                    Command="{Binding CancelCommand}" />
 
-                <Button Grid.Column="0"
-                        Style="{DynamicResource SubRoundedButton}"
-                        Height="35"
-                        HorizontalAlignment="Stretch"
-                        Margin="0 0 5 0"
-                        Content="Отмена"
-                        Command="{Binding CancelCommand}" />
-                
-                <Button Grid.Column="1"
-                        Style="{DynamicResource MainRoundedButton}"
-                        Height="35"
-                        HorizontalAlignment="Stretch"
-                        Margin="5 0 0 0"
-                        Content="Сохранить"
-                        Command="{Binding SaveCommand}" />
-            </Grid>
-
+            <Button Grid.Column="1"
+                    Style="{DynamicResource MainRoundedButton}"
+                    Height="35"
+                    HorizontalAlignment="Stretch"
+                    Margin="5 0 0 0"
+                    Content="Сохранить"
+                    Command="{Binding SaveCommand}" />
         </Grid>
+
     </Grid>
 </UserControl>

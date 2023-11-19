@@ -84,7 +84,8 @@ public class ProjectDialogViewModel : BaseViewModel
     public CommandHandler EditProjectCommand =>
         new(_ => EditProjectCommandExecute(), _ => SelectedProject != null);
 
-    public CommandHandler DeleteProjectCommand => new(_ => DeleteProjectCommandExecute(), _ => SelectedProject != null);
+    public CommandHandler DeleteProjectCommand => 
+        new(_ => DeleteProjectCommandExecute(), _ => SelectedProject != null);
 
     //Constructor
     public ProjectDialogViewModel(DialogProvider currentDialogProvider, MainViewModel currentMainViewModel, Project currentProject)
@@ -106,7 +107,7 @@ public class ProjectDialogViewModel : BaseViewModel
     {
         var dialogResult =
             (Project?)await CreateEditDialogProvider.ShowDialog(
-                new CreateProjectDialogViewModel(this, CreateEditDialogProvider));
+                new CreateProjectViewModel(this, CreateEditDialogProvider));
 
         if (dialogResult == null) return;
 
@@ -118,7 +119,7 @@ public class ProjectDialogViewModel : BaseViewModel
     private async void EditProjectCommandExecute()
     {
         var dialogResult =
-            (Project?)await CreateEditDialogProvider.ShowDialog(new EditProjectDialogViewModel(this, SelectedProject!,
+            (Project?)await CreateEditDialogProvider.ShowDialog(new EditProjectDialogViewModel(SelectedProject!,
                 CreateEditDialogProvider));
 
         if (dialogResult == null) return;

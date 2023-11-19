@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ITProcesses.Models;
 
 namespace ITProcesses.Services;
@@ -11,6 +12,7 @@ public interface IUserService
 
      Task<User> Update(User user);
 
-     Task<User> GetUserByLoginAndPassword(string login, string password);
-
+     Task<List<User>> GetAllUsers();
+     
+     Task<List<Role>> GetAllRoles();
 }
