@@ -83,7 +83,7 @@ public class TasksListViewModel : BaseViewModel
     //Methods
     private async void GetData()
     {
-        _allTasks = await _taskService.GetAllTask();
+        _allTasks = await _taskService.GetTasksByProject(_currentMainViewModel.CurrentProject.Id);
         TasksList = new ObservableCollection<Tasks>(_allTasks);
     }
 

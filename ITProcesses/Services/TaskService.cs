@@ -15,16 +15,19 @@ public class TaskService : BaseViewModel, ITaskService
 
     public async Task<List<Tasks>> GetAllTask()
     {
-        return await Context.Tasks.
-            Include(t => t.Status).
-            Include(t => t.Type).
-            Include(t => t.TaskTags).
-                ThenInclude(tt => tt.Tag).ToListAsync();
+        return await Context.Tasks.Include(t => t.Status)
+            .Include(t => t.Type)
+            .Include(t => t.TaskTags)
+            .ThenInclude(tt => tt.Tag).ToListAsync();
     }
 
     public async Task<List<Tasks>> GetTasksByProject(int id)
     {
-        var tasks = await Context.Tasks.Where(t => t.ProjectId == id).ToListAsync();
+        var tasks = await Context.Tasks.Include(t => t.Status)
+            .Include(t => t.Type)
+            .Include(t => t.TaskTags)
+            .ThenInclude(tt => tt.Tag)
+            .Where(t => t.ProjectId == id).ToListAsync();
 
         if (tasks == null)
             throw new Exception("Проект не найден");
@@ -45,15 +48,9 @@ public class TaskService : BaseViewModel, ITaskService
 
     public async Task<Tasks> GetTaskById(Guid guid)
     {
-        var tasks = await Context.Tasks.Where(t => t.Id == guid).
-            Include(t => t.UsersTasks).
-                ThenInclude(ut => ut.User).
-                    ThenInclude(u => u.Role).
-            Include(t => t.TaskDocuments).
-                ThenInclude(td => td.Documents).
-            Include(t => t.TaskTags).
-                ThenInclude(tt => tt.Tag).
-            Include(t => t.Status).FirstAsync();
+        var tasks = await Context.Tasks.Where(t => t.Id == guid).Include(t => t.UsersTasks).ThenInclude(ut => ut.User)
+            .ThenInclude(u => u.Role).Include(t => t.TaskDocuments).ThenInclude(td => td.Documents)
+            .Include(t => t.TaskTags).ThenInclude(tt => tt.Tag).Include(t => t.Status).FirstAsync();
 
         if (tasks == null)
             throw new Exception("Задача не найдена");

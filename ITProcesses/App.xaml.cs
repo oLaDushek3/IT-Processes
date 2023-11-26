@@ -16,19 +16,12 @@ namespace ITProcesses
     {
         private readonly UserService _userService = new();
         private static AppSettings? Settings => SaveInfo.AppSettings;
+
         protected async override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             var mainWindow = new MainWindow();
-            
-            try
-            {
-                mainWindow.DataContext = new MainWindowViewModel(await WriteUserFromJson());
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show("Ошибка");
-            }
+            mainWindow.DataContext = new MainWindowViewModel(await WriteUserFromJson());
             
             mainWindow.Show();
         }
@@ -37,12 +30,11 @@ namespace ITProcesses
         {
             try
             {
-              var user =  await _userService.Login(Settings.UserName, Settings.Password);
+                var user = await _userService.Login(Settings.UserName, Settings.Password);
                 return user;
             }
-            catch (Exception exception)
+            catch 
             {
-                MessageBox.Show(exception.Message);
                 return null;
             }
         }
