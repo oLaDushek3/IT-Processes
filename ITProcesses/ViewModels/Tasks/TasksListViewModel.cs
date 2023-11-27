@@ -78,6 +78,8 @@ public class TasksListViewModel : BaseViewModel
 
     public CommandHandler OpenTaskCommand => new(obg => OpenTask(obg as Tasks));
 
+    public CommandHandler ClearDatePickerCommand => new(ClearDatePicker);
+
     // public CommandHandler ClearDatePickerCommand => new(ClearDatePicker);
 
     //Methods
@@ -137,9 +139,10 @@ public class TasksListViewModel : BaseViewModel
         return new ObservableCollection<T>(resultList);
     }
 
-    // private void ClearDatePicker()
-    // {
-    //     _selectedDate = null;
-    //     tasksFromDatePickerList = null;
-    // }
+    private void ClearDatePicker(object o)
+    {
+        _selectedDate = null;
+        tasksFromDatePickerList = null;
+        GetData();
+    }
 }

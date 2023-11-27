@@ -28,6 +28,8 @@ public partial class Tasks
     public bool Archived { get; set; }
 
     public Guid? BeforeTask { get; set; }
+    
+    public int? CountHour { get; set; }
 
     public Guid? UserId { get; set; }
 

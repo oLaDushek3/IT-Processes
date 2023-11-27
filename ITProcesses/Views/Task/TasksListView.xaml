@@ -29,9 +29,9 @@
                         Margin="5">
                 <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
                 
-                <!-- <Button Style="{DynamicResource IconButton}" -->
-                <!--         Tag="{DynamicResource TaskList}"  -->
-                <!--         Command="{Binding ClearDatePickerCommand}"/> -->
+                <Button Style="{DynamicResource IconButton}"
+                        Tag="{DynamicResource TaskList}"
+                        Command="{Binding ClearDatePickerCommand}"/>
             </StackPanel>
 
         </StackPanel>
