@@ -4,6 +4,7 @@ using System.Windows.Input;
 using ITProcesses.Command;
 using ITProcesses.Hash;
 using ITProcesses.JsonSaveInfo;
+using ITProcesses.Models;
 using ITProcesses.Services;
 
 namespace ITProcesses.ViewModels;
@@ -67,8 +68,6 @@ public class LoginViewModel : BaseViewModel
     #region Commands
 
     public CommandHandler LoginCommand => new(LoginAsync);
-    
-    //public CommandHandler IsActive => new(SaveLoginIfoInJson);
 
     #endregion
 
@@ -85,7 +84,7 @@ public class LoginViewModel : BaseViewModel
         {
           var user =  await _userService.Login(Login, Md5.HashPassword(Password));
             
-            if(CheckBoxBool==true)
+            if(CheckBoxBool)
                 SaveLoginIfoInJson();
 
             CurrentMainWindowViewModel.ChangeView(new MainViewModel(CurrentMainWindowViewModel,user));
