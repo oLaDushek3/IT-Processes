@@ -16,9 +16,12 @@ public class UserService : BaseViewModel, IUserService
     public async Task<User> Login(string userName, string password)
     {
         var user = await Context.Users.FirstOrDefaultAsync(u => u.Username == userName);
+
+        if (user == null)
+            throw new Exception("Неверный логин или пароль!");
         
         if (user.Password != password)
-            throw new Exception("Нверный пароль");
+            throw new Exception("Неверный логин или пароль!");
         
         return user;
     }
