@@ -39,8 +39,8 @@
         <views:EditTaskDialogView/>
     </DataTemplate>
     
-    <DataTemplate DataType="{x:Type viewModels:UserSelectionDialogViewModel}">
-        <views:UserSelectionDialogView/>
+    <DataTemplate DataType="{x:Type viewModels:SelectionUserToTaskDialogViewModel}">
+        <views:SelectionUserToTaskDialogView/>
     </DataTemplate>
     
 </ResourceDictionary>

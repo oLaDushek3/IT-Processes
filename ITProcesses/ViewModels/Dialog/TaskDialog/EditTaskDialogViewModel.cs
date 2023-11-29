@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using ITProcesses.Command;
 using ITProcesses.Dialog;
 using ITProcesses.Models;
@@ -30,7 +32,7 @@ public class EditTaskDialogViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    
+
     public List<TaskStatus> StatusList
     {
         get => _statusList;
@@ -45,33 +47,46 @@ public class EditTaskDialogViewModel : BaseViewModel
     public DialogProvider ToolsDialogProvider { get; } = new();
 
     #endregion
-    
+
     //Commands
-    public CommandHandler CancelCommand => new(_ =>  _currentDialogProvider.CloseDialog(null));
+    public CommandHandler CancelCommand => new(_ => _currentDialogProvider.CloseDialog(null));
+
     // public CommandHandler SaveCommand => new(_ => SaveCommandExecute(),
     //     _ => !string.IsNullOrEmpty(EditableProject.Name) && !string.IsNullOrEmpty(EditableProject.Description));
-    public CommandHandler DeleteParticipantCommand => new(obj => EditableTask.UsersTasks.Remove(obj as UsersTask)); 
-    public CommandHandler AddParticipantCommand => new(_ => AddParticipantCommandExecute()); 
-    
+    public CommandHandler DeleteParticipantCommand => new(taskParticipants =>
+        DeleteParticipantCommandExecute((taskParticipants as IList).Cast<UsersTask>().ToList()), 
+        taskParticipants => taskParticipants != null && (taskParticipants as IList).Count != 0);
+
+    public CommandHandler AddParticipantCommand => new(_ => AddParticipantCommandExecute());
+
     //Constructor
     public EditTaskDialogViewModel(Tasks editableTask, DialogProvider currentDialogProvider)
     {
         GetData(editableTask.Id);
         _currentDialogProvider = currentDialogProvider;
     }
-    
+
     //Methods
     private async void GetData(Guid taskId)
     {
         EditableTask = await _taskService.GetTaskById(taskId);
         StatusList = await _taskService.GetAllStatuses();
     }
-    
+
+    private async void DeleteParticipantCommandExecute(List<UsersTask> taskParticipants)
+    {
+        foreach (UsersTask taskParticipant in taskParticipants)
+        {
+            EditableTask.UsersTasks.Remove(taskParticipant);
+        }
+    }
+
     private async void AddParticipantCommandExecute()
     {
-        var selectedParticipants = (List<User>?) await ToolsDialogProvider.ShowDialog(new UserSelectionDialogViewModel(ToolsDialogProvider));
-        
-        if(selectedParticipants == null) return;
+        var selectedParticipants = (List<User>?)await ToolsDialogProvider.ShowDialog(
+            new SelectionUserToTaskDialogViewModel(ToolsDialogProvider, EditableTask));
+
+        if (selectedParticipants == null) return;
 
         foreach (var selectedParticipant in selectedParticipants)
         {

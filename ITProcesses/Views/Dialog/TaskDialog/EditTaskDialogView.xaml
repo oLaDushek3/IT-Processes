@@ -81,15 +81,15 @@
                             HorizontalAlignment="Stretch"
                             ui:ControlHelper.PlaceholderText="Дата начала"
                             SelectedDate="{Binding EditableTask.DateStartTimestamp}"
-                            SelectedDateFormat="Long"/>
+                            SelectedDateFormat="Long" />
 
                 <DatePicker Grid.Column="1"
                             Grid.Row="1"
                             Margin="5 5 0 5"
                             HorizontalAlignment="Stretch"
-                            ui:ControlHelper.PlaceholderText="Дата окончания" 
+                            ui:ControlHelper.PlaceholderText="Дата окончания"
                             SelectedDate="{Binding EditableTask.DateEndTimestamp}"
-                            SelectedDateFormat="Long"/>
+                            SelectedDateFormat="Long" />
 
                 <TextBox Grid.Column="0"
                          Grid.Row="2"
@@ -108,84 +108,84 @@
                        Background="{DynamicResource SecondaryBackColorBrush}"
                        Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
 
-            <Grid Grid.Column="2" 
+            <Grid Grid.Column="2"
                   Grid.Row="1"
                   Margin="10">
-                
+
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="5*" />
+                    <RowDefinition Height="5*" />
                 </Grid.RowDefinitions>
-                
+
                 <!--Status-->
                 <Grid Grid.Row="0"
                       VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    
+
                     <TextBlock Grid.Column="0" Text="Статус: "
                                Foreground="{DynamicResource PrimaryFontColorBrush}"
-                               FontSize="20"/>
-                    
+                               FontSize="20" />
+
                     <ComboBox Grid.Column="1"
                               ItemsSource="{Binding StatusList}"
                               SelectedItem="{Binding EditableTask.Status}"
                               HorizontalAlignment="Stretch">
-                        
+
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding Name}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                 </Grid>
-                
+
                 <!--Documents-->
                 <Grid Grid.Row="1"
                       Margin="0 0 0 10">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
-                    
-                    <TextBlock Grid.Row="0" 
+
+                    <TextBlock Grid.Row="0"
                                Margin="0 0 0 5"
                                Text="Документы: " FontSize="20"
-                               Foreground="{DynamicResource PrimaryFontColorBrush}"/>
-                    
+                               Foreground="{DynamicResource PrimaryFontColorBrush}" />
+
                     <ListBox Grid.Row="1"
                              ItemsSource="{Binding EditableTask.TaskDocuments}"
                              Background="{DynamicResource SecondaryBackColorBrush}">
-                        
+
                         <ListBox.Resources>
                             <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="CornerRadius" Value="10" />
                             </Style>
                         </ListBox.Resources>
-                        
+
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Documents.Name}"/>
+                                <TextBlock Text="{Binding Documents.Name}" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ListBox>
                 </Grid>
-                
+
                 <!--Users-->
                 <Grid Grid.Row="2">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
-                    
-                    <TextBlock Grid.Row="0" 
+
+                    <TextBlock Grid.Row="0"
                                Margin="0 0 0 5"
                                Text="Участники: " FontSize="20"
-                               Foreground="{DynamicResource PrimaryFontColorBrush}"/>
-                    
+                               Foreground="{DynamicResource PrimaryFontColorBrush}" />
+
                     <StackPanel Grid.Row="0"
                                 HorizontalAlignment="Right"
                                 Orientation="Horizontal">
@@ -198,64 +198,65 @@
                                 Tag="{StaticResource DeleteRegular}"
                                 Margin="5 0"
                                 Command="{Binding DeleteParticipantCommand}"
-                                CommandParameter="{Binding ElementName=ParticipantList, Path=SelectedItem}" />
+                                CommandParameter="{Binding ElementName=ParticipantList, Path=SelectedItems}" />
                     </StackPanel>
-                    
+
                     <ListBox x:Name="ParticipantList" Grid.Row="1"
                              ItemsSource="{Binding EditableTask.UsersTasks, UpdateSourceTrigger=PropertyChanged}"
                              Background="{DynamicResource SecondaryBackColorBrush}"
-                             HorizontalContentAlignment="Stretch" >
-                        
+                             HorizontalContentAlignment="Stretch"
+                             SelectionMode="Multiple">
+
                         <ListBox.Resources>
                             <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="CornerRadius" Value="10" />
                             </Style>
                             <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
                             </Style>
                         </ListBox.Resources>
-                        
+
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid HorizontalAlignment="Stretch">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="7*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="7*" />
+                                        <ColumnDefinition Width="3*" />
                                     </Grid.ColumnDefinitions>
-                                    
-                                    <Rectangle Grid.Column="0" 
-                                               Width="40" 
-                                               Height="40" 
-                                               RadiusX="5" 
-                                               RadiusY="5" 
+
+                                    <Rectangle Grid.Column="0"
+                                               Width="40"
+                                               Height="40"
+                                               RadiusX="5"
+                                               RadiusY="5"
                                                HorizontalAlignment="Left">
                                         <Rectangle.Fill>
-                                            <ImageBrush ImageSource="{Binding User.Image}" 
-                                                        RenderOptions.BitmapScalingMode="HighQuality"/>
+                                            <ImageBrush ImageSource="{Binding User.Image}"
+                                                        RenderOptions.BitmapScalingMode="HighQuality" />
                                         </Rectangle.Fill>
                                     </Rectangle>
-                                    
-                                    <TextBlock Grid.Column="1" 
+
+                                    <TextBlock Grid.Column="1"
                                                Margin="10 0 0 0"
                                                HorizontalAlignment="Left"
                                                VerticalAlignment="Center"
-                                               Text="{Binding User.Username}"/>
-                                    
-                                    <TextBlock Grid.Column="2" 
+                                               Text="{Binding User.Username}" />
+
+                                    <TextBlock Grid.Column="2"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Right"
-                                               Text="{Binding User.Role.Name}"/>
-                                    
+                                               Text="{Binding User.Role.Name}" />
+
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ListBox>
                 </Grid>
-                
+
             </Grid>
-            
+
             <!--Dialog-->
             <Grid Grid.Column="0"
                   Grid.ColumnSpan="3"
@@ -269,7 +270,7 @@
                 <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Content="{Binding ToolsDialogProvider.DialogView}" />
             </Grid>
-            
+
         </Grid>
 
     </Border>

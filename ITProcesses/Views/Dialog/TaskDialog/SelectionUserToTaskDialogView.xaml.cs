@@ -2,9 +2,9 @@ using System.Windows.Controls;
 
 namespace ITProcesses.Views;
 
-public partial class UserSelectionDialogView : UserControl
+public partial class SelectionUserToTaskDialogView : UserControl
 {
-    public UserSelectionDialogView()
+    public SelectionUserToTaskDialogView()
     {
         InitializeComponent();
     }

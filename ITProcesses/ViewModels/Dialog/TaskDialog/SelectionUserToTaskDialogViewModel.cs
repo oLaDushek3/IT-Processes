@@ -11,7 +11,7 @@ using ITProcesses.Services;
 
 namespace ITProcesses.ViewModels;
 
-public class UserSelectionDialogViewModel : BaseViewModel
+public class SelectionUserToTaskDialogViewModel : BaseViewModel
 {
     #region Field
 
@@ -94,17 +94,18 @@ public class UserSelectionDialogViewModel : BaseViewModel
     });
 
     //Constructor
-    public UserSelectionDialogViewModel(DialogProvider currentDialogProvider)
+    public SelectionUserToTaskDialogViewModel(DialogProvider currentDialogProvider, Tasks editableTask)
     {
         _currentDialogProvider = currentDialogProvider;
-        GetData();
+        GetData(editableTask);
     }
 
     //Methods
-    private async void GetData()
+    private async void GetData(Tasks editableTask)
     {
         _allUserList = await _userService.GetAllUsers();
         DisplayedUserList = new ObservableCollection<User>(_allUserList);
+        
         RoleList = await _userService.GetAllRoles();
     }
 
