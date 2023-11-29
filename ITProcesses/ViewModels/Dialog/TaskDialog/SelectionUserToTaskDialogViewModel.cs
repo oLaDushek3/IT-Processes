@@ -16,6 +16,7 @@ public class SelectionUserToTaskDialogViewModel : BaseViewModel
     #region Field
 
     private readonly DialogProvider _currentDialogProvider;
+    private readonly ITaskService _taskService;
     private readonly IUserService _userService = new UserService();
 
     private List<Role> _roleList;
@@ -94,16 +95,17 @@ public class SelectionUserToTaskDialogViewModel : BaseViewModel
     });
 
     //Constructor
-    public SelectionUserToTaskDialogViewModel(DialogProvider currentDialogProvider, Tasks editableTask)
+    public SelectionUserToTaskDialogViewModel(DialogProvider currentDialogProvider, Guid taskId, ITaskService taskService)
     {
+        _taskService = taskService;
         _currentDialogProvider = currentDialogProvider;
-        GetData(editableTask);
+        GetData(taskId);
     }
 
     //Methods
-    private async void GetData(Tasks editableTask)
+    private async void GetData(Guid taskId)
     {
-        _allUserList = await _userService.GetAllUsers();
+        _allUserList = await _taskService.GetUsersNotParticipatingInTask(taskId);
         DisplayedUserList = new ObservableCollection<User>(_allUserList);
         
         RoleList = await _userService.GetAllRoles();

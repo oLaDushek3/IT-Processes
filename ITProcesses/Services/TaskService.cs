@@ -84,8 +84,7 @@ public class TaskService : BaseViewModel, ITaskService
     }
 
     #endregion
-
-
+    
     public async Task<List<TaskStatus>> GetAllStatuses()
     {
         return await Context.TaskStatuses.ToListAsync();
@@ -112,8 +111,8 @@ public class TaskService : BaseViewModel, ITaskService
 
     public async Task<List<User>> GetUsersNotParticipatingInTask(Guid taskId)
     {
-        var users = await Context.Users.ToListAsync();
-        var usersTasks = await Context.UsersTasks.Where(us => us.TaskId != taskId).ToListAsync();
+        var users = await Context.Users.Include(u => u.Role).ToListAsync();
+        var usersTasks = await Context.UsersTasks.Where(us => us.TaskId == taskId).ToListAsync();
 
         foreach (var usersTask in usersTasks)
         {

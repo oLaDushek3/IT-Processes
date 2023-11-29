@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:ITProcesses.Views"
              xmlns:ui="http://schemas.modernwpf.com/2019"
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
-             xmlns:behavior="clr-namespace:AttachedCommandBehavior;assembly=AttachedCommandBehavior"
              mc:Ignorable="d"
              Width="825" Height="625"
              d:DataContext="{d:DesignInstance Type=viewModels:EditTaskDialogViewModel, IsDesignTimeCreatable=False}">
@@ -36,20 +35,31 @@
                     BorderThickness="0 0 0 2"
                     BorderBrush="{DynamicResource PrimaryStrokeColorBrush}">
                 <Grid>
-                    <TextBlock Grid.Row="0"
-                               VerticalAlignment="Center"
+                    <TextBlock VerticalAlignment="Center"
                                HorizontalAlignment="Left"
                                Text="Редактирование задачи"
                                Foreground="{DynamicResource PrimaryFontColorBrush}"
                                FontSize="21" />
 
-                    <Button Grid.Column="0"
-                            Style="{DynamicResource SubRoundedButton}"
-                            Height="35"
-                            Width="100"
-                            HorizontalAlignment="Right"
-                            Content="Отмена"
-                            Command="{Binding CancelCommand}" />
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right">
+                        
+                        <Button Style="{DynamicResource SubRoundedButton}"
+                                Height="35"
+                                Width="100"
+                                Margin="0 0 5 0"
+                                Content="Назад"
+                                Command="{Binding CancelCommand}" />
+
+                        <Button Style="{DynamicResource MainRoundedButton}"
+                                Height="35"
+                                Width="100"
+                                Margin="5 0 0 0"
+                                Content="Сохранить"
+                                Command="{Binding SaveCommand}"
+                                CommandParameter="{Binding ElementName=UsersList, Path=SelectedItems}" />
+
+                    </StackPanel>
                 </Grid>
             </Border>
 
@@ -114,6 +124,7 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
                     <RowDefinition Height="5*" />
                     <RowDefinition Height="5*" />
                 </Grid.RowDefinitions>
@@ -143,8 +154,26 @@
                     </ComboBox>
                 </Grid>
 
-                <!--Documents-->
+                <!--Status-->
                 <Grid Grid.Row="1"
+                      VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Кол-во часов: "
+                               Foreground="{DynamicResource PrimaryFontColorBrush}"
+                               FontSize="20" />
+
+                    <ui:NumberBox Grid.Column="1"
+                                  HorizontalAlignment="Stretch"
+                                  ui:ControlHelper.PlaceholderText="Кол-во часов"
+                                  Text="{Binding EditableTask.CountHour}" />
+                </Grid>
+
+                <!--Documents-->
+                <Grid Grid.Row="2"
                       Margin="0 0 0 10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -175,7 +204,7 @@
                 </Grid>
 
                 <!--Users-->
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="3">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
@@ -202,7 +231,8 @@
                     </StackPanel>
 
                     <ListBox x:Name="ParticipantList" Grid.Row="1"
-                             ItemsSource="{Binding EditableTask.UsersTasks, UpdateSourceTrigger=PropertyChanged}"
+                             ItemsSource="{Binding EditableTask.UsersTasks, 
+                             UpdateSourceTrigger=PropertyChanged}"
                              Background="{DynamicResource SecondaryBackColorBrush}"
                              HorizontalContentAlignment="Stretch"
                              SelectionMode="Multiple">

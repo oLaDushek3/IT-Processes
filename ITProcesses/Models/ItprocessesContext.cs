@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace ITProcesses.Models;
 
@@ -36,7 +38,7 @@ public partial class ItprocessesContext : DbContext
     public virtual DbSet<UsersTask> UsersTasks { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https: //go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=ITProcesses;Username=admin;Password=admin");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -70,6 +72,7 @@ public partial class ItprocessesContext : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .HasColumnName("name");
+            entity.Property(e => e.Test).HasColumnName("test");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.HasOne(d => d.User).WithMany(p => p.Projects)
@@ -118,6 +121,7 @@ public partial class ItprocessesContext : DbContext
                 .HasColumnName("id");
             entity.Property(e => e.Archived).HasColumnName("archived");
             entity.Property(e => e.BeforeTask).HasColumnName("before_task");
+            entity.Property(e => e.CountHour).HasColumnName("count_hour");
             entity.Property(e => e.DateCreateTimestamp)
                 .HasDefaultValueSql("now()")
                 .HasColumnName("date_create_timestamp");
@@ -131,7 +135,6 @@ public partial class ItprocessesContext : DbContext
             entity.Property(e => e.StatusId).HasColumnName("status_id");
             entity.Property(e => e.TypeId).HasColumnName("type_id");
             entity.Property(e => e.UserId).HasColumnName("user_id");
-            entity.Property(e => e.CountHour).HasColumnName("count_hour");
 
             entity.HasOne(d => d.BeforeTaskNavigation).WithMany(p => p.InverseBeforeTaskNavigation)
                 .HasForeignKey(d => d.BeforeTask)
@@ -139,6 +142,7 @@ public partial class ItprocessesContext : DbContext
 
             entity.HasOne(d => d.Project).WithMany(p => p.Tasks)
                 .HasForeignKey(d => d.ProjectId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("task_project_id_fkey");
 
             entity.HasOne(d => d.Status).WithMany(p => p.Tasks)

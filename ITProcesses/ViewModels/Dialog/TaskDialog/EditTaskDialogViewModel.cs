@@ -51,8 +51,8 @@ public class EditTaskDialogViewModel : BaseViewModel
     //Commands
     public CommandHandler CancelCommand => new(_ => _currentDialogProvider.CloseDialog(null));
 
-    // public CommandHandler SaveCommand => new(_ => SaveCommandExecute(),
-    //     _ => !string.IsNullOrEmpty(EditableProject.Name) && !string.IsNullOrEmpty(EditableProject.Description));
+    public CommandHandler SaveCommand => new(_ => SaveCommandExecute());
+    
     public CommandHandler DeleteParticipantCommand => new(taskParticipants =>
         DeleteParticipantCommandExecute((taskParticipants as IList).Cast<UsersTask>().ToList()), 
         taskParticipants => taskParticipants != null && (taskParticipants as IList).Count != 0);
@@ -73,7 +73,13 @@ public class EditTaskDialogViewModel : BaseViewModel
         StatusList = await _taskService.GetAllStatuses();
     }
 
-    private async void DeleteParticipantCommandExecute(List<UsersTask> taskParticipants)
+    private async void SaveCommandExecute()
+    {
+        await _taskService.UpdateTask(EditableTask);
+        _currentDialogProvider.CloseDialog(EditableTask);
+    }
+    
+    private void DeleteParticipantCommandExecute(List<UsersTask> taskParticipants)
     {
         foreach (UsersTask taskParticipant in taskParticipants)
         {
@@ -84,17 +90,19 @@ public class EditTaskDialogViewModel : BaseViewModel
     private async void AddParticipantCommandExecute()
     {
         var selectedParticipants = (List<User>?)await ToolsDialogProvider.ShowDialog(
-            new SelectionUserToTaskDialogViewModel(ToolsDialogProvider, EditableTask));
+            new SelectionUserToTaskDialogViewModel(ToolsDialogProvider, EditableTask.Id, _taskService));
 
         if (selectedParticipants == null) return;
 
         foreach (var selectedParticipant in selectedParticipants)
         {
-            EditableTask.UsersTasks.Add(new UsersTask
+            UsersTask newUsersTask = new()
             {
                 User = selectedParticipant,
                 Task = EditableTask
-            });
+            };
+            Context.UsersTasks.Add(newUsersTask);
+            //EditableTask.UsersTasks.Add(newUsersTask);
         }
     }
 }
