@@ -110,15 +110,14 @@ public class TaskService : BaseViewModel, ITaskService
         return tasks;
     }
 
-    public async Task<List<User>> GetUsersDontActiveInTask(Tasks task)
+    public async Task<List<User>> GetUsersNotParticipatingInTask(Guid taskId)
     {
-        List<User> users = new List<User>();
-        var usersTasks = Context.UsersTasks.Where(us => us.TaskId != task.Id);
+        var users = await Context.Users.ToListAsync();
+        var usersTasks = await Context.UsersTasks.Where(us => us.TaskId != taskId).ToListAsync();
 
-        foreach (var us in usersTasks)
+        foreach (var usersTask in usersTasks)
         {
-            var user = await Context.Users.FirstOrDefaultAsync(u => u.Id == us.UserId);
-            if (user != null) users.Add(user);
+            users.Remove(usersTask.User!);
         }
 
         return users;

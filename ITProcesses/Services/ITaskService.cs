@@ -27,5 +27,5 @@ public interface ITaskService
 
     Task<Tasks> UpdateTask(Tasks tasks);
 
-    Task<List<User>> GetUsersDontActiveInTask(Tasks task);
+    Task<List<User>> GetUsersNotParticipatingInTask(Guid taskId);
 }
