@@ -20,7 +20,6 @@ public class TaskViewModel : BaseViewModel
     private readonly DialogProvider _currentDialogProvider;
     
     private Tasks _currentTask;
-    private List<TaskStatus> _statusList;
 
     #endregion
 
@@ -36,23 +35,12 @@ public class TaskViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-
-    public List<TaskStatus> StatusList
-    {
-        get => _statusList;
-
-        set
-        {
-            _statusList = value;
-            OnPropertyChanged();
-        }
-    }
     
     #endregion
     
     //Commands
     public CommandHandler CancelCommand => new(_ => _currentMainViewModel.ChangeView(new TasksListViewModel(_currentMainViewModel)));
-    public CommandHandler EditTaskCommand => new(_ => _currentDialogProvider.ShowDialog(new EditTaskDialogViewModel(_currentTask, _currentDialogProvider)));
+    public CommandHandler EditTaskCommand => new(_ => EditTaskCommandExecute());
     public CommandHandler DeleteTaskCommand => new(_ => DeleteTaskCommandExecute());
     
     //Constructor
@@ -67,8 +55,18 @@ public class TaskViewModel : BaseViewModel
     //Methods
     private async void GetData(Guid selectedTaskGuid)
     {
-        StatusList = await _taskService.GetAllStatuses();
-        SelectedTask = (await _taskService.GetTaskById(selectedTaskGuid));
+        SelectedTask = await _taskService.GetTaskById(selectedTaskGuid);
+    }
+    
+    private async void EditTaskCommandExecute()
+    {
+        var dialogResult =
+            (Tasks?)await _currentDialogProvider.ShowDialog(
+                new EditTaskDialogViewModel(_currentTask, _currentDialogProvider));
+
+        if (dialogResult == null) return;
+
+        SelectedTask = dialogResult;
     }
 
     private async void DeleteTaskCommandExecute()

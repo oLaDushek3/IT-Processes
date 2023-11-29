@@ -94,17 +94,9 @@
                                Foreground="{DynamicResource PrimaryFontColorBrush}"
                                FontSize="20"/>
                     
-                    <ComboBox Grid.Column="1"
-                              ItemsSource="{Binding StatusList}"
-                              SelectedItem="{Binding SelectedTask.Status}"
-                              HorizontalAlignment="Stretch">
-                        
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}"/>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                    <TextBlock Grid.Column="1"
+                              Text="{Binding SelectedTask.Status.Name}"
+                              HorizontalAlignment="Stretch"/>
                 </Grid>
                 
                 <!--Documents-->

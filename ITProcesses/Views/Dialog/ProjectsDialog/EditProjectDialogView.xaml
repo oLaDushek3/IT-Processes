@@ -8,8 +8,9 @@
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="515" d:DesignWidth="310"
-             d:DataContext="{d:DesignInstance Type=viewModels:EditTaskDialogViewModel, IsDesignTimeCreatable=False}"
+             d:DataContext="{d:DesignInstance Type=viewModels:EditProjectDialogViewModel, IsDesignTimeCreatable=False}"
              Background="{DynamicResource PrimaryBackColorBrush}">
+    
     <Grid Margin="10" >
 
         <Grid.RowDefinitions>
@@ -22,7 +23,7 @@
 
         <!--Header-->
         <TextBlock Grid.Row="0"
-                   Text="Создание проекта"
+                   Text="Редактирование проекта"
                    Foreground="{DynamicResource PrimaryFontColorBrush}"
                    FontSize="18" />
 
