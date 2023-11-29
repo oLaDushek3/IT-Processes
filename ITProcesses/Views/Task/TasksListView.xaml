@@ -14,7 +14,7 @@
 
     <StackPanel>
         <StackPanel Orientation="Horizontal"
-                    Margin="5">
+                    Margin="10">
             <StackPanel Orientation="Horizontal">
                 <TextBox
                     Text="{Binding SearchBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -26,11 +26,11 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"
-                        Margin="5">
+                        Margin="10">
                 <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
                 
                 <Button Style="{DynamicResource IconButton}"
-                        Tag="{DynamicResource TaskList}"
+                        Tag="{DynamicResource DismissRegular}"
                         Command="{Binding ClearDatePickerCommand}"/>
             </StackPanel>
 
