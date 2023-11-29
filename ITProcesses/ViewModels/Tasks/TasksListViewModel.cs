@@ -138,6 +138,14 @@ public class TasksListViewModel : BaseViewModel
 
         return new ObservableCollection<T>(resultList);
     }
+    
+    private ObservableCollection<T> Merger<T>(IEnumerable<T> fullList, IEnumerable<IEnumerable<T>?> lists)
+    {
+        IEnumerable<T> resultList = lists.Where(list => list != null)
+            .Aggregate(fullList, (current, list) => current.Intersect(list!));
+
+        return new ObservableCollection<T>(resultList);
+    }
 
     private void ClearDatePicker(object o)
     {

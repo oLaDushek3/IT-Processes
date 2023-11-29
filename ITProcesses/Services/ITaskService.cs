@@ -26,4 +26,6 @@ public interface ITaskService
     Task DeleteTask(Tasks tasks);
 
     Task<Tasks> UpdateTask(Tasks tasks);
+
+    Task<List<User>> GetUsersDontActiveInTask(Tasks task);
 }

@@ -109,4 +109,18 @@ public class TaskService : BaseViewModel, ITaskService
         await Context.SaveChangesAsync();
         return tasks;
     }
+
+    public async Task<List<User>> GetUsersDontActiveInTask(Tasks task)
+    {
+        List<User> users = new List<User>();
+        var usersTasks = Context.UsersTasks.Where(us => us.TaskId != task.Id);
+
+        foreach (var us in usersTasks)
+        {
+            var user = await Context.Users.FirstOrDefaultAsync(u => u.Id == us.UserId);
+            if (user != null) users.Add(user);
+        }
+
+        return users;
+    }
 }
