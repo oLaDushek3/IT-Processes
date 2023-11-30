@@ -3,7 +3,7 @@ using ITProcesses.Models;
 
 namespace ITProcesses.SupportMethods;
 
-public class Math
+public class Maths
 {
     public bool CountingTaskHour(Tasks tasks)
     {

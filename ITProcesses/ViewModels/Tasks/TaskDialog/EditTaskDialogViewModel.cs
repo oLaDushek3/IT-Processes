@@ -8,6 +8,7 @@ using ITProcesses.Command;
 using ITProcesses.Dialog;
 using ITProcesses.Models;
 using ITProcesses.Services;
+using ITProcesses.SupportMethods;
 using Microsoft.Win32;
 
 namespace ITProcesses.ViewModels;
@@ -94,7 +95,7 @@ public class EditTaskDialogViewModel : BaseViewModel
     {
         foreach (var participant in _participantDeletionList)
             await _taskService.DeleteUsersTask(participant);
-        
+
         foreach (var document in _documentDeletionList)
             await _taskService.DeleteTaskDocument(document);
 
@@ -140,6 +141,7 @@ public class EditTaskDialogViewModel : BaseViewModel
 
     private async void AddParticipantsCommandExecute()
     {
+        Maths math = new();
         var selectedParticipants = (List<User>?)await ToolsDialogProvider.ShowDialog(
             new SelectionUserToTaskDialogViewModel(ToolsDialogProvider, EditableTask.Id));
 
@@ -154,6 +156,10 @@ public class EditTaskDialogViewModel : BaseViewModel
             };
             EditableTask.UsersTasks.Add(newUsersTask);
         }
+
+        if (math.CountingTaskHour(EditableTask))
+            ToolsDialogProvider.ShowDialog(new ErrorDialogViewModel(ToolsDialogProvider,
+                "У работников будут переработки!"));
     }
 
     private void DeleteParticipantsCommandExecute(List<UsersTask> taskParticipants)

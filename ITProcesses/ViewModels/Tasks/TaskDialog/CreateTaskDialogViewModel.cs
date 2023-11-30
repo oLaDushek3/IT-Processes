@@ -8,6 +8,7 @@ using ITProcesses.Command;
 using ITProcesses.Dialog;
 using ITProcesses.Models;
 using ITProcesses.Services;
+using ITProcesses.SupportMethods;
 using Microsoft.Win32;
 using Type = ITProcesses.Models.Type;
 
@@ -165,6 +166,7 @@ public class CreateTaskDialogViewModel : BaseViewModel
 
     private async void AddParticipantsCommandExecute()
     {
+        Maths math = new();
         var selectedParticipants = (List<User>?)await ToolsDialogProvider.ShowDialog(
             new SelectionUserToTaskDialogViewModel(ToolsDialogProvider, CreatedTask.Id));
 
@@ -179,6 +181,10 @@ public class CreateTaskDialogViewModel : BaseViewModel
             };
             CreatedTask.UsersTasks.Add(newUsersTask);
         }
+
+        if (math.CountingTaskHour(CreatedTask))
+            ToolsDialogProvider.ShowDialog(new ErrorDialogViewModel(ToolsDialogProvider,
+                "У работников будут переработки!"));
     }
 
     private void DeleteParticipantsCommandExecute(List<UsersTask> taskParticipants)
