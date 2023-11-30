@@ -43,4 +43,16 @@
         <views:SelectionUserToTaskDialogView/>
     </DataTemplate>
     
+    <DataTemplate DataType="{x:Type viewModels:CreateTaskDialogViewModel}">
+        <views:CreateTaskDialogView/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewModels:ErrorDialogViewModel}">
+        <views:ErrorDialogView/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewModels:SelectionBeforeTaskDialogViewModel}">
+        <views:SelectionBeforeTaskDialogView/>
+    </DataTemplate>
+    
 </ResourceDictionary>
