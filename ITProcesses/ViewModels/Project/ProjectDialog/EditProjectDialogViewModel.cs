@@ -8,9 +8,11 @@ namespace ITProcesses.ViewModels;
 public class EditProjectDialogViewModel : BaseViewModel
 {
     #region Field
-
-    private readonly IProjectService _projectService = new ProjectService();
+    
     private readonly DialogProvider _currentDialogProvider;
+    
+    private readonly ItprocessesContext _context = new();
+    private readonly IProjectService _projectService;
 
     private Project _editableProject;
 
@@ -39,8 +41,9 @@ public class EditProjectDialogViewModel : BaseViewModel
     //Constructor
     public EditProjectDialogViewModel(Project selectedProject, DialogProvider currentDialogProvider)
     {
-        GetData(selectedProject.Id);
+        _projectService = new ProjectService(_context);
         _currentDialogProvider = currentDialogProvider;
+        GetData(selectedProject.Id);
     }
 
     //Methods

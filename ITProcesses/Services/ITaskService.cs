@@ -26,6 +26,10 @@ public interface ITaskService
     Task DeleteTask(Tasks tasks);
 
     Task<Tasks> UpdateTask(Tasks tasks);
+    
+    Task DeleteUsersTask(UsersTask usersTask);
+    
+    Task DeleteTaskDocument(TaskDocument taskDocument);
 
     Task<List<User>> GetUsersNotParticipatingInTask(Guid taskId);
 }

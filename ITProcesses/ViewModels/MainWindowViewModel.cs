@@ -26,7 +26,7 @@ public class MainWindowViewModel : BaseViewModel
 
     #endregion
     
-    public MainWindowViewModel(User user)
+    public MainWindowViewModel(User? user)
     {
         if(user == null)
             ChangeView(new LoginViewModel(this));

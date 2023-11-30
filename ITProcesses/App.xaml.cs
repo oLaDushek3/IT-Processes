@@ -14,7 +14,7 @@ namespace ITProcesses
     /// </summary>
     public partial class App : Application
     {
-        private readonly UserService _userService = new();
+        private readonly UserService _userService = new(new());
         private static AppSettings? Settings => SaveInfo.AppSettings;
 
         protected async override void OnStartup(StartupEventArgs e)

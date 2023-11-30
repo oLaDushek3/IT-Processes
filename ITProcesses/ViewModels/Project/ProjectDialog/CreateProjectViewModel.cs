@@ -8,10 +8,12 @@ namespace ITProcesses.ViewModels;
 public class CreateProjectViewModel : BaseViewModel
 {
     #region Field
-
+    
     private readonly ProjectDialogViewModel _currentProjectDialogViewModel;
-    private readonly IProjectService _projectService = new ProjectService();
     private readonly DialogProvider _currentDialogProvider;
+    
+    private readonly ItprocessesContext _context = new();
+    private readonly IProjectService _projectService;
     
     private Project _createdProject = new();
 
@@ -19,7 +21,7 @@ public class CreateProjectViewModel : BaseViewModel
 
     #region Properties
     
-    public Project CreatedProject
+    public Models.Project CreatedProject
     {
         get => _createdProject;
         set
@@ -38,6 +40,7 @@ public class CreateProjectViewModel : BaseViewModel
     //Constructor
     public CreateProjectViewModel(ProjectDialogViewModel currentProjectDialogViewModel, DialogProvider currentDialogProvider)
     {
+        _projectService = new ProjectService(_context);
         _currentProjectDialogViewModel = currentProjectDialogViewModel;
         _currentDialogProvider = currentDialogProvider;
     }

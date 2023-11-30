@@ -11,13 +11,13 @@ public class MainViewModel : BaseViewModel
 {
     #region Fields
 
+    private static readonly ItprocessesContext Context = new();
+    private readonly IProjectService _projectService = new ProjectService(Context);
+    
     private MainWindowViewModel _currentMainWindowViewModel;
-
-    private User _user;
     private BaseViewModel _currentChildView;
-
-    private readonly ITaskService _taskService = new TaskService();
-    private readonly IProjectService _projectService = new ProjectService();
+    
+    private User _user;
     private Project _currentProject;
 
     #endregion

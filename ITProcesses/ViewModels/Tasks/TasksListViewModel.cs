@@ -15,21 +15,22 @@ namespace ITProcesses.ViewModels;
 public class TasksListViewModel : BaseViewModel
 {
     #region Fields
-
-    private readonly ITaskService _taskService = new TaskService();
+    
     private readonly MainViewModel _currentMainViewModel;
+    
+    private readonly ItprocessesContext _context = new ();
+    private readonly ITaskService _taskService;
 
     private ObservableCollection<Tasks> _tasksList;
     private Tasks _selectedTask;
     private string? _searchBox = string.Empty;
     private List<Tasks> _allTasks;
     private DateTime? _selectedDate = DateTime.Now;
-    private List<Tasks> tasksEnumerable = new List<Tasks>();
-    private List<Tasks> tasksFromDatePickerList = new List<Tasks>();
+    private List<Tasks> tasksEnumerable = new();
+    private List<Tasks> tasksFromDatePickerList = new();
 
     #endregion
-
-
+    
     #region Properties
 
     public ObservableCollection<Tasks> TasksList
@@ -69,7 +70,7 @@ public class TasksListViewModel : BaseViewModel
     //Constructor
     public TasksListViewModel(MainViewModel currentMainViewModel)
     {
-        // _taskService = new TaskService();
+        _taskService = new TaskService(_context);
         _currentMainViewModel = currentMainViewModel;
         _tasksList = new ObservableCollectionListSource<Tasks>();
 
@@ -77,10 +78,8 @@ public class TasksListViewModel : BaseViewModel
     }
 
     public CommandHandler OpenTaskCommand => new(obg => OpenTask(obg as Tasks));
-
+    
     public CommandHandler ClearDatePickerCommand => new(ClearDatePicker);
-
-    // public CommandHandler ClearDatePickerCommand => new(ClearDatePicker);
 
     //Methods
     private async void GetData()

@@ -3,16 +3,12 @@ using ITProcesses.Services;
 
 namespace ITProcesses.ViewModels;
 
-public class CreateTaskViewModel:BaseViewModel
+public class CreateTaskViewModel : BaseViewModel
 {
+    private readonly ItprocessesContext _context = new();
     private readonly ITaskService _taskService;
-    private Tasks _tasks;
-
-    public CreateTaskViewModel()
-    {
-        _taskService = new TaskService();
-        _tasks = new Tasks();
-    }
+    
+    private Tasks _tasks = new();
     
     public Tasks SelectedTask
     {
@@ -25,6 +21,11 @@ public class CreateTaskViewModel:BaseViewModel
         }
     }
 
+    public CreateTaskViewModel()
+    {
+        _taskService = new TaskService(_context);
+    }
+    
     public async void CreateNewTask()
     {
         var newTask = _taskService.CreateTask(_tasks);

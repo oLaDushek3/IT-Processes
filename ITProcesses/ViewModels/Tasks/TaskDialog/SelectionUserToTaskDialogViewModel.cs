@@ -14,10 +14,12 @@ namespace ITProcesses.ViewModels;
 public class SelectionUserToTaskDialogViewModel : BaseViewModel
 {
     #region Field
-
+    
+    private static readonly ItprocessesContext Context = new();
+    
+    private readonly ITaskService _taskService = new TaskService(Context);
+    private readonly IUserService _userService = new UserService(Context);
     private readonly DialogProvider _currentDialogProvider;
-    private readonly ITaskService _taskService;
-    private readonly IUserService _userService = new UserService();
 
     private List<Role> _roleList;
     private List<User> _allUserList;
@@ -97,7 +99,7 @@ public class SelectionUserToTaskDialogViewModel : BaseViewModel
     //Constructor
     public SelectionUserToTaskDialogViewModel(DialogProvider currentDialogProvider, Guid taskId, ITaskService taskService)
     {
-        _taskService = taskService;
+        //_taskService = taskService;
         _currentDialogProvider = currentDialogProvider;
         GetData(taskId);
     }

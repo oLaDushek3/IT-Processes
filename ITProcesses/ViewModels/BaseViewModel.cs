@@ -9,8 +9,6 @@ namespace ITProcesses.ViewModels;
 
 public abstract class BaseViewModel : INotifyPropertyChanged
 {
-    protected readonly ItprocessesContext Context = new ();
-    
     public static AppSettings? Settings =>
             SaveInfo.AppSettings;
 

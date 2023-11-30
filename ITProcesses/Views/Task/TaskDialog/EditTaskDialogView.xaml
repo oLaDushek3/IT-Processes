@@ -118,6 +118,7 @@
                        Background="{DynamicResource SecondaryBackColorBrush}"
                        Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
 
+            <!--Details-->
             <Grid Grid.Column="2"
                   Grid.Row="1"
                   Margin="10">
@@ -154,7 +155,7 @@
                     </ComboBox>
                 </Grid>
 
-                <!--Status-->
+                <!--Count hour-->
                 <Grid Grid.Row="1"
                       VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
@@ -184,8 +185,24 @@
                                Margin="0 0 0 5"
                                Text="Документы: " FontSize="20"
                                Foreground="{DynamicResource PrimaryFontColorBrush}" />
+                    
+                    <StackPanel Grid.Row="0"
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+                        <Button Style="{DynamicResource IconButton}"
+                                Tag="{StaticResource AddRegular}"
+                                Margin="5 0"
+                                Command="{Binding AddDocumentsCommand}" />
 
-                    <ListBox Grid.Row="1"
+                        <Button Style="{DynamicResource IconButton}"
+                                Tag="{StaticResource DeleteRegular}"
+                                Margin="5 0"
+                                Command="{Binding DeleteDocumentsCommand}"
+                                CommandParameter="{Binding ElementName=DocumentList, Path=SelectedItems}" />
+                    </StackPanel>
+
+                    <ListBox x:Name="DocumentList" 
+                             Grid.Row="1"
                              ItemsSource="{Binding EditableTask.TaskDocuments}"
                              Background="{DynamicResource SecondaryBackColorBrush}">
 
@@ -197,7 +214,9 @@
 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Documents.Name}" />
+                                <TextBlock Text="{Binding Documents.Name}" 
+                                           TextTrimming="CharacterEllipsis"
+                                           ToolTip="{Binding Documents.Name}" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ListBox>
@@ -221,12 +240,12 @@
                         <Button Style="{DynamicResource IconButton}"
                                 Tag="{StaticResource AddRegular}"
                                 Margin="5 0"
-                                Command="{Binding AddParticipantCommand}" />
+                                Command="{Binding AddParticipantsCommand}" />
 
                         <Button Style="{DynamicResource IconButton}"
                                 Tag="{StaticResource DeleteRegular}"
                                 Margin="5 0"
-                                Command="{Binding DeleteParticipantCommand}"
+                                Command="{Binding DeleteParticipantsCommand}"
                                 CommandParameter="{Binding ElementName=ParticipantList, Path=SelectedItems}" />
                     </StackPanel>
 

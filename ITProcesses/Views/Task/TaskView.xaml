@@ -4,39 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
              mc:Ignorable="d"
-             d:DesignHeight="650" d:DesignWidth="1060" 
+             d:DesignHeight="650" d:DesignWidth="1060"
              Background="{DynamicResource PrimaryBackColorBrush}"
              d:DataContext="{d:DesignInstance Type=viewModels:TaskViewModel, IsDesignTimeCreatable=False}">
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <!--Main space-->
-            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="7*" />
             <!--Details-->
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
-        
+
         <!--Main space-->
         <StackPanel Grid.Column="0"
                     Margin="20">
-            
+
             <!--Header-->
             <Grid Margin="0 0 0 20">
-                <TextBlock HorizontalAlignment="Left" 
+                <TextBlock HorizontalAlignment="Left"
                            Text="{Binding SelectedTask.Name}"
                            FontSize="30"
-                           Foreground="{DynamicResource PrimaryFontColorBrush}"/>
-                
+                           Foreground="{DynamicResource PrimaryFontColorBrush}" />
+
                 <!--Tools buttons-->
                 <StackPanel HorizontalAlignment="Right"
                             Orientation="Horizontal">
-                
+
                     <Button Style="{DynamicResource IconButton}"
                             Tag="{StaticResource ArrowLeftRegular}"
                             Margin="5 0"
                             Command="{Binding CancelCommand}" />
-                    
+
                     <Separator Margin="5 5"
                                Width="2"
                                Background="{DynamicResource SecondaryBackColorBrush}"
@@ -54,131 +55,156 @@
 
                 </StackPanel>
             </Grid>
-            
-            <TextBlock Text="{Binding SelectedTask.DateStartTimestamp, StringFormat=Дата начала: {0:d MMMM yyyy}, ConverterCulture=ru-RU}"
-                       FontSize="20"
-                       Foreground="{DynamicResource PrimaryFontColorBrush}"/>
-            <TextBlock Text="{Binding SelectedTask.DateEndTimestamp, StringFormat=Дата окончания: {0:d MMMM yyyy}, ConverterCulture=ru-RU}"
-                       FontSize="20"
-                       Margin="0 0 0 20"
-                       Foreground="{DynamicResource PrimaryFontColorBrush}"/>
-            
+
+            <TextBlock
+                Text="{Binding SelectedTask.DateStartTimestamp, StringFormat=Дата начала: {0:d MMMM yyyy}, ConverterCulture=ru-RU}"
+                FontSize="20"
+                Foreground="{DynamicResource PrimaryFontColorBrush}" />
+            <TextBlock
+                Text="{Binding SelectedTask.DateEndTimestamp, StringFormat=Дата окончания: {0:d MMMM yyyy}, ConverterCulture=ru-RU}"
+                FontSize="20"
+                Margin="0 0 0 20"
+                Foreground="{DynamicResource PrimaryFontColorBrush}" />
+
             <TextBlock Text="{Binding SelectedTask.Description}"
                        TextWrapping="Wrap"
                        FontSize="20"
-                       Foreground="{DynamicResource PrimaryFontColorBrush}"/>
-            
+                       Foreground="{DynamicResource PrimaryFontColorBrush}" />
+
         </StackPanel>
-        
+
         <!--Details-->
         <Border Grid.Column="1"
                 BorderBrush="{DynamicResource PrimaryStrokeColorBrush}"
                 BorderThickness="2 0 0 0">
-            
+
             <Grid Margin="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="5*" />
+                    <RowDefinition Height="5*" />
                 </Grid.RowDefinitions>
-                
+
                 <!--Status-->
                 <Grid Grid.Row="0"
                       VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    
-                    <TextBlock Grid.Column="0" Text="Статус: "
+
+                    <TextBlock Grid.Column="0" 
+                               Text="Статус: "
                                Foreground="{DynamicResource PrimaryFontColorBrush}"
-                               FontSize="20"/>
-                    
+                               FontSize="20" />
+
                     <TextBlock Grid.Column="1"
-                              Text="{Binding SelectedTask.Status.Name}"
-                              HorizontalAlignment="Stretch"/>
+                               HorizontalAlignment="Stretch"
+                               Text="{Binding SelectedTask.Status.Name}"
+                               FontSize="20" />
                 </Grid>
-                
-                <!--Documents-->
+
+                <!--Count hour-->
                 <Grid Grid.Row="1"
+                      VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Кол-во часов: "
+                               Foreground="{DynamicResource PrimaryFontColorBrush}"
+                               FontSize="20" />
+
+                    <ui:NumberBox Grid.Column="1"
+                                  HorizontalAlignment="Stretch"
+                                  ui:ControlHelper.PlaceholderText="Кол-во часов"
+                                  Text="{Binding SelectedTask.CountHour}" />
+                </Grid>
+
+                <!--Documents-->
+                <Grid Grid.Row="2"
                       Margin="0 0 0 10">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
-                    
-                    <TextBlock Grid.Row="0" 
+
+                    <TextBlock Grid.Row="0"
                                Margin="0 0 0 5"
                                Text="Документы: " FontSize="20"
-                               Foreground="{DynamicResource PrimaryFontColorBrush}"/>
-                    
+                               Foreground="{DynamicResource PrimaryFontColorBrush}" />
+
                     <ListBox Grid.Row="1"
                              ItemsSource="{Binding SelectedTask.TaskDocuments}"
                              Background="{DynamicResource SecondaryBackColorBrush}">
-                        
+
                         <ListBox.Resources>
                             <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="CornerRadius" Value="10" />
                             </Style>
                         </ListBox.Resources>
-                        
+
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding DocumentsNavigation.Path}"/>
+                                <TextBlock Text="{Binding Documents.Name}" 
+                                           TextTrimming="CharacterEllipsis"
+                                           ToolTip="{Binding Documents.Name}" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ListBox>
                 </Grid>
-                
+
                 <!--Users-->
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="3">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
-                    
-                    <TextBlock Grid.Row="0" 
+
+                    <TextBlock Grid.Row="0"
                                Margin="0 0 0 5"
                                Text="Участники: " FontSize="20"
-                               Foreground="{DynamicResource PrimaryFontColorBrush}"/>
-                    
+                               Foreground="{DynamicResource PrimaryFontColorBrush}" />
+
                     <ListBox Grid.Row="1"
                              ItemsSource="{Binding SelectedTask.UsersTasks}"
                              Background="{DynamicResource SecondaryBackColorBrush}"
                              HorizontalContentAlignment="Stretch">
-                        
+
                         <ListBox.Resources>
                             <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="CornerRadius" Value="10" />
                             </Style>
                             <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                             </Style>
                         </ListBox.Resources>
-                        
+
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid HorizontalAlignment="Stretch">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="7*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="7*" />
+                                        <ColumnDefinition Width="3*" />
                                     </Grid.ColumnDefinitions>
-                                     
-                                    <TextBlock Grid.Column="0" 
+
+                                    <TextBlock Grid.Column="0"
                                                Text="{Binding User.Username}"
-                                               HorizontalAlignment="Left"/>
-                                    <TextBlock Grid.Column="1" 
+                                               HorizontalAlignment="Left" />
+                                    <TextBlock Grid.Column="1"
                                                Text="{Binding User.Role.Name}"
-                                               HorizontalAlignment="Right"/>
+                                               HorizontalAlignment="Right" />
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ListBox>
                 </Grid>
-                
+
             </Grid>
-            
+
         </Border>
-        
+
     </Grid>
 </UserControl>

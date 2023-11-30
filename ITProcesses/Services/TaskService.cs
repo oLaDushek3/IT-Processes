@@ -9,13 +9,17 @@ using TaskStatus = ITProcesses.Models.TaskStatus;
 
 namespace ITProcesses.Services;
 
-public class TaskService : BaseViewModel, ITaskService
+public class TaskService : ITaskService
 {
-    #region TasksServices
+    private readonly ItprocessesContext _context;
+    public TaskService(ItprocessesContext context)
+    {
+        _context = context;
+    }
 
     public async Task<List<Tasks>> GetAllTask()
     {
-        return await Context.Tasks.Include(t => t.Status)
+        return await _context.Tasks.Include(t => t.Status)
             .Include(t => t.Type)
             .Include(t => t.TaskTags)
             .ThenInclude(tt => tt.Tag).ToListAsync();
@@ -23,7 +27,7 @@ public class TaskService : BaseViewModel, ITaskService
 
     public async Task<List<Tasks>> GetTasksByProject(int id)
     {
-        var tasks = await Context.Tasks.Include(t => t.Status)
+        var tasks = await _context.Tasks.Include(t => t.Status)
             .Include(t => t.Type)
             .Include(t => t.TaskTags)
             .ThenInclude(tt => tt.Tag)
@@ -37,20 +41,23 @@ public class TaskService : BaseViewModel, ITaskService
 
     public async Task<List<UsersTask>> GetTasksThisUser(Guid guid)
     {
-        var tasks = await Context.UsersTasks.Include(c => c.Task)
+        var tasks = await _context.UsersTasks.Include(c => c.Task)
             .Where(c => c.UserId == guid).ToListAsync();
-
-        if (tasks == null)
-            throw new Exception("Не найден пользователь");
 
         return tasks;
     }
 
     public async Task<Tasks> GetTaskById(Guid guid)
     {
-        var tasks = await Context.Tasks.Where(t => t.Id == guid).Include(t => t.UsersTasks).ThenInclude(ut => ut.User)
-            .ThenInclude(u => u.Role).Include(t => t.TaskDocuments).ThenInclude(td => td.Documents)
-            .Include(t => t.TaskTags).ThenInclude(tt => tt.Tag).Include(t => t.Status).FirstAsync();
+        var tasks = await _context.Tasks.Where(t => t.Id == guid).
+            Include(t => t.UsersTasks).
+                ThenInclude(ut => ut.User).
+                    ThenInclude(u => u.Role).
+            Include(t => t.TaskDocuments).
+                ThenInclude(td => td.Documents).
+            Include(t => t.TaskTags).
+                ThenInclude(tt => tt.Tag).
+            Include(t => t.Status).FirstAsync();
 
         if (tasks == null)
             throw new Exception("Задача не найдена");
@@ -60,13 +67,13 @@ public class TaskService : BaseViewModel, ITaskService
 
     public async Task<Tasks> CreateTask(Tasks tasks)
     {
-        var task = await Context.Tasks.FirstOrDefaultAsync(t => t.Id == tasks.Id);
+        var task = await _context.Tasks.FirstOrDefaultAsync(t => t.Id == tasks.Id);
 
         if (task != null)
             throw new Exception("Данная задача уже существует!");
 
-        await Context.Tasks.AddAsync(tasks);
-        await Context.SaveChangesAsync();
+        await _context.Tasks.AddAsync(tasks);
+        await _context.SaveChangesAsync();
 
         return tasks;
     }
@@ -77,22 +84,20 @@ public class TaskService : BaseViewModel, ITaskService
         tasks.InverseBeforeTaskNavigation = null;
         tasks.UsersTasks = null;
         tasks.TaskTags = null;
-        Context.Tasks.Update(tasks);
-        await Context.SaveChangesAsync();
-        Context.Tasks.Remove(tasks);
-        await Context.SaveChangesAsync();
+        _context.Tasks.Update(tasks);
+        await _context.SaveChangesAsync();
+        _context.Tasks.Remove(tasks);
+        await _context.SaveChangesAsync();
     }
-
-    #endregion
     
     public async Task<List<TaskStatus>> GetAllStatuses()
     {
-        return await Context.TaskStatuses.ToListAsync();
+        return await _context.TaskStatuses.ToListAsync();
     }
 
     public async Task<List<UsersTask>> GetAllUsersFromTask(Guid guid)
     {
-        var users = await Context.UsersTasks
+        var users = await _context.UsersTasks
             .Include(u => u.User)
             .Where(u => u.TaskId == guid).ToListAsync();
 
@@ -104,15 +109,27 @@ public class TaskService : BaseViewModel, ITaskService
 
     public async Task<Tasks> UpdateTask(Tasks tasks)
     {
-        Context.Tasks.Update(tasks);
-        await Context.SaveChangesAsync();
+        _context.Tasks.Update(tasks);
+        await _context.SaveChangesAsync();
         return tasks;
+    }
+    
+    public async Task DeleteUsersTask(UsersTask usersTask)
+    {
+        _context.UsersTasks.Remove(usersTask);
+        await _context.SaveChangesAsync();
+    }
+    
+    public async Task DeleteTaskDocument(TaskDocument taskDocument)
+    {
+        _context.TaskDocuments.Remove(taskDocument);
+        await _context.SaveChangesAsync();
     }
 
     public async Task<List<User>> GetUsersNotParticipatingInTask(Guid taskId)
     {
-        var users = await Context.Users.Include(u => u.Role).ToListAsync();
-        var usersTasks = await Context.UsersTasks.Where(us => us.TaskId == taskId).ToListAsync();
+        var users = await _context.Users.Include(u => u.Role).ToListAsync();
+        var usersTasks = await _context.UsersTasks.Where(us => us.TaskId == taskId).ToListAsync();
 
         foreach (var usersTask in usersTasks)
         {

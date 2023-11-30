@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Threading;
 using ITProcesses.Command;
 using ITProcesses.Dialog;
 using ITProcesses.Models;
@@ -14,7 +15,9 @@ namespace ITProcesses.ViewModels;
 public class TaskViewModel : BaseViewModel
 {
     #region Fields
-
+    
+    private readonly ItprocessesContext _context = new();
+    
     private readonly MainViewModel _currentMainViewModel;
     private readonly ITaskService _taskService;
     private readonly DialogProvider _currentDialogProvider;
@@ -46,13 +49,15 @@ public class TaskViewModel : BaseViewModel
     //Constructor
     public TaskViewModel(Guid selectedTaskGuid, MainViewModel currentMainViewModel)
     {
-        _taskService = new TaskService();
+        _taskService = new TaskService(_context);
+        
         _currentMainViewModel = currentMainViewModel;
         _currentDialogProvider = currentMainViewModel.CurrentMainWindowViewModel.MainDialogProvider;
         GetData(selectedTaskGuid);
     }
 
     //Methods
+    
     private async void GetData(Guid selectedTaskGuid)
     {
         SelectedTask = await _taskService.GetTaskById(selectedTaskGuid);

@@ -1,27 +1,22 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-using System.Windows.Automation;
-using System.Windows.Input;
 using ITProcesses.Command;
 using ITProcesses.Dialog;
 using ITProcesses.Models;
 using ITProcesses.Services;
-using Microsoft.EntityFrameworkCore;
 
 namespace ITProcesses.ViewModels;
 
 public class ProjectDialogViewModel : BaseViewModel
 {
     #region Field
-
+    
     public readonly MainViewModel CurrentMainViewModel;
-
     private readonly DialogProvider _currentDialogProvider;
-    private readonly IProjectService _projectService = new ProjectService();
+    
+    private readonly ItprocessesContext _context = new();
+    private readonly IProjectService _projectService;
 
     private ObservableCollection<Project> _projectsList = null!;
     private Project? _selectedProject;
@@ -90,6 +85,7 @@ public class ProjectDialogViewModel : BaseViewModel
     //Constructor
     public ProjectDialogViewModel(DialogProvider currentDialogProvider, MainViewModel currentMainViewModel, Project currentProject)
     {
+        _projectService = new ProjectService(_context);
         _currentDialogProvider = currentDialogProvider;
         CurrentMainViewModel = currentMainViewModel;
         _currentProject = currentProject;

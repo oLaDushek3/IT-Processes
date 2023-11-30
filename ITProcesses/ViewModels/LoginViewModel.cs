@@ -13,10 +13,13 @@ public class LoginViewModel : BaseViewModel
 {
     #region Fields
 
+    
+    private static readonly ItprocessesContext Context = new();
+    
     private string _login = String.Empty;
     private string _password = String.Empty;
-    private bool _checkBoxBool = false;
-    private readonly UserService _userService = new UserService();
+    private bool _checkBoxBool;
+    private readonly IUserService _userService = new UserService(Context);
     private MainWindowViewModel _currentMainWindowViewModel;
 
     #endregion

@@ -43,7 +43,8 @@
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem" BasedOn="{StaticResource DefaultListViewItem}">
                     <Setter Property="behavior:CommandBehavior.Event" Value="MouseDoubleClick" />
-                    <Setter Property="behavior:CommandBehavior.Command" Value="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.OpenTaskCommand}" />
+                    <Setter Property="behavior:CommandBehavior.Command" 
+                            Value="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.OpenTaskCommand}" />
                     <Setter Property="behavior:CommandBehavior.CommandParameter" Value="{Binding}" />
                 </Style>
             </ListView.ItemContainerStyle>

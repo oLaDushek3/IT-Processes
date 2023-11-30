@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ITProcesses.Models;
 
@@ -13,6 +14,8 @@ public interface IUserService
      Task<User> Update(User user);
 
      Task<List<User>> GetAllUsers();
+     
+     Task<User> GetUserById(Guid userId);
      
      Task<List<Role>> GetAllRoles();
 }
