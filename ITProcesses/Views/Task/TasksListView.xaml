@@ -12,55 +12,76 @@
              Background="{DynamicResource PrimaryBackColorBrush}"
              d:DataContext="{d:DesignInstance Type=viewModels:TasksListViewModel, IsDesignTimeCreatable=False}">
 
-    <StackPanel>
-        <StackPanel Orientation="Horizontal"
-                    Margin="10">
-            <!--Search-->
-            <TextBox Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                     Height="35"
-                     Width="275"
-                     Margin="0 0 5 0"
-                     HorizontalAlignment="Left"
-                     ui:ControlHelper.PlaceholderText="Поиск" 
-                     ui:ControlHelper.PlaceholderForeground="{DynamicResource SecondaryFontColorBrush}"/>
+    <StackPanel Margin="10">
+        <Grid>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left">
+                <!--Search-->
+                <TextBox Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                         Height="35"
+                         Width="225"
+                         Margin="0 0 5 0"
+                         HorizontalAlignment="Left"
+                         ui:ControlHelper.PlaceholderText="Поиск"
+                         ui:ControlHelper.PlaceholderForeground="{DynamicResource SecondaryFontColorBrush}" />
 
-            <DatePicker Height="35"
-                        Width="175" 
-                        Margin="5 0 0 0"
-                        ui:ControlHelper.PlaceholderForeground="{DynamicResource SecondaryFontColorBrush}"
-                        SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
+                <DatePicker Height="35"
+                            Width="175"
+                            Margin="5 0 0 0"
+                            ui:ControlHelper.PlaceholderForeground="{DynamicResource SecondaryFontColorBrush}"
+                            SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
 
-            <Button Style="{DynamicResource IconButton}"
-                    Height="20"
-                    Width="20"
-                    Margin="5 0"
-                    Tag="{StaticResource DismissRegular}"
-                    Command="{Binding ClearDateSort}" />
+                <Button Style="{DynamicResource IconButton}"
+                        Height="20"
+                        Width="20"
+                        Margin="5 0"
+                        Tag="{StaticResource DismissRegular}"
+                        Command="{Binding ClearDateSort}" />
 
-            <ComboBox Height="35"
-                      Width="175"
-                      Margin="5 0 0 0"
-                      ui:ControlHelper.PlaceholderText="Роль"
-                      ui:ControlHelper.PlaceholderForeground="{DynamicResource SecondaryFontColorBrush}"
-                      ItemsSource="{Binding TypeList}"
-                      SelectedItem="{Binding SelectedSortType}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name}" />
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+                <ComboBox Height="35"
+                          Width="175"
+                          Margin="5 0 0 0"
+                          ui:ControlHelper.PlaceholderText="Тип"
+                          ui:ControlHelper.PlaceholderForeground="{DynamicResource SecondaryFontColorBrush}"
+                          ItemsSource="{Binding TypeList}"
+                          SelectedItem="{Binding SelectedType}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
-            <Button Style="{DynamicResource IconButton}"
-                    Height="20"
-                    Width="20"
-                    Margin="5 0"
-                    Tag="{StaticResource DismissRegular}"
-                    Command="{Binding ClearSort}" />
+                <Button Style="{DynamicResource IconButton}"
+                        Height="20"
+                        Width="20"
+                        Margin="5 0"
+                        Tag="{StaticResource DismissRegular}"
+                        Command="{Binding ClearTypeSort}" />
 
-        </StackPanel>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Separator Margin="5 5"
+                           Width="2"
+                           Background="{DynamicResource SecondaryBackColorBrush}"
+                           Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
 
-        <ListView Margin="20"
+                <Button Style="{DynamicResource IconButton}"
+                        Tag="{StaticResource AddRegular}"
+                        Margin="5 0"
+                        Command="{Binding CreateTaskCommand}" />
+
+                <Button Style="{DynamicResource IconButton}"
+                        Tag="{StaticResource DeleteRegular}"
+                        Margin="5 0"
+                        Command="{Binding DeleteTaskCommand}"
+                        CommandParameter="{Binding ElementName=TaskListView, Path=SelectedItem}"/>
+            </StackPanel>
+        </Grid>
+
+        <ListView Name="TaskListView" 
                   ItemsSource="{Binding DisplayedTaskList}">
 
             <!--Double click on item-->

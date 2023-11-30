@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ITProcesses.Views"
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="150" d:DesignWidth="300"
              MinHeight="150" MinWidth="300"
@@ -39,11 +38,7 @@
                         Height="40"
                         Margin="10"
                         Content="Ок"
-                        Command="{Binding ConfirmCommand}">
-                    <Button.CommandParameter>
-                        <sys:Boolean>False</sys:Boolean>
-                    </Button.CommandParameter>
-                </Button>
+                        Command="{Binding OkCommand}"/>
             </StackPanel>
             
         </Grid>

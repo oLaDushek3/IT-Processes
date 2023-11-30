@@ -102,16 +102,21 @@ public class CreateTaskDialogViewModel : BaseViewModel
     {
         try
         {
+            if (Maths.CountingTaskHour(CreatedTask))
+                if (!(bool)await ToolsDialogProvider.ShowDialog(new ConfirmDialogViewModel(ToolsDialogProvider,
+                        "У работников будут переработки!")))
+                    return;
+            
             CreatedTask.DateCreateTimestamp = CreatedTask.DateCreateTimestamp.ToUniversalTime();
-            CreatedTask.DateStartTimestamp = CreatedTask.DateCreateTimestamp.ToUniversalTime();
-            CreatedTask.DateEndTimestamp = CreatedTask.DateCreateTimestamp.ToUniversalTime();
+            CreatedTask.DateStartTimestamp = CreatedTask.DateStartTimestamp.ToUniversalTime();
+            CreatedTask.DateEndTimestamp = CreatedTask.DateEndTimestamp.ToUniversalTime();
             CreatedTask.Status = (await _taskService.GetAllStatuses()).FirstOrDefault();
             CreatedTask.ProjectId = _currentMainViewModel.CurrentProject.Id;
 
             await _taskService.CreateTask(CreatedTask);
             _currentDialogProvider.CloseDialog(CreatedTask);
         }
-        catch (Exception e)
+        catch
         {
             ToolsDialogProvider.ShowDialog(new ErrorDialogViewModel(ToolsDialogProvider,
                 "Не все поля заполнены"));
@@ -166,7 +171,6 @@ public class CreateTaskDialogViewModel : BaseViewModel
 
     private async void AddParticipantsCommandExecute()
     {
-        Maths math = new();
         var selectedParticipants = (List<User>?)await ToolsDialogProvider.ShowDialog(
             new SelectionUserToTaskDialogViewModel(ToolsDialogProvider, CreatedTask.Id));
 
@@ -181,10 +185,6 @@ public class CreateTaskDialogViewModel : BaseViewModel
             };
             CreatedTask.UsersTasks.Add(newUsersTask);
         }
-
-        if (math.CountingTaskHour(CreatedTask))
-            ToolsDialogProvider.ShowDialog(new ErrorDialogViewModel(ToolsDialogProvider,
-                "У работников будут переработки!"));
     }
 
     private void DeleteParticipantsCommandExecute(List<UsersTask> taskParticipants)

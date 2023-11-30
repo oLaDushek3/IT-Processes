@@ -66,7 +66,7 @@ public class SelectionBeforeTaskDialogViewModel : BaseViewModel
             OnPropertyChanged();
             if (value == "")
                 _searchTaskList = null;
-            TaskSearch();
+            SearchTasks();
         }
     }
 
@@ -77,7 +77,7 @@ public class SelectionBeforeTaskDialogViewModel : BaseViewModel
         {
             _selectedSortType = value;
             OnPropertyChanged();
-            TaskSort();
+            SortingTasksByType();
         }
     }
 
@@ -108,7 +108,7 @@ public class SelectionBeforeTaskDialogViewModel : BaseViewModel
         TypeList = await _userService.GetAllTypes();
     }
 
-    private void TaskSearch()
+    private void SearchTasks()
     {
         if (!string.IsNullOrEmpty(SearchString))
         {
@@ -124,7 +124,7 @@ public class SelectionBeforeTaskDialogViewModel : BaseViewModel
         }
     }
 
-    private void TaskSort()
+    private void SortingTasksByType()
     {
         if (SelectedSortType != null)
         {

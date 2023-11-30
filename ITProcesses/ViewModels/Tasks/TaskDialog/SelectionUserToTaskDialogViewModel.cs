@@ -67,7 +67,7 @@ public class SelectionUserToTaskDialogViewModel : BaseViewModel
             OnPropertyChanged();
             if (value == "")
                 _searchUserList = null;
-            UserSearch();
+            SearchUsers();
         }
     }
 
@@ -78,7 +78,7 @@ public class SelectionUserToTaskDialogViewModel : BaseViewModel
         {
             _selectedSortRole = value;
             OnPropertyChanged();
-            UserSort();
+            SortingUsersByRole();
         }
     }
 
@@ -109,7 +109,7 @@ public class SelectionUserToTaskDialogViewModel : BaseViewModel
         RoleList = await _userService.GetAllRoles();
     }
 
-    private void UserSearch()
+    private void SearchUsers()
     {
         if (!string.IsNullOrEmpty(SearchString))
         {
@@ -125,7 +125,7 @@ public class SelectionUserToTaskDialogViewModel : BaseViewModel
         }
     }
 
-    private void UserSort()
+    private void SortingUsersByRole()
     {
         if (SelectedSortRole != null)
         {

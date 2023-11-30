@@ -83,9 +83,6 @@ public class MainViewModel : BaseViewModel
 
     //Commands
     public CommandHandler OpenProjectDialogCommand => new(_ => OpenProjectDialog());
-
-    public CommandHandler CreateTaskCommand => new(_ => CurrentMainWindowViewModel.MainDialogProvider.ShowDialog(
-        new CreateTaskDialogViewModel(CurrentMainWindowViewModel.MainDialogProvider, this)));
     
     public CommandHandler LogOutCommand => new(_ => LogOutCommandExecute());
 

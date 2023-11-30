@@ -93,14 +93,30 @@ public class EditTaskDialogViewModel : BaseViewModel
 
     private async void SaveCommandExecute()
     {
-        foreach (var participant in _participantDeletionList)
-            await _taskService.DeleteUsersTask(participant);
+        try
+        {
+            if (Maths.CountingTaskHour(EditableTask))
+                if (!(bool)await ToolsDialogProvider.ShowDialog(new ConfirmDialogViewModel(ToolsDialogProvider,
+                        "У работников будут переработки!")))
+                    return;
 
-        foreach (var document in _documentDeletionList)
-            await _taskService.DeleteTaskDocument(document);
+            foreach (var participant in _participantDeletionList)
+                await _taskService.DeleteUsersTask(participant);
 
-        await _taskService.UpdateTask(EditableTask);
-        _currentDialogProvider.CloseDialog(EditableTask);
+            foreach (var document in _documentDeletionList)
+                await _taskService.DeleteTaskDocument(document);
+
+            EditableTask.DateCreateTimestamp = EditableTask.DateCreateTimestamp.ToUniversalTime();
+            EditableTask.DateStartTimestamp = EditableTask.DateStartTimestamp.ToUniversalTime();
+            EditableTask.DateEndTimestamp = EditableTask.DateEndTimestamp.ToUniversalTime();
+            await _taskService.UpdateTask(EditableTask);
+            _currentDialogProvider.CloseDialog(EditableTask);
+        }
+        catch
+        {
+            ToolsDialogProvider.ShowDialog(new ErrorDialogViewModel(ToolsDialogProvider,
+                "Не все поля заполнены"));
+        }
     }
 
     private void AddDocumentsCommandExecute()
@@ -141,7 +157,6 @@ public class EditTaskDialogViewModel : BaseViewModel
 
     private async void AddParticipantsCommandExecute()
     {
-        Maths math = new();
         var selectedParticipants = (List<User>?)await ToolsDialogProvider.ShowDialog(
             new SelectionUserToTaskDialogViewModel(ToolsDialogProvider, EditableTask.Id));
 
@@ -156,10 +171,6 @@ public class EditTaskDialogViewModel : BaseViewModel
             };
             EditableTask.UsersTasks.Add(newUsersTask);
         }
-
-        if (math.CountingTaskHour(EditableTask))
-            ToolsDialogProvider.ShowDialog(new ErrorDialogViewModel(ToolsDialogProvider,
-                "У работников будут переработки!"));
     }
 
     private void DeleteParticipantsCommandExecute(List<UsersTask> taskParticipants)

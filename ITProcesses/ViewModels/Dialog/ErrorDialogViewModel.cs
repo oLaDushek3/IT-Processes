@@ -27,7 +27,7 @@ public class ErrorDialogViewModel : BaseViewModel
     #endregion
 
     //Commands
-    public CommandHandler ConfirmCommand => new(obj => Confirm(obj as bool? ?? false));
+    public CommandHandler OkCommand => new(_ => Confirm(false));
     
     //Constructor
     public ErrorDialogViewModel(DialogProvider dialogProvider, string message)

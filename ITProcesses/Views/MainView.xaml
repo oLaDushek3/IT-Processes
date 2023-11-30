@@ -56,16 +56,6 @@
                         Foreground="{DynamicResource SecondaryFontColorBrush}"
                         Content="{Binding CurrentProject.Name}"
                         Command="{Binding OpenProjectDialogCommand}" />
-                
-                <Button Grid.Column="2"
-                        Style="{DynamicResource MainRoundedButton}"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Margin="5"
-                        Width="160"
-                        Height="40"
-                        Content="Создать задачу"
-                        Command="{Binding CreateTaskCommand}" />
 
                 <Separator Grid.Column="3"
                            Margin="0 15"

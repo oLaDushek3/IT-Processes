@@ -10,30 +10,31 @@
              d:DesignHeight="150" d:DesignWidth="300"
              MinHeight="150" MinWidth="300"
              d:DataContext="{d:DesignInstance Type=viewModels:ConfirmDialogViewModel, IsDesignTimeCreatable=False}">
-    
+
     <Border Background="{DynamicResource PrimaryBackColorBrush}"
             CornerRadius="10"
             BorderThickness="5"
             BorderBrush="{DynamicResource PrimaryStrokeColorBrush}">
-        
+
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            
+
             <TextBlock Grid.Row="0"
                        Margin="10"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       Text="Вы уверены?"
+                       Text="{Binding Message, StringFormat={}{0} &#x0a; Вы уверены?}"
                        FontSize="18"
-                       TextWrapping="Wrap"/>
-            
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"/>
+
             <StackPanel Grid.Row="1"
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
-                
+
                 <Button Style="{DynamicResource MainRoundedButton}"
                         IsDefault="True"
                         Width="100"
@@ -45,7 +46,7 @@
                         <sys:Boolean>true</sys:Boolean>
                     </Button.CommandParameter>
                 </Button>
-                
+
                 <Button Style="{DynamicResource MainRoundedButton}"
                         Width="100"
                         Height="40"
@@ -57,9 +58,9 @@
                     </Button.CommandParameter>
                 </Button>
             </StackPanel>
-            
+
         </Grid>
-        
+
     </Border>
-    
+
 </UserControl>
