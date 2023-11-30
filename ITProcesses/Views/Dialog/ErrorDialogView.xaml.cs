@@ -2,9 +2,9 @@ using System.Windows.Controls;
 
 namespace ITProcesses.Views;
 
-public partial class UserTaskListView : UserControl
+public partial class ErrorDialogView : UserControl
 {
-    public UserTaskListView()
+    public ErrorDialogView()
     {
         InitializeComponent();
     }
