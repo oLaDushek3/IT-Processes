@@ -14,21 +14,22 @@ namespace ITProcesses.Services;
 public class UserService : IUserService
 {
     private readonly ItprocessesContext _context;
+
     public UserService(ItprocessesContext context)
     {
         _context = context;
     }
-    
+
     public async Task<User> Login(string userName, string password)
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == userName);
 
         if (user == null)
             throw new Exception("Неверный логин или пароль!");
-        
+
         if (user.Password != password)
             throw new Exception("Неверный логин или пароль!");
-        
+
         return user;
     }
 
@@ -64,14 +65,13 @@ public class UserService : IUserService
 
     public async Task<List<User>> GetAllUsers()
     {
-        return await _context.Users.
-            Include(u => u.Role).ToListAsync();
+        return await _context.Users.Include(u => u.Role).ToListAsync();
     }
-    
+
     public async Task<User> GetUserById(Guid userId)
     {
         var user = await _context.Users.Include(u => u.Role).FirstAsync(u => u.Id == userId);
-        
+
         if (user == null)
             throw new Exception("Не найден пользователь");
 
@@ -82,7 +82,13 @@ public class UserService : IUserService
     {
         return await _context.Roles.ToListAsync();
     }
-    
+
+    public async Task DeleteUser(User user)
+    {
+        _context.Users.Remove(user);
+        await _context.SaveChangesAsync();
+    }
+
     private bool ValidatePassword(string password)
     {
         return password.Any(char.IsLetter) &&
