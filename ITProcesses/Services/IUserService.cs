@@ -18,4 +18,6 @@ public interface IUserService
      Task<User> GetUserById(Guid userId);
      
      Task<List<Role>> GetAllRoles();
+
+     Task DeleteUser(User user);
 }
