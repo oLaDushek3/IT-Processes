@@ -55,7 +55,17 @@
                         Background="{DynamicResource SecondaryBackColorBrush}"
                         Foreground="{DynamicResource SecondaryFontColorBrush}"
                         Content="{Binding CurrentProject.Name}"
-                        Command="{Binding OpenProjectDialogCommand}"/>
+                        Command="{Binding OpenProjectDialogCommand}" />
+                
+                <Button Grid.Column="2"
+                        Style="{DynamicResource MainRoundedButton}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Margin="5"
+                        Width="160"
+                        Height="40"
+                        Content="Создать задачу"
+                        Command="{Binding CreateTaskCommand}" />
 
                 <Separator Grid.Column="3"
                            Margin="0 15"
@@ -100,21 +110,24 @@
                                  Command="{Binding OpenTasksListCommand}" />
 
                     <TreeView>
-                        <TreeViewItem Style="{DynamicResource HeaderTreeViewItemStyle}"
+                        <TreeViewItem Style="{DynamicResource HeaderNavigationTreeViewItemStyle}"
                                       Header="Мои задачи"
                                       Tag="{DynamicResource TaskList}"
-                                      ItemsSource="{Binding Nodes}">
+                                      ItemsSource="{Binding UsersTaskList, UpdateSourceTrigger=PropertyChanged}">
 
                             <TreeViewItem.ItemTemplate>
-                                <HierarchicalDataTemplate ItemsSource="{Binding Nodes}">
+                                <HierarchicalDataTemplate
+                                    ItemsSource="{Binding InverseBeforeTaskNavigation, UpdateSourceTrigger=PropertyChanged}">
                                     <RadioButton HorizontalAlignment="Center" VerticalAlignment="Center"
                                                  Style="{DynamicResource NavigationButton}"
                                                  Tag="{DynamicResource TaskList}"
                                                  Content="{Binding Name}"
                                                  GroupName="NavigationButtons"
-                                                 Foreground="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=Foreground}"
-                                                 Background="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=Background}"
-                                                 IsChecked="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=IsSelected, Mode=TwoWay}" />
+                                                 IsChecked="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, 
+                                                 Path=IsSelected, Mode=TwoWay}"
+                                                 Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, 
+                                                 Path=DataContext.OpenTaskCommand}"
+                                                 CommandParameter="{Binding}" />
                                 </HierarchicalDataTemplate>
                             </TreeViewItem.ItemTemplate>
 
@@ -129,11 +142,11 @@
                           Width="2"
                           Background="{DynamicResource PrimaryStrokeColorBrush}"
                           HorizontalAlignment="Center" />
-            
+
             <!--Content section-->
             <ContentControl Grid.Column="2"
                             Content="{Binding CurrentChildView}" />
         </Grid>
-        
+
     </Grid>
 </UserControl>

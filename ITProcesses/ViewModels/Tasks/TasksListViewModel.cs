@@ -9,6 +9,7 @@ using ITProcesses.Models;
 using ITProcesses.Services;
 using ITProcesses.Views;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Type = ITProcesses.Models.Type;
 
 namespace ITProcesses.ViewModels;
 
@@ -21,34 +22,37 @@ public class TasksListViewModel : BaseViewModel
     private readonly ItprocessesContext _context = new ();
     private readonly ITaskService _taskService;
 
-    private ObservableCollection<Tasks> _tasksList;
+    private ObservableCollection<Tasks> _displayedDisplayedTaskList;
+    private List<Tasks> _allTasksList;
     private Tasks _selectedTask;
-    private string? _searchBox = string.Empty;
-    private List<Tasks> _allTasks;
+    
+    //Search and sort
+    private string _searchString;
+    private List<Type> _roleList;
     private DateTime? _selectedDate = DateTime.Now;
-    private List<Tasks> tasksEnumerable = new();
-    private List<Tasks> tasksFromDatePickerList = new();
+    private List<Tasks> _searchTaskList;
+    private List<Tasks> _sortTaskList;
 
     #endregion
     
     #region Properties
 
-    public ObservableCollection<Tasks> TasksList
+    public ObservableCollection<Tasks> DisplayedTaskList
     {
-        get => _tasksList;
+        get => _displayedDisplayedTaskList;
         set
         {
-            _tasksList = value;
+            _displayedDisplayedTaskList = value;
             OnPropertyChanged();
         }
     }
 
-    public string SearchBox
+    public string SearchString
     {
-        get => _searchBox;
+        get => _searchString;
         set
         {
-            _searchBox = value;
+            _searchString = value;
             OnPropertyChanged();
             SearchInfoFromSearchBox();
         }
@@ -64,6 +68,16 @@ public class TasksListViewModel : BaseViewModel
             SearchDateFromDatePicker();
         }
     }
+    
+    public List<Type> TypeList
+    {
+        get => _roleList;
+        set
+        {
+            _roleList = value;
+            OnPropertyChanged();
+        }
+    }
 
     #endregion
 
@@ -72,20 +86,20 @@ public class TasksListViewModel : BaseViewModel
     {
         _taskService = new TaskService(_context);
         _currentMainViewModel = currentMainViewModel;
-        _tasksList = new ObservableCollectionListSource<Tasks>();
+        _displayedDisplayedTaskList = new ObservableCollectionListSource<Tasks>();
 
         GetData();
     }
 
     public CommandHandler OpenTaskCommand => new(obg => OpenTask(obg as Tasks));
     
-    public CommandHandler ClearDatePickerCommand => new(ClearDatePicker);
+    public CommandHandler ClearDateSort => new(_ => SelectedDate = null);
 
     //Methods
     private async void GetData()
     {
-        _allTasks = await _taskService.GetTasksByProject(_currentMainViewModel.CurrentProject.Id);
-        TasksList = new ObservableCollection<Tasks>(_allTasks);
+        _allTasksList = await _taskService.GetTasksByProject(_currentMainViewModel.CurrentProject.Id);
+        DisplayedTaskList = new ObservableCollection<Tasks>(_allTasksList);
     }
 
     private void OpenTask(Tasks selectedTask)
@@ -95,47 +109,34 @@ public class TasksListViewModel : BaseViewModel
 
     private void SearchInfoFromSearchBox()
     {
-        if (!string.IsNullOrEmpty(_searchBox))
+        if (!string.IsNullOrEmpty(SearchString))
         {
-            tasksEnumerable = new List<Tasks>(_allTasks
-                .Where(a => a.Name.ToLower().Contains(_searchBox.ToLower())));
-            TasksList = null;
+            _searchTaskList = new List<Tasks>(_allTasksList
+                .Where(a => a.Name.Contains(SearchString, StringComparison.InvariantCultureIgnoreCase)));
 
-            TasksList = Merger(new List<List<Tasks>> { tasksEnumerable, tasksFromDatePickerList });
+            DisplayedTaskList = Merger(_allTasksList, new List<List<Tasks>> { _searchTaskList, _sortTaskList });
         }
         else
         {
-            GetData();
+            _searchTaskList = null;
+            DisplayedTaskList = Merger(_allTasksList, new List<List<Tasks>> { _searchTaskList, _sortTaskList });
         }
     }
 
     private void SearchDateFromDatePicker()
     {
-        if (_selectedDate != null)
+        if (SelectedDate != null)
         {
-            tasksFromDatePickerList =
-                new List<Tasks>(_allTasks
-                    .Where(a => a.DateCreateTimestamp.Date == _selectedDate));
-            TasksList = null;
-            
-            TasksList = Merger(new List<List<Tasks>> { tasksFromDatePickerList, tasksEnumerable });
+            _sortTaskList = new List<Tasks>(_allTasksList
+                .Where(a => a.DateCreateTimestamp.Date == _selectedDate));
+
+            DisplayedTaskList = Merger(_allTasksList, new List<List<Tasks>> { _searchTaskList, _sortTaskList });
         }
         else
         {
-            GetData();
+            _sortTaskList = null;
+            DisplayedTaskList = Merger(_allTasksList, new List<List<Tasks>> { _searchTaskList, _sortTaskList });
         }
-    }
-
-    private ObservableCollection<T> Merger<T>(List<List<T>> lists)
-    {
-        IEnumerable<T> resultList = lists.First();
-
-        foreach (List<T> list in lists)
-        {
-            resultList.Intersect(list);
-        }
-
-        return new ObservableCollection<T>(resultList);
     }
     
     private ObservableCollection<T> Merger<T>(IEnumerable<T> fullList, IEnumerable<IEnumerable<T>?> lists)
@@ -148,8 +149,7 @@ public class TasksListViewModel : BaseViewModel
 
     private void ClearDatePicker(object o)
     {
-        _selectedDate = null;
-        tasksFromDatePickerList = null;
-        GetData();
+        SelectedDate = null;
+        _sortTaskList = null;
     }
 }

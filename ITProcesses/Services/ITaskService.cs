@@ -4,12 +4,13 @@ using System.Threading.Tasks;
 using System.Windows.Documents;
 using ITProcesses.Models;
 using TaskStatus = ITProcesses.Models.TaskStatus;
+using Type = ITProcesses.Models.Type;
 
 namespace ITProcesses.Services;
 
 public interface ITaskService
 {
-    Task<List<UsersTask>> GetTasksThisUser(Guid guid);
+    Task<List<Tasks>> GetTasksThisUser(Guid userId);
 
     Task<List<Tasks>> GetTasksByProject(int id);
     
@@ -19,6 +20,8 @@ public interface ITaskService
     
     Task<List<TaskStatus>> GetAllStatuses();
 
+    Task<List<Type>> GetAllTypes();
+    
     Task<List<UsersTask>> GetAllUsersFromTask(Guid guid);
 
     Task<List<Tasks>> GetAllTask();

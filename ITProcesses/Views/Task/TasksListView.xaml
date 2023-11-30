@@ -15,46 +15,70 @@
     <StackPanel>
         <StackPanel Orientation="Horizontal"
                     Margin="10">
-            <StackPanel Orientation="Horizontal">
-                <TextBox
-                    Text="{Binding SearchBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    Height="35"
-                    Width="125"
-                    HorizontalAlignment="Left"
-                    ui:ControlHelper.PlaceholderText="Поиск" />
-                
-            </StackPanel>
+            <!--Search-->
+            <TextBox Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                     Height="35"
+                     Width="275"
+                     Margin="0 0 5 0"
+                     HorizontalAlignment="Left"
+                     ui:ControlHelper.PlaceholderText="Поиск" 
+                     ui:ControlHelper.PlaceholderForeground="{DynamicResource SecondaryFontColorBrush}"/>
 
-            <StackPanel Orientation="Horizontal"
-                        Margin="10">
-                <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
-                
-                <Button Style="{DynamicResource IconButton}"
-                        Tag="{DynamicResource DismissRegular}"
-                        Command="{Binding ClearDatePickerCommand}"/>
-            </StackPanel>
+            <DatePicker Height="35"
+                        Width="175" 
+                        Margin="5 0 0 0"
+                        ui:ControlHelper.PlaceholderForeground="{DynamicResource SecondaryFontColorBrush}"
+                        SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
+
+            <Button Style="{DynamicResource IconButton}"
+                    Height="20"
+                    Width="20"
+                    Margin="5 0"
+                    Tag="{StaticResource DismissRegular}"
+                    Command="{Binding ClearDateSort}" />
+
+            <ComboBox Height="35"
+                      Width="175"
+                      Margin="5 0 0 0"
+                      ui:ControlHelper.PlaceholderText="Роль"
+                      ui:ControlHelper.PlaceholderForeground="{DynamicResource SecondaryFontColorBrush}"
+                      ItemsSource="{Binding TypeList}"
+                      SelectedItem="{Binding SelectedSortType}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <Button Style="{DynamicResource IconButton}"
+                    Height="20"
+                    Width="20"
+                    Margin="5 0"
+                    Tag="{StaticResource DismissRegular}"
+                    Command="{Binding ClearSort}" />
 
         </StackPanel>
 
         <ListView Margin="20"
-                  ItemsSource="{Binding TasksList}">
-            
+                  ItemsSource="{Binding DisplayedTaskList}">
+
             <!--Double click on item-->
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem" BasedOn="{StaticResource DefaultListViewItem}">
                     <Setter Property="behavior:CommandBehavior.Event" Value="MouseDoubleClick" />
-                    <Setter Property="behavior:CommandBehavior.Command" 
+                    <Setter Property="behavior:CommandBehavior.Command"
                             Value="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.OpenTaskCommand}" />
                     <Setter Property="behavior:CommandBehavior.CommandParameter" Value="{Binding}" />
                 </Style>
             </ListView.ItemContainerStyle>
-            
+
             <ListView.View>
                 <GridView>
 
                     <GridViewColumn Header="Название"
-                                    DisplayMemberBinding="{Binding Name}"/>
-                    
+                                    DisplayMemberBinding="{Binding Name}" />
+
                     <GridViewColumn Header="Тип"
                                     DisplayMemberBinding="{Binding Type.Name}" />
 
@@ -74,21 +98,21 @@
                     <GridViewColumn Header="Дата окончания"
                                     DisplayMemberBinding="{Binding DateEndTimestamp, 
                                     StringFormat={}{0:d MMMM yyyy}, 
-                                    ConverterCulture=ru-RU}"/>
-                    
-                    <GridViewColumn Header="В архиве">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding Archived}"
-                                          Style="{ui:StaticResource DataGridCheckBoxStyle}"
-                                          IsEnabled="False"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    
+                                    ConverterCulture=ru-RU}" />
+
+                    <!-- <GridViewColumn Header="В архиве"> -->
+                    <!--     <GridViewColumn.CellTemplate> -->
+                    <!--         <DataTemplate> -->
+                    <!--             <CheckBox IsChecked="{Binding Archived}" -->
+                    <!--                       Style="{ui:StaticResource DataGridCheckBoxStyle}" -->
+                    <!--                       IsEnabled="False"/> -->
+                    <!--         </DataTemplate> -->
+                    <!--     </GridViewColumn.CellTemplate> -->
+                    <!-- </GridViewColumn> -->
+
                     <GridViewColumn Header="Кол-во подзадач"
-                                    DisplayMemberBinding="{Binding InverseBeforeTaskNavigation.Count}"/>
-                    
+                                    DisplayMemberBinding="{Binding InverseBeforeTaskNavigation.Count}" />
+
                 </GridView>
             </ListView.View>
 

@@ -56,8 +56,7 @@
                                 Width="100"
                                 Margin="5 0 0 0"
                                 Content="Сохранить"
-                                Command="{Binding SaveCommand}"
-                                CommandParameter="{Binding ElementName=UsersList, Path=SelectedItems}" />
+                                Command="{Binding SaveCommand}" />
 
                     </StackPanel>
                 </Grid>
@@ -143,9 +142,9 @@
                                FontSize="20" />
 
                     <ComboBox Grid.Column="1"
+                              HorizontalAlignment="Stretch"
                               ItemsSource="{Binding StatusList}"
-                              SelectedItem="{Binding EditableTask.Status}"
-                              HorizontalAlignment="Stretch">
+                              SelectedItem="{Binding EditableTask.Status}">
 
                         <ComboBox.ItemTemplate>
                             <DataTemplate>

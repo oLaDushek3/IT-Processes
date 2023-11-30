@@ -127,8 +127,7 @@ public class ProjectDialogViewModel : BaseViewModel
 
     private async void DeleteProjectCommandExecute()
     {
-        if ((bool)await ConfirmDialogProvider.ShowDialog(new ConfirmDialogViewModel(ConfirmDialogProvider,
-                "Вы уверены?")))
+        if ((bool)await ConfirmDialogProvider.ShowDialog(new ConfirmDialogViewModel(ConfirmDialogProvider)))
         {
             if (_currentProject != null && SelectedProject!.Id == _currentProject.Id)
                 _currentProject = null;
@@ -144,7 +143,6 @@ public class ProjectDialogViewModel : BaseViewModel
         {
             _projects = new List<Project>(_allProjects
                 .Where(a => a.Name.ToLower().Contains(_searchBox.ToLower())));
-
 
             ProjectsList = new ObservableCollection<Project>(_projects);
         }

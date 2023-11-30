@@ -141,7 +141,7 @@ public class EditTaskDialogViewModel : BaseViewModel
     private async void AddParticipantsCommandExecute()
     {
         var selectedParticipants = (List<User>?)await ToolsDialogProvider.ShowDialog(
-            new SelectionUserToTaskDialogViewModel(ToolsDialogProvider, EditableTask.Id, _taskService));
+            new SelectionUserToTaskDialogViewModel(ToolsDialogProvider, EditableTask.Id));
 
         if (selectedParticipants == null) return;
 

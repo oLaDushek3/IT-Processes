@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using ITProcesses.Command;
 using ITProcesses.JsonSaveInfo;
 using ITProcesses.Models;
@@ -11,14 +13,17 @@ public class MainViewModel : BaseViewModel
 {
     #region Fields
 
-    private static readonly ItprocessesContext Context = new();
-    private readonly IProjectService _projectService = new ProjectService(Context);
-    
+    private ItprocessesContext _context = new();
+    private IProjectService _projectService;
+    private ITaskService _taskService;
+
     private MainWindowViewModel _currentMainWindowViewModel;
-    private BaseViewModel _currentChildView;
-    
+    private BaseViewModel? _currentChildView;
+
     private User _user;
     private Project _currentProject;
+
+    private ObservableCollection<Tasks> _usersTaskList;
 
     #endregion
 
@@ -30,6 +35,16 @@ public class MainViewModel : BaseViewModel
         set
         {
             _currentMainWindowViewModel = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public BaseViewModel? CurrentChildView
+    {
+        get => _currentChildView;
+        set
+        {
+            _currentChildView = value;
             OnPropertyChanged();
         }
     }
@@ -54,12 +69,12 @@ public class MainViewModel : BaseViewModel
         }
     }
 
-    public BaseViewModel CurrentChildView
+    public ObservableCollection<Tasks> UsersTaskList
     {
-        get => _currentChildView;
+        get => _usersTaskList;
         set
         {
-            _currentChildView = value;
+            _usersTaskList = value;
             OnPropertyChanged();
         }
     }
@@ -69,19 +84,44 @@ public class MainViewModel : BaseViewModel
     //Commands
     public CommandHandler OpenProjectDialogCommand => new(_ => OpenProjectDialog());
 
-    public CommandHandler LogOutCommand => new(_ => LogOutAsync());
+    public CommandHandler CreateTaskCommand => new(_ => CurrentMainWindowViewModel.MainDialogProvider.ShowDialog(
+        new CreateTaskDialogViewModel(CurrentMainWindowViewModel.MainDialogProvider, this)));
+    
+    public CommandHandler LogOutCommand => new(_ => LogOutCommandExecute());
 
-    public CommandHandler OpenTasksListCommand => new(_ => OpenTasksList());
+    public CommandHandler OpenTasksListCommand => new(_ => ChangeView(new TasksListViewModel(this)));
+
+    public CommandHandler OpenTaskCommand =>
+        new(selectedTask => ChangeView(new TaskViewModel((selectedTask as Tasks).Id, this)));
 
     //Constructor
     public MainViewModel(MainWindowViewModel currentMainViewModel, User user)
     {
+        _projectService = new ProjectService(_context);
+        _taskService = new TaskService(_context);
         _currentMainWindowViewModel = currentMainViewModel;
         _user = user;
         GetData();
     }
 
     //Methods
+    public async void GetData()
+    {
+        try
+        {
+            _context = new();
+            _projectService = new ProjectService(_context);
+            _taskService = new TaskService(_context);
+            
+            CurrentProject = await _projectService.GetProjectById(Settings.CurrentProject);
+            UsersTaskList = new ObservableCollection<Tasks>(await _taskService.GetTasksThisUser(_user.Id));
+        }
+        catch
+        {
+            OpenProjectDialog();
+        }
+    }
+
     private async void OpenProjectDialog()
     {
         var selectedProject = (Project?)await CurrentMainWindowViewModel.MainDialogProvider.ShowDialog(
@@ -96,42 +136,22 @@ public class MainViewModel : BaseViewModel
         settings.Password = Settings.Password;
         settings.CurrentProject = CurrentProject.Id;
         SaveInfo.SaveSettings(settings);
+
+        ChangeView(null);
+        GetData();
     }
 
-    private async void GetData()
+    private async void LogOutCommandExecute()
     {
-        try
+        if ((bool)await CurrentMainWindowViewModel.MainDialogProvider.ShowDialog(
+                new ConfirmDialogViewModel(CurrentMainWindowViewModel.MainDialogProvider)))
         {
-            CurrentProject = await _projectService.GetProjectById(Settings.CurrentProject);
-        }
-        catch
-        {
-            OpenProjectDialog();
+            CurrentMainWindowViewModel.ChangeView(new LoginViewModel(CurrentMainWindowViewModel));
+            SaveInfo.CreateAppSettingsDefault();
         }
     }
 
-    private async void LogOutAsync()
-    {
-        try
-        {
-            if ((bool)await CurrentMainWindowViewModel.MainDialogProvider.ShowDialog(
-                    new ConfirmDialogViewModel(CurrentMainWindowViewModel.MainDialogProvider, "Вы уверены?")))
-            {
-                CurrentMainWindowViewModel.ChangeView(new LoginViewModel(CurrentMainWindowViewModel));
-                SaveInfo.CreateAppSettingsDefault();
-            }
-        }
-        catch
-        {
-        }
-    }
-
-    private void OpenTasksList()
-    {
-        ChangeView(new TasksListViewModel(this));
-    }
-
-    public void ChangeView(BaseViewModel selectedView)
+    public void ChangeView(BaseViewModel? selectedView)
     {
         CurrentChildView = selectedView;
     }

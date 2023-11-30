@@ -6,12 +6,14 @@ using ITProcesses.Models;
 using ITProcesses.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using TaskStatus = ITProcesses.Models.TaskStatus;
+using Type = ITProcesses.Models.Type;
 
 namespace ITProcesses.Services;
 
 public class TaskService : ITaskService
 {
     private readonly ItprocessesContext _context;
+
     public TaskService(ItprocessesContext context)
     {
         _context = context;
@@ -39,25 +41,46 @@ public class TaskService : ITaskService
         return tasks;
     }
 
-    public async Task<List<UsersTask>> GetTasksThisUser(Guid guid)
+    public async Task<List<Tasks>> GetTasksThisUser(Guid userId)
     {
-        var tasks = await _context.UsersTasks.Include(c => c.Task)
-            .Where(c => c.UserId == guid).ToListAsync();
+        // var tasks = await _context.Tasks.
+        //     Include(t => t.UsersTasks).
+        //     Where(t => t.UsersTasks.FirstOrDefault(c => c.UserId == userId) != null).
+        //     ToListAsync();
+        //
+        // foreach (var task in tasks)
+        // {
+        //     var t = task;
+        //     while (t?.BeforeTask != null)
+        //     {
+        //         t.BeforeTaskNavigation = await _context.Tasks.FirstOrDefaultAsync(e => e.Id == t.BeforeTask);
+        //         t = t.BeforeTaskNavigation;
+        //     }
+        // }
 
-        return tasks;
+        List<Tasks> result = new();
+        var userTasks = await _context.UsersTasks.Where(ut => ut.UserId == userId).ToListAsync();
+        foreach (var userTask in userTasks)
+        {
+            Tasks? task = _context.Tasks.
+                Include(t => t.InverseBeforeTaskNavigation).
+                ThenInclude(t => t.InverseBeforeTaskNavigation).
+                ThenInclude(t => t.InverseBeforeTaskNavigation).
+                ThenInclude(t => t.InverseBeforeTaskNavigation).
+                ThenInclude(t => t.InverseBeforeTaskNavigation).
+                FirstOrDefault(t => t.Id == userTask.TaskId && t.BeforeTask == null);
+            if (task != null)
+                result.Add(task);
+        }
+
+        return result;
     }
 
     public async Task<Tasks> GetTaskById(Guid guid)
     {
-        var tasks = await _context.Tasks.Where(t => t.Id == guid).
-            Include(t => t.UsersTasks).
-                ThenInclude(ut => ut.User).
-                    ThenInclude(u => u.Role).
-            Include(t => t.TaskDocuments).
-                ThenInclude(td => td.Documents).
-            Include(t => t.TaskTags).
-                ThenInclude(tt => tt.Tag).
-            Include(t => t.Status).FirstAsync();
+        var tasks = await _context.Tasks.Where(t => t.Id == guid).Include(t => t.UsersTasks).ThenInclude(ut => ut.User)
+            .ThenInclude(u => u.Role).Include(t => t.TaskDocuments).ThenInclude(td => td.Documents)
+            .Include(t => t.TaskTags).ThenInclude(tt => tt.Tag).Include(t => t.Status).FirstAsync();
 
         if (tasks == null)
             throw new Exception("Задача не найдена");
@@ -72,6 +95,7 @@ public class TaskService : ITaskService
         if (task != null)
             throw new Exception("Данная задача уже существует!");
 
+        tasks.Id = Guid.NewGuid();
         await _context.Tasks.AddAsync(tasks);
         await _context.SaveChangesAsync();
 
@@ -89,12 +113,17 @@ public class TaskService : ITaskService
         _context.Tasks.Remove(tasks);
         await _context.SaveChangesAsync();
     }
-    
+
     public async Task<List<TaskStatus>> GetAllStatuses()
     {
         return await _context.TaskStatuses.ToListAsync();
     }
 
+    public async Task<List<Type>> GetAllTypes()
+    {
+        return await _context.Types.ToListAsync();
+    }
+    
     public async Task<List<UsersTask>> GetAllUsersFromTask(Guid guid)
     {
         var users = await _context.UsersTasks
@@ -113,15 +142,16 @@ public class TaskService : ITaskService
         await _context.SaveChangesAsync();
         return tasks;
     }
-    
+
     public async Task DeleteUsersTask(UsersTask usersTask)
     {
         _context.UsersTasks.Remove(usersTask);
         await _context.SaveChangesAsync();
     }
-    
+
     public async Task DeleteTaskDocument(TaskDocument taskDocument)
     {
+        _context.Documents.Remove(taskDocument.Documents);
         _context.TaskDocuments.Remove(taskDocument);
         await _context.SaveChangesAsync();
     }

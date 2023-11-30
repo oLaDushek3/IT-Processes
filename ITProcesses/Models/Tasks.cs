@@ -12,11 +12,11 @@ public partial class Tasks
 
     public int ProjectId { get; set; }
 
-    public DateTime DateCreateTimestamp { get; set; }
+    public DateTime DateCreateTimestamp { get; set; } = DateTime.UtcNow;
 
-    public DateTime DateStartTimestamp { get; set; }
+    public DateTime DateStartTimestamp { get; set; } = DateTime.UtcNow;
 
-    public DateTime DateEndTimestamp { get; set; }
+    public DateTime DateEndTimestamp { get; set; } = DateTime.UtcNow;
 
     public string Description { get; set; } = null!;
 
@@ -34,7 +34,7 @@ public partial class Tasks
 
     public virtual Tasks? BeforeTaskNavigation { get; set; }
 
-    public virtual ICollection<Tasks> InverseBeforeTaskNavigation { get; set; } = new List<Tasks>();
+    public virtual ICollection<Tasks> InverseBeforeTaskNavigation { get; set; } = new ObservableCollection<Tasks>();
 
     public virtual Project Project { get; set; } = null!;
 

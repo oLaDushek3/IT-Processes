@@ -16,7 +16,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
             <RowDefinition Height="8*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
@@ -34,14 +33,14 @@
                  Foreground="{DynamicResource PrimaryFontColorBrush}"
                  FontSize="18" />
 
-        <!--Archived-->
-        <CheckBox Grid.Row="2"
-                  Content="В архиве"
-                  Foreground="{DynamicResource PrimaryFontColorBrush}"
-                  IsChecked="{Binding EditableProject.Archived}" />
+        <!-- ~1~Archived@1@ -->
+        <!-- <CheckBox Grid.Row="2" -->
+        <!--           Content="В архиве" -->
+        <!--           Foreground="{DynamicResource PrimaryFontColorBrush}" -->
+        <!--           IsChecked="{Binding EditableProject.Archived}" /> -->
 
         <!--Description-->
-        <ScrollViewer Grid.Row="3"
+        <ScrollViewer Grid.Row="2"
                       Margin="0 10">
             <TextBox ui:ControlHelper.PlaceholderText="Описание..."
                      Text="{Binding EditableProject.Description, UpdateSourceTrigger=PropertyChanged}"
@@ -51,7 +50,7 @@
         </ScrollViewer>
 
         <!--Buttons-->
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="2*" />

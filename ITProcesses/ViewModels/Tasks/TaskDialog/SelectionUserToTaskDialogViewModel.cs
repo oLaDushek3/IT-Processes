@@ -8,15 +8,16 @@ using ITProcesses.Command;
 using ITProcesses.Dialog;
 using ITProcesses.Models;
 using ITProcesses.Services;
+using Type = ITProcesses.Models.Type;
 
 namespace ITProcesses.ViewModels;
 
 public class SelectionUserToTaskDialogViewModel : BaseViewModel
 {
     #region Field
-    
+
     private static readonly ItprocessesContext Context = new();
-    
+
     private readonly ITaskService _taskService = new TaskService(Context);
     private readonly IUserService _userService = new UserService(Context);
     private readonly DialogProvider _currentDialogProvider;
@@ -85,21 +86,16 @@ public class SelectionUserToTaskDialogViewModel : BaseViewModel
 
     //Commands
     public CommandHandler AcceptSelectCommand =>
-        new(selectedUsers => _currentDialogProvider.CloseDialog((selectedUsers as IList).Cast<User>().ToList()), 
+        new(selectedUsers => _currentDialogProvider.CloseDialog((selectedUsers as IList).Cast<User>().ToList()),
             selectedUsers => selectedUsers != null && (selectedUsers as IList).Count != 0);
 
     public CommandHandler CancelCommand => new(_ => _currentDialogProvider.CloseDialog(null));
 
-    public CommandHandler ClearSort => new(_ =>
-    {
-        SelectedSortRole = null;
-        _sortUserList = null;
-    });
+    public CommandHandler ClearSort => new(_ => SelectedSortRole = null);
 
     //Constructor
-    public SelectionUserToTaskDialogViewModel(DialogProvider currentDialogProvider, Guid taskId, ITaskService taskService)
+    public SelectionUserToTaskDialogViewModel(DialogProvider currentDialogProvider, Guid taskId)
     {
-        //_taskService = taskService;
         _currentDialogProvider = currentDialogProvider;
         GetData(taskId);
     }
@@ -109,7 +105,7 @@ public class SelectionUserToTaskDialogViewModel : BaseViewModel
     {
         _allUserList = await _taskService.GetUsersNotParticipatingInTask(taskId);
         DisplayedUserList = new ObservableCollection<User>(_allUserList);
-        
+
         RoleList = await _userService.GetAllRoles();
     }
 
@@ -124,7 +120,8 @@ public class SelectionUserToTaskDialogViewModel : BaseViewModel
         }
         else
         {
-            DisplayedUserList = new ObservableCollection<User>(_allUserList);
+            _searchUserList = null;
+            DisplayedUserList = Merger(_allUserList, new List<List<User>> { _searchUserList, _sortUserList });
         }
     }
 
@@ -139,7 +136,8 @@ public class SelectionUserToTaskDialogViewModel : BaseViewModel
         }
         else
         {
-            DisplayedUserList = new ObservableCollection<User>(_allUserList);
+            _sortUserList = null;
+            DisplayedUserList = Merger(_allUserList, new List<List<User>> { _searchUserList, _sortUserList });
         }
     }
 

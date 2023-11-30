@@ -8,21 +8,6 @@ public class ConfirmDialogViewModel : BaseViewModel
     #region Field
 
     private readonly DialogProvider _currentDialogProvider;
-    private string _message;
-
-    #endregion
-
-    #region Properties
-
-    public string Message
-    {
-        get => _message;
-        set
-        {
-            _message = value;
-            OnPropertyChanged();
-        }
-    }
 
     #endregion
 
@@ -30,10 +15,9 @@ public class ConfirmDialogViewModel : BaseViewModel
     public CommandHandler ConfirmCommand => new(obj => Confirm(obj as bool? ?? false));
     
     //Constructor
-    public ConfirmDialogViewModel(DialogProvider dialogProvider, string message)
+    public ConfirmDialogViewModel(DialogProvider dialogProvider)
     {
         _currentDialogProvider = dialogProvider;
-        Message = message;
     }
     
     //Methods

@@ -63,8 +63,7 @@
                   Grid.Column="0"
                   Margin="10 10 10 5">
 
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
                     <!--Search-->
                     <TextBox Height="35"
                              Width="175"

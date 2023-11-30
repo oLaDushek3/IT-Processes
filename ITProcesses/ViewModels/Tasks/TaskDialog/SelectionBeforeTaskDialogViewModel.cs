@@ -90,11 +90,7 @@ public class SelectionBeforeTaskDialogViewModel : BaseViewModel
 
     public CommandHandler CancelCommand => new(_ => _currentDialogProvider.CloseDialog(null));
 
-    public CommandHandler ClearSort => new(_ =>
-    {
-        SelectedSortType = null;
-        _sortTaskList = null;
-    });
+    public CommandHandler ClearSort => new(_ => SelectedSortType = null);
 
     //Constructor
     public SelectionBeforeTaskDialogViewModel(DialogProvider currentDialogProvider)
@@ -123,7 +119,8 @@ public class SelectionBeforeTaskDialogViewModel : BaseViewModel
         }
         else
         {
-            DisplayedTaskList = new ObservableCollection<Tasks>(_allTaskList);
+            _searchTaskList = null;
+            DisplayedTaskList = Merger(_allTaskList, new List<List<Tasks>> { _searchTaskList, _sortTaskList });
         }
     }
 
@@ -138,7 +135,8 @@ public class SelectionBeforeTaskDialogViewModel : BaseViewModel
         }
         else
         {
-            DisplayedTaskList = new ObservableCollection<Tasks>(_allTaskList);
+            _sortTaskList = null;
+            DisplayedTaskList = Merger(_allTaskList, new List<List<Tasks>> { _searchTaskList, _sortTaskList });
         }
     }
 

@@ -132,15 +132,15 @@
                             <GridViewColumn Header="Кол-во задач"
                                             DisplayMemberBinding="{Binding Tasks.Count}" />
 
-                            <GridViewColumn Header="В архиве">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsChecked="{Binding Archived}"
-                                                  Style="{ui:StaticResource DataGridCheckBoxStyle}"
-                                                  IsEnabled="False" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                            <!-- <GridViewColumn Header="В архиве"> -->
+                            <!--     <GridViewColumn.CellTemplate> -->
+                            <!--         <DataTemplate> -->
+                            <!--             <CheckBox IsChecked="{Binding Archived}" -->
+                            <!--                       Style="{ui:StaticResource DataGridCheckBoxStyle}" -->
+                            <!--                       IsEnabled="False" /> -->
+                            <!--         </DataTemplate> -->
+                            <!--     </GridViewColumn.CellTemplate> -->
+                            <!-- </GridViewColumn> -->
 
                         </GridView>
                     </ListView.View>
@@ -201,7 +201,6 @@
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*" />
-                            <RowDefinition Height="1*" />
                             <RowDefinition Height="8*" />
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
@@ -212,15 +211,15 @@
                                    Foreground="{DynamicResource PrimaryFontColorBrush}"
                                    FontSize="18" />
 
-                        <!--Archived-->
-                        <CheckBox Grid.Row="1"
-                                  Content="В архиве"
-                                  IsEnabled="False"
-                                  Foreground="{DynamicResource PrimaryFontColorBrush}"
-                                  IsChecked="{Binding SelectedProject.Archived}" />
+                        <!-- ~1~Archived@1@ -->
+                        <!-- <CheckBox Grid.Row="1" -->
+                        <!--           Content="В архиве" -->
+                        <!--           IsEnabled="False" -->
+                        <!--           Foreground="{DynamicResource PrimaryFontColorBrush}" -->
+                        <!--           IsChecked="{Binding SelectedProject.Archived}" /> -->
 
                         <!--Description-->
-                        <ScrollViewer Grid.Row="2"
+                        <ScrollViewer Grid.Row="1"
                                       Margin="0 10">
                             <TextBlock TextWrapping="Wrap"
                                        Text="{Binding SelectedProject.Description}"
@@ -229,7 +228,7 @@
                         </ScrollViewer>
 
                         <!--AcceptButton-->
-                        <Button Grid.Row="3" Style="{DynamicResource MainRoundedButton}"
+                        <Button Grid.Row="2" Style="{DynamicResource MainRoundedButton}"
                                 Content="Выбрать"
                                 Height="35"
                                 HorizontalAlignment="Stretch"

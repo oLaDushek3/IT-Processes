@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
              xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:behavior="clr-namespace:AttachedCommandBehavior;assembly=AttachedCommandBehavior"
              mc:Ignorable="d"
              d:DesignHeight="650" d:DesignWidth="1060"
              Background="{DynamicResource PrimaryBackColorBrush}"
@@ -80,8 +81,8 @@
 
             <Grid Margin="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
                     <RowDefinition Height="5*" />
                     <RowDefinition Height="5*" />
                 </Grid.RowDefinitions>
@@ -140,6 +141,16 @@
                              ItemsSource="{Binding SelectedTask.TaskDocuments}"
                              Background="{DynamicResource SecondaryBackColorBrush}">
 
+                        <!--Double click on item-->
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                <Setter Property="behavior:CommandBehavior.Event" Value="MouseDoubleClick" />
+                                <Setter Property="behavior:CommandBehavior.Command" 
+                                        Value="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.OpenDocumentCommand}" />
+                                <Setter Property="behavior:CommandBehavior.CommandParameter" Value="{Binding}" />
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        
                         <ListBox.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="10" />
@@ -186,19 +197,38 @@
                             <DataTemplate>
                                 <Grid HorizontalAlignment="Stretch">
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="7*" />
                                         <ColumnDefinition Width="3*" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Column="0"
-                                               Text="{Binding User.Username}"
-                                               HorizontalAlignment="Left" />
+                                    <Rectangle Grid.Column="0"
+                                               Width="40"
+                                               Height="40"
+                                               RadiusX="5"
+                                               RadiusY="5"
+                                               HorizontalAlignment="Left">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{Binding User.Image}"
+                                                        RenderOptions.BitmapScalingMode="HighQuality" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+
                                     <TextBlock Grid.Column="1"
-                                               Text="{Binding User.Role.Name}"
-                                               HorizontalAlignment="Right" />
+                                               Margin="10 0 0 0"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Text="{Binding User.Username}" />
+
+                                    <TextBlock Grid.Column="2"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Right"
+                                               Text="{Binding User.Role.Name}" />
+
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
+                        
                     </ListBox>
                 </Grid>
 

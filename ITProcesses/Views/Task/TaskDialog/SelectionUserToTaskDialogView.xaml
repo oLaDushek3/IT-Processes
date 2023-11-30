@@ -36,6 +36,7 @@
                                Foreground="{DynamicResource PrimaryFontColorBrush}"
                                FontSize="21" />
 
+                    <!--Buttons-->
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Right">
                         
@@ -62,8 +63,7 @@
                   Grid.Column="0"
                   Margin="10 10 10 5">
 
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
                     <!--Search-->
                     <TextBox Height="35"
                              Width="175"
@@ -162,7 +162,6 @@
 
             </Grid>
             
-            <!--Buttons-->
         </Grid>
         
     </Border>
