@@ -8,7 +8,6 @@
              xmlns:behavior="clr-namespace:AttachedCommandBehavior;assembly=AttachedCommandBehavior"
              mc:Ignorable="d"
              d:DesignHeight="650" d:DesignWidth="1060"
-             Background="{DynamicResource PrimaryBackColorBrush}"
              d:DataContext="{d:DesignInstance Type=viewModels:TaskViewModel, IsDesignTimeCreatable=False}">
 
     <Grid>
@@ -42,17 +41,23 @@
                     <Separator Margin="5 5"
                                Width="2"
                                Background="{DynamicResource SecondaryBackColorBrush}"
-                               Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                               Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" 
+                               Visibility="{Binding CurrentMainViewModel.User, 
+                               Converter={StaticResource UserRoleToVisibilityConverter}}"/>
 
                     <Button Style="{DynamicResource IconButton}"
                             Tag="{StaticResource EditRegular}"
                             Margin="5 0"
-                            Command="{Binding EditTaskCommand}" />
+                            Command="{Binding EditTaskCommand}" 
+                            Visibility="{Binding CurrentMainViewModel.User, 
+                            Converter={StaticResource UserRoleToVisibilityConverter}}"/>
 
                     <Button Style="{DynamicResource IconButton}"
                             Tag="{StaticResource DeleteRegular}"
                             Margin="5 0"
-                            Command="{Binding DeleteTaskCommand}" />
+                            Command="{Binding DeleteTaskCommand}" 
+                            Visibility="{Binding CurrentMainViewModel.User, 
+                            Converter={StaticResource UserRoleToVisibilityConverter}}"/>
 
                 </StackPanel>
             </Grid>

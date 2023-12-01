@@ -21,7 +21,8 @@ public class SaveInfo
     {
         UserName = null,
         Password = null,
-        CurrentProject = 0
+        CurrentProject = 0,
+        CurrentTheme = "UIDarkColors"
     };
 
     public static void CreateAppSettingsDefault()
@@ -29,7 +30,7 @@ public class SaveInfo
         SaveSettings(DefaultSettings);
     }
 
-    private static AppSettings? ReadAppSettings()
+    public static AppSettings? ReadAppSettings()
     {
         if (File.Exists(_appSettings))
         {

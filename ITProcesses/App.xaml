@@ -10,12 +10,13 @@
             <helpersAndConverters:EmptinessToVisibilityConverter x:Key="EmptinessToVisibilityConverter"/>
             <helpersAndConverters:UserFullNameToShortConverter x:Key="UserFullNameToShortConverter"/>
             <helpersAndConverters:EmptyImageConverter x:Key="EmptyImageConverter"/>
+            <helpersAndConverters:UserRoleToVisibilityConverter x:Key="UserRoleToVisibilityConverter"/>
             
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/UIDarkColors.xaml"/>
                 <ui:ThemeResources />
                 <ui:XamlControlsResources />
                 <ResourceDictionary Source="/Resources/ViewResources.xaml"/>
-                <ResourceDictionary Source="/Resources/UIColors.xaml"/>
                 <ResourceDictionary Source="/Resources/Icons.xaml"/>
                 <ResourceDictionary Source="/Resources/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="/Resources/CheckBoxStyle.xaml"/>

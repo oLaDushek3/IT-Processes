@@ -19,7 +19,7 @@ public class TaskViewModel : BaseViewModel
 
     private readonly ItprocessesContext _context = new();
 
-    private readonly MainViewModel _currentMainViewModel;
+    private  MainViewModel _currentMainViewModel;
     private readonly ITaskService _taskService;
     private readonly DialogProvider _currentDialogProvider;
 
@@ -29,6 +29,16 @@ public class TaskViewModel : BaseViewModel
 
     #region Properties
 
+    public MainViewModel CurrentMainViewModel
+    {
+        get => _currentMainViewModel;
+        private set
+        {
+            _currentMainViewModel = value;
+            OnPropertyChanged();
+        }
+    }
+    
     public Tasks SelectedTask
     {
         get => _currentTask;
@@ -57,7 +67,7 @@ public class TaskViewModel : BaseViewModel
     {
         _taskService = new TaskService(_context);
 
-        _currentMainViewModel = currentMainViewModel;
+        CurrentMainViewModel = currentMainViewModel;
         _currentDialogProvider = currentMainViewModel.CurrentMainWindowViewModel.MainDialogProvider;
         GetData(selectedTaskGuid);
     }

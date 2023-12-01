@@ -67,4 +67,12 @@
         <views:CreateUserDialogView/>
     </DataTemplate>
     
+    <DataTemplate DataType="{x:Type viewModels:SmallProfileCardViewModel}">
+        <views:SmallProfileCardView/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewModels:ProfileCardDialogViewMode}">
+        <views:ProfileCardDialogView/>
+    </DataTemplate>
+    
 </ResourceDictionary>

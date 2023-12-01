@@ -58,6 +58,11 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
+      <Page Update="Resources\UILightColors.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
     </ItemGroup>
 
     <ItemGroup>
@@ -84,6 +89,8 @@
       <None Remove="Resources\UsersDefaultPhoto.png" />
       <None Remove="Resources\UserWithoutImage.png" />
       <Resource Include="Resources\UserWithoutImage.png" />
+      <None Remove="Resources\BackSmallLogo.png" />
+      <Resource Include="Resources\BackSmallLogo.png" />
     </ItemGroup>
 
 

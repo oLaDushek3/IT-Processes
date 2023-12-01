@@ -19,6 +19,8 @@ namespace ITProcesses
 
         protected async override void OnStartup(StartupEventArgs e)
         {
+            ChangeTheme(new Uri("Resources/" + Settings.CurrentTheme + ".xaml", UriKind.RelativeOrAbsolute));
+            
             base.OnStartup(e);
             var mainWindow = new MainWindow();
             mainWindow.DataContext = new MainWindowViewModel(await WriteUserFromJson());
@@ -37,6 +39,13 @@ namespace ITProcesses
             {
                 return null;
             }
+        }
+        
+        private ResourceDictionary ThemeDictionary => Resources.MergedDictionaries[1];
+
+        public void ChangeTheme(Uri uri)
+        {
+            ThemeDictionary.Source = uri;
         }
     }
 }

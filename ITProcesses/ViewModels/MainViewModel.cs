@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using ITProcesses.Command;
 using ITProcesses.JsonSaveInfo;
 using ITProcesses.Models;
@@ -21,6 +22,7 @@ public class MainViewModel : BaseViewModel
     private BaseViewModel? _currentChildView;
 
     private User _user;
+    private BaseViewModel _userProfileView;
     private Project _currentProject;
 
     private ObservableCollection<Tasks> _usersTaskList;
@@ -55,6 +57,16 @@ public class MainViewModel : BaseViewModel
         set
         {
             _user = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    public BaseViewModel UserProfileView
+    {
+        get => _userProfileView;
+        set
+        {
+            _userProfileView = value;
             OnPropertyChanged();
         }
     }
@@ -97,10 +109,13 @@ public class MainViewModel : BaseViewModel
     //Constructor
     public MainViewModel(MainWindowViewModel currentMainViewModel, User user)
     {
+        CurrentMainWindowViewModel = currentMainViewModel;
+        
+        User = user;
+        UserProfileView = new SmallProfileCardViewModel(User, CurrentMainWindowViewModel.MainDialogProvider, CurrentMainWindowViewModel);
+        
         _projectService = new ProjectService(_context);
         _taskService = new TaskService(_context);
-        _currentMainWindowViewModel = currentMainViewModel;
-        _user = user;
         GetData();
     }
 

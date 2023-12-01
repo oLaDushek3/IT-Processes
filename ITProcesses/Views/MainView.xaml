@@ -63,14 +63,7 @@
                            Background="{DynamicResource SecondaryBackColorBrush}"
                            Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
 
-                <Button Grid.Column="4"
-                        Style="{DynamicResource MainRoundedButton}"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Center"
-                        Width="160"
-                        Height="40"
-                        Content="Выйти"
-                        Command="{Binding LogOutCommand}" />
+                <ContentControl  Grid.Column="4" Content="{Binding UserProfileView}" />
             </Grid>
         </Border>
 
@@ -96,8 +89,9 @@
                                  Content="Пользователи"
                                  Margin="0 2.5"
                                  Padding="10 0"
-                                 Command="{Binding OpenUsersDialogListCommand}" />
-                    
+                                 Command="{Binding OpenUsersDialogListCommand}"
+                                 Visibility="{Binding User, Converter={StaticResource UserRoleToVisibilityConverter}}" />
+
                     <RadioButton Style="{DynamicResource NavigationButton}"
                                  Tag="{DynamicResource TaskList}"
                                  GroupName="NavigationButtons"
@@ -141,8 +135,13 @@
                           HorizontalAlignment="Center" />
 
             <!--Content section-->
-            <ContentControl Grid.Column="2"
-                            Content="{Binding CurrentChildView}" />
+            <Grid Grid.Column="2">
+                <Image Source="/Resources/BackSmallLogo.png"
+                       RenderOptions.BitmapScalingMode="HighQuality"
+                       Margin="50 50"
+                       Opacity="1" />
+                <ContentControl Content="{Binding CurrentChildView}" />
+            </Grid>
         </Grid>
 
     </Grid>

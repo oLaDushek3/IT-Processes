@@ -9,4 +9,6 @@ public class AppSettings
     [JsonPropertyName("password")] public string? Password { get; set; } = string.Empty;
     
     [JsonPropertyName("currentProject")] public int CurrentProject { get; set; }
+    
+    [JsonPropertyName("currentTheme")] public string CurrentTheme { get; set; } = string.Empty;
 }

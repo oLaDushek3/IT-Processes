@@ -9,7 +9,6 @@
              xmlns:ui="http://schemas.modernwpf.com/2019"
              mc:Ignorable="d"
              d:DesignHeight="650" d:DesignWidth="1060"
-             Background="{DynamicResource PrimaryBackColorBrush}"
              d:DataContext="{d:DesignInstance Type=viewModels:TasksListViewModel, IsDesignTimeCreatable=False}">
 
     <StackPanel Margin="10">
@@ -62,7 +61,9 @@
             </StackPanel>
             
             <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right">
+                        HorizontalAlignment="Right"
+                        Visibility="{Binding CurrentMainViewModel.User, 
+                        Converter={StaticResource UserRoleToVisibilityConverter}}">
                 <Separator Margin="5 5"
                            Width="2"
                            Background="{DynamicResource SecondaryBackColorBrush}"

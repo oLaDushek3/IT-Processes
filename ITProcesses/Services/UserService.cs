@@ -22,7 +22,7 @@ public class UserService : IUserService
 
     public async Task<User> Login(string userName, string password)
     {
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == userName);
+        var user = await _context.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Username == userName);
 
         if (user == null)
             throw new Exception("Неверный логин или пароль!");
@@ -75,7 +75,9 @@ public class UserService : IUserService
 
     public async Task<List<User>> GetAllUsers()
     {
-        return await _context.Users.Include(u => u.Role).ToListAsync();
+        return await _context.Users.
+            Include(u => u.Role).
+            Include(u => u.Tasks).ToListAsync();
     }
 
     public async Task<User> GetUserById(Guid userId)

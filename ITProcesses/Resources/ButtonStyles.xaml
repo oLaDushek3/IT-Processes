@@ -75,6 +75,7 @@
         <!--ButtonAtRest-->
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource SecondaryFontColorBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="MinHeight" Value="35" />
         <Setter Property="Template">
             <Setter.Value>
@@ -85,7 +86,7 @@
                         <ContentControl VerticalAlignment="Center"
                                         Margin="{Binding RelativeSource={RelativeSource AncestorType=RadioButton}, Path=Padding}">
                             <StackPanel Orientation="Horizontal"
-                                        HorizontalAlignment="Left">
+                                        HorizontalAlignment="{Binding RelativeSource={RelativeSource AncestorType=RadioButton}, Path=HorizontalContentAlignment}">
                                 
                                 <Viewbox Margin="0 0 10 0" Height="18" Width="18">
                                     <Path Data="{TemplateBinding Tag}"

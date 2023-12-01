@@ -17,7 +17,7 @@ public class TasksListViewModel : BaseViewModel
 {
     #region Fields
 
-    private readonly MainViewModel _currentMainViewModel;
+    private MainViewModel _currentMainViewModel;
 
     private readonly ItprocessesContext _context = new();
     private readonly ITaskService _taskService;
@@ -41,6 +41,17 @@ public class TasksListViewModel : BaseViewModel
 
     #region Properties
 
+    
+    public MainViewModel CurrentMainViewModel
+    {
+        get => _currentMainViewModel;
+        private set
+        {
+            _currentMainViewModel = value;
+            OnPropertyChanged();
+        }
+    }
+    
     public ObservableCollection<Tasks> DisplayedTaskList
     {
         get => _displayedDisplayedTaskList;
@@ -112,7 +123,7 @@ public class TasksListViewModel : BaseViewModel
     public TasksListViewModel(MainViewModel currentMainViewModel)
     {
         _taskService = new TaskService(_context);
-        _currentMainViewModel = currentMainViewModel;
+        CurrentMainViewModel = currentMainViewModel;
         _displayedDisplayedTaskList = new ObservableCollectionListSource<Tasks>();
 
         GetData();
