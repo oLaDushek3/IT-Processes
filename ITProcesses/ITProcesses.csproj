@@ -81,6 +81,9 @@
       <None Remove="Resources\SmallLogo.png" />
       <Resource Include="Resources\SmallLogo.png" />
       <None Remove="Resources\3270-Regular.otf" />
+      <None Remove="Resources\UsersDefaultPhoto.png" />
+      <None Remove="Resources\UserWithoutImage.png" />
+      <Resource Include="Resources\UserWithoutImage.png" />
     </ItemGroup>
 
 

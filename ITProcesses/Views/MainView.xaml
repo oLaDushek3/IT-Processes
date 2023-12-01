@@ -86,18 +86,25 @@
             <ScrollViewer Grid.Column="0"
                           HorizontalScrollBarVisibility="Visible"
                           VerticalScrollBarVisibility="Visible"
-                          Padding="15 0">
+                          Padding="15 7.5">
 
                 <StackPanel>
 
+                    <RadioButton Style="{DynamicResource NavigationButton}"
+                                 Tag="{DynamicResource PersonRegular}"
+                                 GroupName="NavigationButtons"
+                                 Content="Пользователи"
+                                 Margin="0 2.5"
+                                 Padding="10 0"
+                                 Command="{Binding OpenUsersDialogListCommand}" />
+                    
                     <RadioButton Style="{DynamicResource NavigationButton}"
                                  Tag="{DynamicResource TaskList}"
                                  GroupName="NavigationButtons"
                                  Content="Список задач"
                                  Margin="0 2.5"
                                  Padding="10 0"
-                                 IsChecked="True"
-                                 Command="{Binding OpenTasksListCommand}" />
+                                 Command="{Binding OpenTasksListCommand }" />
 
                     <TreeView>
                         <TreeViewItem Style="{DynamicResource HeaderNavigationTreeViewItemStyle}"

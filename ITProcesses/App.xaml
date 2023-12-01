@@ -8,6 +8,8 @@
             
             <BooleanToVisibilityConverter x:Key="BoolToVisible"/>
             <helpersAndConverters:EmptinessToVisibilityConverter x:Key="EmptinessToVisibilityConverter"/>
+            <helpersAndConverters:UserFullNameToShortConverter x:Key="UserFullNameToShortConverter"/>
+            <helpersAndConverters:EmptyImageConverter x:Key="EmptyImageConverter"/>
             
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemeResources />

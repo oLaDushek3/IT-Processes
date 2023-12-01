@@ -38,10 +38,11 @@ public class UserService : IUserService
         var us = await _context.Users.FirstOrDefaultAsync(u => u.Username == user.Username);
 
         if (us != null)
-            throw new Exception("Данный пользователь уже существует");
+            throw new Exception("Логин занят");
 
         if (!ValidatePassword(user.Password))
             throw new Exception("Неверный формат пароля");
+        user.Password = Hash.Md5.HashPassword(user.Password);
 
         user.Id = Guid.NewGuid();
 
@@ -56,6 +57,15 @@ public class UserService : IUserService
 
     public async Task<User> Update(User user)
     {
+        var us = await _context.Users.FirstOrDefaultAsync(u => u.Username == user.Username);
+
+        if (us != null)
+            throw new Exception("Логин занят");
+        
+        if (!ValidatePassword(user.Password))
+            throw new Exception("Неверный формат пароля");
+        user.Password = Hash.Md5.HashPassword(user.Password);
+        
         _context.Users.Update(user);
 
         await _context.SaveChangesAsync();

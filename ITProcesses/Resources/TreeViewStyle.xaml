@@ -237,11 +237,12 @@
                                             Orientation="Horizontal"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Left">
-                                        
-                                                <Path 
-                                                    Data="{TemplateBinding Tag}"
-                                                    Fill="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=Foreground}" 
-                                                    Margin="0 0 10 0"/>
+                                                
+                                                <Viewbox Margin="0 0 10 0" Height="18" Width="18">
+                                                    <Path Data="{TemplateBinding Tag}"
+                                                          Fill="{TemplateBinding Foreground}"
+                                                          Stretch="Uniform" />
+                                                </Viewbox>
                                                                 
                                                 <TextBlock 
                                                     Text="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=Header}" 

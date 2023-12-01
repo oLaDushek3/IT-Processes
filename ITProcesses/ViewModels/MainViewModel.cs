@@ -86,6 +86,9 @@ public class MainViewModel : BaseViewModel
     
     public CommandHandler LogOutCommand => new(_ => LogOutCommandExecute());
 
+    public CommandHandler OpenUsersDialogListCommand => new(_ => CurrentMainWindowViewModel.MainDialogProvider.ShowDialog(
+        new UserDialogViewModel(CurrentMainWindowViewModel.MainDialogProvider, this)));
+    
     public CommandHandler OpenTasksListCommand => new(_ => ChangeView(new TasksListViewModel(this)));
 
     public CommandHandler OpenTaskCommand =>

@@ -8,7 +8,7 @@
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="515" d:DesignWidth="310"
-             d:DataContext="{d:DesignInstance Type=viewModels:CreateProjectViewModel, IsDesignTimeCreatable=False}"
+             d:DataContext="{d:DesignInstance Type=viewModels:CreateProjectDialogViewModel, IsDesignTimeCreatable=False}"
              Background="#161819">
     <Grid Margin="10">
 
@@ -64,6 +64,6 @@
                     Content="Создать"
                     Command="{Binding CreateCommand}" />
         </Grid>
-
+        
     </Grid>
 </UserControl>

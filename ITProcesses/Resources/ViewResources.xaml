@@ -27,7 +27,7 @@
         <views:ProjectDialogView/>
     </DataTemplate>
     
-    <DataTemplate DataType="{x:Type viewModels:CreateProjectViewModel}">
+    <DataTemplate DataType="{x:Type viewModels:CreateProjectDialogViewModel}">
         <views:CreateProjectDialogView/>
     </DataTemplate>
     
@@ -53,6 +53,18 @@
     
     <DataTemplate DataType="{x:Type viewModels:SelectionBeforeTaskDialogViewModel}">
         <views:SelectionBeforeTaskDialogView/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewModels:UserDialogViewModel}">
+        <views:UserDialogView/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewModels:EditUserDialogViewModel}">
+        <views:EditUserDialogView/>
+    </DataTemplate>    
+    
+    <DataTemplate DataType="{x:Type viewModels:CreateUserDialogViewModel}">
+        <views:CreateUserDialogView/>
     </DataTemplate>
     
 </ResourceDictionary>

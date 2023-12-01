@@ -93,7 +93,7 @@
                             Width="20"
                             Margin="5 0"
                             Tag="{StaticResource DismissRegular}"
-                            Command="{Binding ClearSort}" />
+                            Command="{Binding ClearSortByRoleCommand}" />
                     
                 </StackPanel>
 
@@ -149,7 +149,7 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="Имя"
+                            <GridViewColumn Header="Никнейм"
                                             DisplayMemberBinding="{Binding Username}"/>
                             
                             <GridViewColumn Header="Роль"

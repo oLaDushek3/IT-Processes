@@ -16,10 +16,10 @@ public class SelectionUserToTaskDialogViewModel : BaseViewModel
 {
     #region Field
 
-    private static readonly ItprocessesContext Context = new();
+    private readonly ItprocessesContext _context = new();
 
-    private readonly ITaskService _taskService = new TaskService(Context);
-    private readonly IUserService _userService = new UserService(Context);
+    private readonly ITaskService _taskService;
+    private readonly IUserService _userService;
     private readonly DialogProvider _currentDialogProvider;
 
     private List<Role> _roleList;
@@ -91,11 +91,13 @@ public class SelectionUserToTaskDialogViewModel : BaseViewModel
 
     public CommandHandler CancelCommand => new(_ => _currentDialogProvider.CloseDialog(null));
 
-    public CommandHandler ClearSort => new(_ => SelectedSortRole = null);
+    public CommandHandler ClearSortByRoleCommand => new(_ => SelectedSortRole = null);
 
     //Constructor
     public SelectionUserToTaskDialogViewModel(DialogProvider currentDialogProvider, Guid taskId)
     {
+        _taskService = new TaskService(_context);
+        _userService = new UserService(_context);
         _currentDialogProvider = currentDialogProvider;
         GetData(taskId);
     }

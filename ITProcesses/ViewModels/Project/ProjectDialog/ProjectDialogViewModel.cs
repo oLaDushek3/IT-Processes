@@ -103,7 +103,7 @@ public class ProjectDialogViewModel : BaseViewModel
     {
         var dialogResult =
             (Project?)await CreateEditDialogProvider.ShowDialog(
-                new CreateProjectViewModel(this, CreateEditDialogProvider));
+                new CreateProjectDialogViewModel(this, CreateEditDialogProvider));
 
         if (dialogResult == null) return;
 
