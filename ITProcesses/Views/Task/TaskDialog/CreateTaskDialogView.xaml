@@ -91,7 +91,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Text="Родительская задча: "
+                    <TextBlock Grid.Column="0" Text="Родительская задача: "
                                Foreground="{DynamicResource PrimaryFontColorBrush}"
                                FontSize="20" />
 
@@ -117,6 +117,8 @@
                 <TextBox Grid.Column="0"
                          Grid.Row="1"
                          Grid.ColumnSpan="2"
+                         Foreground="{DynamicResource PrimaryFontColorBrush}"
+                         ui:ControlHelper.PlaceholderForeground="{DynamicResource PrimaryFontColorBrush}"
                          ui:ControlHelper.PlaceholderText="Название задачи"
                          Text="{Binding CreatedTask.Name}" />
 
@@ -125,6 +127,8 @@
                             Grid.Row="2"
                             Margin="0 5 5 5"
                             HorizontalAlignment="Stretch"
+                            Foreground="{DynamicResource PrimaryFontColorBrush}"
+                            ui:ControlHelper.PlaceholderForeground="{DynamicResource PrimaryFontColorBrush}"
                             ui:ControlHelper.PlaceholderText="Дата начала"
                             SelectedDate="{Binding CreatedTask.DateStartTimestamp}"
                             SelectedDateFormat="Long" />
@@ -134,6 +138,8 @@
                             Grid.Row="2"
                             Margin="5 5 0 5"
                             HorizontalAlignment="Stretch"
+                            Foreground="{DynamicResource PrimaryFontColorBrush}"
+                            ui:ControlHelper.PlaceholderForeground="{DynamicResource PrimaryFontColorBrush}"
                             ui:ControlHelper.PlaceholderText="Дата окончания"
                             SelectedDate="{Binding CreatedTask.DateEndTimestamp}"
                             SelectedDateFormat="Long" />
@@ -142,6 +148,8 @@
                 <TextBox Grid.Column="0"
                          Grid.Row="3"
                          Grid.ColumnSpan="2"
+                         Foreground="{DynamicResource PrimaryFontColorBrush}"
+                         ui:ControlHelper.PlaceholderForeground="{DynamicResource PrimaryFontColorBrush}"
                          ui:ControlHelper.PlaceholderText="Описание задачи"
                          Text="{Binding CreatedTask.Description}"
                          TextWrapping="Wrap" />
@@ -186,7 +194,9 @@
                                   SelectedItem="{Binding CreatedTask.Type}" >
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding Name}"
+                                           Foreground="{DynamicResource PrimaryFontColorBrush}"
+                                           />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>

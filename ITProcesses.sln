@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProcesses", "ITProcesses\ITProcesses.csproj", "{CC26D5E9-E5E5-47C5-9639-951A538A3E71}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{057675FD-A7B4-4646-B512-42DC6A45620E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITP.API", "ITP.API\ITP.API.csproj", "{96B0A5FF-FC87-44BF-8545-962A56A85EC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,12 @@ Global
 		{CC26D5E9-E5E5-47C5-9639-951A538A3E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC26D5E9-E5E5-47C5-9639-951A538A3E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC26D5E9-E5E5-47C5-9639-951A538A3E71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96B0A5FF-FC87-44BF-8545-962A56A85EC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96B0A5FF-FC87-44BF-8545-962A56A85EC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96B0A5FF-FC87-44BF-8545-962A56A85EC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96B0A5FF-FC87-44BF-8545-962A56A85EC8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{96B0A5FF-FC87-44BF-8545-962A56A85EC8} = {057675FD-A7B4-4646-B512-42DC6A45620E}
 	EndGlobalSection
 EndGlobal

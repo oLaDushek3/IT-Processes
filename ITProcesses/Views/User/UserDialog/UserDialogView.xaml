@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
              xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d"
              Height="575" Width="925"
              d:DataContext="{d:DesignInstance Type=viewModels:UserDialogViewModel, IsDesignTimeCreatable=False}">
@@ -238,6 +239,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="55" />
                             <RowDefinition Height="55" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
                         <Grid Grid.Row="0">
@@ -288,7 +290,7 @@
                                            Text="{Binding SelectedUser.MiddleName, UpdateSourceTrigger=PropertyChanged}"
                                            Foreground="{DynamicResource PrimaryFontColorBrush}"
                                            FontSize="18" />
-
+                                
                             </Grid>
 
                         </Grid>
@@ -318,6 +320,26 @@
                                        FontSize="20"
                                        Text="{Binding SelectedUser.Role.Name}" />
                         </Grid>
+                        
+                        
+                        <!--<lvc:CartesianChart Grid.Row="3" 
+                                            Series="{Binding SelectedUser.UsersTasks}"
+                                            LegendLocation="Bottom">
+                            <lvc:CartesianChart.AxisX>
+                                
+                            </lvc:CartesianChart.AxisX>
+                        </lvc:CartesianChart>-->
+                        
+                        <lvc:PieChart Grid.Row="3"
+                            Series="{Binding SelectedUserTasks}" 
+                            LegendLocation="Right" InnerRadius="100" Margin="0 15">
+                            <lvc:PieChart.ChartLegend>
+                                <lvc:DefaultLegend BulletSize="20"></lvc:DefaultLegend>
+                            </lvc:PieChart.ChartLegend>
+                            <lvc:PieChart.DataTooltip>
+                                <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
+                            </lvc:PieChart.DataTooltip>
+                        </lvc:PieChart>
                     </Grid>
 
                     <!--Create/Edit dialog -->

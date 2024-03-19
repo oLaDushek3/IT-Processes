@@ -21,6 +21,8 @@ public partial class User
 
     public string? Image { get; set; }
 
+    public virtual ICollection<ChatMessage> ChatMessages { get; set; } = new List<ChatMessage>();
+
     public virtual ICollection<Project> Projects { get; set; } = new List<Project>();
 
     public virtual Role? Role { get; set; }

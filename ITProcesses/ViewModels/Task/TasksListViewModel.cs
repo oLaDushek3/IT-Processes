@@ -25,6 +25,7 @@ public class TasksListViewModel : BaseViewModel
     private ObservableCollection<Tasks> _displayedDisplayedTaskList;
     private List<Tasks> _allTasksList;
     private Tasks _selectedTask;
+    private User _user;
 
     //Search and sort
     private string _searchString;
@@ -124,6 +125,7 @@ public class TasksListViewModel : BaseViewModel
     {
         _taskService = new TaskService(_context);
         CurrentMainViewModel = currentMainViewModel;
+        _user = currentMainViewModel.User;
         _displayedDisplayedTaskList = new ObservableCollectionListSource<Tasks>();
 
         GetData();

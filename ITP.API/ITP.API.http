@@ -1,0 +1,6 @@
+@ITP.API_HostAddress = http://localhost:5155
+
+GET {{ITP.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

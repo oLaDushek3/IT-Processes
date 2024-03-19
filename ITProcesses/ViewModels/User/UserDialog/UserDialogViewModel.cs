@@ -6,6 +6,9 @@ using ITProcesses.Command;
 using ITProcesses.Dialog;
 using ITProcesses.Models;
 using ITProcesses.Services;
+using LiveCharts;
+using LiveCharts.Defaults;
+using LiveCharts.Wpf;
 
 namespace ITProcesses.ViewModels;
 
@@ -22,6 +25,7 @@ public class UserDialogViewModel : BaseViewModel
     private List<Role> _roleList;
     private List<User> _allUserList;
     private ObservableCollection<User> _displayedUserList;
+    private SeriesCollection  _selectedUserTasks = new();
     private User? _selectedUser;
 
     //Search and sort
@@ -46,6 +50,17 @@ public class UserDialogViewModel : BaseViewModel
         {
             _selectedUser = value;
             OnPropertyChanged();
+            foreach (var usersTask in _selectedUser.UsersTasks)
+            {
+                SelectedUserTasks.Add(           
+                    new PieSeries
+                {
+                    Title = usersTask.Task.Name,
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(8) },
+                    DataLabels = true
+                });
+            }
+            SelectedUserTasks = new SeriesCollection(_selectedUser.UsersTasks);
         }
     }
 
@@ -65,6 +80,15 @@ public class UserDialogViewModel : BaseViewModel
         set
         {
             _displayedUserList = value;
+            OnPropertyChanged();
+        }
+    }
+    public LiveCharts.SeriesCollection SelectedUserTasks
+    {
+        get => _selectedUserTasks;
+        set
+        {
+            _selectedUserTasks = value;
             OnPropertyChanged();
         }
     }

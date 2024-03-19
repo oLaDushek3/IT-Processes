@@ -58,6 +58,16 @@
                             Command="{Binding DeleteTaskCommand}" 
                             Visibility="{Binding CurrentMainViewModel.User, 
                             Converter={StaticResource UserRoleToVisibilityConverter}}"/>
+                    
+                    <Button Style="{DynamicResource IconButton}"
+                            Tag="{StaticResource ChatRegular}"
+                            Margin="5 0"
+                            Command="{Binding OpenChatCommand}"/>
+                    
+                    <Button Style="{DynamicResource IconButton}"
+                            Tag="{StaticResource DocRegular}"
+                            Margin="5 0"
+                            Command="{Binding DocXGenerateCommand}"/>
 
                 </StackPanel>
             </Grid>

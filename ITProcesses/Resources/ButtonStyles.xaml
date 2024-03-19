@@ -131,7 +131,6 @@
         </Style.Triggers>
     </Style>
     
-    
      <!--IconButton-->
     <Style x:Key="IconButton" TargetType="Button">
         <!--ButtonAtRest-->

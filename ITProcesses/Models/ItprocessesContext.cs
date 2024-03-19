@@ -15,6 +15,8 @@ public partial class ItprocessesContext : DbContext
     {
     }
 
+    public virtual DbSet<ChatMessage> ChatMessages { get; set; }
+
     public virtual DbSet<Document> Documents { get; set; }
 
     public virtual DbSet<Project> Projects { get; set; }
@@ -43,6 +45,29 @@ public partial class ItprocessesContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ChatMessage>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("chat_message_pkey");
+
+            entity.ToTable("chat_message");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("now()")
+                .HasColumnName("created_date");
+            entity.Property(e => e.Message).HasColumnName("message");
+            entity.Property(e => e.TaskId).HasColumnName("task_id");
+            entity.Property(e => e.UsersId).HasColumnName("users_id");
+
+            entity.HasOne(d => d.Task).WithMany(p => p.ChatMessages)
+                .HasForeignKey(d => d.TaskId)
+                .HasConstraintName("chat_message_task_id_fkey");
+
+            entity.HasOne(d => d.Users).WithMany(p => p.ChatMessages)
+                .HasForeignKey(d => d.UsersId)
+                .HasConstraintName("chat_message_users_id_fkey");
+        });
+
         modelBuilder.Entity<Document>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("documents_pkey");
@@ -53,7 +78,7 @@ public partial class ItprocessesContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.Name)
-                .HasMaxLength(50)
+                .HasMaxLength(150)
                 .HasColumnName("name");
             entity.Property(e => e.Path).HasColumnName("path");
         });
@@ -147,10 +172,12 @@ public partial class ItprocessesContext : DbContext
 
             entity.HasOne(d => d.Status).WithMany(p => p.Tasks)
                 .HasForeignKey(d => d.StatusId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("task_status_id_fkey");
 
             entity.HasOne(d => d.Type).WithMany(p => p.Tasks)
                 .HasForeignKey(d => d.TypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("task_type_id_fkey");
 
             entity.HasOne(d => d.User).WithMany(p => p.Tasks)

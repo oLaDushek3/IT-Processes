@@ -139,7 +139,7 @@
                 <Image Source="/Resources/BackSmallLogo.png"
                        RenderOptions.BitmapScalingMode="HighQuality"
                        Margin="50 50"
-                       Opacity="1" />
+                       Opacity="0.4" />
                 <ContentControl Content="{Binding CurrentChildView}" />
             </Grid>
         </Grid>

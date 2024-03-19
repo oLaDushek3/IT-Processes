@@ -97,14 +97,11 @@
             
             <StackPanel Grid.Row="3"
                         Margin="10"  
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center">
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
                 
-                <TextBlock Margin="0 0 0 5" 
-                           Text="oLaDushek3 (Kuzin Ilya)"
-                           Foreground="{DynamicResource SecondaryFontColorBrush}"
-                           FontSize="14"/>
-                <TextBlock Margin="0 5 0 0" 
+                <TextBlock Margin="5" 
                            Text="inerer (Danila Arshinov)"
                            Foreground="{DynamicResource SecondaryFontColorBrush}"
                            FontSize="14"/>
@@ -112,11 +109,10 @@
             </StackPanel>
             
             <Button Grid.Row="3"
-                    Style="{DynamicResource SubRoundedButton}"
+                    Style="{DynamicResource IconButton}"
+                    Tag="{StaticResource ArrowLeftRegular}"
                     Margin="10"
-                    Height="35"
-                    Width="100"
-                    HorizontalAlignment="Right"
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"
                     Content="Назад"
                     Command="{Binding CancelCommand}" />

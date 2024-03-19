@@ -77,7 +77,8 @@ public class UserService : IUserService
     {
         return await _context.Users.
             Include(u => u.Role).
-            Include(u => u.Tasks).ToListAsync();
+            Include(u => u.UsersTasks).
+            ThenInclude(ut => ut.Task).ToListAsync();
     }
 
     public async Task<User> GetUserById(Guid userId)

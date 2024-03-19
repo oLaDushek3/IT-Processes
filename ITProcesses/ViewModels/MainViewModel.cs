@@ -60,7 +60,7 @@ public class MainViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    
+
     public BaseViewModel UserProfileView
     {
         get => _userProfileView;
@@ -95,12 +95,13 @@ public class MainViewModel : BaseViewModel
 
     //Commands
     public CommandHandler OpenProjectDialogCommand => new(_ => OpenProjectDialog());
-    
+
     public CommandHandler LogOutCommand => new(_ => LogOutCommandExecute());
 
-    public CommandHandler OpenUsersDialogListCommand => new(_ => CurrentMainWindowViewModel.MainDialogProvider.ShowDialog(
-        new UserDialogViewModel(CurrentMainWindowViewModel.MainDialogProvider, this)));
-    
+    public CommandHandler OpenUsersDialogListCommand => new(_ =>
+        CurrentMainWindowViewModel.MainDialogProvider.ShowDialog(
+            new UserDialogViewModel(CurrentMainWindowViewModel.MainDialogProvider, this)));
+
     public CommandHandler OpenTasksListCommand => new(_ => ChangeView(new TasksListViewModel(this)));
 
     public CommandHandler OpenTaskCommand =>
@@ -110,10 +111,11 @@ public class MainViewModel : BaseViewModel
     public MainViewModel(MainWindowViewModel currentMainViewModel, User user)
     {
         CurrentMainWindowViewModel = currentMainViewModel;
-        
+
         User = user;
-        UserProfileView = new SmallProfileCardViewModel(User, CurrentMainWindowViewModel.MainDialogProvider, CurrentMainWindowViewModel);
-        
+        UserProfileView = new SmallProfileCardViewModel(User, CurrentMainWindowViewModel.MainDialogProvider,
+            CurrentMainWindowViewModel);
+
         _projectService = new ProjectService(_context);
         _taskService = new TaskService(_context);
         GetData();
@@ -127,7 +129,7 @@ public class MainViewModel : BaseViewModel
             _context = new();
             _projectService = new ProjectService(_context);
             _taskService = new TaskService(_context);
-            
+
             CurrentProject = await _projectService.GetProjectById(Settings.CurrentProject);
             UsersTaskList = new ObservableCollection<Tasks>(await _taskService.GetTasksThisUser(_user.Id));
         }

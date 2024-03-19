@@ -81,6 +81,8 @@
                 <TextBox Grid.Column="0"
                          Grid.Row="0"
                          Grid.ColumnSpan="2"
+                         Foreground="{DynamicResource PrimaryFontColorBrush}"
+                         ui:ControlHelper.PlaceholderForeground="{DynamicResource PrimaryFontColorBrush}"
                          ui:ControlHelper.PlaceholderText="Название задачи"
                          Text="{Binding EditableTask.Name}" />
 
@@ -89,6 +91,8 @@
                             Margin="0 5 5 5"
                             HorizontalAlignment="Stretch"
                             ui:ControlHelper.PlaceholderText="Дата начала"
+                            Foreground="{DynamicResource PrimaryFontColorBrush}"
+                            ui:ControlHelper.PlaceholderForeground="{DynamicResource PrimaryFontColorBrush}"
                             SelectedDate="{Binding EditableTask.DateStartTimestamp}"
                             SelectedDateFormat="Long" />
 
@@ -96,6 +100,8 @@
                             Grid.Row="1"
                             Margin="5 5 0 5"
                             HorizontalAlignment="Stretch"
+                            Foreground="{DynamicResource PrimaryFontColorBrush}"
+                            ui:ControlHelper.PlaceholderForeground="{DynamicResource PrimaryFontColorBrush}"
                             ui:ControlHelper.PlaceholderText="Дата окончания"
                             SelectedDate="{Binding EditableTask.DateEndTimestamp}"
                             SelectedDateFormat="Long" />
@@ -104,6 +110,8 @@
                          Grid.Row="2"
                          Grid.ColumnSpan="2"
                          ui:ControlHelper.PlaceholderText="Описание задачи"
+                         Foreground="{DynamicResource PrimaryFontColorBrush}"
+                         ui:ControlHelper.PlaceholderForeground="{DynamicResource PrimaryFontColorBrush}"
                          Text="{Binding EditableTask.Description}"
                          TextWrapping="Wrap" />
 
@@ -148,7 +156,9 @@
 
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text="{Binding Name}"
+                                           Foreground="{DynamicResource PrimaryFontColorBrush}"
+                                           />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>

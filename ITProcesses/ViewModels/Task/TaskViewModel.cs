@@ -8,8 +8,11 @@ using System.Windows;
 using System.Windows.Threading;
 using ITProcesses.Command;
 using ITProcesses.Dialog;
+using ITProcesses.FilesGenerate;
 using ITProcesses.Models;
 using ITProcesses.Services;
+using ITProcesses.ViewModels.ChatDialog;
+using ModernWpf.Controls;
 
 namespace ITProcesses.ViewModels;
 
@@ -19,9 +22,11 @@ public class TaskViewModel : BaseViewModel
 
     private readonly ItprocessesContext _context = new();
 
-    private  MainViewModel _currentMainViewModel;
+    private MainViewModel _currentMainViewModel;
     private readonly ITaskService _taskService;
     private readonly DialogProvider _currentDialogProvider;
+    private User _user;
+    private DocxGenerate _docxGenerate = new DocxGenerate();
 
     private Tasks _currentTask;
 
@@ -38,7 +43,7 @@ public class TaskViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    
+
     public Tasks SelectedTask
     {
         get => _currentTask;
@@ -59,8 +64,12 @@ public class TaskViewModel : BaseViewModel
     public CommandHandler EditTaskCommand => new(_ => EditTaskCommandExecute());
     public CommandHandler DeleteTaskCommand => new(_ => DeleteTaskCommandExecute());
 
+    public CommandHandler OpenChatCommand => new(_ => ChatCommandExecute());
+
     public CommandHandler OpenDocumentCommand => new(selectedDocument =>
         OpenDocumentCommandExecute((selectedDocument as TaskDocument).Documents));
+
+    public CommandHandler DocXGenerateCommand => new(_ => DocXGenerateExecute());
 
     //Constructor
     public TaskViewModel(Guid selectedTaskGuid, MainViewModel currentMainViewModel)
@@ -68,6 +77,7 @@ public class TaskViewModel : BaseViewModel
         _taskService = new TaskService(_context);
 
         CurrentMainViewModel = currentMainViewModel;
+        _user = currentMainViewModel.User;
         _currentDialogProvider = currentMainViewModel.CurrentMainWindowViewModel.MainDialogProvider;
         GetData(selectedTaskGuid);
     }
@@ -109,5 +119,22 @@ public class TaskViewModel : BaseViewModel
             _currentMainViewModel.GetData();
             _currentMainViewModel.ChangeView(new TasksListViewModel(_currentMainViewModel));
         }
+    }
+
+    private async void ChatCommandExecute()
+    {
+        ContentDialog contentDialog = new ContentDialog
+        {
+            Title = "Чат",
+            Content = new Views.Task.ChatDialog.ChatDialog(),
+            CloseButtonText = "Закрыть чат",
+            DataContext = new ChatDialogViewModel(_currentTask.Id, _user)
+        };
+        await contentDialog.ShowAsync();
+    }
+
+    private void DocXGenerateExecute()
+    {
+        _docxGenerate.GeneratePeopleFromTask(_currentTask);
     }
 }
