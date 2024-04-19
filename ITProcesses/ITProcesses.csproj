@@ -5,6 +5,7 @@
         <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <ApplicationIcon>SmallLogoIco.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
@@ -68,6 +69,7 @@
     <ItemGroup>
       <PackageReference Include="AttachedCommandBehavior" Version="2.0.0" />
       <PackageReference Include="DocX" Version="3.0.0" />
+      <PackageReference Include="EPPlus" Version="7.1.0" />
       <PackageReference Include="Great.LiveCharts" Version="2.0.3" />
       <PackageReference Include="LiveCharts.Core" Version="0.9.8" />
       <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />

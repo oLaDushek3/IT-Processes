@@ -4,9 +4,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ITProcesses.Views.Task"
+             xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             Height="350" Width="400"
+             d:DataContext="{d:DesignInstance Type=viewModels:TaskDiagramViewModel, IsDesignTimeCreatable=False}">
     <Grid>
-        
+        <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
+            <StackPanel Orientation="Vertical" Margin="10"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                
+
+                <lvc:PieChart Grid.Row="3"
+                              Series="{Binding SelectedUserTasks}" 
+                              LegendLocation="Right" InnerRadius="100" Margin="0 15">
+                    <lvc:PieChart.ChartLegend>
+                        <lvc:DefaultLegend BulletSize="20"></lvc:DefaultLegend>
+                    </lvc:PieChart.ChartLegend>
+                    <lvc:PieChart.DataTooltip>
+                        <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
+                    </lvc:PieChart.DataTooltip>
+                </lvc:PieChart>
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

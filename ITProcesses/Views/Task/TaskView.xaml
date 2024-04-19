@@ -68,6 +68,11 @@
                             Tag="{StaticResource DocRegular}"
                             Margin="5 0"
                             Command="{Binding DocXGenerateCommand}"/>
+                    
+                    <Button Style="{DynamicResource IconButton}"
+                            Tag="{StaticResource ExcelRegular}"
+                            Margin="5 0"
+                            Command="{Binding XlsXGenerateCommand}"/>
 
                 </StackPanel>
             </Grid>

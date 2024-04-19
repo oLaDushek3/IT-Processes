@@ -83,7 +83,7 @@ public class UserService : IUserService
 
     public async Task<User> GetUserById(Guid userId)
     {
-        var user = await _context.Users.Include(u => u.Role).FirstAsync(u => u.Id == userId);
+        var user = await _context.Users.Include(u => u.Role).Include(u=>u.UsersTasks).FirstAsync(u => u.Id == userId);
 
         if (user == null)
             throw new Exception("Не найден пользователь");

@@ -13,16 +13,15 @@ public class ChatDialogViewModel : BaseViewModel
 {
     private readonly ItprocessesContext _context = new();
     private List<ChatMessage> _messagesList;
-    private Guid _guid;
-    private ChatMessage _newChatMessage = new ChatMessage();
-    private User _user = new User()
-        ;
+    private readonly Guid _guid;
+    private readonly ChatMessage _newChatMessage = new ChatMessage();
+    private readonly User _user;
 
     private ObservableCollection<ChatMessage> _displayedMessages;
 
     private string _message = string.Empty;
 
-    private ApiUpdate _apiUpdate;
+    private readonly ApiUpdate _apiUpdate;
 
     public string Message
     {
@@ -54,8 +53,10 @@ public class ChatDialogViewModel : BaseViewModel
         _displayedMessages = new ObservableCollection<ChatMessage>();
         _user = user;
 
-        DispatcherTimer timer = new DispatcherTimer();
-        timer.Interval = TimeSpan.FromSeconds(1);
+        DispatcherTimer timer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromSeconds(1)
+        };
         timer.Tick += TimerOnTick;
         timer.Start();
     }
@@ -88,6 +89,4 @@ public class ChatDialogViewModel : BaseViewModel
             throw;
         }
     }
-    
-    
 }

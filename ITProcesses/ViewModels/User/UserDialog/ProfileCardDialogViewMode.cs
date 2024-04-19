@@ -5,6 +5,8 @@ using ITProcesses.Dialog;
 using ITProcesses.Hash;
 using ITProcesses.JsonSaveInfo;
 using ITProcesses.Models;
+using ITProcesses.Views.Task;
+using ModernWpf.Controls;
 
 namespace ITProcesses.ViewModels;
 
@@ -63,6 +65,8 @@ public class ProfileCardDialogViewMode : BaseViewModel
 
     public CommandHandler CancelCommand => new(_ => _currentDialogProvider.CloseDialog(null));
 
+    public CommandHandler DiagramCommand => new(_ => DiagramCommandExecute());
+
     //Constructor
     public ProfileCardDialogViewMode(User profileUser, DialogProvider currentDialogProvider,
         MainWindowViewModel currentMainWindowViewModel)
@@ -102,9 +106,22 @@ public class ProfileCardDialogViewMode : BaseViewModel
 
         var app = (App)Application.Current;
         app.ChangeTheme(new Uri("Resources/" + selectedTheme + ".xaml", UriKind.RelativeOrAbsolute));
-        
+
         AppSettings settings = SaveInfo.ReadAppSettings();
         settings.CurrentTheme = selectedTheme;
         SaveInfo.SaveSettings(settings);
+    }
+
+    private async void DiagramCommandExecute()
+    {
+        ContentDialog contentDialog = new ContentDialog
+        {
+            Title = "Статистика",
+            Content = new DiagramView(),
+            CloseButtonText = "Закрыть статистику",
+            DataContext = new TaskDiagramViewModel(_profileUser)
+        };
+
+        await contentDialog.ShowAsync();
     }
 }

@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Threading;
 using ITProcesses.Command;
 using ITProcesses.Dialog;
@@ -26,7 +27,8 @@ public class TaskViewModel : BaseViewModel
     private readonly ITaskService _taskService;
     private readonly DialogProvider _currentDialogProvider;
     private User _user;
-    private DocxGenerate _docxGenerate = new DocxGenerate();
+    private readonly DocxGenerate _docxGenerate = new DocxGenerate();
+    private readonly XlsxGenerate _xlsxGenerate = new XlsxGenerate();
 
     private Tasks _currentTask;
 
@@ -70,6 +72,8 @@ public class TaskViewModel : BaseViewModel
         OpenDocumentCommandExecute((selectedDocument as TaskDocument).Documents));
 
     public CommandHandler DocXGenerateCommand => new(_ => DocXGenerateExecute());
+
+    public CommandHandler XlsXGenerateCommand => new(_ => XlsXGenerateExecute());
 
     //Constructor
     public TaskViewModel(Guid selectedTaskGuid, MainViewModel currentMainViewModel)
@@ -136,5 +140,11 @@ public class TaskViewModel : BaseViewModel
     private void DocXGenerateExecute()
     {
         _docxGenerate.GeneratePeopleFromTask(_currentTask);
+    }
+
+    private async void XlsXGenerateExecute()
+    {
+        
+       _xlsxGenerate.GenerateExcel(_currentTask.UsersTasks.ToList());
     }
 }

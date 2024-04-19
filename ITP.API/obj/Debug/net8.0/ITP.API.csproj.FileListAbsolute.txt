@@ -104,3 +104,11 @@ C:\Users\arshi\RiderProjects\IT-Processes\ITP.API\obj\Debug\net8.0\refint\ITP.AP
 C:\Users\arshi\RiderProjects\IT-Processes\ITP.API\obj\Debug\net8.0\ITP.API.pdb
 C:\Users\arshi\RiderProjects\IT-Processes\ITP.API\obj\Debug\net8.0\ITP.API.genruntimeconfig.cache
 C:\Users\arshi\RiderProjects\IT-Processes\ITP.API\obj\Debug\net8.0\ref\ITP.API.dll
+C:\Users\arshi\RiderProjects\IT-Processes\ITP.API\bin\Debug\net8.0\EPPlus.dll
+C:\Users\arshi\RiderProjects\IT-Processes\ITP.API\bin\Debug\net8.0\EPPlus.Interfaces.dll
+C:\Users\arshi\RiderProjects\IT-Processes\ITP.API\bin\Debug\net8.0\EPPlus.System.Drawing.dll
+C:\Users\arshi\RiderProjects\IT-Processes\ITP.API\bin\Debug\net8.0\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\arshi\RiderProjects\IT-Processes\ITP.API\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\arshi\RiderProjects\IT-Processes\ITP.API\bin\Debug\net8.0\System.Drawing.Common.dll
+C:\Users\arshi\RiderProjects\IT-Processes\ITP.API\bin\Debug\net8.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\arshi\RiderProjects\IT-Processes\ITP.API\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
