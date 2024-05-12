@@ -330,16 +330,16 @@
                             </lvc:CartesianChart.AxisX>
                         </lvc:CartesianChart>-->
                         
-                        <lvc:PieChart Grid.Row="3"
-                            Series="{Binding SelectedUserTasks}" 
-                            LegendLocation="Right" InnerRadius="100" Margin="0 15">
-                            <lvc:PieChart.ChartLegend>
-                                <lvc:DefaultLegend BulletSize="20"></lvc:DefaultLegend>
-                            </lvc:PieChart.ChartLegend>
-                            <lvc:PieChart.DataTooltip>
-                                <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
-                            </lvc:PieChart.DataTooltip>
-                        </lvc:PieChart>
+                        <!-- <lvc:PieChart Grid.Row="3" -->
+                        <!--     Series="{Binding SelectedUserTasks}"  -->
+                        <!--     LegendLocation="Right" InnerRadius="100" Margin="0 15"> -->
+                        <!--     <lvc:PieChart.ChartLegend> -->
+                        <!--         <lvc:DefaultLegend BulletSize="20"></lvc:DefaultLegend> -->
+                        <!--     </lvc:PieChart.ChartLegend> -->
+                        <!--     <lvc:PieChart.DataTooltip> -->
+                        <!--         <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip> -->
+                        <!--     </lvc:PieChart.DataTooltip> -->
+                        <!-- </lvc:PieChart> -->
                     </Grid>
 
                     <!--Create/Edit dialog -->

@@ -38,7 +38,7 @@
                        Width="200"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Source="/Resources/BigLogo.png"
+                       Source="../Resources/SmallLogo.png"
                        RenderOptions.BitmapScalingMode="HighQuality" />
 
                 <Separator Grid.Column="1"

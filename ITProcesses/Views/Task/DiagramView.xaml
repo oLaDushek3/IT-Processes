@@ -7,7 +7,7 @@
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d"
-             Height="350" Width="400"
+             Height="500" Width="500"
              d:DataContext="{d:DesignInstance Type=viewModels:TaskDiagramViewModel, IsDesignTimeCreatable=False}">
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
@@ -15,10 +15,13 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
                 
+                <TextBlock Text="{Binding Count}"
+                           FontSize="20"
+                           Margin="15"/>
 
-                <lvc:PieChart Grid.Row="3"
+                <lvc:PieChart
                               Series="{Binding SelectedUserTasks}" 
-                              LegendLocation="Right" InnerRadius="100" Margin="0 15">
+                              LegendLocation="Right" InnerRadius="100" Margin="15">
                     <lvc:PieChart.ChartLegend>
                         <lvc:DefaultLegend BulletSize="20"></lvc:DefaultLegend>
                     </lvc:PieChart.ChartLegend>
@@ -27,6 +30,7 @@
                     </lvc:PieChart.DataTooltip>
                 </lvc:PieChart>
 
+                
             </StackPanel>
         </ScrollViewer>
     </Grid>
