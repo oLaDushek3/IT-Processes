@@ -119,7 +119,7 @@ public class TaskViewModel : BaseViewModel
     {
         if ((bool)await _currentDialogProvider.ShowDialog(new ConfirmDialogViewModel(_currentDialogProvider)))
         {
-            await _taskService.DeleteTask(_currentTask);
+          await   _taskService.DeleteTask(_currentTask);
             _currentMainViewModel.GetData();
             _currentMainViewModel.ChangeView(new TasksListViewModel(_currentMainViewModel));
         }

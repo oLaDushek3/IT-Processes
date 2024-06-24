@@ -42,7 +42,7 @@ public class UserService : IUserService
 
         if (!ValidatePassword(user.Password))
             throw new Exception("Неверный формат пароля");
-        user.Password = Hash.Md5.HashPassword(user.Password);
+        // user.Password = Hash.Md5.HashPassword(user.Password);
 
         user.Id = Guid.NewGuid();
 
@@ -59,13 +59,13 @@ public class UserService : IUserService
     {
         var us = await _context.Users.FirstOrDefaultAsync(u => u.Username == user.Username);
 
-        if (us != null)
-            throw new Exception("Логин занят");
-        
+        // if (us != null)
+        //     throw new Exception("Логин занят");
+
         if (!ValidatePassword(user.Password))
             throw new Exception("Неверный формат пароля");
         user.Password = Hash.Md5.HashPassword(user.Password);
-        
+
         _context.Users.Update(user);
 
         await _context.SaveChangesAsync();
@@ -75,15 +75,13 @@ public class UserService : IUserService
 
     public async Task<List<User>> GetAllUsers()
     {
-        return await _context.Users.
-            Include(u => u.Role).
-            Include(u => u.UsersTasks).
-            ThenInclude(ut => ut.Task).ToListAsync();
+        return await _context.Users.Include(u => u.Role).Include(u => u.UsersTasks).ThenInclude(ut => ut.Task)
+            .ToListAsync();
     }
 
     public async Task<User> GetUserById(Guid userId)
     {
-        var user = await _context.Users.Include(u => u.Role).Include(u=>u.UsersTasks).FirstAsync(u => u.Id == userId);
+        var user = await _context.Users.Include(u => u.Role).Include(u => u.UsersTasks).FirstAsync(u => u.Id == userId);
 
         if (user == null)
             throw new Exception("Не найден пользователь");

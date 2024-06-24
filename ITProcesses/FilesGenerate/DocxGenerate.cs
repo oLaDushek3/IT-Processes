@@ -43,6 +43,7 @@ public class DocxGenerate
             .Font("Times New Roman")
             .FontSize(12)
             .Alignment = Alignment.center;
+        
 
         paragraph.AppendLine($"ПРИКАЗ ")
             .Bold()
@@ -52,7 +53,7 @@ public class DocxGenerate
             .Alignment = Alignment.center;
 
 
-        paragraph.AppendLine($"{tasks.DateStartTimestamp.Date} № {tasks.Id}")
+        paragraph.AppendLine($"{tasks.DateStartTimestamp.Date} № ")
             .Bold()
             .FontSize(12)
             .Font("Times New Roman")
@@ -76,7 +77,7 @@ public class DocxGenerate
             .Font("Times New Roman")
             .Alignment = Alignment.center;
 
-        paragraph1.AppendLine($"Назначить для выполнения задачи {tasks.Name} следующих сотрудников:")
+        paragraph1.AppendLine($"Назначить для выполнения задачи {tasks.Name} в проекте {tasks.Project.Name}следующих сотрудников:")
             .FontSize(12)
             .Font("Times New Roman")
             .Alignment = Alignment.left;

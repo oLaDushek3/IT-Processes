@@ -21,7 +21,7 @@ public class TaskService : ITaskService
 
     public async Task<List<Tasks>> GetAllTask()
     {
-        return await _context.Tasks.Include(t => t.Status)
+        return await _context.Tasks.AsNoTracking().Where(t => t.Deleted != true).Include(t => t.Status)
             .Include(t => t.Type)
             .Include(t => t.TaskTags)
             .ThenInclude(tt => tt.Tag).ToListAsync();
@@ -29,11 +29,11 @@ public class TaskService : ITaskService
 
     public async Task<List<Tasks>> GetTasksByProject(int id)
     {
-        var tasks = await _context.Tasks.Include(t => t.Status)
+        var tasks = await _context.Tasks.AsNoTracking().Include(t => t.Status)
             .Include(t => t.Type)
             .Include(t => t.TaskTags)
             .ThenInclude(tt => tt.Tag)
-            .Where(t => t.ProjectId == id).ToListAsync();
+            .Where(t => t.ProjectId == id && t.Deleted != true).ToListAsync();
 
         if (tasks == null)
             throw new Exception("Проект не найден");
@@ -62,13 +62,10 @@ public class TaskService : ITaskService
         var userTasks = await _context.UsersTasks.Where(ut => ut.UserId == userId).ToListAsync();
         foreach (var userTask in userTasks)
         {
-            Tasks? task = _context.Tasks.
-                Include(t => t.InverseBeforeTaskNavigation).
-                ThenInclude(t => t.InverseBeforeTaskNavigation).
-                ThenInclude(t => t.InverseBeforeTaskNavigation).
-                ThenInclude(t => t.InverseBeforeTaskNavigation).
-                ThenInclude(t => t.InverseBeforeTaskNavigation).
-                FirstOrDefault(t => t.Id == userTask.TaskId && t.BeforeTask == null);
+            Tasks? task = _context.Tasks.Include(t => t.InverseBeforeTaskNavigation)
+                .ThenInclude(t => t.InverseBeforeTaskNavigation).ThenInclude(t => t.InverseBeforeTaskNavigation)
+                .ThenInclude(t => t.InverseBeforeTaskNavigation).ThenInclude(t => t.InverseBeforeTaskNavigation)
+                .FirstOrDefault(t => t.Id == userTask.TaskId && t.BeforeTask == null && t.Deleted != true);
             if (task != null)
                 result.Add(task);
         }
@@ -78,7 +75,8 @@ public class TaskService : ITaskService
 
     public async Task<Tasks> GetTaskById(Guid guid)
     {
-        var tasks = await _context.Tasks.Where(t => t.Id == guid).Include(t => t.UsersTasks).ThenInclude(ut => ut.User)
+        var tasks = await _context.Tasks.AsNoTracking().Where(t => t.Id == guid && t.Deleted != true).Include(t => t.UsersTasks)
+            .ThenInclude(ut => ut.User)
             .ThenInclude(u => u.Role).Include(t => t.TaskDocuments).ThenInclude(td => td.Documents)
             .Include(t => t.TaskTags).ThenInclude(tt => tt.Tag).Include(t => t.Status).FirstAsync();
 
@@ -104,13 +102,8 @@ public class TaskService : ITaskService
 
     public async Task DeleteTask(Tasks tasks)
     {
-        tasks.TaskDocuments = null;
-        tasks.InverseBeforeTaskNavigation = null;
-        tasks.UsersTasks = null;
-        tasks.TaskTags = null;
+        tasks.Deleted = true;
         _context.Tasks.Update(tasks);
-        await _context.SaveChangesAsync();
-        _context.Tasks.Remove(tasks);
         await _context.SaveChangesAsync();
     }
 
@@ -123,7 +116,7 @@ public class TaskService : ITaskService
     {
         return await _context.Types.ToListAsync();
     }
-    
+
     public async Task<List<UsersTask>> GetAllUsersFromTask(Guid guid)
     {
         var users = await _context.UsersTasks

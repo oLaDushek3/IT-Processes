@@ -154,12 +154,12 @@ public class TasksListViewModel : BaseViewModel
 
     private async void DeleteTaskCommandExecute(Tasks selectedTask)
     {
-        if ((bool)await _currentMainViewModel.CurrentMainWindowViewModel.MainDialogProvider.ShowDialog(
-                new ConfirmDialogViewModel(_currentMainViewModel.CurrentMainWindowViewModel.MainDialogProvider)))
-        {
-            await _taskService.DeleteTask(await _taskService.GetTaskById(selectedTask.Id));
-            GetData();
-        }
+        // if ((bool)await _currentMainViewModel.CurrentMainWindowViewModel.MainDialogProvider.ShowDialog(
+        //         new ConfirmDialogViewModel(_currentMainViewModel.CurrentMainWindowViewModel.MainDialogProvider)))
+        // {
+        //     await _taskService.DeleteTask(await _taskService.GetTaskById(selectedTask.Id));
+        //     GetData();
+        // }
     }
 
     private void OpenTask(Tasks selectedTask)

@@ -17,6 +17,5 @@ public partial class ChatMessage
     public DateTime? CreatedDate { get; set; }
 
     [JsonIgnore] public virtual Task? Task { get; set; }
-
-    [JsonIgnore] public virtual User? Users { get; set; }
+    public virtual User? Users { get; set; }
 }

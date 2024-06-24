@@ -25,7 +25,11 @@ public class CreateTaskDialogViewModel : BaseViewModel
     private readonly DialogProvider _currentDialogProvider;
     private readonly MainViewModel _currentMainViewModel;
 
-    private Tasks _createdTask = new();
+    private Tasks _createdTask = new()
+    {
+        DateStartTimestamp = DateTime.Today,
+        DateEndTimestamp = DateTime.Today
+    };
     private List<Type> _typeList;
 
     #endregion
@@ -107,10 +111,11 @@ public class CreateTaskDialogViewModel : BaseViewModel
                         "У работников будут переработки!")))
                     return;
             
+            var status = (await _taskService.GetAllStatuses()).FirstOrDefault();
             CreatedTask.DateCreateTimestamp = CreatedTask.DateCreateTimestamp.ToUniversalTime();
             CreatedTask.DateStartTimestamp = CreatedTask.DateStartTimestamp.ToUniversalTime();
             CreatedTask.DateEndTimestamp = CreatedTask.DateEndTimestamp.ToUniversalTime();
-            CreatedTask.Status = (await _taskService.GetAllStatuses()).FirstOrDefault();
+            CreatedTask.StatusId = status.Id;
             CreatedTask.ProjectId = _currentMainViewModel.CurrentProject.Id;
 
             await _taskService.CreateTask(CreatedTask);
@@ -132,6 +137,8 @@ public class CreateTaskDialogViewModel : BaseViewModel
 
         CreatedTask.BeforeTaskNavigation = await _taskService.GetTaskById(selectedTask.Id);
         OnPropertyChanged("CreatedTask");
+        CreatedTask.BeforeTaskNavigation = null;
+        CreatedTask.BeforeTask = selectedTask.Id;
     }
 
     private void AddDocumentsCommandExecute()

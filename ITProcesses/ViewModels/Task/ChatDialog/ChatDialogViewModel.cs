@@ -48,7 +48,7 @@ public class ChatDialogViewModel : BaseViewModel
 
     public ChatDialogViewModel(Guid guid, User user)
     {
-        _apiUpdate = new ApiUpdate(_context);
+        _apiUpdate = new ApiUpdate();
         _guid = guid;
         _displayedMessages = new ObservableCollection<ChatMessage>();
         _user = user;

@@ -21,14 +21,14 @@
                  Text = "{Binding Login}"
                  ui:ControlHelper.PlaceholderText="Логин"
                  ui:ControlHelper.PlaceholderForeground="{DynamicResource SecondaryFontColorBrush}"
-                 Foreground="{DynamicResource PrimaryFontColorBrush}"/>
+                 />
 
         <PasswordBox Height="45" Width="230"
                      Margin="0 15 0 5"
                      PasswordChanged="PasswordBox_OnPasswordChanged"
                      ui:ControlHelper.PlaceholderText="Пароль"
                      ui:ControlHelper.PlaceholderForeground="{DynamicResource SecondaryFontColorBrush}"
-                     Foreground="{DynamicResource PrimaryFontColorBrush}"/>
+                     />
         
         <CheckBox Content="Запомнить меня"
                   IsChecked="{Binding CheckBoxBool, Mode=TwoWay}"/>

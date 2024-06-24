@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using ITProcesses.Models;
+using ITProcesses.Services;
 using Microsoft.Win32;
 using OfficeOpenXml;
 
@@ -7,9 +8,12 @@ namespace ITProcesses.FilesGenerate;
 
 public class XlsxGenerate
 {
-    public void GenerateExcel(List<UsersTask> users)
+    public async void GenerateExcel(List<UsersTask> users)
     {
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         var package = new ExcelPackage();
+        ItprocessesContext context = new ItprocessesContext();
+        UserService service = new UserService(context);
 
         var sheet = package.Workbook.Worksheets.Add("Users");
 
@@ -24,10 +28,11 @@ public class XlsxGenerate
 
         foreach (var user in users)
         {
+            var user1 = await service.GetUserById(user.User.Id);
             sheet.Cells[i, 1].Value = user.User.FirstName;
             sheet.Cells[i, 2].Value = user.User.LastName;
             sheet.Cells[i, 3].Value = user.User.MiddleName;
-            sheet.Cells[i, 4].Value = user.User.Role;
+            sheet.Cells[i, 4].Value = user1.Role.Name;
             
             i++;
         }

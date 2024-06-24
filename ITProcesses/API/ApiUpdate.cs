@@ -6,18 +6,15 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 using ITProcesses.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 
 namespace ITProcesses.API;
 
 public class ApiUpdate : ApiBase
 {
-    private ItprocessesContext _context;
 
-    public ApiUpdate(ItprocessesContext context)
-    {
-        _context = context;
-    }
+    
 
     public async Task<List<ChatMessage>> GetAllMessagesByTaskId(Guid id, int count)
     {
@@ -31,8 +28,16 @@ public class ApiUpdate : ApiBase
             {
                 PropertyNameCaseInsensitive = true
             };
+            var chatMessages = JsonSerializer.Deserialize<List<ChatMessage>>(res, options) ??
+                               throw new InvalidOperationException();
 
-            return JsonSerializer.Deserialize<List<ChatMessage>>(res, options) ?? throw new InvalidOperationException();
+            // foreach (var item in chatMessages)
+            // {
+            //     var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == item.UsersId);
+            //     item.Users = user;
+            // }
+
+            return chatMessages;
         }
         catch (Exception e)
         {
@@ -46,10 +51,10 @@ public class ApiUpdate : ApiBase
             // if (saveFileDialog.ShowDialog() == false)
             //     throw;
             // получаем выбранный файл
-            string filename = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-
-            await using StreamWriter writer = new StreamWriter(filename, false);
-            await writer.WriteLineAsync(e.Message);
+            // string filename = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            //
+            // await using StreamWriter writer = new StreamWriter(filename, false);
+            // await writer.WriteLineAsync(e.Message);
             throw;
         }
     }
@@ -67,18 +72,18 @@ public class ApiUpdate : ApiBase
         catch (Exception e)
         {
             Console.WriteLine(e);
-            SaveFileDialog saveFileDialog = new SaveFileDialog
-            {
-                Filter = "Excel files(*.xlsx)|*.xlsx"
-            };
-
-            if (saveFileDialog.ShowDialog() == false)
-                throw;
-            // получаем выбранный файл
-            string filename = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-
-            await using StreamWriter writer = new StreamWriter(filename, false);
-            await writer.WriteLineAsync(e.Message);
+            // SaveFileDialog saveFileDialog = new SaveFileDialog
+            // {
+            //     Filter = "Excel files(*.xlsx)|*.xlsx"
+            // };
+            //
+            // if (saveFileDialog.ShowDialog() == false)
+            //     throw;
+            // // получаем выбранный файл
+            // string filename = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            //
+            // await using StreamWriter writer = new StreamWriter(filename, false);
+            // await writer.WriteLineAsync(e.Message);
             throw;
         }
     }

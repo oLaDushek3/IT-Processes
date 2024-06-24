@@ -7,31 +7,54 @@
              xmlns:viewModels="clr-namespace:ITProcesses.ViewModels"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d"
-             Height="500" Width="500"
+             Height="500"
+             Width="1000"
              d:DataContext="{d:DesignInstance Type=viewModels:TaskDiagramViewModel, IsDesignTimeCreatable=False}">
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
-            <StackPanel Orientation="Vertical" Margin="10"
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+            <StackPanel Margin="5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="{Binding Count}"
+                           FontSize="20"
+                           Margin="5"
+                           TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding EndedTask}"
+                           FontSize="20"
+                           Margin="5"
+                           TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding WorkTask}"
+                           FontSize="20"
+                           Margin="5"
+                           TextWrapping="Wrap"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Vertical"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
                 
-                <TextBlock Text="{Binding Count}"
-                           FontSize="20"
-                           Margin="15"/>
+                
 
                 <lvc:PieChart
-                              Series="{Binding SelectedUserTasks}" 
-                              LegendLocation="Right" InnerRadius="100" Margin="15">
-                    <lvc:PieChart.ChartLegend>
-                        <lvc:DefaultLegend BulletSize="20"></lvc:DefaultLegend>
-                    </lvc:PieChart.ChartLegend>
+                    Series="{Binding SelectedUserTasks}" 
+                    LegendLocation="Bottom" InnerRadius="100" Margin="20" Width="300"
+                    Height="250"
+                >
+                    <!-- <lvc:PieChart.ChartLegend> -->
+                    <!--     <lvc:DefaultLegend BulletSize="20"></lvc:DefaultLegend> -->
+                    <!-- </lvc:PieChart.ChartLegend> -->
                     <lvc:PieChart.DataTooltip>
-                        <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
+                        <lvc:DefaultTooltip BulletSize="20" ></lvc:DefaultTooltip>
                     </lvc:PieChart.DataTooltip>
                 </lvc:PieChart>
 
                 
             </StackPanel>
-        </ScrollViewer>
+        </StackPanel>
+        
+       
+            
     </Grid>
 </UserControl>

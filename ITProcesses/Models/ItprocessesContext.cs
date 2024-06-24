@@ -152,6 +152,7 @@ public partial class ItprocessesContext : DbContext
                 .HasColumnName("date_create_timestamp");
             entity.Property(e => e.DateEndTimestamp).HasColumnName("date_end_timestamp");
             entity.Property(e => e.DateStartTimestamp).HasColumnName("date_start_timestamp");
+            entity.Property(e => e.Deleted).HasColumnName("deleted");
             entity.Property(e => e.Description).HasColumnName("description");
             entity.Property(e => e.Name)
                 .HasMaxLength(150)

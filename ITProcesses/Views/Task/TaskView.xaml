@@ -36,7 +36,8 @@
                     <Button Style="{DynamicResource IconButton}"
                             Tag="{StaticResource ArrowLeftRegular}"
                             Margin="5 0"
-                            Command="{Binding CancelCommand}" />
+                            Command="{Binding CancelCommand}"
+                            ToolTip="Вернуться"/>
 
                     <Separator Margin="5 5"
                                Width="2"
@@ -50,29 +51,36 @@
                             Margin="5 0"
                             Command="{Binding EditTaskCommand}" 
                             Visibility="{Binding CurrentMainViewModel.User, 
-                            Converter={StaticResource UserRoleToVisibilityConverter}}"/>
+                            Converter={StaticResource UserRoleToVisibilityConverter}}"
+                            ToolTip="Изменить"/>
 
                     <Button Style="{DynamicResource IconButton}"
                             Tag="{StaticResource DeleteRegular}"
                             Margin="5 0"
                             Command="{Binding DeleteTaskCommand}" 
                             Visibility="{Binding CurrentMainViewModel.User, 
-                            Converter={StaticResource UserRoleToVisibilityConverter}}"/>
+                            Converter={StaticResource UserRoleToVisibilityConverter}}"
+                            ToolTip="Удалить"/>
                     
                     <Button Style="{DynamicResource IconButton}"
                             Tag="{StaticResource ChatRegular}"
                             Margin="5 0"
-                            Command="{Binding OpenChatCommand}"/>
+                            Visibility="{Binding CurrentMainViewModel.User, 
+                            Converter={StaticResource UserRoleToVisibilityConverter}}"
+                            Command="{Binding OpenChatCommand}"
+                            ToolTip="Чат"/>
                     
                     <Button Style="{DynamicResource IconButton}"
                             Tag="{StaticResource DocRegular}"
                             Margin="5 0"
-                            Command="{Binding DocXGenerateCommand}"/>
+                            Command="{Binding DocXGenerateCommand}"
+                            ToolTip="Генерация приказа"/>
                     
                     <Button Style="{DynamicResource IconButton}"
                             Tag="{StaticResource ExcelRegular}"
                             Margin="5 0"
-                            Command="{Binding XlsXGenerateCommand}"/>
+                            Command="{Binding XlsXGenerateCommand}"
+                            ToolTip="Генерация данных о сотрудниках"/>
 
                 </StackPanel>
             </Grid>

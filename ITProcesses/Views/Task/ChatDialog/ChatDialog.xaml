@@ -9,6 +9,22 @@
              xmlns:chatDialog="clr-namespace:ITProcesses.ViewModels.ChatDialog"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=chatDialog:ChatDialogViewModel, IsDesignTimeCreatable=False}">
+    <UserControl.Resources>
+        <Style TargetType="Border">
+            <Setter Property="Background">
+
+                <Setter.Value>
+                    <SolidColorBrush Color="{ui:ThemeResource SystemChromeMediumLowColor}" />
+                </Setter.Value>
+
+            </Setter>
+            <Setter Property="Margin" Value="0,5,0,0" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="BorderBrush" Value="Indigo" />
+            <Setter Property="Padding" Value="12" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="8*" />
@@ -22,17 +38,30 @@
             <StackPanel Grid.Row="0">
                 <ui:ItemsRepeater Name="MessagesListView"
                                   ItemsSource="{Binding DisplayedChatMessagesList}">
+                    <!-- <ui:ItemsRepeater.Layout> -->
+                    <!-- -->
+                    <!--     <ui:UniformGridLayout MinItemWidth="200" -->
+                    <!--                           ItemsStretch="Fill" -->
+                    <!--                           MinItemHeight="300" -->
+                    <!--                           MinColumnSpacing="5" -->
+                    <!--                           MinRowSpacing="5" -->
+                    <!--                           ItemsJustification="Start" /> -->
+                    <!-- -->
+                    <!-- </ui:ItemsRepeater.Layout> -->
                     <ui:ItemsRepeater.ItemTemplate>
                         <!-- ReSharper disable once Xaml.RedundantResource -->
                         <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Name="DateMessageTextBlock"
-                                           Text="{Binding CreatedDate, StringFormat=t}" />
-                                <TextBlock Name="UserNameTextBlock"
-                                           Text="{Binding Users.Username}" />
-                                <TextBlock Name="MessageTextBlock"
-                                           Text="{Binding Message}" />
-                            </StackPanel>
+                            <Border>
+                                <ui:SimpleStackPanel>
+                                    <TextBlock Name="DateMessageTextBlock"
+                                               Text="{Binding CreatedDate, StringFormat=t}" />
+                                    <TextBlock Name="UserNameTextBlock"
+                                               Text="{Binding Users.Username}" />
+                                    <TextBlock Name="MessageTextBlock"
+                                               Text="{Binding Message}" />
+                                </ui:SimpleStackPanel>
+                            </Border>
+
                         </DataTemplate>
                     </ui:ItemsRepeater.ItemTemplate>
                 </ui:ItemsRepeater>

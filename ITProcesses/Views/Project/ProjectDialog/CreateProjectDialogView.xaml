@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              d:DesignHeight="515" d:DesignWidth="310"
              d:DataContext="{d:DesignInstance Type=viewModels:CreateProjectDialogViewModel, IsDesignTimeCreatable=False}"
-             Background="#161819">
+             >
     <Grid Margin="10">
 
         <Grid.RowDefinitions>
